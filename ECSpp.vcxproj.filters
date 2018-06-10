@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="include\Component.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\System.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\World.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utility\Pool.h">
+      <Filter>Include\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utility\TuplePP.h">
+      <Filter>Include\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utility\Bitmask.h">
+      <Filter>Include\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utility\CFilter.h">
+      <Filter>Include\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utility\DebugAssert.h">
+      <Filter>Include\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utility\ThirdParty\sparsepp\spp_stdint.h">
+      <Filter>Include\Utility\ThirdParty\sparsepp</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utility\ThirdParty\sparsepp\spp_timer.h">
+      <Filter>Include\Utility\ThirdParty\sparsepp</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utility\ThirdParty\sparsepp\spp_traits.h">
+      <Filter>Include\Utility\ThirdParty\sparsepp</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utility\ThirdParty\sparsepp\spp_utils.h">
+      <Filter>Include\Utility\ThirdParty\sparsepp</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utility\ThirdParty\sparsepp\spp.h">
+      <Filter>Include\Utility\ThirdParty\sparsepp</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utility\ThirdParty\sparsepp\spp_config.h">
+      <Filter>Include\Utility\ThirdParty\sparsepp</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utility\ThirdParty\sparsepp\spp_dlalloc.h">
+      <Filter>Include\Utility\ThirdParty\sparsepp</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utility\ThirdParty\sparsepp\spp_memory.h">
+      <Filter>Include\Utility\ThirdParty\sparsepp</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utility\ThirdParty\sparsepp\spp_smartptr.h">
+      <Filter>Include\Utility\ThirdParty\sparsepp</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EntityManager\ASpawner.h">
+      <Filter>Include\EntityManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EntityManager\EntityManager.h">
+      <Filter>Include\EntityManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EntityManager\EntityRef.h">
+      <Filter>Include\EntityManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EntityManager\Archetype.h">
+      <Filter>Include\EntityManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EntityManager\CPool.h">
+      <Filter>Include\EntityManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CGroup\CGroup.h">
+      <Filter>Include\CGroup</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CGroup\PArray.h">
+      <Filter>Include\CGroup</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CGroup\ASpawnersPack.h">
+      <Filter>Include\CGroup</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="include\Utility\Pool.inl">
+      <Filter>Include\Utility</Filter>
+    </None>
+    <None Include="include\Utility\TuplePP.inl">
+      <Filter>Include\Utility</Filter>
+    </None>
+    <None Include="include\EntityManager\CPool.inl">
+      <Filter>Include\EntityManager</Filter>
+    </None>
+    <None Include="include\CGroup\ASpawnersPack.inl">
+      <Filter>Include\CGroup</Filter>
+    </None>
+    <None Include="include\CGroup\PArray.inl">
+      <Filter>Include\CGroup</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Include">
+      <UniqueIdentifier>{c321dc86-54ef-42a4-b647-f739c3066fab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\CGroup">
+      <UniqueIdentifier>{8746d8a3-2f24-49dd-8a03-024a131bc560}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\EntityManager">
+      <UniqueIdentifier>{6de3281e-8195-4048-85e1-72b4a2ec1a60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\Utility">
+      <UniqueIdentifier>{1a5accca-9fb1-4fe7-8923-b6b01fe212ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\Utility\ThirdParty">
+      <UniqueIdentifier>{cf9862f2-7205-40c1-a7e2-50ed38d6db2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\Utility\ThirdParty\sparsepp">
+      <UniqueIdentifier>{0eff3a32-999f-4c4f-a504-6b1b331732dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{93419b2e-d46a-4c6e-806b-c0c6940c6e7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\EntityManager">
+      <UniqueIdentifier>{8a9fa3d8-f6b4-4a16-9992-d350640f4697}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Utility">
+      <UniqueIdentifier>{b0828f13-05bf-4048-83b1-c81f3c8a3f37}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\System.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\World.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Component.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Utility\Bitmask.cpp">
+      <Filter>src\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Utility\CFilter.cpp">
+      <Filter>src\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EntityManager\EntityManager.cpp">
+      <Filter>src\EntityManager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EntityManager\EntityRef.cpp">
+      <Filter>src\EntityManager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EntityManager\Archetype.cpp">
+      <Filter>src\EntityManager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EntityManager\ASpawner.cpp">
+      <Filter>src\EntityManager</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
