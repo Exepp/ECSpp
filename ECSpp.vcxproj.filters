@@ -7,9 +7,6 @@
     <ClInclude Include="include\System.h">
       <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="include\World.h">
-      <Filter>Include</Filter>
-    </ClInclude>
     <ClInclude Include="include\Utility\Pool.h">
       <Filter>Include\Utility</Filter>
     </ClInclude>
@@ -76,6 +73,9 @@
     <ClInclude Include="include\CGroup\ASpawnersPack.h">
       <Filter>Include\CGroup</Filter>
     </ClInclude>
+    <ClInclude Include="include\ECSWorld.h">
+      <Filter>Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="include\Utility\Pool.inl">
@@ -127,9 +127,6 @@
     <ClCompile Include="src\System.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\World.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="src\Component.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -150,6 +147,9 @@
     </ClCompile>
     <ClCompile Include="src\EntityManager\ASpawner.cpp">
       <Filter>src\EntityManager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ECSWorld.cpp">
+      <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -3,6 +3,9 @@
 #include "Component.h"
 #include "Archetype.h"
 
+namespace epp
+{
+
 class ASpawner;
 
 using EntityId_t = size_t;
@@ -76,7 +79,7 @@ private:
 
 	ASpawner* originSpawner = nullptr;
 
-	EntityId_t id = unidentifiedId;
+	EntityId_t id = epp::unidentifiedId;
 
 	bool alive = false;
 
@@ -123,4 +126,6 @@ template<class T>
 inline const T * EntityRef::getComponent_NoCheck() const
 {
 	return (T*)getComponent_NoCheck(getCTypeId<T>());
+}
+
 }

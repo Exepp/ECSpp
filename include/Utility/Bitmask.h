@@ -1,6 +1,9 @@
 #pragma once
 #include <vector>
 
+namespace epp
+{
+
 class Bitmask
 {
 	using Mask_t = uint64_t;
@@ -71,14 +74,16 @@ private:
 	friend struct std::hash<Bitmask>;
 };
 
+}
+
 namespace std
 {
 	template<>
-	struct hash<Bitmask>
+	struct hash<epp::Bitmask>
 	{
-		size_t operator()(const Bitmask& bitmask) const
+		size_t operator()(const epp::Bitmask& bitmask) const
 		{
-			return std::_Hash_array_representation(bitmask.masks.data(), bitmask.masks.size());
+			return _Hash_array_representation(bitmask.masks.data(), bitmask.masks.size());
 		}
 	};
 }

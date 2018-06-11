@@ -1,6 +1,9 @@
 #pragma once
 #include <type_traits>
 
+namespace epp
+{
+
 using CTypeId_t = size_t;
 
 inline const size_t unidentifiedId = size_t(-1);
@@ -27,8 +30,10 @@ constexpr CTypeId_t getCTypeId()
 }
 
 template<class ...CTypes>
-constexpr void registerCTypes()
+void registerCTypes()
 {
 	static_assert((std::is_base_of_v<Component, CTypes> && ...), "Only Component based types can request Id here");
 	(getCTypeId<CTypes>(), ...);
+}
+
 }

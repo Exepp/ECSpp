@@ -1,5 +1,7 @@
 #include "EntityManager/EntityManager.h"
 
+using namespace epp;
+
 const ERefPtr_t& EntityManager::spawn(const Archetype& arche)
 {
 	return registerArchetypeIfNew(arche).spawn();

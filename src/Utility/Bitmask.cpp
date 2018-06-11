@@ -1,6 +1,8 @@
 #include "Utility/Bitmask.h"
 #include <bitset>
 
+using namespace epp;
+
 Bitmask::Bitmask(std::initializer_list<size_t> list)
 {
 	for (auto& index : list)

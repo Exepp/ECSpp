@@ -1,5 +1,7 @@
 #include "Utility/CFilter.h"
 
+using namespace epp;
+
 CFilter::CFilter(Bitmask wanted, Bitmask unwated) : unwantedMask(std::move(unwated))
 {
 	setWanted(std::move(wanted));

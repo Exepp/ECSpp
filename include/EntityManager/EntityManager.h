@@ -2,6 +2,9 @@
 #include "ASpawner.h"
 #include "CGroup/CGroup.h"
 
+namespace epp
+{
+
 class EntityManager
 {
 	using ASpawnerPtr_t = std::unique_ptr<ASpawner>;
@@ -143,4 +146,6 @@ inline ASpawner & EntityManager::registerArchetypeIfNew(AType && arche)
 	for (auto& pArrayPack : pArraysPacks)
 		pArrayPack.second->addASpawnerIfMeetsRequirements(*aSpawnerPtr);
 	return *aSpawnerPtr;
+}
+
 }

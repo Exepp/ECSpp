@@ -2,6 +2,12 @@
 
 #ifdef _DEBUG
 #include <iostream>
+#endif
+
+namespace epp
+{
+
+#ifdef _DEBUG
 
 #define EXC_ASSERT(expression, exception, message) \
 if(!expression)\
@@ -15,3 +21,4 @@ if(!expression)\
 #define EXC_ASSERT(...)
 #define ASSERT(expression, message)
 #endif
+}

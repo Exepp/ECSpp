@@ -3,6 +3,9 @@
 #include "Bitmask.h"
 #include "DebugAssert.h"
 
+namespace epp
+{
+
 template<class T>
 class Pool;
 
@@ -165,3 +168,5 @@ private:
 };
 
 #include "Pool.inl"
+
+}

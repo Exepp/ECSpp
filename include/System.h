@@ -2,6 +2,9 @@
 #include "CGroup/CGroup.h"
 #include "EntityManager/EntityManager.h"
 
+namespace epp
+{
+
 using STypeId_t = size_t;
 
 class System
@@ -29,4 +32,6 @@ inline constexpr STypeId_t getSTypeId()
 	static_assert(std::is_base_of_v<System, T>, "Only System based types can request Id here");
 	static STypeId_t id = System::typeCounter++;
 	return id;
+}
+
 }

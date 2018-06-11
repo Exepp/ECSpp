@@ -1,6 +1,8 @@
 #include "EntityManager/EntityRef.h"
 #include "EntityManager/ASpawner.h"
 
+using namespace epp;
+
 EntityRef::EntityRef(ASpawner * spawnerPtr, EntityId_t id, bool living) : originSpawner(spawnerPtr), id(id), alive(living) {}
 
 void EntityRef::die()

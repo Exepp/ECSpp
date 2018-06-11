@@ -2,6 +2,8 @@
 #include "Archetype.h"
 #include "EntityRef.h"
 
+namespace epp
+{
 
 class ASpawner
 {
@@ -129,4 +131,6 @@ template<class T>
 inline const Pool<T> & ASpawner::getPool(bool alive) const
 {
 	return static_cast<CPool<T>&>(getPool(getCTypeId<T>(), alive)).pool;
+}
+
 }
