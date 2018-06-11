@@ -43,7 +43,7 @@
     <ClInclude Include="include\Utility\ThirdParty\sparsepp\spp_traits.h" />
     <ClInclude Include="include\Utility\ThirdParty\sparsepp\spp_utils.h" />
     <ClInclude Include="include\Utility\TuplePP.h" />
-    <ClInclude Include="include\World.h" />
+    <ClInclude Include="include\ECSWorld.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="include\CGroup\ASpawnersPack.inl" />

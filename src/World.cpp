@@ -1,7 +1,9 @@
-#include "World.h"
+#include "ECSWorld.h"
 #include <algorithm>
 
-bool World::removeSystem(STypeId_t id)
+using namespace epp;
+
+bool ECSWorld::removeSystem(STypeId_t id)
 {
 	auto found = std::find_if(systems.begin(), systems.end(), SystemUnaryPredicate(id));
 	ASSERT((found != systems.end()), "Tried to remove unidentified system")
@@ -13,13 +15,13 @@ bool World::removeSystem(STypeId_t id)
 	return false;
 }
 
-bool World::hasSystem(STypeId_t id)
+bool ECSWorld::hasSystem(STypeId_t id)
 {
 	auto found = std::find_if(systems.begin(), systems.end(), SystemUnaryPredicate(id));
 	return found != systems.end();
 }
 
-void World::update(float dt)
+void ECSWorld::update(float dt)
 {
 	entityManager.acceptSpawnedEntities();
 	for (auto& systemNode : systems)

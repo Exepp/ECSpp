@@ -7,9 +7,6 @@
     <ClInclude Include="include\System.h">
       <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="include\World.h">
-      <Filter>Include</Filter>
-    </ClInclude>
     <ClInclude Include="include\Utility\Pool.h">
       <Filter>Include\Utility</Filter>
     </ClInclude>
@@ -75,6 +72,9 @@
     </ClInclude>
     <ClInclude Include="include\CGroup\ASpawnersPack.h">
       <Filter>Include\CGroup</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ECSWorld.h">
+      <Filter>Include</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

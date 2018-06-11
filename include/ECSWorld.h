@@ -1,7 +1,9 @@
 #pragma once
 #include "System.h"
 
-struct World
+namespace epp
+{
+struct ECSWorld
 {
 
 	using SystemPtr_t = std::unique_ptr<System>;
@@ -59,7 +61,7 @@ protected:
 
 
 template<class T, class ...Args>
-inline T & World::makeSystem(Args && ...args)
+inline T & ECSWorld::makeSystem(Args && ...args)
 {
 	auto found = std::find_if(systems.begin(), systems.end(), SystemUnaryPredicate(getSTypeId<T>()));
 	ASSERT((found == systems.end()), "Making the same System twice. Returning the existing one")
@@ -73,19 +75,19 @@ inline T & World::makeSystem(Args && ...args)
 }
 
 template<class T, class ...Args>
-bool World::removeSystem()
+bool ECSWorld::removeSystem()
 {
 	return removeSystem(getSTypeId<T>());
 }
 
 template<class T>
-inline bool World::hasSystem()
+inline bool ECSWorld::hasSystem()
 {
 	return hasSystem(getSTypeId<T>());
 }
 
 template<class T>
-inline T & World::getSystem()
+inline T & ECSWorld::getSystem()
 {
 	auto found = std::find_if(systems.begin(), systems.end(), SystemUnaryPredicate(getSTypeId<T>()));
 	EXC_ASSERT((found != systems.end()), std::out_of_range, "Getting unidentified system")
@@ -93,7 +95,8 @@ inline T & World::getSystem()
 }
 
 template<class T>
-inline const T & World::getSystem() const
+inline const T & ECSWorld::getSystem() const
 {
 	return static_cast<const T&>(*systems[getSTypeId<T>()]);
+}
 }
