@@ -1,4 +1,4 @@
-#include "EntityManager/ASpawner.h"
+#include <ECSpp/EntityManager/ASpawner.h>
 
 using namespace epp;
 

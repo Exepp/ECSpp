@@ -1,6 +1,6 @@
 #pragma once
 #include "ASpawner.h"
-#include "CGroup/CGroup.h"
+#include <ECSpp/CGroup/CGroup.h>
 
 namespace epp
 {

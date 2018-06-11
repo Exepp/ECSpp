@@ -1,7 +1,7 @@
 #pragma once
-#include "EntityManager/ASpawner.h"
-#include "Utility/CFilter.h"
-#include "Utility/TuplePP.h"
+#include <ECSpp/EntityManager/ASpawner.h>
+#include <ECSpp/Utility/CFilter.h>
+#include <ECSpp/Utility/TuplePP.h>
 
 namespace epp
 {

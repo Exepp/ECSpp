@@ -1,4 +1,4 @@
-#include "EntityManager/Archetype.h"
+#include <ECSpp/EntityManager/Archetype.h>
 
 using namespace epp;
 

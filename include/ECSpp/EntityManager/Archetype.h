@@ -1,8 +1,8 @@
 #pragma once
 #include <memory>
 #include "CPool.h"
-#include "Utility/CFilter.h"
-#include "Utility/ThirdParty/sparsepp/spp.h"
+#include <ECSpp/Utility/CFilter.h>
+#include <ECSpp/Utility/ThirdParty/sparsepp/spp.h>
 
 namespace epp
 {

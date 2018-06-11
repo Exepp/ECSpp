@@ -1,6 +1,6 @@
 #pragma once
-#include "Component.h"
-#include "Utility/Pool.h"
+#include <ECSpp/Component.h>
+#include <ECSpp/Utility/Pool.h>
 
 namespace epp
 {
