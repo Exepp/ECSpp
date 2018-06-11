@@ -1,5 +1,7 @@
 #include "EntityManager/Archetype.h"
 
+using namespace epp;
+
 Archetype::Archetype(const Archetype & rhs)
 {
 	*this = rhs;

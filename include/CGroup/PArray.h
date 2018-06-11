@@ -3,6 +3,9 @@
 #include "Utility/Pool.h"
 #include "Component.h"
 
+namespace epp
+{
+
 template<class T, bool IsConst>
 class PArrayIterator
 {
@@ -93,3 +96,5 @@ private:
 };
 
 #include "PArray.inl"
+
+}

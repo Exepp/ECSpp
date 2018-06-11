@@ -1,10 +1,11 @@
 #include "ECSWorld.h"
 #include <algorithm>
 
-using namespace epp;
 
+using namespace epp;
 bool ECSWorld::removeSystem(STypeId_t id)
 {
+	
 	auto found = std::find_if(systems.begin(), systems.end(), SystemUnaryPredicate(id));
 	ASSERT((found != systems.end()), "Tried to remove unidentified system")
 	if (found != systems.end())

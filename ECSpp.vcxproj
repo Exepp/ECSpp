@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Component.cpp" />
+    <ClCompile Include="src\ECSWorld.cpp" />
     <ClCompile Include="src\EntityManager\Archetype.cpp" />
     <ClCompile Include="src\EntityManager\ASpawner.cpp" />
     <ClCompile Include="src\EntityManager\EntityManager.cpp" />
@@ -61,7 +62,6 @@
     <ClCompile Include="src\System.cpp" />
     <ClCompile Include="src\Utility\Bitmask.cpp" />
     <ClCompile Include="src\Utility\CFilter.cpp" />
-    <ClCompile Include="src\World.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

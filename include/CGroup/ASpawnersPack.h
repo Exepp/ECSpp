@@ -3,7 +3,8 @@
 #include "Utility/CFilter.h"
 #include "Utility/TuplePP.h"
 
-
+namespace epp
+{
 
 template<bool IsConst, class FirstType, class ...CTypes>
 class ASpawnersPackIterator
@@ -146,3 +147,5 @@ private:
 
 
 #include "ASpawnersPack.inl"
+
+}

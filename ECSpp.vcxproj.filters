@@ -127,9 +127,6 @@
     <ClCompile Include="src\System.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\World.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="src\Component.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -150,6 +147,9 @@
     </ClCompile>
     <ClCompile Include="src\EntityManager\ASpawner.cpp">
       <Filter>src\EntityManager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ECSWorld.cpp">
+      <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

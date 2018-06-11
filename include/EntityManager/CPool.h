@@ -2,6 +2,9 @@
 #include "Component.h"
 #include "Utility/Pool.h"
 
+namespace epp
+{
+
 // interface of a component pool 
 struct CPoolInterface
 {
@@ -89,3 +92,5 @@ struct CPool : public CPoolInterface
 };
 
 #include "CPool.inl"
+
+}

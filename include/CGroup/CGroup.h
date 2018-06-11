@@ -3,7 +3,8 @@
 #include "Utility/CFilter.h"
 #include "ASpawnersPack.h"
 
-
+namespace epp
+{
 
 template<class ...CTypes>
 class CGroup
@@ -77,4 +78,6 @@ template<class ...CTypes>
 inline typename CGroup<CTypes...>::ConstIterator_t CGroup<CTypes...>::end() const
 {
 	return static_cast<const SpawnersPack_t&>(*spawnersPtr).end();
+}
+
 }

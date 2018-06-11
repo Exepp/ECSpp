@@ -4,6 +4,9 @@
 #include "Utility/CFilter.h"
 #include "Utility/ThirdParty/sparsepp/spp.h"
 
+namespace epp
+{
+
 class Archetype
 {
 	using CPoolBase_t = CPoolInterface;
@@ -83,27 +86,10 @@ private:
 };
 
 
-
-
-namespace std
-{
-	template<>
-	struct hash<Archetype>
-	{
-		size_t operator()(const Archetype& arche)
-		{
-			return hasher(arche.cMask);
-		}
-		hash<Bitmask> hasher;
-	};
-}
-
-
-
 template<class T1, class T2, class ...CTypes>
 inline bool Archetype::addComponent()
 {
-	return addComponent<T1>() & addComponent<T2>() & ( 1 & ... & addComponent<CTypes>());
+	return addComponent<T1>() & addComponent<T2>() & (1 & ... & addComponent<CTypes>());
 }
 
 template<class T>
@@ -127,7 +113,7 @@ inline bool Archetype::removeComponent()
 }
 
 template<class ...IdTypes>
-inline bool Archetype::removeComponent(CTypeId_t id1, CTypeId_t id2,  IdTypes ...ids)
+inline bool Archetype::removeComponent(CTypeId_t id1, CTypeId_t id2, IdTypes ...ids)
 {
 	return removeComponent(id1) & removeComponent(id2) & (1 & ... & removeComponent(ids));
 }
@@ -154,4 +140,20 @@ inline const Archetype& makeArchetype()
 		arche.hash();
 	}
 	return arche;
+}
+
+}
+
+
+namespace std
+{
+	template<>
+	struct hash<epp::Archetype>
+	{
+		size_t operator()(const epp::Archetype& arche)
+		{
+			return hasher(arche.cMask);
+		}
+		hash<epp::Bitmask> hasher;
+	};
 }

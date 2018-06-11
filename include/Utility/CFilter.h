@@ -2,6 +2,9 @@
 #include "Bitmask.h"
 #include "Component.h"
 
+namespace epp
+{
+
 class CFilter
 {
 public:
@@ -76,19 +79,6 @@ private:
 	friend struct std::hash<CFilter>;
 };
 
-namespace std
-{
-	template<>
-	struct hash<CFilter>
-	{
-		size_t operator()(const CFilter& filter)
-		{
-			return hasher(filter.wantedMask) - hasher(filter.unwantedMask) % (0x7FFFFFFF);
-		}
-		std::hash<Bitmask> hasher;
-	};
-}
-
 template<class ...CTypes>
 inline CFilter& CFilter::addWanted()
 {
@@ -145,4 +135,19 @@ inline CFilter & CFilter::removeUnwanted(IdTypes ...ids)
 	(unwantedMask.unset(ids), ...);
 	rehash = true;
 	return *this;
+}
+
+}
+
+namespace std
+{
+	template<>
+	struct hash<epp::CFilter>
+	{
+		size_t operator()(const epp::CFilter& filter)
+		{
+			return hasher(filter.wantedMask) - hasher(filter.unwantedMask) % (0x7FFFFFFF);
+		}
+		hash<epp::Bitmask> hasher;
+	};
 }
