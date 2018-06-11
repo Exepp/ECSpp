@@ -12,8 +12,6 @@ struct CPoolInterface
 
 	virtual Component& alloc() = 0;
 
-	virtual Component& alloc(const Component& arg) = 0;
-
 	virtual Component& alloc(Component&& arg) = 0;
 
 	virtual void allocN(size_t n) = 0;
@@ -60,8 +58,6 @@ struct CPool : public CPoolInterface
 
 	virtual Component& alloc() override;
 
-	virtual Component& alloc(const Component& arg) override;
-
 	virtual Component& alloc(Component&& arg) override;
 
 	virtual void allocN(size_t n) override;
@@ -91,6 +87,6 @@ struct CPool : public CPoolInterface
 	Pool_t pool;
 };
 
+}
 #include "CPool.inl"
 
-}
