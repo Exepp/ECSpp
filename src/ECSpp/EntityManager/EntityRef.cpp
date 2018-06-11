@@ -1,5 +1,5 @@
-#include "EntityManager/EntityRef.h"
-#include "EntityManager/ASpawner.h"
+#include <ECSpp/EntityManager/EntityRef.h>
+#include <ECSpp/EntityManager/ASpawner.h>
 
 using namespace epp;
 

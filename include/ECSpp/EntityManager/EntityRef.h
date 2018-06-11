@@ -1,7 +1,7 @@
 #pragma once
 #include <memory>
-#include "Component.h"
-#include "Archetype.h"
+#include <ECSpp/Component.h>
+#include <ECSpp/EntityManager/Archetype.h>
 
 namespace epp
 {

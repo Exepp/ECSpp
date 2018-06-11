@@ -1,4 +1,4 @@
-#include "System.h"
+#include <ECSpp/System.h>
 
 using namespace epp;
 

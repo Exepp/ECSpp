@@ -1,6 +1,6 @@
 #pragma once
 #include "Bitmask.h"
-#include "Component.h"
+#include <ECSpp/Component.h>
 
 namespace epp
 {

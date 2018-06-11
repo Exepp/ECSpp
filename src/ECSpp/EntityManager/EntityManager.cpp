@@ -1,4 +1,4 @@
-#include "EntityManager/EntityManager.h"
+#include <ECSpp/EntityManager/EntityManager.h>
 
 using namespace epp;
 

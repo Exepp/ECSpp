@@ -19,49 +19,49 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\CGroup\ASpawnersPack.h" />
-    <ClInclude Include="include\CGroup\CGroup.h" />
-    <ClInclude Include="include\CGroup\PArray.h" />
-    <ClInclude Include="include\Component.h" />
-    <ClInclude Include="include\EntityManager\Archetype.h" />
-    <ClInclude Include="include\EntityManager\ASpawner.h" />
-    <ClInclude Include="include\EntityManager\CPool.h" />
-    <ClInclude Include="include\EntityManager\EntityManager.h" />
-    <ClInclude Include="include\EntityManager\EntityRef.h" />
-    <ClInclude Include="include\System.h" />
-    <ClInclude Include="include\Utility\Bitmask.h" />
-    <ClInclude Include="include\Utility\CFilter.h" />
-    <ClInclude Include="include\Utility\DebugAssert.h" />
-    <ClInclude Include="include\Utility\Pool.h" />
-    <ClInclude Include="include\Utility\ThirdParty\sparsepp\spp.h" />
-    <ClInclude Include="include\Utility\ThirdParty\sparsepp\spp_config.h" />
-    <ClInclude Include="include\Utility\ThirdParty\sparsepp\spp_dlalloc.h" />
-    <ClInclude Include="include\Utility\ThirdParty\sparsepp\spp_memory.h" />
-    <ClInclude Include="include\Utility\ThirdParty\sparsepp\spp_smartptr.h" />
-    <ClInclude Include="include\Utility\ThirdParty\sparsepp\spp_stdint.h" />
-    <ClInclude Include="include\Utility\ThirdParty\sparsepp\spp_timer.h" />
-    <ClInclude Include="include\Utility\ThirdParty\sparsepp\spp_traits.h" />
-    <ClInclude Include="include\Utility\ThirdParty\sparsepp\spp_utils.h" />
-    <ClInclude Include="include\Utility\TuplePP.h" />
-    <ClInclude Include="include\ECSWorld.h" />
+    <ClInclude Include="include\ECSpp\CGroup\ASpawnersPack.h" />
+    <ClInclude Include="include\ECSpp\CGroup\CGroup.h" />
+    <ClInclude Include="include\ECSpp\CGroup\PArray.h" />
+    <ClInclude Include="include\ECSpp\Component.h" />
+    <ClInclude Include="include\ECSpp\ECSWorld.h" />
+    <ClInclude Include="include\ECSpp\EntityManager\Archetype.h" />
+    <ClInclude Include="include\ECSpp\EntityManager\ASpawner.h" />
+    <ClInclude Include="include\ECSpp\EntityManager\CPool.h" />
+    <ClInclude Include="include\ECSpp\EntityManager\EntityManager.h" />
+    <ClInclude Include="include\ECSpp\EntityManager\EntityRef.h" />
+    <ClInclude Include="include\ECSpp\System.h" />
+    <ClInclude Include="include\ECSpp\Utility\Bitmask.h" />
+    <ClInclude Include="include\ECSpp\Utility\CFilter.h" />
+    <ClInclude Include="include\ECSpp\Utility\DebugAssert.h" />
+    <ClInclude Include="include\ECSpp\Utility\Pool.h" />
+    <ClInclude Include="include\ECSpp\Utility\ThirdParty\sparsepp\spp.h" />
+    <ClInclude Include="include\ECSpp\Utility\ThirdParty\sparsepp\spp_config.h" />
+    <ClInclude Include="include\ECSpp\Utility\ThirdParty\sparsepp\spp_dlalloc.h" />
+    <ClInclude Include="include\ECSpp\Utility\ThirdParty\sparsepp\spp_memory.h" />
+    <ClInclude Include="include\ECSpp\Utility\ThirdParty\sparsepp\spp_smartptr.h" />
+    <ClInclude Include="include\ECSpp\Utility\ThirdParty\sparsepp\spp_stdint.h" />
+    <ClInclude Include="include\ECSpp\Utility\ThirdParty\sparsepp\spp_timer.h" />
+    <ClInclude Include="include\ECSpp\Utility\ThirdParty\sparsepp\spp_traits.h" />
+    <ClInclude Include="include\ECSpp\Utility\ThirdParty\sparsepp\spp_utils.h" />
+    <ClInclude Include="include\ECSpp\Utility\TuplePP.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="include\CGroup\ASpawnersPack.inl" />
-    <None Include="include\CGroup\PArray.inl" />
-    <None Include="include\EntityManager\CPool.inl" />
-    <None Include="include\Utility\Pool.inl" />
-    <None Include="include\Utility\TuplePP.inl" />
+    <None Include="include\ECSpp\CGroup\ASpawnersPack.inl" />
+    <None Include="include\ECSpp\CGroup\PArray.inl" />
+    <None Include="include\ECSpp\EntityManager\CPool.inl" />
+    <None Include="include\ECSpp\Utility\Pool.inl" />
+    <None Include="include\ECSpp\Utility\TuplePP.inl" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Component.cpp" />
-    <ClCompile Include="src\ECSWorld.cpp" />
-    <ClCompile Include="src\EntityManager\Archetype.cpp" />
-    <ClCompile Include="src\EntityManager\ASpawner.cpp" />
-    <ClCompile Include="src\EntityManager\EntityManager.cpp" />
-    <ClCompile Include="src\EntityManager\EntityRef.cpp" />
-    <ClCompile Include="src\System.cpp" />
-    <ClCompile Include="src\Utility\Bitmask.cpp" />
-    <ClCompile Include="src\Utility\CFilter.cpp" />
+    <ClCompile Include="src\ECSpp\Component.cpp" />
+    <ClCompile Include="src\ECSpp\ECSWorld.cpp" />
+    <ClCompile Include="src\ECSpp\EntityManager\Archetype.cpp" />
+    <ClCompile Include="src\ECSpp\EntityManager\ASpawner.cpp" />
+    <ClCompile Include="src\ECSpp\EntityManager\EntityManager.cpp" />
+    <ClCompile Include="src\ECSpp\EntityManager\EntityRef.cpp" />
+    <ClCompile Include="src\ECSpp\System.cpp" />
+    <ClCompile Include="src\ECSpp\Utility\Bitmask.cpp" />
+    <ClCompile Include="src\ECSpp\Utility\CFilter.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
@@ -121,6 +121,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <TargetName>$(ProjectName)-d</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -150,7 +151,6 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);_SCL_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <AdditionalIncludeDirectories>$(SolutionDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -187,7 +187,6 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);_SCL_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <AdditionalIncludeDirectories>$(SolutionDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>

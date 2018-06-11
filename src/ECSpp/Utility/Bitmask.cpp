@@ -1,4 +1,4 @@
-#include "Utility/Bitmask.h"
+#include <ECSpp/Utility/Bitmask.h>
 #include <bitset>
 
 using namespace epp;

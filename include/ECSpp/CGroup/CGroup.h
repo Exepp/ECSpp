@@ -1,7 +1,7 @@
 #pragma once
 #include "PArray.h"
-#include "Utility/CFilter.h"
-#include "ASpawnersPack.h"
+#include <ECSpp/Utility/CFilter.h>
+#include <ECSpp/CGroup/ASpawnersPack.h>
 
 namespace epp
 {

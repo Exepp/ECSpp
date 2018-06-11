@@ -1,4 +1,4 @@
-#include "Component.h"
+#include <ECSpp/Component.h>
 
 using namespace epp;
 
