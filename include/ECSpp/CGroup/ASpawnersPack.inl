@@ -2,9 +2,16 @@
 template<bool IsConst, class FirstType, class ...CTypes>
 inline ASpawnersPackIterator<IsConst, FirstType, CTypes...>::
 ASpawnersPackIterator(const ASpawnersHolder_t& spawners, PoolArraysHolder_t & poolArrays, size_t archetypeIndex) :
-	spawners(spawners), poolArrays(poolArrays), archetypeIndex(archetypeIndex), firstTypePools(poolArrays.get<PArray<FirstType>>().getPools()), startingSize(firstTypePools.size())
+	spawners(spawners), poolArrays(poolArrays), archetypeIndex(archetypeIndex), firstTypePools(poolArrays.get<PArray<FirstType>>().getPools())
 {
 	findValidIndices();
+}
+
+template<bool IsConst, class FirstType, class ...CTypes>
+template<class T>
+inline T & ASpawnersPackIterator<IsConst, FirstType, CTypes...>::getComponent() const
+{
+	return poolArrays.get<PArray<T>>()[archetypeIndex][entityIndex];
 }
 
 template<bool IsConst, class FirstType, class ...CTypes>
@@ -29,7 +36,7 @@ template<bool IsConst, class FirstType, class ...CTypes>
 inline void ASpawnersPackIterator<IsConst, FirstType, CTypes...>::findValidIndices()
 {
 	entityIndex = 0;
-	while (archetypeIndex < startingSize)
+	while (archetypeIndex < firstTypePools.size())
 		if (firstTypePools[archetypeIndex]->getSize())
 		{
 			return;
@@ -41,7 +48,7 @@ inline void ASpawnersPackIterator<IsConst, FirstType, CTypes...>::findValidIndic
 template<bool IsConst, class FirstType, class ...CTypes>
 inline bool ASpawnersPackIterator<IsConst, FirstType, CTypes...>::isValid() const
 {
-	return archetypeIndex < startingSize && entityIndex < firstTypePools[archetypeIndex]->getSize();
+	return archetypeIndex < firstTypePools.size() && entityIndex < firstTypePools[archetypeIndex]->getSize();
 }
 
 template<bool IsConst, class FirstType, class ...CTypes>
@@ -62,7 +69,7 @@ template<bool IsConst, class FirstType, class ...CTypes>
 inline bool ASpawnersPackIterator<IsConst, FirstType, CTypes...>::operator==(const ThisIterator_t & other) const
 {
 	return &poolArrays == &poolArrays && archetypeIndex == other.archetypeIndex &&
-		(archetypeIndex == startingSize || entityIndex == other.entityIndex);
+		(archetypeIndex == firstTypePools.size() || entityIndex == other.entityIndex);
 }
 
 template<bool IsConst, class FirstType, class ...CTypes>

@@ -29,6 +29,9 @@ public:
 	ASpawnersPackIterator(const ASpawnersHolder_t& spawners, PoolArraysHolder_t& poolArrays, size_t archetypeIndex = 0);
 
 
+	template<class T>
+	T& getComponent() const;
+
 	EntityRef getERefPtr() const;
 
 
@@ -56,8 +59,6 @@ private:
 	PoolArraysHolder_t & poolArrays;
 
 	const FirstTypePools_t& firstTypePools;
-
-	size_t startingSize = 0;
 
 	size_t archetypeIndex = 0;
 
