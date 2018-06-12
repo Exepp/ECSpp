@@ -5,20 +5,39 @@
 
 namespace epp
 {
-
 class ASpawner;
+
 
 using EntityId_t = size_t;
 
 
-class EntityRef : public std::enable_shared_from_this<EntityRef>
+struct Entity : public std::enable_shared_from_this<Entity>
 {
+	Entity(ASpawner* originSpawner, EntityId_t id);
+
+	void invalidate();
+
+
+	ASpawner* originSpawner = nullptr;
+
+	EntityId_t id = unidentifiedId;
+
+	bool alive = false;
+};
+
+
+
+using EPtr_t = std::shared_ptr<Entity>;
+
+
+
+class EntityRef
+{
+private:
+
+	EntityRef(const EPtr_t& entity);
+
 public:
-
-	EntityRef() = default;
-
-	EntityRef(ASpawner* spawnerPtr, EntityId_t id, bool living);
-
 
 	void die();
 
@@ -73,22 +92,10 @@ public:
 
 private:
 
-	void invalidate();
-
-private:
-
-	ASpawner* originSpawner = nullptr;
-
-	EntityId_t id = epp::unidentifiedId;
-
-	bool alive = false;
-
+	EPtr_t entity;
 
 	friend ASpawner;
 };
-
-
-using ERefPtr_t = std::shared_ptr<EntityRef>;
 
 
 

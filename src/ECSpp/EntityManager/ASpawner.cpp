@@ -9,34 +9,34 @@ ASpawner::~ASpawner()
 	clear();
 }
 
-const ERefPtr_t& ASpawner::spawn()
+EntityRef ASpawner::spawn()
 {
 	for (auto & pool : spawningEntities.archetype.cPools)
 		pool.second->alloc();
 
-	return spawningEntities.eRefs.alloc(std::make_shared<EntityRef>(this, spawningEntities.eRefs.getSize(), false));
+	return EntityRef(spawningEntities.ePtrs.alloc(std::make_shared<Entity>(this, spawningEntities.ePtrs.getSize())));
 }
 
-ASpawner::ERefPtrPoolIteratorPair_t ASpawner::spawn(size_t n)
+void ASpawner::spawn(size_t n)
 {
 	for (auto & pool : spawningEntities.archetype.cPools)
 		pool.second->allocN(n);
 
-	spawningEntities.eRefs.allocN(n);
+	spawningEntities.ePtrs.allocN(n);
 
-	for (size_t i = spawningEntities.eRefs.getSize() - n; i < spawningEntities.eRefs.getSize(); ++i)
-		spawningEntities.eRefs[i] = std::make_shared<EntityRef>(this, i, false);
-
-	return std::make_pair(spawningEntities.eRefs.end() - n, spawningEntities.eRefs.end());
+	for (size_t i = spawningEntities.ePtrs.getSize() - n; i < spawningEntities.ePtrs.getSize(); ++i)
+		spawningEntities.ePtrs[i] = std::make_shared<Entity>(this, i);
 }
 
-void ASpawner::moveExistingEntityHere(EntityRef & eRef)
+void ASpawner::moveExistingEntityHere(const EntityRef & eRef)
 {
-	if (!eRef.isValid() || eRef.originSpawner == this)
+	if (!eRef.isValid() || eRef.entity->originSpawner == this)
 		return;
 
-	ASpawner& originSpawner = *eRef.originSpawner;
-	EntitiesData& originEData = eRef.alive ? originSpawner.aliveEntities : originSpawner.spawningEntities;
+	auto& entity = *eRef.entity;
+
+	ASpawner& originSpawner = *entity.originSpawner;
+	EntitiesData& originEData = entity.alive ? originSpawner.aliveEntities : originSpawner.spawningEntities;
 
 	// moving components
 	for (auto& pool : spawningEntities.archetype.cPools)
@@ -44,19 +44,19 @@ void ASpawner::moveExistingEntityHere(EntityRef & eRef)
 		auto found = originEData.archetype.cPools.find(pool.first);
 		if (found != originEData.archetype.cPools.end())
 		{
-			Component& componentToMove = (*found->second)[eRef.id];
+			Component& componentToMove = (*found->second)[entity.id];
 			pool.second->alloc(std::move(componentToMove));
-			found->second->free(eRef.id);
+			found->second->free(entity.id);
 		}
 		else
 			pool.second->alloc();
 	}
 
 	// moving reference
-	spawningEntities.eRefs.alloc(eRef.shared_from_this());
-	originSpawner.referenceKill(originEData, eRef.id);
-	eRef.originSpawner = this;
-	eRef.id = spawningEntities.eRefs.getSize() - 1;
+	spawningEntities.ePtrs.alloc(entity.shared_from_this());
+	originSpawner.entityKill(originEData, entity.id);
+	entity.originSpawner = this;
+	entity.id = spawningEntities.ePtrs.getSize() - 1;
 }
 
 void ASpawner::acceptSpawningEntities()
@@ -70,37 +70,37 @@ void ASpawner::acceptSpawningEntities()
 	}
 	spawningEntities.archetype.clear();
 
-	for (auto& eRef : spawningEntities.eRefs)
+	for (auto& ePtr : spawningEntities.ePtrs)
 	{
-		eRef->id = aliveEntities.eRefs.getSize();
-		eRef->alive = true;
-		aliveEntities.eRefs.alloc(std::move(eRef));
+		ePtr->id = aliveEntities.ePtrs.getSize();
+		ePtr->alive = true;
+		aliveEntities.ePtrs.alloc(std::move(ePtr));
 	}
-	spawningEntities.eRefs.clear();
+	spawningEntities.ePtrs.clear();
 }
 
-void ASpawner::kill(EntityRef & ref)
+void ASpawner::kill(const EntityRef & ref)
 {
-	if (ref.originSpawner != this)
+	if (ref.entity->originSpawner != this)
 		return;
 
-	EntitiesData& eData = ref.alive ? aliveEntities : spawningEntities;
-	EntityId_t id = ref.id;
+	EntitiesData& eData = ref.entity->alive ? aliveEntities : spawningEntities;
+	EntityId_t id = ref.entity->id;
 
 	for (auto & pool : eData.archetype.cPools)
 		pool.second->free(id);
-	referenceKill(eData, id);
+	entityKill(eData, id);
 }
 
-void ASpawner::referenceKill(EntitiesData& eData, size_t id)
+void ASpawner::entityKill(EntitiesData& eData, size_t id)
 {
-	eData.eRefs[id]->invalidate();
-	eData.eRefs.free(id);
+	eData.ePtrs[id]->invalidate();
+	eData.ePtrs.free(id);
 
-	// eRefs already moved the last object to the freed one, now we need to update its index to the current one
+	// ePtrs already moved the last object to the freed one, now we need to update its index to the current one
 	// check if any entity was moved (if "id" wasn't the last index)
-	if (eData.eRefs.getSize() && eData.eRefs.getSize() != id)
-		eData.eRefs[id]->id = id;
+	if (eData.ePtrs.getSize() && eData.ePtrs.getSize() != id)
+		eData.ePtrs[id]->id = id;
 }
 
 void ASpawner::clear()
@@ -108,23 +108,13 @@ void ASpawner::clear()
 	aliveEntities.archetype.clear();
 	spawningEntities.archetype.clear();
 
-	for (auto& eRef : aliveEntities.eRefs)
-		eRef->invalidate();
-	for (auto& eRef : spawningEntities.eRefs)
-		eRef->invalidate();
+	for (auto& ePtr : aliveEntities.ePtrs)
+		ePtr->invalidate();
+	for (auto& ePtr : spawningEntities.ePtrs)
+		ePtr->invalidate();
 
-	aliveEntities.eRefs.clear();
-	spawningEntities.eRefs.clear();
-}
-
-Component & ASpawner::getComponent(CTypeId_t cId, EntityId_t entityId, bool alive)
-{
-	return getPool(cId, alive)[entityId];
-}
-
-const Component & ASpawner::getComponent(CTypeId_t cId, EntityId_t entityId, bool alive) const
-{
-	return getPool(cId, alive)[entityId];
+	aliveEntities.ePtrs.clear();
+	spawningEntities.ePtrs.clear();
 }
 
 CPoolInterface & ASpawner::getPool(CTypeId_t cId, bool alive)
@@ -148,17 +138,17 @@ const Archetype & ASpawner::getArchetype() const
 
 size_t ASpawner::getAliveEntitiesCount() const
 {
-	return aliveEntities.eRefs.getSize();
+	return aliveEntities.ePtrs.getSize();
 }
 
 
 size_t ASpawner::getSpawningEntitiesCount() const
 {
-	return spawningEntities.eRefs.getSize();
+	return spawningEntities.ePtrs.getSize();
 }
 
-const ERefPtr_t& ASpawner::operator[](EntityId_t i) const
+EntityRef ASpawner::operator[](EntityId_t i) const
 {
-	EXC_ASSERT((i < aliveEntities.eRefs.getSize()), std::out_of_range, "Wrong entity id")
-	return aliveEntities.eRefs[i];
+	EXC_ASSERT((i < aliveEntities.ePtrs.getSize()), std::out_of_range, "Wrong entity id")
+	return EntityRef(aliveEntities.ePtrs[i]);
 }

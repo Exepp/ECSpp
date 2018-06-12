@@ -8,7 +8,7 @@ ASpawnersPackIterator(const ASpawnersHolder_t& spawners, PoolArraysHolder_t & po
 }
 
 template<bool IsConst, class FirstType, class ...CTypes>
-inline const ERefPtr_t & ASpawnersPackIterator<IsConst, FirstType, CTypes...>::getERefPtr() const
+inline EntityRef ASpawnersPackIterator<IsConst, FirstType, CTypes...>::getERefPtr() const
 {
 	return (*spawners[archetypeIndex])[entityIndex];
 }

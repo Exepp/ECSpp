@@ -2,12 +2,12 @@
 
 using namespace epp;
 
-const ERefPtr_t& EntityManager::spawn(const Archetype& arche)
+EntityRef EntityManager::spawn(const Archetype& arche)
 {
 	return registerArchetypeIfNew(arche).spawn();
 }
 
-ASpawner::ERefPtrPoolIteratorPair_t EntityManager::spawn(const Archetype & arche, size_t n)
+void EntityManager::spawn(const Archetype & arche, size_t n)
 {
 	return registerArchetypeIfNew(arche).spawn(n);
 }

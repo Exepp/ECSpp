@@ -9,7 +9,7 @@ class ASpawner
 {
 public:
 	
-	using ERefPtrPool_t = Pool<ERefPtr_t>;
+	using EPtrPool_t = Pool<EPtr_t>;
 
 
 	struct EntitiesData
@@ -18,15 +18,11 @@ public:
 
 		EntitiesData(Archetype archetype) : archetype(std::move(archetype)) {}
 
+
 		Archetype archetype;
 
-		ERefPtrPool_t eRefs;
+		EPtrPool_t ePtrs;
 	};
-
-
-	using ERefPtrPoolIterator_t = Pool<ERefPtr_t>::Iterator_t;
-
-	using ERefPtrPoolIteratorPair_t = std::pair<ERefPtrPoolIterator_t, ERefPtrPoolIterator_t>;
 
 public:
 
@@ -43,34 +39,21 @@ public:
 	ASpawner& operator=(ASpawner&&) = default;
 
 
-	const ERefPtr_t& spawn();
+	EntityRef spawn();
 
-	ERefPtrPoolIteratorPair_t spawn(size_t n);
+	void spawn(size_t n);
 
-
-	void kill(EntityRef & ref);
-
+	void kill(const EntityRef & ref);
 
 	// kills alive and spawning entities
 	void clear();
 
 	
-	void moveExistingEntityHere(EntityRef& eRef);
+	void moveExistingEntityHere(const EntityRef& eRef);
 
 
 	// accepts recently added (since last registerNewEntities call) entities, ie. enables CGroup iterators to reach these entities
 	void acceptSpawningEntities();
-
-	
-	Component& getComponent(CTypeId_t cId, EntityId_t entityId, bool alive);
-
-	const Component& getComponent(CTypeId_t cId, EntityId_t entityId, bool alive) const;
-
-	template<class T>
-	T& getComponent(EntityId_t entityId, bool alive);
-
-	template<class T>
-	const T& getComponent(EntityId_t entityId, bool alive) const;
 
 
 	CPoolInterface & getPool(CTypeId_t cId, bool alive);
@@ -84,20 +67,20 @@ public:
 	const Pool<T>& getPool(bool alive) const;
 
 
-
 	size_t getSpawningEntitiesCount() const;
 
 	size_t getAliveEntitiesCount() const;
 
+
 	const Archetype& getArchetype() const;
 
 
-	// returns ptr to ALIVE entity reference 
-	const ERefPtr_t& operator[](EntityId_t id) const;
+	 //returns ref to ALIVE entity 
+	EntityRef operator[](EntityId_t id) const;
 
 private:
 
-	void referenceKill(EntitiesData& eData, size_t id);
+	void entityKill(EntitiesData& eData, size_t id);
 
 private:
 
@@ -107,19 +90,6 @@ private:
 };
 
 
-
-
-template<class T>
-inline T & ASpawner::getComponent(EntityId_t entityId, bool alive)
-{
-	return static_cast<T&>(getComponent(getCTypeId<T>(), entityId, alive));
-}
-
-template<class T>
-inline const T & ASpawner::getComponent(EntityId_t entityId, bool alive) const
-{
-	return static_cast<const T&>(getComponent(getCTypeId<T>(), entityId, alive));
-}
 
 template<class T>
 inline Pool<T> & ASpawner::getPool(bool alive)

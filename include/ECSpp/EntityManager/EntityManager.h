@@ -19,14 +19,14 @@ class EntityManager
 public:
 
 	template<class ...CTypes>
-	const ERefPtr_t& spawn();
+	EntityRef spawn();
 
 	template<class ...CTypes>
-	const ERefPtr_t& spawn(size_t n);
+	void spawn(size_t n);
 
-	const ERefPtr_t& spawn(const Archetype& arche);
+	EntityRef spawn(const Archetype& arche);
 
-	ASpawner::ERefPtrPoolIteratorPair_t spawn(const Archetype& arche, size_t n);
+	void spawn(const Archetype& arche, size_t n);
 
 	
 	// makes it possible for a groups to iterate over recently spawned entities (should be called outside of any group iteration loop)
@@ -39,14 +39,14 @@ public:
 
 	// adding (new)component will always make entity unreachable for any group's iterator, by the time EntityManager::acceptSpawnedEntities is called
 	template<class ...CTypes>
-	void addComponent(EntityRef& eRef);
+	void addComponent(const EntityRef& eRef);
 
 	// removing (present)component will always make entity unreachable for any group's iterator, by the time EntityManager::acceptSpawnedEntities is called
 	template<class ...CTypes>
-	void removeComponent(EntityRef& eRef);
+	void removeComponent(const EntityRef& eRef);
 
 	template<class ...IdTypes>
-	void removeComponent(EntityRef& eRef, IdTypes ...ids);
+	void removeComponent(const EntityRef& eRef, IdTypes ...ids);
 
 
 	// registers archetype, so it doesn't need to be done on spawn/(add/remove component) calls
@@ -58,6 +58,9 @@ public:
 	// returns a group of entities, that meets the given requirements
 	template<class ...CTypes>
 	CGroup<CTypes...> requestCGroup(Bitmask unwantedComponents = Bitmask());
+
+	template<class ...CTypes>
+	void requestCGroup(CGroup<CTypes...>& group, Bitmask unwantedComponents = Bitmask());
 
 private:
 
@@ -77,19 +80,19 @@ private:
 
 
 template<class ...CTypes>
-inline const ERefPtr_t & EntityManager::spawn()
+inline EntityRef EntityManager::spawn()
 {
-	spawn(makeArchetype<CTypes...>());
+	return spawn(makeArchetype<CTypes...>());
 }
 
 template<class ...CTypes>
-inline const ERefPtr_t & EntityManager::spawn(size_t n)
+inline void EntityManager::spawn(size_t n)
 {
-	spawn(makeArchetype<CTypes...>(), n);
+	return spawn(makeArchetype<CTypes...>(), n);
 }
 
 template<class ...CTypes>
-inline void EntityManager::addComponent(EntityRef& eRef)
+inline void EntityManager::addComponent(const EntityRef& eRef)
 {
 	if (!isEntityRefValid(eRef) || (eRef.hasComponent_noCheck<CTypes>() && ...))
 		return;
@@ -100,13 +103,13 @@ inline void EntityManager::addComponent(EntityRef& eRef)
 }
 
 template<class ...CTypes>
-inline void EntityManager::removeComponent(EntityRef & eRef)
+inline void EntityManager::removeComponent(const EntityRef & eRef)
 {
 	removeComponent(eRef, getCTypeId<CTypes>()...);
 }
 
 template<class ...IdTypes>
-inline void EntityManager::removeComponent(EntityRef & eRef, IdTypes ...ids)
+inline void EntityManager::removeComponent(const EntityRef & eRef, IdTypes ...ids)
 {
 	if (!isEntityRefValid(eRef) || !(eRef.hasComponent_noCheck(ids) || ...))
 		return;
@@ -132,6 +135,12 @@ inline CGroup<CTypes...> EntityManager::requestCGroup(Bitmask unwantedComponents
 			cArraysPackPtr->addASpawnerIfMeetsRequirements(*aSpawner.second);
 	}
 	return CGroup<CTypes...>(cArraysPackPtr);
+}
+
+template<class ...CTypes>
+inline void EntityManager::requestCGroup(CGroup<CTypes...>& group, Bitmask unwantedComponents)
+{
+	group = requestCGroup<CTypes...>(unwantedComponents);
 }
 
 template<class AType>

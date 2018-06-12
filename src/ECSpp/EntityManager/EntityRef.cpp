@@ -3,22 +3,35 @@
 
 using namespace epp;
 
-EntityRef::EntityRef(ASpawner * spawnerPtr, EntityId_t id, bool living) : originSpawner(spawnerPtr), id(id), alive(living) {}
+Entity::Entity(ASpawner * originSpawner, EntityId_t id) : originSpawner(originSpawner), id(id)
+{}
+
+void epp::Entity::invalidate()
+{
+	originSpawner = nullptr;
+	id = unidentifiedId;
+	alive = false;
+}
+
+
+
+epp::EntityRef::EntityRef(const EPtr_t & entity) : entity(entity)
+{}
 
 void EntityRef::die()
 {
 	if (isValid())
-		originSpawner->kill(*this);
+		entity->originSpawner->kill(*this);
 }
 
 bool EntityRef::isValid() const
 {
-	return originSpawner;
+	return entity->originSpawner;
 }
 
 bool EntityRef::isAlive() const
 {
-	return alive;
+	return entity->alive;
 }
 
 bool EntityRef::hasComponent(CTypeId_t id) const
@@ -28,7 +41,7 @@ bool EntityRef::hasComponent(CTypeId_t id) const
 
 bool EntityRef::hasComponent_noCheck(CTypeId_t id) const
 {
-	return originSpawner->getArchetype().hasComponent(id);;
+	return entity->originSpawner->getArchetype().hasComponent(id);;
 }
 
 Component* EntityRef::getComponent(size_t cTypeId)
@@ -47,29 +60,22 @@ const Component * EntityRef::getComponent(size_t cTypeId) const
 
 Component * EntityRef::getComponent_NoCheck(size_t cTypeId)
 {
-	return &(*originSpawner).getComponent(cTypeId, id, alive);
+	return &(*entity->originSpawner).getPool(cTypeId, entity->alive)[entity->id];
 }
 
 const Component * EntityRef::getComponent_NoCheck(size_t cTypeId) const
 {
-	return &(*originSpawner).getComponent(cTypeId, id, alive);
+	return &(*entity->originSpawner).getPool(cTypeId, entity->alive)[entity->id];
 }
 
 ASpawner const* EntityRef::getOriginSpawner() const
 {
-	return originSpawner;
-}
-
-void EntityRef::invalidate()
-{
-	originSpawner = nullptr;
-	id = unidentifiedId;
-	alive = false;
+	return entity->originSpawner;
 }
 
 bool EntityRef::operator==(const EntityRef& rhs) const
 {
-	return originSpawner == rhs.originSpawner && id == rhs.id;
+	return entity == rhs.entity;
 }
 
 bool EntityRef::operator!=(const EntityRef& rhs) const

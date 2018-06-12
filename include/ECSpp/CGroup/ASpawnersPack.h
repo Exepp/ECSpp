@@ -29,7 +29,7 @@ public:
 	ASpawnersPackIterator(const ASpawnersHolder_t& spawners, PoolArraysHolder_t& poolArrays, size_t archetypeIndex = 0);
 
 
-	const ERefPtr_t& getERefPtr() const;
+	EntityRef getERefPtr() const;
 
 
 	bool isValid() const;
