@@ -15,7 +15,7 @@ inline T & ASpawnersPackIterator<IsConst, FirstType, CTypes...>::getComponent() 
 }
 
 template<bool IsConst, class FirstType, class ...CTypes>
-inline EntityRef ASpawnersPackIterator<IsConst, FirstType, CTypes...>::getERefPtr() const
+inline EntityRef ASpawnersPackIterator<IsConst, FirstType, CTypes...>::getERef() const
 {
 	return (*spawners[archetypeIndex])[entityIndex];
 }

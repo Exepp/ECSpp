@@ -32,7 +32,7 @@ public:
 	template<class T>
 	T& getComponent() const;
 
-	EntityRef getERefPtr() const;
+	EntityRef getERef() const;
 
 
 	bool isValid() const;
