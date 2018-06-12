@@ -22,11 +22,11 @@ public:
 	EntityRef spawn();
 
 	template<class ...CTypes>
-	void spawn(size_t n);
+	const ASpawner& spawn(size_t n);
 
 	EntityRef spawn(const Archetype& arche);
 
-	void spawn(const Archetype& arche, size_t n);
+	const ASpawner& spawn(const Archetype& arche, size_t n);
 
 	
 	// makes it possible for a groups to iterate over recently spawned entities (should be called outside of any group iteration loop)
@@ -86,7 +86,7 @@ inline EntityRef EntityManager::spawn()
 }
 
 template<class ...CTypes>
-inline void EntityManager::spawn(size_t n)
+inline const ASpawner& EntityManager::spawn(size_t n)
 {
 	return spawn(makeArchetype<CTypes...>(), n);
 }

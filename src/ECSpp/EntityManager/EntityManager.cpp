@@ -7,9 +7,11 @@ EntityRef EntityManager::spawn(const Archetype& arche)
 	return registerArchetypeIfNew(arche).spawn();
 }
 
-void EntityManager::spawn(const Archetype & arche, size_t n)
+const ASpawner& EntityManager::spawn(const Archetype & arche, size_t n)
 {
-	return registerArchetypeIfNew(arche).spawn(n);
+	auto& aSpawner = registerArchetypeIfNew(arche);
+	aSpawner.spawn(n);
+	return aSpawner;
 }
 
 void EntityManager::acceptSpawnedEntities()
