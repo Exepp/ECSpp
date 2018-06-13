@@ -26,12 +26,12 @@ void EntityRef::die()
 
 bool EntityRef::isValid() const
 {
-	return entity->originSpawner;
+	return entity && entity->originSpawner;
 }
 
 bool EntityRef::isAlive() const
 {
-	return entity->alive;
+	return isValid() && entity->alive;
 }
 
 bool EntityRef::hasComponent(CTypeId_t id) const
@@ -70,7 +70,9 @@ const Component * EntityRef::getComponent_NoCheck(size_t cTypeId) const
 
 ASpawner const* EntityRef::getOriginSpawner() const
 {
-	return entity->originSpawner;
+	if(entity)
+		return entity->originSpawner;
+	return nullptr;
 }
 
 bool EntityRef::operator==(const EntityRef& rhs) const

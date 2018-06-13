@@ -39,6 +39,9 @@ private:
 
 public:
 
+	EntityRef() = default;
+
+
 	void die();
 
 
