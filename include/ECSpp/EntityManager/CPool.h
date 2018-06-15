@@ -8,7 +8,7 @@ namespace epp
 // interface of a component pool 
 struct CPoolInterface
 {
-	~CPoolInterface() = default;
+	virtual ~CPoolInterface() = default;
 
 	virtual Component& alloc() = 0;
 
