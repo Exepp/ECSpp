@@ -11,7 +11,7 @@ public:
 
 	CFilter() = default;
 
-	// if wanted & unwated != 0, then unwanted = unwanted & ~(unwanted & wanted)
+	// if wanted n unwated != 0, then unwanted = unwanted & ~(unwanted & wanted)
 	CFilter(Bitmask wanted, Bitmask unwated);
 
 

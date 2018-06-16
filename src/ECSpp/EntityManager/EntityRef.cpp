@@ -47,23 +47,23 @@ bool EntityRef::hasComponent_noCheck(CTypeId_t id) const
 Component* EntityRef::getComponent(size_t cTypeId)
 {
 	if (hasComponent(cTypeId))
-		return getComponent_NoCheck(cTypeId);
+		return getComponent_noCheck(cTypeId);
 	return nullptr;
 }
 
 const Component * EntityRef::getComponent(size_t cTypeId) const
 {
 	if (hasComponent(cTypeId))
-		return getComponent_NoCheck(cTypeId);
+		return getComponent_noCheck(cTypeId);
 	return nullptr;
 }
 
-Component * EntityRef::getComponent_NoCheck(size_t cTypeId)
+Component * EntityRef::getComponent_noCheck(size_t cTypeId)
 {
 	return &(*entity->originSpawner).getPool(cTypeId, entity->alive)[entity->id];
 }
 
-const Component * EntityRef::getComponent_NoCheck(size_t cTypeId) const
+const Component * EntityRef::getComponent_noCheck(size_t cTypeId) const
 {
 	return &(*entity->originSpawner).getPool(cTypeId, entity->alive)[entity->id];
 }

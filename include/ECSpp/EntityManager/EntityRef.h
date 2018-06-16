@@ -67,9 +67,9 @@ public:
 
 	const Component* getComponent(size_t cTypeId) const;
 
-	Component* getComponent_NoCheck(size_t cTypeId);
+	Component* getComponent_noCheck(size_t cTypeId);
 
-	const Component* getComponent_NoCheck(size_t cTypeId) const;
+	const Component* getComponent_noCheck(size_t cTypeId) const;
 
 
 	// returns nullptr when entity does not own given component, or reference is invalid
@@ -80,10 +80,10 @@ public:
 	const T* getComponent() const;
 
 	template<class T>
-	T* getComponent_NoCheck();
+	T* getComponent_noCheck();
 
 	template<class T>
-	const T* getComponent_NoCheck() const;
+	const T* getComponent_noCheck() const;
 
 
 	ASpawner const * getOriginSpawner() const;
@@ -127,15 +127,15 @@ inline const T* EntityRef::getComponent() const
 }
 
 template<class T>
-inline T * EntityRef::getComponent_NoCheck()
+inline T * EntityRef::getComponent_noCheck()
 {
-	return (T*)getComponent_NoCheck(getCTypeId<T>());
+	return (T*)getComponent_noCheck(getCTypeId<T>());
 }
 
 template<class T>
-inline const T * EntityRef::getComponent_NoCheck() const
+inline const T * EntityRef::getComponent_noCheck() const
 {
-	return (T*)getComponent_NoCheck(getCTypeId<T>());
+	return (T*)getComponent_noCheck(getCTypeId<T>());
 }
 
 }

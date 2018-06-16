@@ -22,7 +22,7 @@ public:
 
 	CGroup() = default;
 
-	// it is up to caller to provide ptr to ASpawnersPack of a correct type (SpawnersPack_t)
+	// it is up to caller to provide ptr to ASpawnersPack of a correct type (CGroup::SpawnersPack_t)
 	CGroup(const std::shared_ptr<ASpawnersPackInterace>& arraysPtr);
 
 
