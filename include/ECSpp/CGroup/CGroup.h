@@ -1,5 +1,4 @@
 #pragma once
-#include "PArray.h"
 #include <ECSpp/Utility/CFilter.h>
 #include <ECSpp/CGroup/ASpawnersPack.h>
 

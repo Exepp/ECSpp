@@ -53,7 +53,6 @@
   <ItemGroup>
     <ClInclude Include="include\ECSpp\CGroup\ASpawnersPack.h" />
     <ClInclude Include="include\ECSpp\CGroup\CGroup.h" />
-    <ClInclude Include="include\ECSpp\CGroup\PArray.h" />
     <ClInclude Include="include\ECSpp\Component.h" />
     <ClInclude Include="include\ECSpp\ECSWorld.h" />
     <ClInclude Include="include\ECSpp\EntityManager\Archetype.h" />
@@ -79,7 +78,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="include\ECSpp\CGroup\ASpawnersPack.inl" />
-    <None Include="include\ECSpp\CGroup\PArray.inl" />
     <None Include="include\ECSpp\EntityManager\CPool.inl" />
     <None Include="include\ECSpp\Utility\Pool.inl" />
     <None Include="include\ECSpp\Utility\TuplePP.inl" />

@@ -5,16 +5,14 @@
 
 namespace epp
 {
+	template<class T>
+	using PArray = std::vector<Pool<T>*>;
+
 
 template<bool IsConst, class FirstType, class ...CTypes>
 class ASpawnersPackIterator
 {
 	using ThisIterator_t = ASpawnersPackIterator<IsConst, FirstType, CTypes...>;
-
-	template<class T>
-	using PArrayIterator_t = PArrayIterator<T, IsConst>;
-
-	using PArrayIteratorsHolder_t = TuplePP<PArrayIterator_t<FirstType>, PArrayIterator_t<CTypes>...>;
 
 	using CProxyPack_t = std::conditional_t<IsConst, TuplePP<const FirstType&, const CTypes&...>, TuplePP<FirstType&, CTypes&...>>;
 
@@ -22,7 +20,7 @@ class ASpawnersPackIterator
 
 	using PoolArraysHolder_t = std::conditional_t<IsConst, const TuplePP<PArray<FirstType>, PArray<CTypes>...>, TuplePP<PArray<FirstType>, PArray<CTypes>...>>;
 
-	using FirstTypePools_t = std::vector<Pool<FirstType>*>;
+	using FirstTypePools_t = PArray<FirstType>;
 
 public:
 
@@ -125,7 +123,7 @@ public:
 		if (aSpawner.getArchetype().meetsRequirementsOf(filter))
 		{
 			spawners.push_back(&aSpawner);
-			(poolArrays.get<PArray<CTypes>>().addPool(aSpawner.getPool<CTypes>(true)), ...);
+			(poolArrays.get<PArray<CTypes>>().push_back(&aSpawner.getPool<CTypes>(true)), ...);
 		}
 	}
 
