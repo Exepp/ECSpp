@@ -1,5 +1,5 @@
 # ECSpp -  C++ 17 Entity Component System library
-ECSpp is a library for managing entities in games. It is implemented using "data-oriented design" approach using Entity Comonent System pattern, that optimize iteration over objects with specyfic components set by arranging them contiguously in memory, maximizing cache usage while keeping entities addition and removal fast.
+ECSpp is a library for managing entities in games. It is implemented using "data-oriented design" approach and Entity Comonent System pattern. Library optimize iteration over objects with specyfic components set by arranging them contiguously in memory, maximizing cache usage while keeping entities addition and removal fast.
 
 You can see an example of use in my [Game Engine](https://github.com/Exepp/GameEngine).
 
