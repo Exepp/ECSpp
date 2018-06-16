@@ -53,8 +53,10 @@ if you call it inside CGroup iteration loop, it is undefined which one of the ad
 
     eRef.getComponent_noCheck<TComp1>(); // for no isValid() checks - call it if you checked it by yourself (it will throw if invalid) and you want to get many components
     eRef.hasComponent_noCheck<TComp1>(); // same as above
-    eRef.die(); // destroys owned components, invalidates all the references to this entity (requires a special treatment while called in a CGroup iteration loop, more info in: [Using CGroup](##Using%20CGroup))
+    eRef.die(); // destroys owned components, invalidates all the references to this entity)
 ```
+EntityRef::die requires a special treatment while called in a CGroup iteration loop, more info in: [Using CGroup](##Using%20CGroup))
+
 ## Adding/Removing components
 This is kind of an expensive operation, especially when resulting archetype is new to the EntityManager
 To add a new archetype, EntityManager must go through every requested CGroup and add that archetype to the ones that accept it (when it has a proper components set), plus of course there will be some memory allocation, but that being said, all of this happens only for the first time the new Archetype is added.To prevent this, you can call: EntityManager::registerArchetype, but you would have to register every possible archetype that will be used in your game (of course order doesn't matter).
