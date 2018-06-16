@@ -12,7 +12,7 @@ ECSpp is a library for managing entities in games. It is implemented using "data
 # Memory Layout
 ![](Documentation/Memory%20Layout/Pool.PNG)
 
-![](Documentation/Memory%20Layout/Archetype2.PNG)        ![](Documentation/Memory%20Layout/ASpawner.PNG)
+![](Documentation/Memory%20Layout/Archetype3.PNG)        ![](Documentation/Memory%20Layout/ASpawner.PNG)
 
 ![](Documentation/Memory%20Layout/CGroup.PNG)           
 ![](Documentation/Memory%20Layout/Entity.PNG)
