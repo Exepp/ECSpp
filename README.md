@@ -24,7 +24,7 @@ ECSpp is a library for managing entities in games. It is implemented using "data
 ## Spawning an entity:
 Every spawned entity must be accepted before CGroup iterators can iterate over them
 that happens before each System::Update, or you can accept them manually by calling EntityManager::acceptSpawningEntities
-if you call it inside CGroup iteration loop, it is undefined which one of the added entities will iterator iterate over (more about it in [Adding/Removing components](##adding/removing-components))
+if you call it inside CGroup iteration loop, it is undefined which one of the added entities will iterator iterate over (more about it in [Adding/Removing components](#addingremoving-components))
 ```c++
     EntityManager entityManager;
 
@@ -55,7 +55,7 @@ if you call it inside CGroup iteration loop, it is undefined which one of the ad
     eRef.hasComponent_noCheck<TComp1>(); // same as above
     eRef.die(); // destroys owned components, invalidates all the references to this entity)
 ```
-EntityRef::die requires a special treatment while called in a CGroup iteration loop, more info in: [Using CGroup](##using-cgroup))
+EntityRef::die requires a special treatment while called in a CGroup iteration loop, more info in: [Using CGroup](#using-cgroup))
 
 ## Adding/Removing components
 This is kind of an expensive operation, especially when resulting archetype is new to the EntityManager
