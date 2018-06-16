@@ -3,6 +3,12 @@ ECSpp is a library for managing entities in games. It is implemented using "data
 
 You can see an example of use in my [Game Engine](https://github.com/Exepp/GameEngine).
 
+Current TODO
+------------
+Add internal static stack and pool allocators (pool mainly for handling Entity instances)
+
+Add multithreading support
+
 # Classes description
 1. Component - data. A unique set of different components describes what entity really is (what is its archetype)
 2. Pool<Component> - a pool of components. Each component is "owned" by a different entity
