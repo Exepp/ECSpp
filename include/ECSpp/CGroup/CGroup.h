@@ -58,25 +58,37 @@ inline const CFilter & CGroup<CTypes...>::getFilter() const
 template<class ...CTypes>
 inline typename CGroup<CTypes...>::Iterator_t CGroup<CTypes...>::begin()
 {
-	return spawnersPtr->begin();
+	ASSERT(spawnersPtr, "CGroup used before being requested")
+	if(spawnersPtr)
+		return spawnersPtr->begin();
+	return Iterator_t();
 }
 
 template<class ...CTypes>
 inline typename CGroup<CTypes...>::ConstIterator_t CGroup<CTypes...>::begin() const
 {
-	return static_cast<const SpawnersPack_t&>(*spawnersPtr).begin();
+	ASSERT(spawnersPtr, "CGroup used before being requested")
+	if (spawnersPtr)
+		return static_cast<const SpawnersPack_t&>(*spawnersPtr).begin();
+	return ConstIterator_t();
 }
 
 template<class ...CTypes>
 inline typename CGroup<CTypes...>::Iterator_t CGroup<CTypes...>::end()
 {
-	return spawnersPtr->end();
+	ASSERT(spawnersPtr, "CGroup used before being requested")
+		if (spawnersPtr)
+			return spawnersPtr->end();
+	return Iterator_t();
 }
 
 template<class ...CTypes>
 inline typename CGroup<CTypes...>::ConstIterator_t CGroup<CTypes...>::end() const
 {
-	return static_cast<const SpawnersPack_t&>(*spawnersPtr).end();
+	ASSERT(spawnersPtr, "CGroup used before being requested")
+		if (spawnersPtr)
+			return static_cast<const SpawnersPack_t&>(*spawnersPtr).end();
+	return ConstIterator_t();
 }
 
 }

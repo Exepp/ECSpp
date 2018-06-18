@@ -24,6 +24,8 @@ class ASpawnersPackIterator
 
 public:
 
+	ASpawnersPackIterator() = default;
+
 	ASpawnersPackIterator(const ASpawnersHolder_t& spawners, PoolArraysHolder_t& poolArrays, size_t archetypeIndex = 0);
 
 
@@ -52,11 +54,11 @@ private:
 
 private:
 
-	const ASpawnersHolder_t&  spawners;
+	const ASpawnersHolder_t*  spawners;
 
-	PoolArraysHolder_t & poolArrays;
+	PoolArraysHolder_t* poolArrays;
 
-	const FirstTypePools_t& firstTypePools;
+	const FirstTypePools_t* firstTypePools;
 
 	size_t archetypeIndex = 0;
 

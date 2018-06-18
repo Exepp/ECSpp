@@ -2,7 +2,7 @@
 template<bool IsConst, class FirstType, class ...CTypes>
 inline ASpawnersPackIterator<IsConst, FirstType, CTypes...>::
 ASpawnersPackIterator(const ASpawnersHolder_t& spawners, PoolArraysHolder_t & poolArrays, size_t archetypeIndex) :
-	spawners(spawners), poolArrays(poolArrays), archetypeIndex(archetypeIndex), firstTypePools(poolArrays.get<PArray<FirstType>>())
+	spawners(&spawners), poolArrays(&poolArrays), archetypeIndex(archetypeIndex), firstTypePools(&poolArrays.get<PArray<FirstType>>())
 {
 	findValidIndices();
 }
@@ -11,13 +11,13 @@ template<bool IsConst, class FirstType, class ...CTypes>
 template<class T>
 inline T & ASpawnersPackIterator<IsConst, FirstType, CTypes...>::getComponent() const
 {
-	return (*poolArrays.get<PArray<T>>()[archetypeIndex])[entityIndex];
+	return (*poolArrays->get<PArray<T>>()[archetypeIndex])[entityIndex];
 }
 
 template<bool IsConst, class FirstType, class ...CTypes>
 inline EntityRef ASpawnersPackIterator<IsConst, FirstType, CTypes...>::getERef() const
 {
-	return (*spawners[archetypeIndex])[entityIndex];
+	return (*(*spawners)[archetypeIndex])[entityIndex];
 }
 
 template<bool IsConst, class FirstType, class ...CTypes>
@@ -36,8 +36,8 @@ template<bool IsConst, class FirstType, class ...CTypes>
 inline void ASpawnersPackIterator<IsConst, FirstType, CTypes...>::findValidIndices()
 {
 	entityIndex = 0;
-	while (archetypeIndex < firstTypePools.size())
-		if (firstTypePools[archetypeIndex]->getSize())
+	while (archetypeIndex < firstTypePools->size())
+		if ((*firstTypePools)[archetypeIndex]->getSize())
 		{
 			return;
 		}
@@ -48,7 +48,7 @@ inline void ASpawnersPackIterator<IsConst, FirstType, CTypes...>::findValidIndic
 template<bool IsConst, class FirstType, class ...CTypes>
 inline bool ASpawnersPackIterator<IsConst, FirstType, CTypes...>::isValid() const
 {
-	return archetypeIndex < firstTypePools.size() && entityIndex < firstTypePools[archetypeIndex]->getSize();
+	return archetypeIndex < firstTypePools->size() && entityIndex < (*firstTypePools)[archetypeIndex]->getSize();
 }
 
 template<bool IsConst, class FirstType, class ...CTypes>
@@ -62,14 +62,14 @@ inline ASpawnersPackIterator<IsConst, FirstType, CTypes...> ASpawnersPackIterato
 template<bool IsConst, class FirstType, class ...CTypes>
 inline typename ASpawnersPackIterator<IsConst, FirstType, CTypes...>::CProxyPack_t ASpawnersPackIterator<IsConst, FirstType, CTypes...>::operator*()
 {
-	return  CProxyPack_t::Base_t({ (*firstTypePools[archetypeIndex])[entityIndex], (*poolArrays.get<PArray<CTypes>>()[archetypeIndex])[entityIndex]... });
+	return  CProxyPack_t::Base_t({ (*(*firstTypePools)[archetypeIndex])[entityIndex], (*poolArrays->get<PArray<CTypes>>()[archetypeIndex])[entityIndex]... });
 }
 
 template<bool IsConst, class FirstType, class ...CTypes>
 inline bool ASpawnersPackIterator<IsConst, FirstType, CTypes...>::operator==(const ThisIterator_t & other) const
 {
-	return &poolArrays == &poolArrays && archetypeIndex == other.archetypeIndex &&
-		(archetypeIndex == firstTypePools.size() || entityIndex == other.entityIndex);
+	return poolArrays == poolArrays &&  (!poolArrays || archetypeIndex == other.archetypeIndex &&
+		(archetypeIndex == firstTypePools->size() || entityIndex == other.entityIndex));
 }
 
 template<bool IsConst, class FirstType, class ...CTypes>
