@@ -86,9 +86,6 @@ private:
 };
 
 
-
-
-
 template<class T1, class T2, class ...CTypes>
 inline bool Archetype::addComponent()
 {

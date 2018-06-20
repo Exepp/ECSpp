@@ -40,7 +40,6 @@ static void BM_EntitiesIteration_20M(benchmark::State& state)
 			entity.get<ComflabulationComponent&>().dingy++;
 		}
 	}
-	ECSWorld::removeSystem
 }
 BENCHMARK(BM_EntitiesIteration_20M);
 
