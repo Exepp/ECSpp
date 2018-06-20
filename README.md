@@ -19,15 +19,45 @@ Multithreading support
 5. CGroup (ASpawnersPack) - container of all the ASpawners that meets the requirements of CGroup's filter (The filter contains set of wanted and unwanted components) with an iterator, that iterates over every entity of contained ASpawners and provides fast and safe access to their components.
 6. EntityManager - container of ASpawners that provides interface for: spawning new entities of given Archetype (with given components), adding or removing components from an entity and requesting CGroups. 
 7. System - Nothing fancy, just a class that can be used to implement some logic by iterating over entities form CGroup. CGroups can be requested everywhere, so its not like this class is special in any case, just use it, if it and World class are good enough for you.
-7. World - just a container of Systems + EntityManager instance...
+7. ECSWorld - just a container of Systems + EntityManager instance...
 
 # Examples
+
+## Using ECSWorld:
+```c++
+ECSWorld world;
+world.makeSystem<System1>(/*args to constructor*/); // order of making systems determines the order of systems update
+world.update(deltaTime); 
+world.hasSystem<System1>();
+world.getSystem<System1>(); // throws when there is no System1 added
+world.removeSystem<System1>();
+```
+
+## Using System
+```c++
+struct TestSystem : public System
+{
+	virtual void init(EntityManager& entityManager) override
+	{
+		group = entityManager.requestCGroup<TComp1, TComp3>();
+		
+	}
+
+	virtual void update(EntityManager& entityManager, float dt) override
+	{
+		for (auto pack : group)
+		{
+			// ...
+		}
+	}
+
+	CGroup<TComp1, TComp3> group;
+};
+```
 
 ## Spawning an entity:
 Every spawned entity must be accepted before CGroup iterators can iterate over them. That happens automatically in World::update before each System::update but you can accept them manually by calling EntityManager::acceptSpawningEntities. If you call it inside a CGroup iteration loop, it is undefined which one of the added entities will iterator iterate over (more about it in [Adding/Removing components](#addingremoving-components))
 ```c++
-EntityManager entityManager;
-
 entityManager.spawn<Component1, Component2>();
 //or
 entityManager.spawn(makeArchetype<Component1, Component2>());
@@ -38,7 +68,6 @@ Archetype archetype = makeArchetype<Component1, Component2>();
 // archetype.addComponent<Component1, Component2>();
 
 entityManager.spawn(archetype);
-    
 ```
 
 ## Getting and using EntityRef
@@ -55,14 +84,14 @@ eRef.getComponent_noCheck<Component1>(); // for no internal isValid() checks - w
 eRef.hasComponent_noCheck<Component1>(); // same as above
 eRef.die(); // destroys the owned components, invalidates all the references to this entity
 ```
-EntityRef::die requires a special treatment while called in a CGroup iteration loop, more about it in: [Using CGroup](#using-cgroup))
+EntityRef::die requires a special treatment while called inside a CGroup iteration loop, more about it in: [Using CGroup](#using-cgroup))
 
 ## Adding/Removing components
 This is kind of an expensive operation, especially when resulting archetype is new to the EntityManager. To add a new archetype, EntityManager must let all the requested CGroups know about it (and these will add that archetype if it meets their requirements), but all of this happens only for the first time a new Archetype is added. To prevent this, you can call: EntityManager::registerArchetype, but you would have to register every possible archetype that will be used in your game (of course order doesn't matter).
 
 Second thing is, that changing the archetype of an entity makes the EntityManager move entity's components to a new ASpawner. For this reason entity with added/removed components will be treated as spawned one, so as mentioned before in "Spawning an entity", EntityManager::acceptSpawningEntities must be called before any CGroup iterator can iterate over this entity.
 
-Component can be added/removed only through EntityManager.
+Components can be added/removed only through EntityManager.
 
 ```c++
 EntityRef eRef = entityManager.spawn<Component1, Component2>();
