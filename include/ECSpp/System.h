@@ -22,12 +22,12 @@ private:
 	static STypeId_t typeCounter;
 
 	template<class T>
-	friend constexpr STypeId_t getSTypeId();
+	friend STypeId_t getSTypeId();
 };
 
 
 template<class T>
-inline constexpr STypeId_t getSTypeId()
+inline STypeId_t getSTypeId()
 {
 	static_assert(std::is_base_of_v<System, T>, "Only System based types can request Id here");
 	static STypeId_t id = System::typeCounter++;

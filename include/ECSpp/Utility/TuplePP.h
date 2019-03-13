@@ -7,7 +7,10 @@ namespace epp
 	template<class T, class ...Pack>
 	inline constexpr bool isTypeInPack()
 	{
-		return (std::is_same_v<T, Pack> || ...);
+		// if constexpr (sizeof...(Pack) > 0)
+			return (std::is_same_v<T, Pack> || ...);
+		// else
+		// 	return false;
 	}
 
 
@@ -61,25 +64,17 @@ namespace epp
 		template<class ...OtherTplTypes>
 		static ThisTpl_t makeFromTuple(const TuplePP<OtherTplTypes...>& tplToCpyFrom)
 		{
-			return ThisTpl_t(Base_t(tplToCpyFrom.get<TplTypes>()...));
+			return ThisTpl_t(Base_t(tplToCpyFrom.template get<TplTypes>()...));
 		}
 
 		template<class ...SearchedTypes>
 		static constexpr bool containsType()
 		{
-			return (isTypeInPack<SearchedTypes, TplTypes...>() && ...);
+			if constexpr(sizeof...(SearchedTypes) > 0)
+				return (isTypeInPack<SearchedTypes, TplTypes...>() && ...);
+			else
+				return false;
 		}
-
-		template<>
-		static constexpr bool containsType<>()
-		{
-			return false;
-		}
-
-
-		template<class ...OtherTypes>
-		struct AreUsed : public std::bool_constant<containsType<OtherTypes...>()> {};
-
 	};
 
 #include "TuplePP.inl"

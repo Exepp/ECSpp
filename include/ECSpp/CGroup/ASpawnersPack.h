@@ -125,7 +125,7 @@ public:
 		if (aSpawner.getArchetype().meetsRequirementsOf(filter))
 		{
 			spawners.push_back(&aSpawner);
-			(poolArrays.get<PArray<CTypes>>().push_back(&aSpawner.getPool<CTypes>(true)), ...);
+			(poolArrays.template get<PArray<CTypes>>().push_back(&aSpawner.getPool<CTypes>(true)), ...);
 		}
 	}
 

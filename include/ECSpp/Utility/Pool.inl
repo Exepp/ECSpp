@@ -5,12 +5,7 @@ inline T* allocNObjects(size_t n)
 	return (T*)::operator new(n * sizeof(T), std::align_val_t(alignof(T)));
 }
 
-template<class T>
-inline void destroyMFreeNObjects(T* memory, size_t m, size_t n)
-{
-	destroyMObjects(memory, m);
-	::operator delete((void*)memory, n * sizeof(T), std::align_val_t(alignof(T)));
-}
+
 
 template<class T>
 inline void destroyMObjects(T* memory, size_t m)
@@ -19,7 +14,12 @@ inline void destroyMObjects(T* memory, size_t m)
 		(memory + i)->~T();
 }
 
-
+template<class T>
+inline void destroyMFreeNObjects(T* memory, size_t m, size_t n)
+{
+	destroyMObjects(memory, m);
+	::operator delete((void *)memory, n * sizeof(T), std::align_val_t(alignof(T)));
+}
 
 template<class T>
 Pool<T>::Pool(ThisPool_t&& rhs)

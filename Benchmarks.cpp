@@ -1,11 +1,11 @@
 #include <benchmark/benchmark.h>
 #include <ECSpp/ECSWorld.h>
-
+#include <entt/entt.hpp>
 using namespace epp;
 
 struct PositionComponent : public Component {float x, y; };	struct DirectionComponent : public Component { float x, y; }; struct ComflabulationComponent : public Component {float thingy;int dingy;std::string stringy; bool mingy;};
 
-static void BM_EntitiesCreationKilling(benchmark::State& state) 
+static void BM_EntitiesCreateDestroy(benchmark::State& state) 
 {
 	epp::EntityManager manager;
 	manager.registerArchetype(makeArchetype<PositionComponent, DirectionComponent>());
@@ -15,15 +15,14 @@ static void BM_EntitiesCreationKilling(benchmark::State& state)
 		manager.clear();
 	}
 }
-BENCHMARK(BM_EntitiesCreationKilling)->Range(8, 8<<20);
+BENCHMARK(BM_EntitiesCreateDestroy)->Range(8, 1e6);
 
-static void BM_EntitiesIteration_20M(benchmark::State& state)
+static void BM_EntitiesIteration_2M(benchmark::State& state)
 {
 	epp::EntityManager manager;
-	manager.spawn(makeArchetype<PositionComponent, DirectionComponent, ComflabulationComponent>(), size_t(2 * 1e6));
+	manager.spawn(makeArchetype<PositionComponent, DirectionComponent, ComflabulationComponent>(), size_t(2e6));
 	manager.acceptSpawnedEntities();
-	CGroup<PositionComponent, DirectionComponent, ComflabulationComponent> group;
-	manager.requestCGroup(group);
+	auto group = manager.requestCGroup<PositionComponent, DirectionComponent, ComflabulationComponent>();
 
 	for (auto _ : state)
 	{
@@ -41,7 +40,8 @@ static void BM_EntitiesIteration_20M(benchmark::State& state)
 		}
 	}
 }
-BENCHMARK(BM_EntitiesIteration_20M);
+
+BENCHMARK(BM_EntitiesIteration_2M);
 
 static void BM_AddingRemovingComponent(benchmark::State& state)
 {

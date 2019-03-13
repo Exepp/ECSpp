@@ -1,5 +1,6 @@
 #pragma once
 #include <memory>
+#include <new>
 #include "Bitmask.h"
 #include "DebugAssert.h"
 

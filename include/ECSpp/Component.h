@@ -1,5 +1,6 @@
 #pragma once
 #include <type_traits>
+#include <cstdlib>
 
 namespace epp
 {
@@ -18,11 +19,11 @@ private:
 
 
 	template<class T>
-	friend constexpr CTypeId_t getCTypeId();
+	friend CTypeId_t getCTypeId();
 };
 
 template<class T>
-constexpr CTypeId_t getCTypeId()
+CTypeId_t getCTypeId()
 {
 	static_assert(std::is_base_of_v<Component, T>, "Only Component based types can request Id here");
 	static const CTypeId_t cTypeId = Component::cTypeCounter++;

@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <cstdint>
 
 namespace epp
 {
@@ -83,7 +84,11 @@ namespace std
 	{
 		size_t operator()(const epp::Bitmask& bitmask) const
 		{
-			return _Hash_array_representation(bitmask.masks.data(), bitmask.masks.size());
+			size_t val = 0;
+			for(size_t i : bitmask.masks)
+			// equation from boost library: hash_combine function
+				val ^= std::hash<size_t>()(i) + 0x9e3779b9 + (val << 6) + (val >> 2);
+			return val;
 		}
 	};
 }
