@@ -1,5 +1,6 @@
 #include <ECSpp/Utility/Bitmask.h>
 #include <bitset>
+#include <algorithm>
 
 using namespace epp;
 

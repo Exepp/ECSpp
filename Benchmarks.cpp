@@ -1,6 +1,6 @@
 #include <benchmark/benchmark.h>
 #include <ECSpp/ECSWorld.h>
-#include <entt/entt.hpp>
+
 using namespace epp;
 
 struct PositionComponent : public Component {float x, y; };	struct DirectionComponent : public Component { float x, y; }; struct ComflabulationComponent : public Component {float thingy;int dingy;std::string stringy; bool mingy;};

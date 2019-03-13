@@ -5,17 +5,19 @@ workspace "ECSpp"
 	architecture "x64"
 
 	cppdialect "C++17"
-	
-	configurations
-	{
-		"Debug",
-		"Release"
-	}
 
-	toolset "clang"
-	
-	filter {"toolset:clang"}
-		buildoptions { "-fsized-deallocation"}
+	configurations { "Debug", "Release" }
+
+
+	filter {"system:windows"}
+		links { "Shlwapi" }
+		systemversion "latest"
+
+	filter {"system:linux"}
+		links { "pthread" }
+		toolset "clang"
+		buildoptions { "-fsized-deallocation" }
+
 
 	filter "configurations:Debug"
 		defines "EPP_DEBUG"
@@ -68,9 +70,9 @@ project "Tests"
 	}
 
 	filter "configurations:Debug"
-		links { "ECSpp", "gtest_maind", "gtestd", "pthread" }
+		links { "ECSpp", "gtest_maind", "gtestd" }
 	filter "configurations:Release"
-		links { "ECSpp", "gtest_main", "gtest", "pthread", }
+		links { "ECSpp", "gtest_main", "gtest", }
 	filter {}
 
 project "Benchmarks"
@@ -85,7 +87,7 @@ project "Benchmarks"
 	}
 
 	filter "configurations:Debug"
-		links { "ECSpp", "benchmark_maind", "benchmarkd", "pthread" }
+		links { "ECSpp", "benchmark_maind", "benchmarkd" }
 	filter "configurations:Release"
-		links { "ECSpp", "benchmark_main", "benchmark", "pthread" }
+		links { "ECSpp", "benchmark_main", "benchmark" }
 	filter {}
