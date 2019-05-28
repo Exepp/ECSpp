@@ -9,12 +9,12 @@ class EntityManager
 {
 	using ASpawnerPtr_t = std::unique_ptr<ASpawner>;
 
-	using ASpawnersHolder_t = spp::sparse_hash_map<size_t, ASpawnerPtr_t>;
+	using ASpawnersHolder_t = std::unordered_map<size_t, ASpawnerPtr_t>;
 
 
 	using ASpawnersPackPtr_t = std::shared_ptr<ASpawnersPackInterace>;
 
-	using ASpawnersPacksHolder_t = spp::sparse_hash_map<size_t, ASpawnersPackPtr_t>;
+	using ASpawnersPacksHolder_t = std::unordered_map<size_t, ASpawnersPackPtr_t>;
 
 public:
 
