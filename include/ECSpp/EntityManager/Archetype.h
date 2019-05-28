@@ -2,7 +2,7 @@
 #include <memory>
 #include "CPool.h"
 #include <ECSpp/Utility/CFilter.h>
-#include <ECSpp/Utility/ThirdParty/sparsepp/spp.h>
+#include <unordered_map>
 
 namespace epp
 {
@@ -13,7 +13,7 @@ class Archetype
 
 	using CPoolBasePtr_t = std::unique_ptr<CPoolBase_t>;
 
-	using CPoolsHolder_t = spp::sparse_hash_map<CTypeId_t, CPoolBasePtr_t>;
+	using CPoolsHolder_t = std::unordered_map<CTypeId_t, CPoolBasePtr_t>;
 
 public:
 

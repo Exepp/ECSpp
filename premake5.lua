@@ -16,7 +16,6 @@ workspace "ECSpp"
 	filter {"system:linux"}
 		links { "pthread" }
 		toolset "clang"
-		buildoptions { "-fsized-deallocation" }
 
 
 	filter "configurations:Debug"
