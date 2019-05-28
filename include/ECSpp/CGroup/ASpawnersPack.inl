@@ -2,7 +2,7 @@
 template<bool IsConst, class FirstType, class ...CTypes>
 inline ASpawnersPackIterator<IsConst, FirstType, CTypes...>::
 ASpawnersPackIterator(const ASpawnersHolder_t& spawners, PoolArraysHolder_t & poolArrays, size_t archetypeIndex) :
-	spawners(&spawners), poolArrays(&poolArrays), archetypeIndex(archetypeIndex), firstTypePools(&poolArrays.get<PArray<FirstType>>())
+	spawners(&spawners), poolArrays(&poolArrays), archetypeIndex(archetypeIndex), firstTypePools(&poolArrays.template get<PArray<FirstType>>())
 {
 	findValidIndices();
 }
@@ -11,7 +11,7 @@ template<bool IsConst, class FirstType, class ...CTypes>
 template<class T>
 inline T & ASpawnersPackIterator<IsConst, FirstType, CTypes...>::getComponent() const
 {
-	return (*poolArrays->get<PArray<T>>()[archetypeIndex])[entityIndex];
+	return (*poolArrays->template get<PArray<T>>()[archetypeIndex])[entityIndex];
 }
 
 template<bool IsConst, class FirstType, class ...CTypes>
@@ -62,14 +62,14 @@ inline ASpawnersPackIterator<IsConst, FirstType, CTypes...> ASpawnersPackIterato
 template<bool IsConst, class FirstType, class ...CTypes>
 inline typename ASpawnersPackIterator<IsConst, FirstType, CTypes...>::CProxyPack_t ASpawnersPackIterator<IsConst, FirstType, CTypes...>::operator*()
 {
-	return  CProxyPack_t::Base_t({ (*(*firstTypePools)[archetypeIndex])[entityIndex], (*poolArrays->get<PArray<CTypes>>()[archetypeIndex])[entityIndex]... });
+	return typename CProxyPack_t::Base_t({(*(*firstTypePools)[archetypeIndex])[entityIndex], (*poolArrays->template get<PArray<CTypes>>()[archetypeIndex])[entityIndex]...});
 }
 
 template<bool IsConst, class FirstType, class ...CTypes>
 inline bool ASpawnersPackIterator<IsConst, FirstType, CTypes...>::operator==(const ThisIterator_t & other) const
 {
-	return poolArrays == poolArrays &&  (!poolArrays || archetypeIndex == other.archetypeIndex &&
-		(archetypeIndex == firstTypePools->size() || entityIndex == other.entityIndex));
+	return poolArrays == poolArrays &&  (!poolArrays || 
+	(archetypeIndex == other.archetypeIndex && (archetypeIndex == firstTypePools->size() || entityIndex == other.entityIndex)));
 }
 
 template<bool IsConst, class FirstType, class ...CTypes>

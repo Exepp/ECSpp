@@ -1,5 +1,6 @@
 #include <ECSpp/Utility/Bitmask.h>
 #include <bitset>
+#include <algorithm>
 
 using namespace epp;
 
@@ -78,7 +79,7 @@ size_t Bitmask::getSetCount() const
 
 bool Bitmask::hasCommon(const Bitmask & other) const
 {
-	size_t smallest = std::_Min_value(masks.size(), other.masks.size());
+	size_t smallest = std::min(masks.size(), other.masks.size());
 	for (size_t i = 0; i < smallest; i++)
 		if (masks[i] & other.masks[i])
 			return true;
@@ -87,7 +88,7 @@ bool Bitmask::hasCommon(const Bitmask & other) const
 
 size_t Bitmask::numberOfCommon(const Bitmask & other) const
 {
-	size_t smallest = std::_Min_value(masks.size(), other.masks.size());
+	size_t smallest = std::min(masks.size(), other.masks.size());
 	size_t sum = 0;
 	std::bitset<sizeof(Mask_t) * 8u> counter;
 
@@ -109,12 +110,12 @@ size_t Bitmask::hash() const
 Bitmask Bitmask::operator&(const Bitmask & rhs) const
 {
 	Bitmask result;
-	size_t smallest = std::_Min_value(masks.size(), rhs.masks.size());
+	size_t smallest = std::min(masks.size(), rhs.masks.size());
 	result.masks.resize(smallest);
 
 	std::bitset<sizeof(Mask_t) * 8u> counter;
 	for (size_t i = 0; i < smallest; i++)
-		if (result.masks[i] = masks[i] & rhs.masks[i])
+		if ((result.masks[i] = masks[i] & rhs.masks[i]))
 			result.setCount += (counter = result.masks[i]).count();
 
 	return result;
@@ -123,13 +124,13 @@ Bitmask Bitmask::operator&(const Bitmask & rhs) const
 Bitmask Bitmask::operator|(const Bitmask & rhs) const
 {
 	Bitmask result;
-	size_t smallest = std::_Min_value(masks.size(), rhs.masks.size());
+	size_t smallest = std::min(masks.size(), rhs.masks.size());
 
 	result.masks.resize(smallest);
 
 	std::bitset<sizeof(Mask_t) * 8u> counter;
 	for (size_t i = 0; i < smallest; i++)
-		if (result.masks[i] = masks[i] | rhs.masks[i])
+		if ((result.masks[i] = masks[i] | rhs.masks[i]))
 			result.setCount += (counter = result.masks[i]).count();
 
 	return result;
@@ -137,7 +138,7 @@ Bitmask Bitmask::operator|(const Bitmask & rhs) const
 
 Bitmask & Bitmask::operator&=(const Bitmask & rhs)
 {
-	size_t smallest = std::_Min_value(masks.size(), rhs.masks.size());
+	size_t smallest = std::min(masks.size(), rhs.masks.size());
 
 	if (masks.size() > smallest)
 		masks.resize(smallest);
@@ -153,12 +154,12 @@ Bitmask & Bitmask::operator&=(const Bitmask & rhs)
 
 Bitmask & Bitmask::operator|=(const Bitmask & rhs)
 {
-	size_t smallest = std::_Min_value(masks.size(), rhs.masks.size());
+	size_t smallest = std::min(masks.size(), rhs.masks.size());
 
 	setCount = 0;
 	std::bitset<sizeof(Mask_t) * 8u> counter;
 	for (size_t i = 0; i < smallest; i++)
-		if (masks[i] |= rhs.masks[i])
+		if ((masks[i] |= rhs.masks[i]))
 			setCount += (counter = masks[i]).count();
 	rehash = true;
 	return *this;
