@@ -1,10 +1,13 @@
-#pragma once
+#ifndef POOL_H
+#define POOL_H
+
 #include "Bitmask.h"
 #include "DebugAssert.h"
 
 #include <memory>
 
-namespace epp {
+namespace epp
+{
 
 template<class T>
 class Pool;
@@ -162,3 +165,5 @@ private:
 #include "Pool.inl"
 
 } // namespace epp
+
+#endif // POOL_H
