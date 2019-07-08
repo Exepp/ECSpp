@@ -12,12 +12,12 @@ class EntityManager
 {
     using ASpawnerPtr_t = std::unique_ptr<ASpawner>;
 
-    using ASpawnersHolder_t = std::unordered_map<size_t, ASpawnerPtr_t>;
+    using ASpawnersHolder_t = std::unordered_map<Bitmask, ASpawnerPtr_t>;
 
 
     using ASpawnersPackPtr_t = std::shared_ptr<ASpawnersPackInterace>;
 
-    using ASpawnersPacksHolder_t = std::unordered_map<size_t, ASpawnersPackPtr_t>;
+    using ASpawnersPacksHolder_t = std::unordered_map<CFilter, ASpawnersPackPtr_t>;
 
 public:
     template<class... CTypes>
@@ -55,11 +55,6 @@ public:
     void registerArchetype(Archetype arche);
 
     const ASpawnersHolder_t& getArchetypesSpawners() const;
-
-
-    // returns a group of entities, that meets the given requirements
-    template<class... CTypes>
-    CGroup<CTypes...> requestCGroup(Bitmask unwantedComponents = Bitmask());
 
     template<class... CTypes>
     void requestCGroup(CGroup<CTypes...>& group, Bitmask unwantedComponents = Bitmask());
@@ -118,13 +113,13 @@ inline void EntityManager::removeComponent(const EntityRef& eRef, IdTypes... ids
 }
 
 template<class... CTypes>
-inline CGroup<CTypes...> EntityManager::requestCGroup(Bitmask unwantedComponents)
+inline void EntityManager::requestCGroup(CGroup<CTypes...>& group, Bitmask unwantedComponents)
 {
     CFilter filter;
     filter.setUnwanted(std::move(unwantedComponents));
     filter.addWanted<CTypes...>();
 
-    ASpawnersPackPtr_t& cArraysPackPtr = pArraysPacks[filter.hash()];
+    ASpawnersPackPtr_t& cArraysPackPtr = pArraysPacks[filter];
     if (!cArraysPackPtr)
     {
         cArraysPackPtr = std::make_shared<ASpawnersPack<CTypes...>>(std::move(filter));
@@ -132,19 +127,13 @@ inline CGroup<CTypes...> EntityManager::requestCGroup(Bitmask unwantedComponents
         for (auto& aSpawner : aSpawners)
             cArraysPackPtr->addASpawnerIfMeetsRequirements(*aSpawner.second);
     }
-    return CGroup<CTypes...>(cArraysPackPtr);
-}
-
-template<class... CTypes>
-inline void EntityManager::requestCGroup(CGroup<CTypes...>& group, Bitmask unwantedComponents)
-{
-    group = requestCGroup<CTypes...>(unwantedComponents);
+    group.setSpawnersPtr(std::static_pointer_cast<ASpawnersPack<CTypes...>>(cArraysPackPtr));
 }
 
 template<class AType>
 inline ASpawner& EntityManager::registerArchetypeIfNew(AType&& arche)
 {
-    ASpawnerPtr_t& aSpawnerPtr = aSpawners[arche.hash()];
+    ASpawnerPtr_t& aSpawnerPtr = aSpawners[arche.getCMask()];
     if (aSpawnerPtr)
         return *aSpawnerPtr;
 

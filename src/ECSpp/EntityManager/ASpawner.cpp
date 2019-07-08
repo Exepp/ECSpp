@@ -3,7 +3,9 @@
 using namespace epp;
 
 ASpawner::ASpawner(Archetype archetype)
-    : aliveEntities(archetype), spawningEntities(std::move(archetype)) {}
+    : aliveEntities(archetype)
+    , spawningEntities(std::move(archetype))
+{}
 
 ASpawner::~ASpawner()
 {

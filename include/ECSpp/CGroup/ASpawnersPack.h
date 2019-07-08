@@ -72,7 +72,8 @@ struct ASpawnersPackInterace
 
 public:
     ASpawnersPackInterace(CFilter filter)
-        : filter(std::move(filter)) {}
+        : filter(std::move(filter))
+    {}
 
     virtual ~ASpawnersPackInterace() = default;
 
@@ -96,7 +97,7 @@ protected:
 
 
 template<class... CTypes>
-struct ASpawnersPack : public ASpawnersPackInterace
+struct ASpawnersPack : public ASpawnersPackInterace, public SpawnerNotifier_t
 {
     static_assert(sizeof...(CTypes), "Cannot create an empty ASpawnersPack");
 
@@ -108,9 +109,14 @@ struct ASpawnersPack : public ASpawnersPackInterace
     using ConstIterator_t = ASpawnersPackIterator<true, CTypes...>;
 
 public:
-    // it is up to caller to make sure, that filter matches the filter of CTypes
     ASpawnersPack(CFilter filter)
-        : ASpawnersPackInterace(std::move(filter)) {}
+        : ASpawnersPackInterace(std::move(filter))
+    {}
+
+    ASpawnersPack(Bitmask unwanted)
+        : ASpawnersPackInterace(CFilter(std::move(CFilter().addWanted<CTypes...>().getWantedCMask()),
+                                        std::move(unwanted)))
+    {}
 
 
     // adds a ASpawner if its archetype meets the requirements of the filer of this pack
@@ -121,6 +127,8 @@ public:
         {
             spawners.push_back(&aSpawner);
             (poolArrays.template get<PArray<CTypes>>().push_back(&aSpawner.getPool<CTypes>(true)), ...);
+
+            aSpawner.addSubscriber(this, &ASpawnersPack::notify, SpawnerNotifier_t::EvType_t::_Every);
         }
     }
 

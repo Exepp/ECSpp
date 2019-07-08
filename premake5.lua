@@ -47,6 +47,10 @@ outDir = "%{cfg.system}_%{cfg.architecture}/%{cfg.buildcfg}/"
 
 project "ECSpp"
 
+	filter "configurations:Debug"
+		targetname ("%{prj.name}" .. "_d")
+	filter {}
+
 	kind "StaticLib"
 
 	location "./"

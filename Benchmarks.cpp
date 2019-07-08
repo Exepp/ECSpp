@@ -39,7 +39,8 @@ static void BM_EntitiesIteration_2M(benchmark::State& state)
     epp::EntityManager manager;
     manager.spawn(makeArchetype<PositionComponent, DirectionComponent, ComflabulationComponent>(), size_t(2e6));
     manager.acceptSpawnedEntities();
-    auto group = manager.requestCGroup<PositionComponent, DirectionComponent, ComflabulationComponent>();
+    epp::CGroup<PositionComponent, DirectionComponent, ComflabulationComponent> group;
+    manager.requestCGroup(group);
 
     for (auto _ : state)
     {

@@ -80,6 +80,7 @@ private:
     friend struct std::hash<CFilter>;
 };
 
+
 template<class... CTypes>
 inline CFilter& CFilter::addWanted()
 {
@@ -140,12 +141,13 @@ inline CFilter& CFilter::removeUnwanted(IdTypes... ids)
 
 } // namespace epp
 
+
 namespace std
 {
 template<>
 struct hash<epp::CFilter>
 {
-    size_t operator()(const epp::CFilter& filter)
+    size_t operator()(const epp::CFilter& filter) const
     {
         return hasher(filter.wantedMask) - hasher(filter.unwantedMask) % (0x7FFFFFFF);
     }

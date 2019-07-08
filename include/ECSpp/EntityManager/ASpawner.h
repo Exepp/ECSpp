@@ -14,10 +14,11 @@ struct EntityEvent
     {
         Creation,
         Destruction,
-        Count
+        _Count,
+        _Every
     };
 
-    Type type;
+    Type const type;
 
     EntityRef entity;
 };
@@ -35,7 +36,8 @@ public:
         EntitiesData() = default;
 
         EntitiesData(Archetype archetype)
-            : archetype(std::move(archetype)) {}
+            : archetype(std::move(archetype))
+        {}
 
 
         Archetype archetype;
@@ -47,15 +49,15 @@ public:
 public:
     explicit ASpawner(Archetype archetype);
 
-    ~ASpawner();
-
-    ASpawner(const ASpawner&) = default;
+    ASpawner(const ASpawner&) = delete;
 
     ASpawner(ASpawner&&) = default;
 
     ASpawner& operator=(const ASpawner&) = delete;
 
     ASpawner& operator=(ASpawner&&) = default;
+
+    ~ASpawner();
 
 
     EntityRef spawn();

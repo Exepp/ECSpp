@@ -8,8 +8,10 @@ namespace epp
 {
 
 template<class... CTypes>
-class CGroup
+class CGroup : public SpawnerNotifier_t
 {
+    using This_t = CGroup<CTypes...>;
+
     using SpawnersPack_t = ASpawnersPack<CTypes...>;
 
     using SpawnersPackPtr_t = std::shared_ptr<SpawnersPack_t>;
@@ -20,12 +22,6 @@ public:
     using ConstIterator_t = typename SpawnersPack_t::ConstIterator_t;
 
 public:
-    CGroup() = default;
-
-    // it is up to caller to provide ptr to ASpawnersPack of a correct type (CGroup::SpawnersPack_t)
-    CGroup(const std::shared_ptr<ASpawnersPackInterace>& arraysPtr);
-
-
     const CFilter& getFilter() const;
 
 
@@ -38,14 +34,23 @@ public:
     ConstIterator_t end() const;
 
 private:
+    void setSpawnersPtr(SpawnersPackPtr_t ptr);
+
+private:
     SpawnersPackPtr_t spawnersPtr;
+
+
+    friend class EntityManager;
 };
 
 
 template<class... CTypes>
-inline CGroup<CTypes...>::CGroup(const std::shared_ptr<ASpawnersPackInterace>& arraysPtr)
-    : spawnersPtr(std::static_pointer_cast<SpawnersPack_t>(arraysPtr))
-{}
+inline void CGroup<CTypes...>::setSpawnersPtr(SpawnersPackPtr_t ptr)
+{
+    ASSERT((!spawnersPtr), "Pointer must be set only once");
+    spawnersPtr.swap(ptr);
+    spawnersPtr->addSubscriber(this, &This_t::notify, SpawnerNotifier_t::EvType_t::_Every);
+}
 
 template<class... CTypes>
 inline const CFilter& CGroup<CTypes...>::getFilter() const

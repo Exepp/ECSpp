@@ -150,7 +150,7 @@ namespace std
 template<>
 struct hash<epp::Archetype>
 {
-    size_t operator()(const epp::Archetype& arche)
+    size_t operator()(const epp::Archetype& arche) const
     {
         return hasher(arche.cMask);
     }
