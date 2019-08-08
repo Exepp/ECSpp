@@ -16,6 +16,7 @@ workspace "ECSpp"
 	filter {"system:linux"}
 		links { "pthread" }
 		toolset "clang"
+		buildoptions{"-fPIC"}
 
 
 	filter "configurations:Debug"
@@ -35,7 +36,7 @@ workspace "ECSpp"
 
 	libdirs
 	{
-		"./external/lib/",
+		"./external/lib/"
 	}
 
 outDir = "%{cfg.system}_%{cfg.architecture}/%{cfg.buildcfg}/"
@@ -48,7 +49,8 @@ outDir = "%{cfg.system}_%{cfg.architecture}/%{cfg.buildcfg}/"
 project "ECSpp"
 
 	filter "configurations:Debug"
-		targetname ("%{prj.name}" .. "_d")
+		targetsuffix "_d"
+		-- targetname ("%{prj.name}" .. "_d")
 	filter {}
 
 	kind "StaticLib"
@@ -60,6 +62,7 @@ project "ECSpp"
 		"%{prj.location}/src/**",
 		"%{prj.location}/external/src/**",
 	}
+
 
 project "Tests"
 
@@ -78,6 +81,7 @@ project "Tests"
 		links { "ECSpp", "gtest_main", "gtest", }
 	filter {}
 
+	
 project "Benchmarks"
 
 	kind "ConsoleApp"

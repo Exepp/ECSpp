@@ -17,7 +17,11 @@ public:
 
     virtual void init(EntityManager& entityManager) = 0;
 
-    virtual void update(EntityManager& entityManager, float dt) = 0;
+    virtual void preUpdate(EntityManager& entityManager, float dt, bool catchUpTick){};
+
+    virtual void update(EntityManager& entityManager, float dt, bool catchUpTick) = 0;
+
+    virtual void postUpdate(EntityManager& entityManager, float dt, bool catchUpTick){};
 
 private:
     static STypeId_t typeCounter;

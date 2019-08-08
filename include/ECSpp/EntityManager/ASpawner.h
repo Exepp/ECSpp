@@ -14,8 +14,7 @@ struct EntityEvent
     {
         Creation,
         Destruction,
-        _Count,
-        _Every
+        _Every // must be the last one
     };
 
     Type const type;

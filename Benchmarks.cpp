@@ -3,6 +3,7 @@
 
 using namespace epp;
 
+
 struct PositionComponent : public Component
 {
     float x, y;
@@ -24,7 +25,7 @@ struct ComflabulationComponent : public Component
 
 static void BM_EntitiesCreateDestroy(benchmark::State& state)
 {
-    epp::EntityManager manager;
+    EntityManager manager;
     manager.registerArchetype(makeArchetype<PositionComponent, DirectionComponent>());
     for (auto _ : state)
     {
@@ -36,10 +37,10 @@ BENCHMARK(BM_EntitiesCreateDestroy)->Range(8, 1e6);
 
 static void BM_EntitiesIteration_2M(benchmark::State& state)
 {
-    epp::EntityManager manager;
+    EntityManager manager;
     manager.spawn(makeArchetype<PositionComponent, DirectionComponent, ComflabulationComponent>(), size_t(2e6));
     manager.acceptSpawnedEntities();
-    epp::CGroup<PositionComponent, DirectionComponent, ComflabulationComponent> group;
+    CGroup<PositionComponent, DirectionComponent, ComflabulationComponent> group;
     manager.requestCGroup(group);
 
     for (auto _ : state)
@@ -64,8 +65,8 @@ BENCHMARK(BM_EntitiesIteration_2M);
 static void BM_AddingRemovingComponent(benchmark::State& state)
 {
     // removing and adding operations have the same performance (also almost indentical code)
-    epp::EntityManager manager;
-    auto               entity = manager.spawn(makeArchetype<PositionComponent>());
+    EntityManager manager;
+    auto          entity = manager.spawn(makeArchetype<PositionComponent>());
     manager.acceptSpawnedEntities();
     for (auto _ : state)
         manager.addComponent<DirectionComponent, ComflabulationComponent>(entity);
@@ -75,8 +76,8 @@ BENCHMARK(BM_AddingRemovingComponent);
 static void BM_UsingReference_GettingComponent(benchmark::State& state)
 {
     // removing and adding operations have the same performance (also almost indentical code)
-    epp::EntityManager manager;
-    auto               entity = manager.spawn(makeArchetype<PositionComponent>());
+    EntityManager manager;
+    auto          entity = manager.spawn(makeArchetype<PositionComponent>());
     manager.acceptSpawnedEntities();
     for (auto _ : state)
     {

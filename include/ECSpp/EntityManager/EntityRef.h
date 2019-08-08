@@ -33,11 +33,13 @@ using EPtr_t = std::shared_ptr<Entity>;
 
 class EntityRef
 {
-private:
-    EntityRef(const EPtr_t& entity);
-
 public:
     EntityRef() = default;
+
+    EntityRef(EPtr_t ptr);
+
+
+    EPtr_t const& getEntityPtr() const { return entity; }
 
 
     void die();

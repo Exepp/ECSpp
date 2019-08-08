@@ -19,7 +19,8 @@ struct ECSWorld
     struct SystemUnaryPredicate
     {
         SystemUnaryPredicate(STypeId_t id)
-            : id(id) {}
+            : id(id)
+        {}
         bool operator()(const SystemPair_t& system)
         {
             return system.first == id;
@@ -28,7 +29,7 @@ struct ECSWorld
     };
 
 public:
-    void update(float dt);
+    void update(float dt, bool catchUpTick = false);
 
     // order of making system defines the order of update
     template<class T, class... Args>

@@ -21,14 +21,11 @@ private:
 
     using NotifyCb_t = void (This_t::*)(Event&) const;
 
-    using NotifyFn_t = std::function<void(This_t const&, Event&)>;
 
-
-    static constexpr size_t const NumOfEv = (size_t)EvType_t::_Count;
+    static_assert((size_t)EvType_t::_Every > 0, "Cannot create an empty event notifier");
+    static constexpr size_t const NumOfEv = (size_t)EvType_t::_Every - 1;
 
     static constexpr EvType_t const EveryType = EvType_t::_Every;
-
-    static_assert(NumOfEv < (size_t)EveryType, "_Count should always come before _Every");
 
 
     using EvCbVec_t = std::vector<Callback_t>;
@@ -50,6 +47,14 @@ public:
     virtual ~Notifier() = default;
 
 
+    void addSubscriber(Callback_t callback, EvType_t type)
+    {
+        if (type == EveryType)
+            everyTypeCallbacks.push_back(callback);
+        else
+            callbacks[(size_t)type].push_back(callback);
+    }
+
     template<class T, class F>
     void addSubscriber(T* sub, F callback, EvType_t type)
     {
@@ -61,12 +66,12 @@ public:
     }
 
     template<class T>
-    void addSubscriber(T* sub, NotifyCb_t callback, EvType_t type)
+    void addSubscriber(T* sub, NotifyCb_t callback, EvType_t type) // when Notifier::notify is the callback (to distinguish between overloads)
     {
         addSubscriber<T, NotifyCb_t>(sub, callback, type);
     }
 
-    // protected:
+protected:
     void notify(Event& event) const
     {
         for (auto const& cb : everyTypeCallbacks)

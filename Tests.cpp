@@ -3,9 +3,15 @@
 #include <gtest/gtest.h>
 
 
+
+// TODO:
+// Notifier.h
+// Time.h
+
 //#include "vld.h"
 
 using namespace epp;
+
 
 using Clock_t = std::chrono::high_resolution_clock;
 
@@ -29,7 +35,7 @@ struct TestSystem : public System
         entityManager.requestCGroup(group);
     }
 
-    virtual void update(EntityManager& entityManager, float dt) override
+    virtual void update(EntityManager& entityManager, float dt, bool catchUpTick) override
     {
         for (auto pack : group)
         {
@@ -52,13 +58,6 @@ struct TestClass
 
 TEST(BitmaskTest, Set_Unset_Get)
 {
-    Notifier<EntityEvent> nfier;
-    {
-        TestClass inst;
-        nfier.addSubscriber(&inst, &TestClass::cb, EntityEvent::Type::Creation);
-    }
-    nfier.notify(EntityEvent{ EntityEvent::Type::Creation });
-
     Bitmask bitmask;
 
     EXPECT_FALSE((TuplePP<int, float>::containsType<>()));
