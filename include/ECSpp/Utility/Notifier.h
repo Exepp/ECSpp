@@ -1,7 +1,6 @@
 #ifndef NOTIFIER_H
 #define NOTIFIER_H
 
-#include <array>
 #include <functional>
 #include <vector>
 
@@ -11,6 +10,8 @@ namespace epp
 template<class Event>
 class Notifier
 {
+    static_assert(std::is_unsigned_v<std::underlying_type_t<typename Event::Type>>);
+
 public:
     using EvType_t = typename Event::Type;
 
@@ -22,15 +23,16 @@ private:
     using NotifyCb_t = void (This_t::*)(Event&) const;
 
 
-    static_assert((size_t)EvType_t::_Every > 0, "Cannot create an empty event notifier");
-    static constexpr size_t const NumOfEv = (size_t)EvType_t::_Every - 1;
-
     static constexpr EvType_t const EveryType = EvType_t::_Every;
+
+    static constexpr std::size_t const NumOfEv = (std::size_t)EveryType;
+
+    static_assert(NumOfEv > 0, "Cannot create an empty event notifier");
 
 
     using EvCbVec_t = std::vector<Callback_t>;
 
-    using EvCbVecArr_t = std::array<EvCbVec_t, NumOfEv>;
+    using EvCbVecArr_t = std::vector<EvCbVec_t>;
 
 
 public:
@@ -49,20 +51,14 @@ public:
 
     void addSubscriber(Callback_t callback, EvType_t type)
     {
-        if (type == EveryType)
-            everyTypeCallbacks.push_back(callback);
-        else
-            callbacks[(size_t)type].push_back(callback);
+        callbacks[std::size_t(type)].push_back(std::move(callback));
     }
 
     template<class T, class F>
     void addSubscriber(T* sub, F callback, EvType_t type)
     {
         Callback_t callb = [sub, callback](Event& e) { (sub->*callback)(e); };
-        if (type == EveryType)
-            everyTypeCallbacks.push_back(callb);
-        else
-            callbacks[(size_t)type].push_back(callb);
+        callbacks[(std::size_t)type].push_back(callb);
     }
 
     template<class T>
@@ -74,9 +70,11 @@ public:
 protected:
     void notify(Event& event) const
     {
-        for (auto const& cb : everyTypeCallbacks)
+        assert(event.type != EveryType);
+
+        for (auto const& cb : callbacks[std::size_t(EveryType)])
             cb(event);
-        for (auto const& cb : callbacks[(size_t)event.type])
+        for (auto const& cb : callbacks[std::size_t(event.type)])
             cb(event);
     }
 
@@ -86,10 +84,9 @@ protected:
     }
 
 private:
-    EvCbVecArr_t callbacks;
-
-    EvCbVec_t everyTypeCallbacks;
+    EvCbVecArr_t callbacks = EvCbVecArr_t(NumOfEv + 1);
 };
 
 } // namespace epp
+
 #endif // NOTIFIER_H

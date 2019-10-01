@@ -26,10 +26,10 @@ struct ComflabulationComponent : public Component
 static void BM_EntitiesCreateDestroy(benchmark::State& state)
 {
     EntityManager manager;
-    manager.registerArchetype(makeArchetype<PositionComponent, DirectionComponent>());
+    manager.registerArchetype(MakeArchetype<PositionComponent, DirectionComponent>());
     for (auto _ : state)
     {
-        manager.spawn(makeArchetype<PositionComponent, DirectionComponent>(), state.range(0));
+        manager.spawn(MakeArchetype<PositionComponent, DirectionComponent>(), state.range(0));
         manager.clear();
     }
 }
@@ -38,9 +38,9 @@ BENCHMARK(BM_EntitiesCreateDestroy)->Range(8, 1e6);
 static void BM_EntitiesIteration_2M(benchmark::State& state)
 {
     EntityManager manager;
-    manager.spawn(makeArchetype<PositionComponent, DirectionComponent, ComflabulationComponent>(), size_t(2e6));
+    manager.spawn(MakeArchetype<PositionComponent, DirectionComponent, ComflabulationComponent>(), size_t(2e6));
     manager.acceptSpawnedEntities();
-    CGroup<PositionComponent, DirectionComponent, ComflabulationComponent> group;
+    EntityCollection<PositionComponent, DirectionComponent, ComflabulationComponent> group;
     manager.requestCGroup(group);
 
     for (auto _ : state)
@@ -66,7 +66,7 @@ static void BM_AddingRemovingComponent(benchmark::State& state)
 {
     // removing and adding operations have the same performance (also almost indentical code)
     EntityManager manager;
-    auto          entity = manager.spawn(makeArchetype<PositionComponent>());
+    auto          entity = manager.spawn(MakeArchetype<PositionComponent>());
     manager.acceptSpawnedEntities();
     for (auto _ : state)
         manager.addComponent<DirectionComponent, ComflabulationComponent>(entity);
@@ -77,7 +77,7 @@ static void BM_UsingReference_GettingComponent(benchmark::State& state)
 {
     // removing and adding operations have the same performance (also almost indentical code)
     EntityManager manager;
-    auto          entity = manager.spawn(makeArchetype<PositionComponent>());
+    auto          entity = manager.spawn(MakeArchetype<PositionComponent>());
     manager.acceptSpawnedEntities();
     for (auto _ : state)
     {
