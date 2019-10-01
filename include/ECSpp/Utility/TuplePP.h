@@ -9,10 +9,7 @@ namespace epp
 template<class T, class... Pack>
 inline constexpr bool isTypeInPack()
 {
-    // if constexpr (sizeof...(Pack) > 0)
-    return (std::is_same_v<T, Pack> || ...);
-    // else
-    // 	return false;
+    return false || (std::is_same_v<T, Pack> || ...);
 }
 
 
@@ -26,22 +23,23 @@ struct TuplePP : public std::tuple<TplTypes...>
 
     TuplePP() = default;
 
-    TuplePP(const ThisTpl_t&) = default;
+    TuplePP(ThisTpl_t const&) = default;
 
-    TuplePP(const Base_t& rhs)
-        : Base_t(rhs) {}
+    TuplePP(Base_t const& rhs)
+        : Base_t(rhs)
+    {}
 
 
     template<class U>
     U& get();
 
     template<class U>
-    const U& get() const;
+    U const& get() const;
 
-    template<size_t i>
+    template<std::size_t i>
     decltype(auto) get();
 
-    template<size_t i>
+    template<std::size_t i>
     decltype(auto) get() const;
 
 
@@ -54,18 +52,18 @@ struct TuplePP : public std::tuple<TplTypes...>
 
     TuplePP<TplTypes&...> asRefTuple();
 
-    TuplePP<const TplTypes&...> asRefTuple() const;
+    TuplePP<TplTypes const&...> asRefTuple() const;
 
 
     template<class... OtherTypes>
     TuplePP<OtherTypes&...> asRefTuple();
 
     template<class... OtherTypes>
-    TuplePP<const OtherTypes&...> asRefTuple() const;
+    TuplePP<OtherTypes const&...> asRefTuple() const;
 
 
     template<class... OtherTplTypes>
-    static ThisTpl_t makeFromTuple(const TuplePP<OtherTplTypes...>& tplToCpyFrom)
+    static ThisTpl_t makeFromTuple(TuplePP<OtherTplTypes...> const& tplToCpyFrom)
     {
         return ThisTpl_t(Base_t(tplToCpyFrom.template get<TplTypes>()...));
     }
@@ -80,7 +78,7 @@ struct TuplePP : public std::tuple<TplTypes...>
     }
 };
 
-#include "TuplePP.inl"
+#include <ECSpp/Utility/TuplePP.inl>
 
 } // namespace epp
 

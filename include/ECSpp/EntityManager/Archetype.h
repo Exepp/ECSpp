@@ -1,161 +1,101 @@
 #ifndef ARCHETYPE_H
 #define ARCHETYPE_H
 
-#include "CPool.h"
-
-#include <ECSpp/Utility/CFilter.h>
+#include <ECSpp/EntityManager/CPool.h>
+#include <ECSpp/EntityManager/ComponentUtility.h>
+#include <ECSpp/Utility/BitFilter.h>
+#include <algorithm>
 #include <memory>
-#include <unordered_map>
 
 namespace epp
 {
 
 class Archetype
 {
-    using CPoolBase_t = CPoolInterface;
+    struct IdentifiedCPoolCreator
+    {
+        ComponentID                      id;
+        ComponentUtility::CPoolCreator_t create;
+    };
 
-    using CPoolBasePtr_t = std::unique_ptr<CPoolBase_t>;
 
-    using CPoolsHolder_t = std::unordered_map<CTypeId_t, CPoolBasePtr_t>;
+    using CPoolsCreators_t = std::vector<IdentifiedCPoolCreator>;
+
+    using IDList_t = std::initializer_list<ComponentID>;
 
 public:
     Archetype() = default;
 
-    Archetype(const Archetype& rhs);
-
-    Archetype(Archetype&& rhs) = default;
-
-    Archetype& operator=(const Archetype&);
-
-    Archetype& operator=(Archetype&&) = default;
-
+    explicit Archetype(IDList_t initList);
 
     // resets to an empty archetype (with no set components)
     void reset();
 
 
-    bool meetsRequirementsOf(const CFilter& filter) const;
+    template<class... CTypes>
+    void addComponent();
 
+    void addComponent(IDList_t ids);
 
-    // returns true when successfully added every given components
-    template<class T1, class T2, class... CTypes>
-    bool addComponent();
-
-    template<class T>
-    bool addComponent();
-
-
-    // returns true when successfully removed given components
-    template<class CType1, class... CTypes>
-    bool removeComponent();
-
-    template<class... IdTypes>
-    bool removeComponent(CTypeId_t id1, CTypeId_t id2, IdTypes... ids);
-
-    bool removeComponent(CTypeId_t id);
-
+    void addComponent(ComponentID id);
 
     template<class... CTypes>
-    bool hasComponent() const;
+    void removeComponent();
 
-    template<class... IdTypes>
-    bool hasComponent(CTypeId_t id1, IdTypes... ids) const;
+    void removeComponent(IDList_t ids);
 
-    const Bitmask& getCMask() const;
+    void removeComponent(ComponentID id);
 
-    size_t hash() const;
+    template<class... CTypes>
+    bool hasAllOf() const;
 
-private:
-    // clears pools from components
-    void clear();
+    bool hasAllOf(IDList_t ids) const;
+
+    template<class... CTypes>
+    bool hasAnyOf() const;
+
+    bool hasAnyOf(IDList_t ids) const;
+
+    bool has(ComponentID id) const;
+
+
+    Bitmask const& getMask() const;
 
 private:
     Bitmask cMask;
 
-    CPoolsHolder_t cPools;
+    CPoolsCreators_t creators;
 
 
-    mutable bool rehash = true;
-
-    mutable size_t hashValue = 0;
-
-
-    friend class ASpawner;
-
-    friend struct std::hash<Archetype>;
+    friend class EntitySpawner;
 };
 
 
-template<class T1, class T2, class... CTypes>
-inline bool Archetype::addComponent()
+template<class... CTypes>
+inline void Archetype::addComponent()
 {
-    return addComponent<T1>() & addComponent<T2>() & (1 & ... & addComponent<CTypes>());
-}
-
-template<class T>
-inline bool Archetype::addComponent()
-{
-    size_t cTId = getCTypeId<T>();
-    if (!cMask.get(cTId))
-    {
-        cMask.set(cTId);
-        cPools[cTId] = std::make_unique<CPool<T>>();
-        rehash       = true;
-        return true;
-    }
-    return false;
-}
-
-template<class CType1, class... CTypes>
-inline bool Archetype::removeComponent()
-{
-    return removeComponent(getCTypeId<CType1>(), getCTypeId<CTypes>()...);
-}
-
-template<class... IdTypes>
-inline bool Archetype::removeComponent(CTypeId_t id1, CTypeId_t id2, IdTypes... ids)
-{
-    return removeComponent(id1) & removeComponent(id2) & (1 & ... & removeComponent(ids));
+    addComponent({ ComponentUtility::ID<CTypes>... });
 }
 
 template<class... CTypes>
-inline bool Archetype::hasComponent() const
+inline void Archetype::removeComponent()
 {
-    return hasComponent(getCTypeId<CTypes>()...);
+    removeComponent({ ComponentUtility::ID<CTypes>... });
 }
 
-template<class... IdTypes>
-inline bool Archetype::hasComponent(CTypeId_t id1, IdTypes... ids) const
+template<class... CTypes>
+inline bool Archetype::hasAllOf() const
 {
-    return cMask.get(id1) && (cMask.get(ids) && ...);
+    return hasAllOf({ ComponentUtility::ID<CTypes>... });
 }
 
-template<class FirstType, class... CTypes>
-inline const Archetype& makeArchetype()
+template<class... CTypes>
+inline bool Archetype::hasAnyOf() const
 {
-    static Archetype arche;
-    if (!arche.hasComponent<FirstType>())
-    {
-        arche.addComponent<FirstType, CTypes...>();
-        arche.hash();
-    }
-    return arche;
+    return hasAnyOf({ ComponentUtility::ID<CTypes>... });
 }
+
 
 } // namespace epp
-
-
-namespace std
-{
-template<>
-struct hash<epp::Archetype>
-{
-    size_t operator()(const epp::Archetype& arche) const
-    {
-        return hasher(arche.cMask);
-    }
-    hash<epp::Bitmask> hasher;
-};
-} // namespace std
 
 #endif // ARCHETYPE_H

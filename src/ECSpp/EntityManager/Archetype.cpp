@@ -2,64 +2,69 @@
 
 using namespace epp;
 
-Archetype::Archetype(const Archetype & rhs)
+Archetype::Archetype(IDList_t initList)
 {
-	*this = rhs;
+    addComponent(initList);
 }
 
-Archetype & Archetype::operator=(const Archetype & rhs)
+void Archetype::addComponent(IDList_t ids)
 {
-	cMask = rhs.cMask;
-	cPools.clear();
-	for (auto& pool : rhs.cPools)
-		cPools.emplace(std::make_pair(pool.first, pool.second->makeEmptyCopy()));
-	rehash = rhs.rehash;
-	hashValue = rhs.hashValue;
-
-	return *this;
+    for (auto id : ids)
+        addComponent(id);
 }
 
-bool Archetype::removeComponent(CTypeId_t id)
+void Archetype::addComponent(ComponentID id)
 {
-	if (hasComponent(id))
-	{
-		cMask.unset(id);
-		cPools.erase(id);
-		rehash = true;
-		return true;
-	}
-	return false;
+    if (cMask.get(id))
+        return;
+    cMask.set(id);
+    creators.push_back({ id, ComponentUtility::GetCPoolsFactory()[id] });
+}
+
+void Archetype::removeComponent(IDList_t ids)
+{
+    for (auto id : ids)
+        removeComponent(id);
+}
+
+void Archetype::removeComponent(ComponentID id)
+{
+    if (!has(id))
+        return;
+    cMask.unset(id);
+    creators.erase(std::find_if(creators.begin(), creators.end(),
+                                [id](auto const& creator) { return creator.id == id; }));
 }
 
 void Archetype::reset()
 {
-	cPools.clear();
-	cMask.clear();
-	rehash = true;
+    cMask.clear();
+    creators.clear();
 }
 
-bool Archetype::meetsRequirementsOf(const CFilter & filter) const
+bool Archetype::hasAllOf(IDList_t ids) const
 {
-	return filter.getWantedCMask().numberOfCommon(cMask) == filter.getWantedCMask().getSetCount() && !filter.getUnwantedCMask().hasCommon(cMask);
+    bool result = true;
+    for (auto id : ids)
+        result &= has(id);
+    return result;
 }
 
-const Bitmask& Archetype::getCMask() const
+bool Archetype::hasAnyOf(IDList_t ids) const
 {
-	return cMask;
+    bool result = false;
+    for (auto id : ids)
+        result |= has(id);
+    return result;
 }
 
-size_t Archetype::hash() const
+bool Archetype::has(ComponentID id) const
 {
-	if (rehash)
-	{
-		rehash = false;
-		hashValue = std::hash<Archetype>()(*this);
-	}
-	return hashValue;
+    return cMask.get(id);
 }
 
-void Archetype::clear()
+
+Bitmask const& Archetype::getMask() const
 {
-	for (auto& pool : cPools)
-		pool.second->clear();
+    return cMask;
 }

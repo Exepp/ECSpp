@@ -1,147 +1,122 @@
 #ifndef ENTITYMANAGER_H
 #define ENTITYMANAGER_H
 
-#include "ASpawner.h"
-
-#include <ECSpp/CGroup/CGroup.h>
+#include <ECSpp/EntityManager/EntityCollection.h>
+#include <ECSpp/EntityManager/EntityList.h>
+#include <ECSpp/EntityManager/EntitySpawner.h>
+#include <deque>
 
 namespace epp
 {
 
 class EntityManager
 {
-    using ASpawnerPtr_t = std::unique_ptr<ASpawner>;
+    struct BitmaskPtrHash
+    {
+        std::size_t operator()(Bitmask const* bmask) const { return std::hash<Bitmask>()(*bmask); }
+    };
 
-    using ASpawnersHolder_t = std::unordered_map<Bitmask, ASpawnerPtr_t>;
+    struct BitmaskPtrCompare
+    {
+        bool operator()(Bitmask const* lhs, Bitmask const* rhs) const { return *lhs == *rhs; }
+    };
 
+    using SpawnerIdsByBitmask_t = std::unordered_map<Bitmask const*, SpawnerID, BitmaskPtrHash, BitmaskPtrCompare>;
 
-    using ASpawnersPackPtr_t = std::shared_ptr<ASpawnersPackInterace>;
+    using SpawnersByID_t = std::deque<EntitySpawner>;
 
-    using ASpawnersPacksHolder_t = std::unordered_map<CFilter, ASpawnersPackPtr_t>;
+    using SpawnerCollections_t = std::unordered_map<BitFilter, std::unique_ptr<EntityCollectionBase>>;
+
+    using CompIDList_t = std::initializer_list<ComponentID>;
 
 public:
     template<class... CTypes>
-    EntityRef spawn();
+    Entity spawn();
+
+    Entity spawn(Archetype const& arche);
+
+    void destroy(Entity ent);
+
 
     template<class... CTypes>
-    const ASpawner& spawn(size_t n);
+    void addComponent(Entity ent);
 
-    EntityRef spawn(const Archetype& arche);
-
-    const ASpawner& spawn(const Archetype& arche, size_t n);
+    void addComponent(Entity ent, CompIDList_t cIDs);
 
 
-    // makes it possible for a groups to iterate over recently spawned entities (should be called outside of any group iteration loop)
-    void acceptSpawnedEntities();
+    template<class... CTypes>
+    void removeComponent(Entity ent);
+
+    void removeComponent(Entity ent, CompIDList_t cIDs);
 
 
-    // kills all entities
+    // destroys all entities
     void clear();
-
-
-    // adding (new)component will always make entity unreachable for any group's iterator, until EntityManager::acceptSpawnedEntities is called
-    template<class... CTypes>
-    void addComponent(const EntityRef& eRef);
-
-    // removing (present)component will always make entity unreachable for any group's iterator, until EntityManager::acceptSpawnedEntities is called
-    template<class... CTypes>
-    void removeComponent(const EntityRef& eRef);
-
-    template<class... IdTypes>
-    void removeComponent(const EntityRef& eRef, IdTypes... ids);
 
 
     // registers archetype manually, so it doesn't need to be done on spawn/(add/remove component) calls
     void registerArchetype(Archetype arche);
 
-    const ASpawnersHolder_t& getArchetypesSpawners() const;
 
     template<class... CTypes>
-    void requestCGroup(CGroup<CTypes...>& group, Bitmask unwantedComponents = Bitmask());
+    EntityCollection<CTypes...>& requestCollection(Bitmask unwantedComponents = Bitmask());
 
 private:
-    bool isEntityRefValid(const EntityRef& eRef);
-
     template<class AType>
-    ASpawner& registerArchetypeIfNew(AType&& arche);
+    EntitySpawner& registerArchetypeIfNew(AType&& arche);
 
 private:
-    ASpawnersHolder_t aSpawners;
+    SpawnersByID_t spawnersByIDs;
 
-    ASpawnersPacksHolder_t pArraysPacks;
+    SpawnerIdsByBitmask_t idsByBitmasks;
+
+    EntityList entList;
+
+    SpawnerCollections_t collections;
 };
 
 
 template<class... CTypes>
-inline EntityRef EntityManager::spawn()
+inline Entity EntityManager::spawn()
 {
-    return spawn(makeArchetype<CTypes...>());
+    return spawn(Archetype({ ComponentUtility::ID<CTypes>... }));
 }
 
 template<class... CTypes>
-inline const ASpawner& EntityManager::spawn(size_t n)
+inline void EntityManager::addComponent(Entity ent)
 {
-    return spawn(makeArchetype<CTypes...>(), n);
+    addComponent(ent, { ComponentUtility::ID<CTypes>... });
 }
 
 template<class... CTypes>
-inline void EntityManager::addComponent(const EntityRef& eRef)
+inline void EntityManager::removeComponent(Entity ent)
 {
-    if (!isEntityRefValid(eRef) || (eRef.hasComponent_noCheck<CTypes>() && ...))
-        return;
-
-    Archetype newArchetype = eRef.getOriginSpawner()->getArchetype();
-    newArchetype.addComponent<CTypes...>();
-    registerArchetypeIfNew(std::move(newArchetype)).moveExistingEntityHere(eRef);
+    removeComponent(ent, { ComponentUtility::ID<CTypes>... });
 }
 
 template<class... CTypes>
-inline void EntityManager::removeComponent(const EntityRef& eRef)
+inline EntityCollection<CTypes...>& EntityManager::requestCollection(Bitmask unwantedComponents)
 {
-    removeComponent(eRef, getCTypeId<CTypes>()...);
-}
+    BitFilter filter(Bitmask({ ComponentUtility::ID<CTypes>... }), unwantedComponents);
+    auto&     collectionPtr = collections[filter];
 
-template<class... IdTypes>
-inline void EntityManager::removeComponent(const EntityRef& eRef, IdTypes... ids)
-{
-    if (!isEntityRefValid(eRef) || !(eRef.hasComponent_noCheck(ids) || ...))
-        return;
+    if (!collectionPtr)
+        collectionPtr = std::unique<EntityCollection<CTypes...>>(std::move(filter));
+    collectionPtr->update(spawnersByIDs);
 
-    Archetype newArchetype = eRef.getOriginSpawner()->getArchetype();
-    newArchetype.removeComponent(ids...);
-    registerArchetypeIfNew(std::move(newArchetype)).moveExistingEntityHere(eRef);
-}
-
-template<class... CTypes>
-inline void EntityManager::requestCGroup(CGroup<CTypes...>& group, Bitmask unwantedComponents)
-{
-    CFilter filter;
-    filter.setUnwanted(std::move(unwantedComponents));
-    filter.addWanted<CTypes...>();
-
-    ASpawnersPackPtr_t& cArraysPackPtr = pArraysPacks[filter];
-    if (!cArraysPackPtr)
-    {
-        cArraysPackPtr = std::make_shared<ASpawnersPack<CTypes...>>(std::move(filter));
-
-        for (auto& aSpawner : aSpawners)
-            cArraysPackPtr->addASpawnerIfMeetsRequirements(*aSpawner.second);
-    }
-    group.setSpawnersPtr(std::static_pointer_cast<ASpawnersPack<CTypes...>>(cArraysPackPtr));
+    return static_cast<EntityCollection<CTypes...>&>(*collectionPtr);
 }
 
 template<class AType>
-inline ASpawner& EntityManager::registerArchetypeIfNew(AType&& arche)
+inline EntitySpawner& EntityManager::registerArchetypeIfNew(AType&& arche)
 {
-    ASpawnerPtr_t& aSpawnerPtr = aSpawners[arche.getCMask()];
-    if (aSpawnerPtr)
-        return *aSpawnerPtr;
+    auto found = idsByBitmasks.find(&arche.getMask());
+    if (found != idsByBitmasks.end())
+        return spawnersByIDs[found->second.value];
 
-    aSpawnerPtr = std::make_unique<ASpawner>(std::forward<AType>(arche));
-
-    for (auto& pArrayPack : pArraysPacks)
-        pArrayPack.second->addASpawnerIfMeetsRequirements(*aSpawnerPtr);
-    return *aSpawnerPtr;
+    spawnersByIDs.emplace_back(std::forward<AType>(arche), SpawnerID{ (uint32_t)spawnersByIDs.size() });
+    idsByBitmasks.emplace(&spawnersByIDs.back().getArchetype().getMask(), spawnersByIDs.back().spawnerID);
+    return spawnersByIDs.back();
 }
 
 } // namespace epp

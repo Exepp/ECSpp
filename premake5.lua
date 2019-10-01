@@ -24,7 +24,7 @@ workspace "ECSpp"
 		symbols "On"
 		
 	filter "configurations:Release"
-		defines "EPP_RELEASE"
+		defines {"EPP_RELEASE", "NDEBUG"} -- NDEBUG for assert.h
 		optimize "On"
 	filter{}
 	
@@ -59,8 +59,8 @@ project "ECSpp"
 
 	files
 	{
-		"%{prj.location}/src/**",
-		"%{prj.location}/external/src/**",
+		"%{prj.location}/src/%{prj.name}/**",
+		"%{prj.location}/external/src/%{prj.name}/**",
 	}
 
 
@@ -72,7 +72,7 @@ project "Tests"
 
 	files
 	{
-		"%{prj.location}/Tests.cpp"
+		"%{prj.location}/src/%{prj.name}/**"
 	}
 
 	filter "configurations:Debug"
@@ -90,7 +90,7 @@ project "Benchmarks"
 
 	files
 	{
-		"%{prj.location}/Benchmarks.cpp"
+		"%{prj.location}/%{prj.name}/**"
 	}
 
 	filter "configurations:Debug"
