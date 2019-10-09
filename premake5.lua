@@ -16,7 +16,7 @@ workspace "ECSpp"
 	filter {"system:linux"}
 		links { "pthread" }
 		toolset "clang"
-		buildoptions{"-fPIC"}
+		buildoptions{"-fPIC -Weverything -Wno-c++98-compat-pedantic -Wno-newline-eof"}
 
 
 	filter "configurations:Debug"
