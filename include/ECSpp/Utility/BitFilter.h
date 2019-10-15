@@ -43,11 +43,7 @@ public:
     BitFilter& removeUnwanted(IdxList_t idxList);
 
 
-    Bitmask& getWanted();
-
     const Bitmask& getWanted() const;
-
-    Bitmask& getUnwanted();
 
     const Bitmask& getUnwanted() const;
 
