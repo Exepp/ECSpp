@@ -77,19 +77,9 @@ BitFilter& BitFilter::removeUnwanted(IdxList_t idxList)
     return *this;
 }
 
-Bitmask& BitFilter::getWanted()
-{
-    return wantedMask;
-}
-
 const Bitmask& BitFilter::getWanted() const
 {
     return wantedMask;
-}
-
-Bitmask& BitFilter::getUnwanted()
-{
-    return unwantedMask;
 }
 
 const Bitmask& BitFilter::getUnwanted() const
