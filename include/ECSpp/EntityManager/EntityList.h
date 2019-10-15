@@ -10,8 +10,8 @@ namespace epp
 struct PoolIdx
 {
     PoolIdx() = default;
-    explicit PoolIdx(uint32_t value)
-        : value(value)
+    explicit PoolIdx(uint32_t val)
+        : value(val)
     {}
     constexpr static std::size_t const BitLength = 26; // max 32
     constexpr static uint32_t const    BadValue  = (1ull << BitLength) - 1;
@@ -23,8 +23,8 @@ struct PoolIdx
 struct SpawnerID
 {
     SpawnerID() = default;
-    explicit SpawnerID(uint32_t value)
-        : value(value)
+    explicit SpawnerID(uint32_t val)
+        : value(val)
     {}
     constexpr static std::size_t const BitLength = 12; // max 32
     constexpr static uint32_t const    BadValue  = (1ull << BitLength) - 1;
@@ -36,8 +36,8 @@ struct SpawnerID
 struct EntVersion
 {
     EntVersion() = default;
-    explicit EntVersion(uint32_t value)
-        : value(value)
+    explicit EntVersion(uint32_t val)
+        : value(val)
     {}
     constexpr static std::size_t const BitLength = 64 - (PoolIdx::BitLength + SpawnerID::BitLength);
     constexpr static uint32_t const    BadValue  = (1ull << BitLength) - 1;
@@ -54,8 +54,8 @@ static_assert(EntVersion::BitLength != 0 && PoolIdx::BitLength + SpawnerID::BitL
 struct ListIdx
 {
     ListIdx() = default;
-    explicit ListIdx(uint32_t value)
-        : value(value)
+    explicit ListIdx(uint32_t val)
+        : value(val)
     {}
     constexpr static std::size_t const BitLength = 32;
     constexpr static uint32_t const    BadValue  = (1ull << BitLength) - 1;
@@ -72,48 +72,36 @@ struct Entity
 };
 
 
-class OccupiedCell
+class EntityCell
 {
 public:
-    struct Broken
+    struct Occupied
     {
         PoolIdx    poolIdx;
         SpawnerID  spawnerID;
         EntVersion version;
     };
 
+    using Free = Entity;
+
 public:
-    explicit OccupiedCell(Broken cell);
+    explicit EntityCell(Occupied cell);
+    explicit EntityCell(Free cell);
 
-    PoolIdx    poolIdx() const;
-    SpawnerID  spawnerID() const;
-    EntVersion entVersion() const;
+    ListIdx nextFreeListIdx() const; // free
 
-    Broken asBroken() const;
+    PoolIdx    poolIdx() const;    // occupied
+    SpawnerID  spawnerID() const;  // occupied
+    EntVersion entVersion() const; // occupied & free
+
+    Occupied asOccupied() const;
+    Free     asFree() const;
 
 private:
     uint64_t value;
 };
 
-static_assert(sizeof(Entity) == sizeof(OccupiedCell) && sizeof(Entity) == sizeof(uint64_t));
-
-
-class FreeCell
-{
-public:
-    using Broken = Entity;
-
-public:
-    explicit FreeCell(Broken cell);
-
-    ListIdx    nextFreeListIdx() const;
-    EntVersion entVersion() const;
-
-    Broken asBroken() const;
-
-private:
-    uint64_t value;
-};
+static_assert(sizeof(Entity) == sizeof(EntityCell) && sizeof(Entity) == sizeof(uint64_t));
 
 
 class EntityList
@@ -124,9 +112,9 @@ public:
 public:
     EntityList() = default;
 
-    EntityList(EntityList&& rhs);
+    EntityList(EntityList&& rhs) = delete;
 
-    EntityList& operator=(EntityList&& rhs);
+    EntityList& operator=(EntityList&& rhs) = delete;
 
     EntityList(const EntityList&) = delete;
 
@@ -148,27 +136,18 @@ public:
     bool isValid(Entity ent) const;
 
 
-    OccupiedCell const& get(Entity ent) const;
+    EntityCell::Occupied get(Entity ent) const;
 
 private:
-    OccupiedCell& ocAtIdx(ListIdx idx);
-
-    FreeCell& fcAtIdx(ListIdx idx);
-
-    OccupiedCell const& ocAtIdx(ListIdx idx) const;
-
-    FreeCell const& fcAtIdx(ListIdx idx) const;
-
-
     void resize(Size_t n);
 
     void reserve(Size_t n);
 
 protected:
-    FreeCell* memory   = nullptr;
-    Size_t    freeLeft = 0;
-    Size_t    reserved = 0;
-    ListIdx   freeIndex;
+    EntityCell* memory   = nullptr;
+    Size_t      freeLeft = 0;
+    Size_t      reserved = 0;
+    ListIdx     freeIndex;
 };
 
 } // namespace epp
