@@ -4,9 +4,9 @@
 using namespace epp;
 
 
-EntitySpawner::EntitySpawner(Archetype archetype, SpawnerID id)
-    : archetype(std::move(archetype))
-    , spawnerID(id)
+EntitySpawner::EntitySpawner(Archetype arche, SpawnerID id)
+    : spawnerID(id)
+    , archetype(std::move(arche))
 {
     for (auto const& creator : archetype.creators)
         cPools.push_back({ creator.id, creator.create() });
@@ -16,7 +16,7 @@ EntitySpawner::EntitySpawner(Archetype archetype, SpawnerID id)
 
 Entity EntitySpawner::create(EntityList& entList)
 {
-    Entity ent = entList.allocEntity(PoolIdx(entityPool.content.size()), spawnerID);
+    Entity ent = entList.allocEntity(PoolIdx(uint32_t(entityPool.content.size())), spawnerID);
     entityPool.alloc(ent);
     for (auto& pool : cPools)
         pool.ptr->alloc();
@@ -30,7 +30,7 @@ void EntitySpawner::destroy(Entity ent, EntityList& entList)
 
     notify({ EntityEvent::Type::Destruction, ent });
 
-    PoolIdx entPoolIdx = entList.get(ent).poolIdx();
+    PoolIdx entPoolIdx = entList.get(ent).poolIdx;
     for (auto& pool : cPools)
         pool.ptr->free(entPoolIdx.value);
     removeEntityFromEntityPoolOnly(entPoolIdx, entList);
@@ -54,7 +54,7 @@ void EntitySpawner::moveEntityHere(Entity ent, EntityList& entList, EntitySpawne
 {
     assert(entList.isValid(ent) && &originSpawner != this);
 
-    PoolIdx entPoolIdx  = entList.get(ent).poolIdx();
+    PoolIdx entPoolIdx  = entList.get(ent).poolIdx;
     auto    orgPoolsPtr = originSpawner.cPools.begin();
     auto    orgPoolsEnd = originSpawner.cPools.end();
 
@@ -75,7 +75,7 @@ void EntitySpawner::moveEntityHere(Entity ent, EntityList& entList, EntitySpawne
         }
     }
     originSpawner.removeEntityFromEntityPoolOnly(entPoolIdx, entList);
-    entList.changeEntity(ent, PoolIdx(entityPool.content.size()), spawnerID);
+    entList.changeEntity(ent, PoolIdx(uint32_t(entityPool.content.size())), spawnerID);
     entityPool.alloc(ent);
 }
 

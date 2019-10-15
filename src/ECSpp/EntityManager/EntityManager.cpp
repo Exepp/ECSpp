@@ -10,7 +10,7 @@ Entity EntityManager::spawn(Archetype const& arche)
 void EntityManager::destroy(Entity ent)
 {
     if (entList.isValid(ent))
-        spawnersByIDs[entList.get(ent).spawnerID().value].destroy(ent, entList);
+        spawnersByIDs[entList.get(ent).spawnerID.value].destroy(ent, entList);
 }
 
 void EntityManager::addComponent(Entity ent, CompIDList_t cIDs)
@@ -18,7 +18,7 @@ void EntityManager::addComponent(Entity ent, CompIDList_t cIDs)
     if (!entList.isValid(ent))
         return;
     auto           entity  = entList.get(ent);
-    EntitySpawner& spawner = spawnersByIDs[entity.spawnerID().value];
+    EntitySpawner& spawner = spawnersByIDs[entity.spawnerID.value];
     if (spawner.getArchetype().hasAllOf(cIDs))
         return;
     Archetype newArchetype = spawner.getArchetype();
@@ -31,7 +31,7 @@ void EntityManager::removeComponent(Entity ent, CompIDList_t cIDs)
     if (!entList.isValid(ent))
         return;
     auto           entity  = entList.get(ent);
-    EntitySpawner& spawner = spawnersByIDs[entity.spawnerID().value];
+    EntitySpawner& spawner = spawnersByIDs[entity.spawnerID.value];
     if (spawner.getArchetype().hasAnyOf(cIDs))
         return;
     Archetype newArchetype = spawner.getArchetype();

@@ -1,5 +1,5 @@
-#ifndef CGROUP_H
-#define CGROUP_H
+#ifndef ENTITYCOLLECTION_H
+#define ENTITYCOLLECTION_H
 
 #include <ECSpp/EntityManager/EntitySpawner.h>
 #include <ECSpp/Utility/BitFilter.h>
@@ -15,8 +15,8 @@ protected:
     using Spawners_t = std::vector<EntitySpawner const*>;
 
 public:
-    EntityCollectionBase(BitFilter filter)
-        : filter(std::move(filter))
+    EntityCollectionBase(BitFilter flrt)
+        : filter(std::move(flrt))
     {}
 
     virtual ~EntityCollectionBase() = default;
@@ -24,10 +24,10 @@ public:
     const BitFilter& getFilter() const { return filter; }
 
 private:
-    void update(std::deque<EntitySpawner>& spawners)
+    void update(std::deque<EntitySpawner> const& spawns)
     {
-        for (; checkedSpawnersCount < spawners.size(); ++checkedSpawnersCount)
-            addSpawnerIfMeetsRequirements(spawners[checkedSpawnersCount]);
+        for (; checkedSpawnersCount < spawns.size(); ++checkedSpawnersCount)
+            addSpawnerIfMeetsRequirements(spawns[checkedSpawnersCount]);
     }
 
     // adds a spawner if its archetype meets the requirements of this Collection's filter
@@ -136,4 +136,4 @@ private:
 
 } // namespace epp
 
-#endif // CGROUP_H
+#endif // ENTITYCOLLECTION_H

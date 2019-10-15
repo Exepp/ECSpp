@@ -114,7 +114,7 @@ inline EntitySpawner& EntityManager::registerArchetypeIfNew(AType&& arche)
     if (found != idsByBitmasks.end())
         return spawnersByIDs[found->second.value];
 
-    spawnersByIDs.emplace_back(std::forward<AType>(arche), SpawnerID{ (uint32_t)spawnersByIDs.size() });
+    spawnersByIDs.emplace_back(std::forward<AType>(arche), SpawnerID{ uint32_t(spawnersByIDs.size()) });
     idsByBitmasks.emplace(&spawnersByIDs.back().getArchetype().getMask(), spawnersByIDs.back().spawnerID);
     return spawnersByIDs.back();
 }

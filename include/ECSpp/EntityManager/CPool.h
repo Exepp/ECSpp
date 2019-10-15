@@ -54,7 +54,41 @@ struct CPool : public CPoolBase
 };
 
 
-#include <ECSpp/EntityManager/CPool.inl>
+template<class T>
+Component& CPool<T>::alloc()
+{
+    return static_cast<Component&>(pool.alloc());
+}
+
+template<class T>
+Component& CPool<T>::alloc(Component&& arg)
+{
+    return static_cast<Component&>(pool.alloc(static_cast<T&&>(arg)));
+}
+
+template<class T>
+void CPool<T>::free(std::size_t i)
+{
+    pool.free(i);
+}
+
+template<class T>
+void CPool<T>::prepareToFitNMore(std::size_t n)
+{
+    pool.prepareToFitNMore(n);
+}
+
+template<class T>
+void CPool<T>::clear()
+{
+    pool.clear();
+}
+
+template<class T>
+Component& CPool<T>::operator[](std::size_t i)
+{
+    return pool.content[i];
+}
 
 } // namespace epp
 
