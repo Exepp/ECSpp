@@ -1,9 +1,9 @@
 
 template<class... CTypes>
 template<bool IsConst>
-inline EntityCollection<CTypes...>::Iterator<IsConst>::Iterator(Collection_t& collection, std::size_t spawnerIdx)
-    : collection(collection)
-    , spawnerIdx(spawnerIdx)
+inline EntityCollection<CTypes...>::Iterator<IsConst>::Iterator(Collection_t& col, std::size_t sIdx)
+    : collection(col)
+    , spawnerIdx(sIdx)
 {
     findValidIndices();
 }

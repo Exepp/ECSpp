@@ -93,7 +93,7 @@ private:
 template<class T>
 inline Pool<T>* EntitySpawner::getPool()
 {
-    return (Pool<T>*)(const_cast<EntitySpawner const&>(*this).getPool<T>());
+    return const_cast<Pool<T>*>(const_cast<EntitySpawner const&>(*this).getPool<T>());
 }
 
 template<class T>

@@ -3,14 +3,14 @@
 using namespace epp;
 
 BitFilter::BitFilter(Bitmask wanted, Bitmask unwanted)
-    : wantedMask(wanted)
+    : wantedMask(std::move(wanted))
     , unwantedMask(std::move(unwanted.removeCommon(wantedMask)))
 {}
 
 void BitFilter::clear()
 {
-    unwantedMask.clear();
     wantedMask.clear();
+    unwantedMask.clear();
 }
 
 void BitFilter::setWanted(Bitmask wanted)
@@ -19,10 +19,23 @@ void BitFilter::setWanted(Bitmask wanted)
     unwantedMask.removeCommon(wantedMask);
 }
 
+BitFilter& epp::BitFilter::addWanted(Idx_t idx)
+{
+    wantedMask.set(idx);
+    unwantedMask.unset(idx);
+    return *this;
+}
+
 BitFilter& BitFilter::addWanted(IdxList_t idxList)
 {
     wantedMask.set(idxList);
     unwantedMask.removeCommon(wantedMask);
+    return *this;
+}
+
+BitFilter& epp::BitFilter::removeWanted(Idx_t idx)
+{
+    wantedMask.unset(idx);
     return *this;
 }
 
@@ -38,10 +51,23 @@ void BitFilter::setUnwanted(Bitmask unwanted)
     wantedMask.removeCommon(unwantedMask);
 }
 
+BitFilter& epp::BitFilter::addUnwanted(Idx_t idx)
+{
+    unwantedMask.set(idx);
+    wantedMask.unset(idx);
+    return *this;
+}
+
 BitFilter& BitFilter::addUnwanted(IdxList_t idxList)
 {
     unwantedMask.set(idxList);
-    wantedMask.removeCommon(wantedMask);
+    wantedMask.removeCommon(unwantedMask);
+    return *this;
+}
+
+BitFilter& epp::BitFilter::removeUnwanted(Idx_t idx)
+{
+    unwantedMask.unset(idx);
     return *this;
 }
 
@@ -51,22 +77,22 @@ BitFilter& BitFilter::removeUnwanted(IdxList_t idxList)
     return *this;
 }
 
-Bitmask& BitFilter::getWantedMask()
+Bitmask& BitFilter::getWanted()
 {
     return wantedMask;
 }
 
-const Bitmask& BitFilter::getWantedMask() const
+const Bitmask& BitFilter::getWanted() const
 {
     return wantedMask;
 }
 
-Bitmask& BitFilter::getUnwantedMask()
+Bitmask& BitFilter::getUnwanted()
 {
     return unwantedMask;
 }
 
-const Bitmask& BitFilter::getUnwantedMask() const
+const Bitmask& BitFilter::getUnwanted() const
 {
     return unwantedMask;
 }

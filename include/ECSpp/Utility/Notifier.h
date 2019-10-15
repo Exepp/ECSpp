@@ -25,7 +25,7 @@ private:
 
     static constexpr EvType_t const EveryType = EvType_t::_Every;
 
-    static constexpr std::size_t const NumOfEv = (std::size_t)EveryType;
+    static constexpr std::size_t const NumOfEv = std::size_t(EveryType);
 
     static_assert(NumOfEv > 0, "Cannot create an empty event notifier");
 
@@ -58,7 +58,7 @@ public:
     void addSubscriber(T* sub, F callback, EvType_t type)
     {
         Callback_t callb = [sub, callback](Event& e) { (sub->*callback)(e); };
-        callbacks[(std::size_t)type].push_back(callb);
+        callbacks[std::size_t(type)].push_back(callb);
     }
 
     template<class T>

@@ -1,5 +1,5 @@
-#ifndef CFILTER_H
-#define CFILTER_H
+#ifndef BITFILTER_H
+#define BITFILTER_H
 
 #include <ECSpp/EntityManager/ComponentUtility.h>
 #include <ECSpp/Utility/Bitmask.h>
@@ -11,9 +11,11 @@ class BitFilter
 {
     using IdxList_t = Bitmask::IdxList_t;
 
+    using Idx_t = Bitmask::Idx_t;
+
 public:
     BitFilter() = default;
-    // if wanted /\ unwated != 0, then unwanted = unwanted & ~(unwanted & wanted)
+    // if wanted & unwated (common part) != 0, then unwanted = unwanted & ~wanted
     BitFilter(Bitmask wanted, Bitmask unwanted);
 
     void clear();
@@ -21,25 +23,33 @@ public:
 
     void setWanted(Bitmask wantedMask);
 
+    BitFilter& addWanted(Idx_t idx);
+
     BitFilter& addWanted(IdxList_t idxList);
+
+    BitFilter& removeWanted(Idx_t idx);
 
     BitFilter& removeWanted(IdxList_t idxList);
 
 
     void setUnwanted(Bitmask unwantedMask);
 
+    BitFilter& addUnwanted(Idx_t idx);
+
     BitFilter& addUnwanted(IdxList_t idxList);
+
+    BitFilter& removeUnwanted(Idx_t idx);
 
     BitFilter& removeUnwanted(IdxList_t idxList);
 
 
-    Bitmask& getWantedMask();
+    Bitmask& getWanted();
 
-    const Bitmask& getWantedMask() const;
+    const Bitmask& getWanted() const;
 
-    Bitmask& getUnwantedMask();
+    Bitmask& getUnwanted();
 
-    const Bitmask& getUnwantedMask() const;
+    const Bitmask& getUnwanted() const;
 
 
     bool operator==(BitFilter const& rhs) const;
@@ -75,4 +85,4 @@ struct hash<epp::BitFilter>
 };
 } // namespace std
 
-#endif // CFILTER_H
+#endif // BITFILTER_H

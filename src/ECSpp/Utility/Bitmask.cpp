@@ -47,10 +47,10 @@ void Bitmask::unsetNoShrink(Idx_t bitIndex)
 
 void Bitmask::shrinkToFit()
 {
-    std::intptr_t idx = masks.size() - 1;
-    while (masks[idx] == 0x0 && --idx >= 0)
+    std::intptr_t idx = std::intptr_t(masks.size());
+    while (--idx >= 0 && masks[idx] == 0x0)
         ;
-    masks.resize(idx + 1);
+    masks.resize(std::size_t(idx + 1));
 }
 
 void Bitmask::clear()
@@ -61,7 +61,6 @@ void Bitmask::clear()
 Bitmask& Bitmask::removeCommon(Bitmask const& other)
 {
     std::size_t smallest = std::min(masks.size(), other.masks.size());
-
     for (Idx_t i = 0; i < smallest; ++i)
         masks[i] &= ~other.masks[i];
     shrinkToFit();
@@ -166,7 +165,8 @@ bool Bitmask::operator<(Bitmask const& rhs) const
 {
     if (masks.size() == rhs.masks.size())
     {
-        for (std::intptr_t i = masks.size() - 1; i >= 0; --i)
+        std::intptr_t i = std::intptr_t(masks.size());
+        while (--i >= 0)
             if (masks[i] != rhs.masks[i])
                 return masks[i] < rhs.masks[i];
         return false; // equal
@@ -178,7 +178,8 @@ bool Bitmask::operator>(Bitmask const& rhs) const
 {
     if (masks.size() == rhs.masks.size())
     {
-        for (std::intptr_t i = masks.size() - 1; i >= 0; --i)
+        std::intptr_t i = std::intptr_t(masks.size());
+        while (--i >= 0)
             if (masks[i] != rhs.masks[i])
                 return masks[i] > rhs.masks[i];
         return false; // equal
