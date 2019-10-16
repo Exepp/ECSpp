@@ -3,7 +3,7 @@
 
 using namespace epp;
 
-TEST(BitFilterTest, addWanted_setWanted_getWanted)
+TEST(BitFilter, addWanted_setWanted_getWanted)
 {
     {
         BitFilter filter;
@@ -28,7 +28,7 @@ TEST(BitFilterTest, addWanted_setWanted_getWanted)
     }
 }
 
-TEST(BitFilterTest, setWanted)
+TEST(BitFilter, setWanted)
 {
     {
         BitFilter filter;
@@ -48,7 +48,7 @@ TEST(BitFilterTest, setWanted)
     }
 }
 
-TEST(BitFilterTest, addUnwanted_getUnwanted)
+TEST(BitFilter, addUnwanted_getUnwanted)
 {
     {
         BitFilter filter;
@@ -73,7 +73,7 @@ TEST(BitFilterTest, addUnwanted_getUnwanted)
     }
 }
 
-TEST(BitFilterTest, setUnwanted)
+TEST(BitFilter, setUnwanted)
 {
     {
         BitFilter filter;
@@ -93,7 +93,7 @@ TEST(BitFilterTest, setUnwanted)
     }
 }
 
-TEST(BitFilterTest, add_set_sideEffects)
+TEST(BitFilter, add_set_sideEffects)
 {
     { // state of unwanted has no effect on wanted mask (when set after unwanted or when there are no common)
         BitFilter filter;
@@ -135,7 +135,7 @@ TEST(BitFilterTest, add_set_sideEffects)
     }
 }
 
-TEST(BitFilterTest, removeWanted)
+TEST(BitFilter, removeWanted)
 {
     {
         BitFilter filter;
@@ -174,7 +174,7 @@ TEST(BitFilterTest, removeWanted)
     }
 }
 
-TEST(BitFilterTest, removeUnwanted)
+TEST(BitFilter, removeUnwanted)
 {
     {
         BitFilter filter;
@@ -213,7 +213,7 @@ TEST(BitFilterTest, removeUnwanted)
     }
 }
 
-TEST(BitFilterTest, Clear)
+TEST(BitFilter, Clear)
 {
     BitFilter filter(Bitmask{ 0, 1, 2 }, Bitmask{ 64, 65, 66 });
     filter.clear();
@@ -221,7 +221,7 @@ TEST(BitFilterTest, Clear)
     ASSERT_EQ(filter.getUnwanted(), Bitmask());
 }
 
-TEST(BitFilterTest, Operators_EQ_NE)
+TEST(BitFilter, Operators_EQ_NE)
 {
     BitFilter filter1(Bitmask{ 0, 1, 2 }, Bitmask{ 3, 4, 5 });
     BitFilter filter2 = filter1; // copy constructor
@@ -248,7 +248,7 @@ TEST(BitFilterTest, Operators_EQ_NE)
     ASSERT_EQ(filter1, BitFilter());
 }
 
-TEST(BitFilterTest, Operators_AND)
+TEST(BitFilter, Operators_AND)
 {
     BitFilter filter(Bitmask{ 0, 1, 2 }, Bitmask{ 3, 4, 5 });
     Bitmask   mask{ 0, 1, 2 };
@@ -267,7 +267,7 @@ TEST(BitFilterTest, Operators_AND)
     ASSERT_TRUE(filter & mask);
 }
 
-TEST(BitFilterTest, Hash)
+TEST(BitFilter, Hash)
 {
     std::hash<BitFilter> hasher;
 
