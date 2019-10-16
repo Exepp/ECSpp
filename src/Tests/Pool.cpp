@@ -1,130 +1,112 @@
-// TEST(PoolTest, Alloc_Free_Capacity)
-// {
-//     Pool<int> pool;
-//     int       x  = 2;
-//     int       a1 = pool.alloc();
-//     int       a2 = pool.alloc(-1);
-//     int       a3 = pool.alloc(x);
+#include <ECSpp/Utility/Pool.h>
+#include <gtest/gtest.h>
 
-//     EXPECT_EQ(a1, pool[0]);
-//     EXPECT_EQ(a2, pool[1]);
-//     EXPECT_EQ(a3, pool[2]);
-//     EXPECT_EQ(pool.getSize(), 3);
+using namespace epp;
 
-//     pool.free(0); // move last object to freed index (2 -> 0)
-//     pool.free(2); // free again, now invalid index
-//     EXPECT_NE(a1, pool[0]);
-//     EXPECT_EQ(a3, pool[0]);
-//     EXPECT_EQ(a2, pool[1]);
-//     EXPECT_EQ(pool.getSize(), 2);
+TEST(Pool, Alloc)
+{
+    {
+        Pool<int> pool;
+        int       x  = 2;
+        int       a1 = pool.alloc();
+        int       a2 = pool.alloc(-1);
+        int       a3 = pool.alloc(x);
 
-//     pool.reserve(10);
-//     EXPECT_EQ(pool.getReserved(), 10);
-//     EXPECT_EQ(pool.getSize(), 2);
+        EXPECT_EQ(a1, 0);
+        EXPECT_EQ(a2, -1);
+        EXPECT_EQ(a3, x);
+        EXPECT_EQ(a1, pool.content[0]);
+        EXPECT_EQ(a2, pool.content[1]);
+        EXPECT_EQ(a3, pool.content[2]);
 
-//     pool.clear();
-//     EXPECT_EQ(pool.getSize(), 0);
-//     EXPECT_EQ(pool.getReserved(), 10);
+        // force expansion
+        for (int i = 0; i < 1024; ++i)
+            pool.alloc(i);
+        for (int i = 0; i < 1024; ++i)
+            EXPECT_EQ(i, pool.content[3 + i]);
+        EXPECT_EQ(a1, pool.content[0]);
+        EXPECT_EQ(a2, pool.content[1]);
+        EXPECT_EQ(a3, pool.content[2]);
+    }
+    {
+        Pool<std::unique_ptr<int>> pool;
 
-//     for (size_t i = 0; i < 8; i++)
-//         pool.alloc();
+        auto p1 = pool.alloc(std::make_unique<int>(1)).get();
+        auto p2 = pool.alloc(std::make_unique<int>(10)).get();
+        auto p3 = pool.alloc(std::move(pool.content[0])).get();
+        EXPECT_EQ(pool.content[0].get(), nullptr);
+        EXPECT_EQ(pool.content[1].get(), p2);
+        EXPECT_EQ(pool.content[2].get(), p1);
+    }
+}
 
-//     pool.reserve(2);
+TEST(Pool, free)
+{
+    {
+        Pool<int> pool;
 
-//     EXPECT_EQ(pool.getSize(), 2);
-// }
+        int a = pool.alloc(1);
+        int b = pool.alloc(10);
+        int c = pool.alloc(100);
 
-// TEST(PoolTest, AllocN)
-// {
-//     Pool<int> pool;
-//     auto      it = pool.allocN(10, 123);
+        pool.free(0);
+        EXPECT_EQ(c, pool.content[0]);
+        EXPECT_EQ(b, pool.content[1]);
+    }
+    {
+        Pool<int> pool;
 
-//     ASSERT_GT(pool.getReserved(), 10);
-//     ASSERT_EQ(pool.getSize(), 10);
+        for (int i = 0; i < 1024; ++i)
+            pool.alloc(321);
+        for (int i = 0; i < 1024; ++i)
+            pool.alloc(123);
+        for (int i = 0; i < 1024; ++i)
+            pool.alloc(4321);
 
-//     int i = 0;
-//     for (; it != pool.end(); ++it)
-//     {
-//         ASSERT_EQ(*it, 123);
-//         ++i;
-//     }
-//     ASSERT_EQ(i, 10);
-// }
+        for (int i = 0; i < 512; ++i)
+            pool.free(1024 + i); // delete half of 123
 
-// TEST(PoolTest, Access_Iterators)
-// {
-//     Pool<int>    pool;
-//     const size_t allocCount = 6;
-//     for (size_t i = 0; i < allocCount; i++)
-//         pool.alloc();
+        for (int i = 0; i < 1024; ++i)
+            EXPECT_EQ(321, pool.content[i]);
+        for (int i = 0; i < 512; ++i)
+            EXPECT_EQ(4321, pool.content[1024 + i]); // 123 replaced by 4321
+        for (int i = 0; i < 512; ++i)
+            EXPECT_EQ(123, pool.content[1024 + 512 + i]);
+        for (int i = 0; i < 512; ++i)
+            EXPECT_EQ(4321, pool.content[2 * 1024 + i]);
+    }
+    {
+        Pool<std::unique_ptr<int>> pool;
 
-//     Pool<int>::Iterator_t iterator(&pool[0]);
-//     ASSERT_EQ(iterator, pool.begin());
-//     ASSERT_EQ(&*iterator, &pool.front());
-//     for (size_t i = 0; i < allocCount - 1; i++)
-//         ++iterator;
-//     ASSERT_EQ(&*iterator, &pool.back());
-//     ++iterator;
-//     ASSERT_EQ(iterator, pool.end());
+        auto p1 = pool.alloc(std::make_unique<int>(1)).get();
+        auto p2 = pool.alloc(std::make_unique<int>(10)).get();
+        auto p3 = pool.alloc(std::make_unique<int>(100)).get();
+        pool.free(0);
+        EXPECT_EQ(pool.content[0].get(), p3);
+        EXPECT_EQ(pool.content[1].get(), p2);
+    }
+}
 
-// #ifdef _DEBUG
-//     // test the exception throwing on out of range index
-//     bool catched = false;
-//     try
-//     {
-//         pool[allocCount];
-//     }
-//     catch (std::out_of_range)
-//     {
-//         catched = true;
-//     }
-//     // did not catch out of range exception
-//     ASSERT_TRUE(catched);
-// #endif
-// }
+TEST(Pool, prepareToFitNMore)
+{
+    Pool<int> pool;
+    int*      ptr = &pool.alloc(123);
+    pool.prepareToFitNMore(512);
 
-// TEST(PoolTest, Operator)
-// {
-//     Pool<int>    pool;
-//     const size_t allocCount = 6;
-//     for (size_t i = 0; i < allocCount; i++)
-//         pool.alloc();
-//     auto poolBegin = &pool.front();
+    ASSERT_NE(ptr, &pool.content[0]);
+    ASSERT_EQ(123, pool.content[0]);
 
-//     Pool<int> moveConstructed = std::move(pool);
+    std::vector<int*> ptrs(512);
+    for (int i = 0; i < 512; ++i)
+        ptrs[i] = &pool.alloc(i);
 
-//     ASSERT_GT(moveConstructed.getReserved(), allocCount);
-//     ASSERT_EQ(moveConstructed.getSize(), allocCount);
-//     ASSERT_EQ(&moveConstructed[0], poolBegin);
-// }
+    for (int i = 0; i < 512; ++i)
+        ASSERT_EQ(ptrs[i], &pool.content[1 + i]);
 
-// TEST(PoolIteratorTest, Operators)
-// {
-//     Pool<int> pool;
-//     size_t    n = 20;
-//     pool.allocN(n);
-
-//     auto it = pool.begin();
-
-//     ASSERT_EQ(it + n, pool.end());
-//     ASSERT_EQ(it, pool.end() - n);
-//     ASSERT_EQ(it += n, pool.end());
-//     ASSERT_EQ(it -= n, pool.begin());
-//     ASSERT_EQ(pool.end() - it, ptrdiff_t(n));
-
-//     ASSERT_TRUE(it < pool.end());
-//     ASSERT_TRUE(pool.end() > it);
-//     ASSERT_TRUE(it >= pool.begin());
-//     ASSERT_TRUE(it <= pool.begin());
-//     ASSERT_TRUE((it += n) == pool.end());
-//     ASSERT_TRUE(it != pool.begin());
-
-//     it = pool.begin();
-//     ASSERT_TRUE(it++ == pool.begin());
-//     ASSERT_TRUE(++it == pool.begin() + 2);
-//     ASSERT_TRUE(it-- == pool.begin() + 2);
-//     ASSERT_TRUE(--it == pool.begin());
-
-//     ASSERT_EQ(&*it, &it[0]);
-//     ASSERT_EQ(&*(it + n - 1), &it[n - 1]);
-// }
+    pool.prepareToFitNMore(5096);
+    for (int i = 0; i < 512; ++i)
+    {
+        ASSERT_NE(ptrs[i], &pool.content[1 + i]);
+        ASSERT_EQ(i, pool.content[1 + i]);
+    }
+}
