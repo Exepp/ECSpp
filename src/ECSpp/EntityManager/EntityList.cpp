@@ -99,15 +99,15 @@ void EntityList::freeEntity(Entity ent)
     ++freeLeft;
 }
 
-EntityCell::Occupied EntityList::get(Entity ent) const
+void EntityList::freeAll()
 {
-    assert(isValid(ent));
-    return memory[ent.listIdx.value].asOccupied();
-}
-
-bool EntityList::isValid(Entity ent) const
-{
-    return ent.listIdx.value < reserved && ent.version.value == memory[ent.listIdx.value].entVersion().value; // UB here, casting  to EntityCell
+    if (!reserved)
+        return;
+    freeLeft  = reserved;
+    freeIndex = ListIdx(0);
+    for (auto i = freeIndex; i.value < reserved - 1; ++i.value)
+        memory[i.value] = EntityCell({ ListIdx(i.value + 1), EntVersion(memory[i.value].entVersion().value + 1) });
+    memory[reserved - 1] = EntityCell({ ListIdx(ListIdx::BadValue), memory[reserved - 1].entVersion() });
 }
 
 void EntityList::prepareToFitNMore(Size_t n)
@@ -120,9 +120,9 @@ void EntityList::prepareToFitNMore(Size_t n)
 void EntityList::resize(Size_t n)
 {
     ListIdx first{ reserved };
-    reserve(n);
+    reserve(n); // makes reserved > 0
     for (ListIdx i = first; i.value < reserved - 1; ++i.value)
-        memory[i.value] = EntityCell({ ListIdx{ i.value + 1 }, EntVersion{ 0 } });
+        memory[i.value] = EntityCell({ ListIdx(i.value + 1), EntVersion{ 0 } });
     memory[reserved - 1] = EntityCell({ ListIdx(freeIndex), EntVersion{ 0 } });
     freeIndex            = first;
 }
@@ -139,4 +139,20 @@ void EntityList::reserve(Size_t n)
     freeLeft += n - reserved;
     reserved = n;
     memory   = newMemory;
+}
+
+EntityCell::Occupied EntityList::get(Entity ent) const
+{
+    assert(isValid(ent));
+    return memory[ent.listIdx.value].asOccupied();
+}
+
+bool EntityList::isValid(Entity ent) const
+{
+    return ent.listIdx.value < reserved && ent.version.value == memory[ent.listIdx.value].entVersion().value; // UB here, casting  to EntityCell
+}
+
+EntityList::Size_t EntityList::size() const
+{
+    return reserved - freeLeft;
 }

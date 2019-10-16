@@ -130,6 +130,10 @@ public:
     void freeEntity(Entity ent);
 
 
+    // increments versions of all currently reserved cells
+    void freeAll();
+
+
     void prepareToFitNMore(Size_t n);
 
 
@@ -137,6 +141,8 @@ public:
 
 
     EntityCell::Occupied get(Entity ent) const;
+
+    Size_t size() const;
 
 private:
     void resize(Size_t n);

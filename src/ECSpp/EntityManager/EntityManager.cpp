@@ -41,6 +41,7 @@ void EntityManager::removeComponent(Entity ent, CompIDList_t cIDs)
 
 void EntityManager::clear()
 {
+    entList.freeAll();
     for (auto& spawner : spawnersByIDs)
         spawner.clear();
 }
