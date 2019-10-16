@@ -122,8 +122,8 @@ void EntityList::resize(Size_t n)
     ListIdx first{ reserved };
     reserve(n); // makes reserved > 0
     for (ListIdx i = first; i.value < reserved - 1; ++i.value)
-        memory[i.value] = EntityCell({ ListIdx(i.value + 1), EntVersion{ 0 } });
-    memory[reserved - 1] = EntityCell({ ListIdx(freeIndex), EntVersion{ 0 } });
+        memory[i.value] = EntityCell({ ListIdx(i.value + 1), EntVersion(0) });
+    memory[reserved - 1] = EntityCell({ ListIdx(freeIndex), EntVersion(0) });
     freeIndex            = first;
 }
 
