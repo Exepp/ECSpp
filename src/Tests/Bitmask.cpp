@@ -5,7 +5,7 @@
 
 using namespace epp;
 
-TEST(BitmaskTest, Set_Unset_Get_InitializerList)
+TEST(Bitmask, Set_Unset_Get_InitializerList)
 {
     {
         Bitmask bitmask;
@@ -72,7 +72,7 @@ TEST(BitmaskTest, Set_Unset_Get_InitializerList)
     }
 }
 
-TEST(BitmaskTest, Operators)
+TEST(Bitmask, Operators)
 {
     {
         Bitmask bm1, bm2;
@@ -142,7 +142,7 @@ TEST(BitmaskTest, Operators)
     }
 }
 
-TEST(BitmaskTest, Clear_Count)
+TEST(Bitmask, Clear_Count)
 {
     Bitmask bitmask;
 
@@ -168,7 +168,7 @@ TEST(BitmaskTest, Clear_Count)
     EXPECT_EQ(bitmask.getSetCount(), 0);
 }
 
-TEST(BitmaskTest, Common)
+TEST(Bitmask, Common)
 {
     Bitmask bitmask1{ 64, 5, 77, 128 };
     Bitmask bitmask2{ 64, 1, 4, 128 };
@@ -195,7 +195,7 @@ TEST(BitmaskTest, Common)
     ASSERT_FALSE(bitmask3.hasCommon(Bitmask()));
 }
 
-TEST(BitmaskTest, Hash)
+TEST(Bitmask, Hash)
 {
     std::hash<Bitmask> hasher;
 
