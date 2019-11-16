@@ -81,7 +81,7 @@ void CPool<T>::prepareToFitNMore(std::size_t n)
 template<class T>
 void CPool<T>::clear()
 {
-    pool.clear();
+    pool.content.clear();
 }
 
 template<class T>

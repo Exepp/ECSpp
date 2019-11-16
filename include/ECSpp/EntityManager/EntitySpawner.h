@@ -13,7 +13,9 @@ struct EntityEvent
     enum class Type : uint8_t {
         Creation,
         Destruction,
-        _Every // must be the last one
+        JoinedCollection, // when existing entity's archetype changes to the ones, that are accepted by this collection
+        LeftCollection,   // when entity gets/loses component and no longer passes through the collection's filter
+        _Every            // must be the last one
     };
 
     Type const type;
@@ -21,10 +23,10 @@ struct EntityEvent
     Entity entity;
 };
 
-using SpawnerNotifier_t = Notifier<EntityEvent>;
+using SpawnerNotifier = Notifier<EntityEvent>;
 
 
-class EntitySpawner : public SpawnerNotifier_t
+class EntitySpawner : public SpawnerNotifier
 {
 public:
     struct IdentifiedCPool

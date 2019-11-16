@@ -74,25 +74,25 @@ private:
 template<class... CTypes>
 inline void Archetype::addComponent()
 {
-    addComponent({ ComponentUtility::ID<CTypes>... });
+    addComponent(IDOfComp<CTypes...>());
 }
 
 template<class... CTypes>
 inline void Archetype::removeComponent()
 {
-    removeComponent({ ComponentUtility::ID<CTypes>... });
+    removeComponent(IDOfComp<CTypes...>());
 }
 
 template<class... CTypes>
 inline bool Archetype::hasAllOf() const
 {
-    return hasAllOf({ ComponentUtility::ID<CTypes>... });
+    return hasAllOf(IDOfComp<CTypes...>());
 }
 
 template<class... CTypes>
 inline bool Archetype::hasAnyOf() const
 {
-    return hasAnyOf({ ComponentUtility::ID<CTypes>... });
+    return hasAnyOf(IDOfComp<CTypes...>());
 }
 
 

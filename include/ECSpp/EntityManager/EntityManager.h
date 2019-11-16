@@ -79,25 +79,25 @@ private:
 template<class... CTypes>
 inline Entity EntityManager::spawn()
 {
-    return spawn(Archetype({ ComponentUtility::ID<CTypes>... }));
+    return spawn(Archetype(IDOfComp<CTypes...>()));
 }
 
 template<class... CTypes>
 inline void EntityManager::addComponent(Entity ent)
 {
-    addComponent(ent, { ComponentUtility::ID<CTypes>... });
+    addComponent(ent, IDOfComp<CTypes...>());
 }
 
 template<class... CTypes>
 inline void EntityManager::removeComponent(Entity ent)
 {
-    removeComponent(ent, { ComponentUtility::ID<CTypes>... });
+    removeComponent(ent, IDOfComp<CTypes...>());
 }
 
 template<class... CTypes>
 inline EntityCollection<CTypes...>& EntityManager::requestCollection(Bitmask unwantedComponents)
 {
-    BitFilter filter(Bitmask({ ComponentUtility::ID<CTypes>... }), unwantedComponents);
+    BitFilter filter(Bitmask(IDOfComp<CTypes...>()), unwantedComponents);
     auto&     collectionPtr = collections[filter];
 
     if (!collectionPtr)
