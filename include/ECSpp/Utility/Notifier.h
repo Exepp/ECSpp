@@ -18,9 +18,7 @@ public:
 private:
     using This_t = Notifier<Event>;
 
-    using Callback_t = std::function<void(Event&)>;
-
-    using NotifyCb_t = void (This_t::*)(Event&) const;
+    using Callback_t = std::function<void(Event const&)>;
 
 
     static constexpr EvType_t const EveryType = EvType_t::_Every;
@@ -54,21 +52,8 @@ public:
         callbacks[std::size_t(type)].push_back(std::move(callback));
     }
 
-    template<class T, class F>
-    void addSubscriber(T* sub, F callback, EvType_t type)
-    {
-        Callback_t callb = [sub, callback](Event& e) { (sub->*callback)(e); };
-        callbacks[std::size_t(type)].push_back(callb);
-    }
-
-    template<class T>
-    void addSubscriber(T* sub, NotifyCb_t callback, EvType_t type) // when Notifier::notify is the callback (to distinguish between overloads)
-    {
-        addSubscriber<T, NotifyCb_t>(sub, callback, type);
-    }
-
 protected:
-    void notify(Event& event) const
+    void notify(Event const& event) const
     {
         assert(event.type != EveryType);
 
@@ -76,11 +61,6 @@ protected:
             cb(event);
         for (auto const& cb : callbacks[std::size_t(event.type)])
             cb(event);
-    }
-
-    void notify(Event&& event) const
-    {
-        notify(event);
     }
 
 private:

@@ -19,11 +19,18 @@ private:
     using CPoolCreator_t  = CPoolBasePtr_t (*)();
     using CPoolsFactory_t = std::vector<CPoolCreator_t>;
 
+    template<class T>
+    static CPoolBasePtr_t Make_Unique_Pool()
+    {
+        return std::make_unique<CPool<T>>();
+    }
+
     template<class ComponentT>
     inline static ComponentID RegisterComponent()
     {
         static_assert(std::is_base_of_v<Component, ComponentT>);
-        GetCPoolsFactory().push_back(std::make_unique<CPool<ComponentT>>);
+        CPoolCreator_t ptr = Make_Unique_Pool<ComponentT>;
+        GetCPoolsFactory().push_back(ptr);
         return NextID();
     }
 
@@ -41,10 +48,17 @@ private:
 
 public:
     template<class T>
-    inline static ComponentID ID = RegisterComponent<T>();
+    inline static ComponentID const ID = RegisterComponent<T>();
 
     friend class Archetype;
 };
+
+template<class... Types>
+inline std::initializer_list<ComponentID> IDOfComp()
+{
+    static std::initializer_list<ComponentID> list = { ComponentUtility::ID<Types>... };
+    return list;
+}
 
 } // namespace epp
 
