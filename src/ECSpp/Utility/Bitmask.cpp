@@ -1,5 +1,6 @@
 #include <ECSpp/Utility/Bitmask.h>
 #include <algorithm>
+#include <numeric>
 
 using namespace epp;
 
@@ -60,7 +61,7 @@ void Bitmask::clear()
 
 Bitmask& Bitmask::removeCommon(Bitmask const& other)
 {
-    std::size_t smallest = std::min(masks.size(), other.masks.size());
+    Idx_t smallest = std::min(masks.size(), other.masks.size());
     for (Idx_t i = 0; i < smallest; ++i)
         masks[i] &= ~other.masks[i];
     shrinkToFit();
@@ -83,7 +84,7 @@ Bitmask::MaskContainer_t const& Bitmask::getMasks() const
 std::size_t Bitmask::getSetCount() const
 {
     std::size_t sum = 0;
-    Bitset_t    counter;
+    Bitset_t counter;
 
     for (auto mask : masks)
         sum += (counter = mask).count();
@@ -94,26 +95,23 @@ bool Bitmask::contains(Bitmask const& other) const
 {
     if (other.masks.size() > masks.size())
         return false;
-    for (Idx_t i = 0; i < other.masks.size(); ++i)
-        if ((masks[i] & other.masks[i]) != other.masks[i])
-            return false;
-    return true;
+    auto maskIt = masks.begin();
+    return std::all_of(other.masks.begin(), other.masks.end(),
+                       [&maskIt](Mask_t mask) { return (*maskIt++ & mask) == mask; });
 }
 
 bool Bitmask::hasCommon(Bitmask const& other) const
 {
-    std::size_t smallest = std::min(masks.size(), other.masks.size());
-    for (Idx_t i = 0; i < smallest; ++i)
-        if (masks[i] & other.masks[i])
-            return true;
-    return false;
+    auto maskIt = masks.begin();
+    return std::any_of(other.masks.begin(), other.masks.begin() + std::min(masks.size(), other.masks.size()),
+                       [&maskIt](Mask_t mask) { return *maskIt++ & mask; });
 }
 
 std::size_t Bitmask::numberOfCommon(Bitmask const& other) const
 {
-    std::size_t smallest = std::min(masks.size(), other.masks.size());
-    std::size_t sum      = 0;
-    Bitset_t    counter;
+    Idx_t smallest = std::min(masks.size(), other.masks.size());
+    std::size_t sum = 0;
+    Bitset_t counter;
 
     for (Idx_t i = 0; i < smallest; ++i)
         sum += (counter = (masks[i] & other.masks[i])).count();
@@ -163,8 +161,7 @@ bool Bitmask::operator!=(Bitmask const& rhs) const
 
 bool Bitmask::operator<(Bitmask const& rhs) const
 {
-    if (masks.size() == rhs.masks.size())
-    {
+    if (masks.size() == rhs.masks.size()) {
         std::intptr_t i = std::intptr_t(masks.size());
         while (--i >= 0)
             if (masks[i] != rhs.masks[i])
@@ -176,8 +173,7 @@ bool Bitmask::operator<(Bitmask const& rhs) const
 
 bool Bitmask::operator>(Bitmask const& rhs) const
 {
-    if (masks.size() == rhs.masks.size())
-    {
+    if (masks.size() == rhs.masks.size()) {
         std::intptr_t i = std::intptr_t(masks.size());
         while (--i >= 0)
             if (masks[i] != rhs.masks[i])

@@ -5,11 +5,9 @@
 #include <cstdint>
 #include <vector>
 
-namespace epp
-{
+namespace epp {
 
-class Bitmask
-{
+class Bitmask {
 public:
     using Idx_t = std::size_t;
 
@@ -94,11 +92,9 @@ private:
 
 } // namespace epp
 
-namespace std
-{
-template<>
-struct hash<epp::Bitmask>
-{
+namespace std {
+template <>
+struct hash<epp::Bitmask> {
     std::size_t operator()(epp::Bitmask const& bitmask) const
     {
         std::size_t val = 0;
