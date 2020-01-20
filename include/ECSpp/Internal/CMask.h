@@ -10,9 +10,9 @@ namespace epp {
 
 class CMask {
 public:
-    using Idx_t = ComponentId;
+    using IdxList_t = decltype(IdOfL<>());
 
-    using IdxList_t = std::initializer_list<Idx_t>;
+    using Idx_t = IdxList_t::value_type;
 
     using Bitset_t = std::bitset<CMetadata::MaxRegisteredComponents>;
 

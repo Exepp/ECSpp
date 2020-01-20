@@ -16,10 +16,11 @@ EntityManager::spawn(Archetype const& arch, std::size_t n, EntitySpawner::UserCr
     return { spawner.getEntities().data.end() - n, spawner.getEntities().data.end() };
 }
 
-void EntityManager::changeArchetype(Entity ent, Archetype const& newArchetype, EntitySpawner::UserCreationFn_t const& fn)
+void EntityManager::changeArchetype(Entity ent, IdList_t toAdd, IdList_t toRemove, EntitySpawner::UserCreationFn_t const& fn)
 {
     EPP_ASSERT(entList.isValid(ent));
     EntitySpawner& spawner = getSpawner(ent);
+    Archetype newArchetype = spawner.makeArchetype().removeComponent(toRemove).addComponent(toAdd);
     if (spawner.mask != newArchetype.getMask())
         getSpawner(newArchetype).moveEntityHere(ent, entList, spawner, fn);
 }

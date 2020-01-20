@@ -6,10 +6,12 @@
 namespace epp {
 
 class CPool final {
+    using CId_t = decltype(IdOfL<>())::value_type;
+
     using Idx_t = std::uint32_t;
 
 public:
-    explicit CPool(ComponentId cId);
+    explicit CPool(CId_t cId);
 
     CPool(CPool&& rval);
 
@@ -52,7 +54,7 @@ public:
 
     void* operator[](Idx_t i);
 
-    ComponentId getCId() const { return cId; }
+    CId_t getCId() const { return cId; }
 
     std::size_t size() const { return dataUsed; }
 
@@ -87,7 +89,7 @@ private:
 
     CMetadata metadata;
 
-    ComponentId const cId; // may change on assignment
+    CId_t const cId; // may change on assignment
 };
 
 } // namespace epp

@@ -37,7 +37,7 @@ public:
         template <typename CType, typename... Args>
         CType& construct(Args&&... args)
         {
-            ComponentId cId = IdOf<CType>();
+            auto cId = IdOf<CType>();
             EPP_ASSERT(spawner.mask.get(cId));
             CType* component = static_cast<CType*>(spawner.getPool(cId)[idx.value]);
             if (constructed.get(cId))

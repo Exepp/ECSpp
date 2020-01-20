@@ -17,6 +17,8 @@ class EntityManager {
 
     using EPoolCIter_t = EntitySpawner::EntityPool_t::Container_t::const_iterator;
 
+    using IdList_t = decltype(IdOfL<>());
+
 public:
     Entity spawn(Archetype const& arch, EntitySpawner::UserCreationFn_t const& fn = ([](EntitySpawner::Creator&&) {}));
 
@@ -24,9 +26,11 @@ public:
     // second - end iterator
     std::pair<EPoolCIter_t, EPoolCIter_t> spawn(Archetype const& arch, std::size_t n, EntitySpawner::UserCreationFn_t const& fn = ([](EntitySpawner::Creator&&) {}));
 
+
     // ent - valid entity
     // newArchetype - any archetype
     void changeArchetype(Entity ent, Archetype const& newArchetype, EntitySpawner::UserCreationFn_t const& fn = ([](EntitySpawner::Creator&&) {}));
+
 
     // changes the archetype of the entity associated with the iterator and returns the next valid one
     // iterator - valid and non-end iterator
@@ -39,11 +43,21 @@ public:
         return it;
     }
 
+
+    EPoolCIter_t changeArchetype(EPoolCIter_t const& it, Archetype const& newArchetype, EntitySpawner::UserCreationFn_t const& fn = ([](EntitySpawner::Creator&&) {}))
+    {
+        changeArchetype(*it, newArchetype, fn);
+        return it; // same iterator (valid for vector)
+    }
+
+
     // the next n spawn(arche, ...) calls will not require reallocation in any of the internal structures
     void prepareToSpawn(Archetype const& arch, std::size_t n);
 
+
     // ent - valid entity
     void destroy(Entity ent);
+
 
     // destroys the entity associated with the iterator and returns the next valid one
     // iterator - valid and non-end iterator
@@ -56,14 +70,17 @@ public:
         return it;
     }
 
+
     EPoolCIter_t destroy(EPoolCIter_t const& it)
     {
         destroy(*it);
         return it; // same iterator (valid for vector)
     }
 
+
     // destroys every entity
     void clear();
+
 
     // destroys every entity of the given archetype
     // arch - any archetype
@@ -92,9 +109,11 @@ public:
     // returns the CMask of the spawner that ent is currently in
     CMask const& maskOf(Entity ent) const;
 
+
     // ent - valid entity
     // returns the archetype of ent
     Archetype archetypeOf(Entity ent) const;
+
 
     // arch - one of archetypes that were used to spawn entities during this application (throws for other archetypes)
     EntityPool_t const& entitiesOf(Archetype const& arch) const
@@ -103,9 +122,12 @@ public:
         return findSpawner(arch)->getEntities();
     }
 
+
     bool isValid(Entity ent) const { return entList.isValid(ent); }
 
+
     std::size_t size() const { return entList.size(); }
+
 
     // arch - any archetype
     std::size_t size(Archetype const& arch) const;

@@ -5,7 +5,7 @@
 using namespace epp;
 
 
-CPool::CPool(ComponentId cId) : cId(cId), metadata(CMetadata::GetData(cId)) {}
+CPool::CPool(CId_t cId) : cId(cId), metadata(CMetadata::GetData(cId)) {}
 
 CPool::CPool(CPool&& rval)
     : data(rval.data), dataSize(rval.dataSize), dataUsed(rval.dataUsed), cId(rval.cId), metadata(rval.metadata)

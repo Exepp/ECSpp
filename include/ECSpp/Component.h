@@ -97,22 +97,20 @@ private:
 
 
 template <typename T>
-inline ComponentId IdOf()
+inline decltype(auto) IdOf()
 {
     return CMetadata::Id<T>();
 }
 
 template <typename... Comps>
-inline std::initializer_list<ComponentId> IdOfL()
+inline decltype(auto) IdOfL()
 {
-    static_assert(sizeof...(Comps));
     static std::initializer_list<ComponentId> list = { IdOf<Comps>()... };
     return list;
 }
 
-
 template <typename C1, typename C2, typename... CRest>
-inline std::initializer_list<ComponentId> IdOf()
+inline decltype(auto) IdOf()
 {
     return IdOfL<C1, C2, CRest...>();
 }

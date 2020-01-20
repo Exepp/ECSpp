@@ -14,7 +14,7 @@ Archetype& Archetype::addComponent(IdList_t ids)
     return *this;
 }
 
-Archetype& Archetype::addComponent(ComponentId id)
+Archetype& Archetype::addComponent(CId_t id)
 {
     if (!cMask.get(id)) {
         cMask.set(id);
@@ -30,7 +30,7 @@ Archetype& Archetype::removeComponent(IdList_t ids)
     return *this;
 }
 
-Archetype& Archetype::removeComponent(ComponentId id)
+Archetype& Archetype::removeComponent(CId_t id)
 {
     if (has(id)) {
         cMask.unset(id);
@@ -55,7 +55,7 @@ bool Archetype::hasAnyOf(IdList_t ids) const
     return cMask.hasCommon(ids);
 }
 
-bool Archetype::has(ComponentId id) const
+bool Archetype::has(CId_t id) const
 {
     return cMask.get(id);
 }

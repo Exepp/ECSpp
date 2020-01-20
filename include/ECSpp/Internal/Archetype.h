@@ -8,9 +8,11 @@
 namespace epp {
 
 class Archetype {
-    using CIdVec_t = std::vector<ComponentId>;
+    using IdList_t = decltype(IdOfL<>());
 
-    using IdList_t = std::initializer_list<ComponentId>;
+    using CId_t = IdList_t::value_type;
+
+    using IdVec_t = std::vector<CId_t>;
 
 public:
     Archetype() = default;
@@ -26,31 +28,31 @@ public:
 
     Archetype& addComponent(IdList_t ids);
 
-    Archetype& addComponent(ComponentId id);
+    Archetype& addComponent(CId_t id);
 
     template <typename... CTypes>
     Archetype& removeComponent();
 
     Archetype& removeComponent(IdList_t ids);
 
-    Archetype& removeComponent(ComponentId id);
+    Archetype& removeComponent(CId_t id);
 
 
     bool hasAllOf(IdList_t ids) const;
 
     bool hasAnyOf(IdList_t ids) const;
 
-    bool has(ComponentId id) const;
+    bool has(CId_t id) const;
 
 
-    CIdVec_t const& getCIds() const { return cIds; }
+    IdVec_t const& getCIds() const { return cIds; }
 
     CMask const& getMask() const { return cMask; }
 
 private:
     CMask cMask;
 
-    CIdVec_t cIds;
+    IdVec_t cIds;
 };
 
 
