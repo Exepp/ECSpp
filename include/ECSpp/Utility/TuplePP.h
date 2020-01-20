@@ -3,72 +3,103 @@
 
 #include <tuple>
 
-namespace epp
-{
+namespace epp {
 
-template<class T, class... Pack>
+template <typename T, typename... Pack>
 inline constexpr bool isTypeInPack()
 {
     return false || (std::is_same_v<T, Pack> || ...);
 }
 
 
-template<class... TplTypes>
-struct TuplePP : public std::tuple<TplTypes...>
-{
-    using ThisTpl_t = TuplePP<TplTypes...>;
+template <typename... TplTypes>
+struct TuplePP : public std::tuple<TplTypes...> {
 
     using Base_t = std::tuple<TplTypes...>;
 
 
     TuplePP() = default;
 
-    TuplePP(ThisTpl_t const&) = default;
+    TuplePP(TuplePP const&) = default;
 
-    TuplePP(Base_t const& rhs)
-        : Base_t(rhs)
-    {}
+    TuplePP(Base_t const& rhs) : Base_t(rhs) {}
 
 
-    template<class U>
-    U& get();
-
-    template<class U>
-    U const& get() const;
-
-    template<std::size_t i>
-    decltype(auto) get();
-
-    template<std::size_t i>
-    decltype(auto) get() const;
-
-
-    template<class... OtherTypes>
-    TuplePP<OtherTypes...> asTuple();
-
-    template<class... OtherTypes>
-    TuplePP<OtherTypes...> asTuple() const;
-
-
-    TuplePP<TplTypes&...> asRefTuple();
-
-    TuplePP<TplTypes const&...> asRefTuple() const;
-
-
-    template<class... OtherTypes>
-    TuplePP<OtherTypes&...> asRefTuple();
-
-    template<class... OtherTypes>
-    TuplePP<OtherTypes const&...> asRefTuple() const;
-
-
-    template<class... OtherTplTypes>
-    static ThisTpl_t makeFromTuple(TuplePP<OtherTplTypes...> const& tplToCpyFrom)
+    template <typename U>
+    U& get()
     {
-        return ThisTpl_t(Base_t(tplToCpyFrom.template get<TplTypes>()...));
+        static_assert(isTypeInPack<U, TplTypes...>(), "Tried to get a wrong type from a tuple!");
+        return std::get<U>(*this);
     }
 
-    template<class... SearchedTypes>
+    template <typename U>
+    U const& get() const
+    {
+        static_assert(isTypeInPack<U, TplTypes...>(), "Tried to get a wrong type from a tuple!");
+        return std::get<U>(*this);
+    }
+
+    template <std::size_t i>
+    decltype(auto) get()
+    {
+        static_assert(i < sizeof...(TplTypes), "Tried to get a wrong type from a tuple!");
+        return std::get<i>(*this);
+    }
+
+    template <std::size_t i>
+    decltype(auto) get() const
+    {
+        static_assert(i < sizeof...(TplTypes), "Tried to get a wrong type from a tuple!");
+        return std::get<i>(*this);
+    }
+
+
+    template <typename... OtherTypes>
+    TuplePP<OtherTypes...> asTuple()
+    {
+        static_assert(containsType<OtherTypes...>() || !sizeof...(OtherTypes), "Tuple does not contain given sequence of types");
+        return std::tuple<OtherTypes...>(get<OtherTypes>()...);
+    }
+
+    template <typename... OtherTypes>
+    TuplePP<OtherTypes...> asTuple() const
+    {
+        static_assert(containsType<OtherTypes...>() || !sizeof...(OtherTypes), "Tuple does not contain given sequence of types");
+        return std::tuple<OtherTypes...>(get<OtherTypes>()...);
+    }
+
+    TuplePP<TplTypes&...> asRefTuple()
+    {
+        return std::tuple<TplTypes&...>(get<TplTypes>()...);
+    }
+
+    TuplePP<TplTypes const&...> asRefTuple() const
+    {
+        return std::tuple<const TplTypes&...>(get<TplTypes>()...);
+    }
+
+    template <typename... OtherTypes>
+    TuplePP<OtherTypes&...> asRefTuple()
+    {
+        static_assert(containsType<OtherTypes...>() || !sizeof...(OtherTypes), "Tuple does not contain given sequence of types");
+        return std::tuple<OtherTypes&...>(get<OtherTypes>()...);
+    }
+
+    template <typename... OtherTypes>
+    TuplePP<OtherTypes const&...> asRefTuple() const
+    {
+        static_assert(containsType<OtherTypes...>() || !sizeof...(OtherTypes), "Tuple does not contain given sequence of types");
+        return std::tuple<const OtherTypes&...>(get<OtherTypes>()...);
+    }
+
+
+    template <typename... OtherTplTypes>
+    static TuplePP makeFromTuple(TuplePP<OtherTplTypes...> const& tplToCpyFrom)
+    {
+        return TuplePP(Base_t(tplToCpyFrom.template get<TplTypes>()...));
+    }
+
+    template <typename... SearchedTypes>
     static constexpr bool containsType()
     {
         if constexpr (sizeof...(SearchedTypes) > 0)
@@ -77,8 +108,6 @@ struct TuplePP : public std::tuple<TplTypes...>
             return false;
     }
 };
-
-#include <ECSpp/Utility/TuplePP.inl>
 
 } // namespace epp
 

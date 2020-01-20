@@ -1,54 +1,60 @@
 #ifndef POOL_H
 #define POOL_H
 
-#include <assert.h>
+#include <ECSpp/Utility/Assert.h>
+#include <cmath>
 #include <memory>
 #include <vector>
 
-namespace epp
-{
+namespace epp {
 
-template<class T>
-struct Pool
-{
-    template<class... U>
-    T& alloc(U&&... arg);
+template <typename T>
+struct Pool {
+    using Container_t = std::vector<T>;
+
+    template <typename... U>
+    T& create(U&&... arg);
 
     // returns true if deleted object was replaced with last element (false only for last element)
-    bool free(std::size_t i);
+    bool destroy(std::size_t i);
 
-    void prepareToFitNMore(std::size_t n);
+    void fitNextN(std::size_t n);
 
 
-    std::vector<T> content;
+    Container_t data;
 };
 
 
-template<class T>
-template<class... U>
-inline T& Pool<T>::alloc(U&&... arg)
+template <typename T>
+template <typename... U>
+inline T& Pool<T>::create(U&&... arg)
 {
-    return content.emplace_back(std::forward<U>(arg)...);
+    return data.emplace_back(std::forward<U>(arg)...);
 }
 
-template<class T>
-bool Pool<T>::free(std::size_t i)
+template <typename T>
+inline bool Pool<T>::destroy(std::size_t i)
 {
-    assert(i < content.size());
+    EPP_ASSERT(i < data.size());
 
-    bool isLast = (i + 1) == content.size();
-    if (!isLast)
-        std::swap(content.back(), content[i]);
-    content.pop_back();
-    return isLast;
+    bool notLast = (i + 1) < data.size();
+    if (notLast) {
+        data[i].~T();
+        new (&data[i]) T(std::move(data.back()));
+    }
+    data.pop_back();
+    return notLast;
 }
 
-template<class T>
-void Pool<T>::prepareToFitNMore(std::size_t n)
+inline std::size_t SizeToFitNextN(std::size_t n, std::size_t reserved, std::size_t freeLeft)
 {
-    std::size_t freeLeft = content.capacity() - content.size();
-    if (freeLeft < n)
-        content.reserve(std::size_t((content.capacity() + (n - freeLeft)) * 1.61803398875));
+    return freeLeft >= n ? reserved : (std::size_t(0x1) << std::size_t(std::ceil(std::log2(reserved + (n - freeLeft)))));
+}
+
+template <typename T>
+inline void Pool<T>::fitNextN(std::size_t n)
+{
+    data.reserve(SizeToFitNextN(n, data.capacity(), data.capacity() - data.size()));
 }
 
 } // namespace epp

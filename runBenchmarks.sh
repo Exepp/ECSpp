@@ -1,0 +1,1 @@
+(make Benchmarks config=release && cd bin/linux_x86_64/Release/Benchmarks; ./Benchmarks)

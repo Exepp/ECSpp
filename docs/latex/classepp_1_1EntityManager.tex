@@ -1,0 +1,64 @@
+\hypertarget{classepp_1_1EntityManager}{}\doxysection{epp\+::Entity\+Manager Class Reference}
+\label{classepp_1_1EntityManager}\index{epp::EntityManager@{epp::EntityManager}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classepp_1_1EntityManager_ad67129cb2bb9cb453be5d21364f4f91d}\label{classepp_1_1EntityManager_ad67129cb2bb9cb453be5d21364f4f91d}} 
+\mbox{\hyperlink{structepp_1_1Entity}{Entity}} {\bfseries spawn} (\mbox{\hyperlink{classepp_1_1Archetype}{Archetype}} const \&arch, Entity\+Spawner\+::\+User\+Creation\+Fn\+\_\+t const \&fn=(\mbox{[}$\,$\mbox{]}(\mbox{\hyperlink{classepp_1_1EntitySpawner_1_1Creator}{Entity\+Spawner\+::\+Creator}} \&\&) \{\}))
+\item 
+\mbox{\Hypertarget{classepp_1_1EntityManager_a5ca8f2efdd761d78334a42facfabc758}\label{classepp_1_1EntityManager_a5ca8f2efdd761d78334a42facfabc758}} 
+std\+::pair$<$ E\+Pool\+C\+Iter\+\_\+t, E\+Pool\+C\+Iter\+\_\+t $>$ {\bfseries spawn} (\mbox{\hyperlink{classepp_1_1Archetype}{Archetype}} const \&arch, std\+::size\+\_\+t n, Entity\+Spawner\+::\+User\+Creation\+Fn\+\_\+t const \&fn=(\mbox{[}$\,$\mbox{]}(\mbox{\hyperlink{classepp_1_1EntitySpawner_1_1Creator}{Entity\+Spawner\+::\+Creator}} \&\&) \{\}))
+\item 
+\mbox{\Hypertarget{classepp_1_1EntityManager_a0521c8c9568f1ef50b2a13bc0f466e17}\label{classepp_1_1EntityManager_a0521c8c9568f1ef50b2a13bc0f466e17}} 
+void {\bfseries change\+Archetype} (\mbox{\hyperlink{structepp_1_1Entity}{Entity}} ent, \mbox{\hyperlink{classepp_1_1Archetype}{Archetype}} const \&new\+Archetype, Entity\+Spawner\+::\+User\+Creation\+Fn\+\_\+t const \&fn=(\mbox{[}$\,$\mbox{]}(\mbox{\hyperlink{classepp_1_1EntitySpawner_1_1Creator}{Entity\+Spawner\+::\+Creator}} \&\&) \{\}))
+\item 
+\mbox{\Hypertarget{classepp_1_1EntityManager_a2d1f8d871426cdb0d690423e2e53a717}\label{classepp_1_1EntityManager_a2d1f8d871426cdb0d690423e2e53a717}} 
+{\footnotesize template$<$typename Iterator $>$ }\\Iterator {\bfseries change\+Archetype} (Iterator it, \mbox{\hyperlink{classepp_1_1Archetype}{Archetype}} const \&new\+Archetype, Entity\+Spawner\+::\+User\+Creation\+Fn\+\_\+t const \&fn=(\mbox{[}$\,$\mbox{]}(\mbox{\hyperlink{classepp_1_1EntitySpawner_1_1Creator}{Entity\+Spawner\+::\+Creator}} \&\&) \{\}))
+\item 
+\mbox{\Hypertarget{classepp_1_1EntityManager_a22bcca7da714d912c4a0fa835d5197be}\label{classepp_1_1EntityManager_a22bcca7da714d912c4a0fa835d5197be}} 
+void {\bfseries prepare\+To\+Spawn} (\mbox{\hyperlink{classepp_1_1Archetype}{Archetype}} const \&arch, std\+::size\+\_\+t n)
+\item 
+\mbox{\Hypertarget{classepp_1_1EntityManager_a1c967e0dfdd36039e965f3d8c4a71642}\label{classepp_1_1EntityManager_a1c967e0dfdd36039e965f3d8c4a71642}} 
+void {\bfseries destroy} (\mbox{\hyperlink{structepp_1_1Entity}{Entity}} ent)
+\item 
+\mbox{\Hypertarget{classepp_1_1EntityManager_a6e5950facbfc74fa589cbc7d6d5045f9}\label{classepp_1_1EntityManager_a6e5950facbfc74fa589cbc7d6d5045f9}} 
+{\footnotesize template$<$typename Iterator $>$ }\\Iterator {\bfseries destroy} (Iterator it)
+\item 
+\mbox{\Hypertarget{classepp_1_1EntityManager_ac5ade395a1a7561b93ec5886c12932bc}\label{classepp_1_1EntityManager_ac5ade395a1a7561b93ec5886c12932bc}} 
+E\+Pool\+C\+Iter\+\_\+t {\bfseries destroy} (E\+Pool\+C\+Iter\+\_\+t const \&it)
+\item 
+\mbox{\Hypertarget{classepp_1_1EntityManager_ad28ffa045d1c2adc4c730e6bc1c6c43c}\label{classepp_1_1EntityManager_ad28ffa045d1c2adc4c730e6bc1c6c43c}} 
+void {\bfseries clear} ()
+\item 
+\mbox{\Hypertarget{classepp_1_1EntityManager_acd18d37f4a71d468ce96af9452f3bd91}\label{classepp_1_1EntityManager_acd18d37f4a71d468ce96af9452f3bd91}} 
+void {\bfseries clear} (\mbox{\hyperlink{classepp_1_1Archetype}{Archetype}} const \&arch)
+\item 
+\mbox{\Hypertarget{classepp_1_1EntityManager_ae2305ba9c7e6421d1df6e3403b1e571d}\label{classepp_1_1EntityManager_ae2305ba9c7e6421d1df6e3403b1e571d}} 
+{\footnotesize template$<$typename... C\+Types$>$ }\\void {\bfseries update\+Collection} (\mbox{\hyperlink{classepp_1_1EntityCollection}{Entity\+Collection}}$<$ C\+Types... $>$ \&collection)
+\item 
+\mbox{\Hypertarget{classepp_1_1EntityManager_acbab88f171867e1b3cd0d04e0692e418}\label{classepp_1_1EntityManager_acbab88f171867e1b3cd0d04e0692e418}} 
+{\footnotesize template$<$typename T\+Comp $>$ }\\T\+Comp \& {\bfseries component\+Of} (\mbox{\hyperlink{structepp_1_1Entity}{Entity}} ent)
+\item 
+\mbox{\Hypertarget{classepp_1_1EntityManager_ab721f5a43adbdf3170b510094b3780c2}\label{classepp_1_1EntityManager_ab721f5a43adbdf3170b510094b3780c2}} 
+\mbox{\hyperlink{classepp_1_1CMask}{C\+Mask}} const  \& {\bfseries mask\+Of} (\mbox{\hyperlink{structepp_1_1Entity}{Entity}} ent) const
+\item 
+\mbox{\Hypertarget{classepp_1_1EntityManager_a89a1bb839ae41f16150289c361157024}\label{classepp_1_1EntityManager_a89a1bb839ae41f16150289c361157024}} 
+\mbox{\hyperlink{classepp_1_1Archetype}{Archetype}} {\bfseries archetype\+Of} (\mbox{\hyperlink{structepp_1_1Entity}{Entity}} ent) const
+\item 
+\mbox{\Hypertarget{classepp_1_1EntityManager_a432612cc916ba56e7b2419af28a106d9}\label{classepp_1_1EntityManager_a432612cc916ba56e7b2419af28a106d9}} 
+\mbox{\hyperlink{structepp_1_1Pool}{Entity\+Pool\+\_\+t}} const  \& {\bfseries entities\+Of} (\mbox{\hyperlink{classepp_1_1Archetype}{Archetype}} const \&arch) const
+\item 
+\mbox{\Hypertarget{classepp_1_1EntityManager_ae920a08435a9c74c9d81dd6c5ce7ac83}\label{classepp_1_1EntityManager_ae920a08435a9c74c9d81dd6c5ce7ac83}} 
+bool {\bfseries is\+Valid} (\mbox{\hyperlink{structepp_1_1Entity}{Entity}} ent) const
+\item 
+\mbox{\Hypertarget{classepp_1_1EntityManager_a585b02a93e9e8e7023c41b8f207d637b}\label{classepp_1_1EntityManager_a585b02a93e9e8e7023c41b8f207d637b}} 
+std\+::size\+\_\+t {\bfseries size} () const
+\item 
+\mbox{\Hypertarget{classepp_1_1EntityManager_a2ad8d3dc26823d236320d7fe0097467d}\label{classepp_1_1EntityManager_a2ad8d3dc26823d236320d7fe0097467d}} 
+std\+::size\+\_\+t {\bfseries size} (\mbox{\hyperlink{classepp_1_1Archetype}{Archetype}} const \&arch) const
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/\+E\+C\+Spp/Entity\+Manager.\+h\end{DoxyCompactItemize}

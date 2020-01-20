@@ -4,20 +4,16 @@
 #include <functional>
 #include <vector>
 
-namespace epp
-{
+namespace epp {
 
-template<class Event>
-class Notifier
-{
+template <typename Event>
+class Notifier {
     static_assert(std::is_unsigned_v<std::underlying_type_t<typename Event::Type>>);
 
 public:
     using EvType_t = typename Event::Type;
 
 private:
-    using This_t = Notifier<Event>;
-
     using Callback_t = std::function<void(Event const&)>;
 
 
@@ -35,17 +31,10 @@ private:
 
 public:
     Notifier() = default;
-
-    Notifier(This_t const&) = delete;
-
-    Notifier(This_t&&) = delete;
-
-    This_t& operator=(This_t const&) = delete;
-
-    This_t& operator=(This_t&&) = delete;
-
-    virtual ~Notifier() = default;
-
+    Notifier(Notifier const&) = delete;
+    Notifier(Notifier&&) = delete;
+    Notifier& operator=(Notifier const&) = delete;
+    Notifier& operator=(Notifier&&) = delete;
 
     void addSubscriber(Callback_t callback, EvType_t type)
     {
@@ -55,7 +44,7 @@ public:
 protected:
     void notify(Event const& event) const
     {
-        assert(event.type != EveryType);
+        EPP_ASSERT(event.type != EveryType);
 
         for (auto const& cb : callbacks[std::size_t(EveryType)])
             cb(event);

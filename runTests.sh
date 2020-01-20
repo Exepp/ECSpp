@@ -1,0 +1,1 @@
+(make Tests && cd bin/linux_x86_64/Debug/Tests; ./Tests)

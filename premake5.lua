@@ -14,11 +14,8 @@ workspace "ECSpp"
 		systemversion "latest"
 
 	filter {"system:linux"}
-		links { "pthread" }
 		toolset "clang"
-		buildoptions{"-fPIC",
-		-- "-Weverything -Wno-c++98-compat-pedantic -Wno-newline-eof -Wno-zero-as-null-pointer-constant -Wno-padded -Wno-exit-time-destructors"
-	}
+		buildoptions{"-fPIC -Wno-dangling-else"}
 
 
 	filter "configurations:Debug"
@@ -26,8 +23,9 @@ workspace "ECSpp"
 		symbols "On"
 		
 	filter "configurations:Release"
-		defines {"EPP_RELEASE", "NDEBUG"} -- NDEBUG for assert.h
-		optimize "On"
+		defines {"EPP_RELEASE"}
+		optimize "Speed"
+		symbols "On"
 	filter{}
 	
 	includedirs
@@ -52,7 +50,6 @@ project "ECSpp"
 
 	filter "configurations:Debug"
 		targetsuffix "_d"
-		-- targetname ("%{prj.name}" .. "_d")
 	filter {}
 
 	kind "StaticLib"
@@ -76,11 +73,11 @@ project "Tests"
 	{
 		"%{prj.location}/src/%{prj.name}/**"
 	}
-
-	filter "configurations:Debug"
-		links { "ECSpp", "gtest_maind", "gtestd" }
-	filter "configurations:Release"
-		links { "ECSpp", "gtest_main", "gtest", }
+	links {"ECSpp", "gtest_main", "gtest", "pthread"}
+	-- filter "configurations:Debug"
+	-- 	links {}
+	-- filter "configurations:Release"
+	-- 	links {}
 	filter {}
 
 	
@@ -92,11 +89,12 @@ project "Benchmarks"
 
 	files
 	{
-		"%{prj.location}/%{prj.name}/**"
+		"%{prj.location}/src/%{prj.name}/**"
 	}
 
-	filter "configurations:Debug"
-		links { "ECSpp", "benchmark_maind", "benchmarkd" }
-	filter "configurations:Release"
-		links { "ECSpp", "benchmark_main", "benchmark" }
-	filter {}
+	links {"pthread", "ECSpp", "benchmark_main", "benchmark"}
+	-- filter "configurations:Debug"
+	-- 	links {}
+	-- filter "configurations:Release"
+	-- 	links {}
+	-- filter {}
