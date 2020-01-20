@@ -1,32 +1,33 @@
-#include <ECSpp/EntityManager/EntityList.h>
+#include <ECSpp/Internal/EntityList.h>
+#include <ECSpp/Utility/Assert.h>
+#include <ECSpp/Utility/Pool.h>
 #include <algorithm>
-#include <assert.h>
+#include <cmath>
 #include <cstring>
 #include <utility>
 
 using namespace epp;
 
 constexpr static EntityList::Size_t const InitReserveSize = 32;
-constexpr static double const             GrowthFactor    = 1.61803398875;
 
 ////////////////////////////////////////////////////////////
 
 EntVersion EntVersion::nextVersion() const
 {
-    return EntVersion((value + 1) % BadValue);
+    return EntVersion(value + 1); // no need for a % (MaxValue + 1). The return value of this function will be always shifted to the left, removing the excess
 }
 
 ////////////////////////////////////////////////////////////
 
 EntityCell::EntityCell(Occupied cell)
     : value(uint64_t(cell.poolIdx.value) |
-            (uint64_t(cell.spawnerID.value) << PoolIdx::BitLength) |
-            (uint64_t(cell.version.value) << (PoolIdx::BitLength + SpawnerID::BitLength)))
+            (uint64_t(cell.spawnerId.value) << PoolIdx::BitLength) |
+            (uint64_t(cell.version.value) << (PoolIdx::BitLength + SpawnerId::BitLength)))
 {}
 
-EntityCell::EntityCell(Free cell)
-    : value(uint64_t(cell.listIdx.value) | // version has the same offset as in EntityCell
-            (uint64_t(cell.version.value) << (PoolIdx::BitLength + SpawnerID::BitLength)))
+EntityCell::EntityCell(Free cell) // version has the same offset in free and occupied
+    : value(uint64_t(cell.listIdx.value) |
+            (uint64_t(cell.version.value) << (PoolIdx::BitLength + SpawnerId::BitLength)))
 {}
 
 ListIdx EntityCell::nextFreeListIdx() const
@@ -39,19 +40,19 @@ PoolIdx EntityCell::poolIdx() const
     return PoolIdx(value & PoolIdx::Mask);
 }
 
-SpawnerID EntityCell::spawnerID() const
+SpawnerId EntityCell::spawnerId() const
 {
-    return SpawnerID(uint32_t((value & SpawnerID::Mask) >> PoolIdx::BitLength));
+    return SpawnerId(uint32_t((value & SpawnerId::Mask) >> PoolIdx::BitLength));
 }
 
 EntVersion EntityCell::entVersion() const
 {
-    return EntVersion((value & EntVersion::Mask) >> (PoolIdx::BitLength + SpawnerID::BitLength));
+    return EntVersion((value & EntVersion::Mask) >> (PoolIdx::BitLength + SpawnerId::BitLength));
 }
 
 EntityCell::Occupied EntityCell::asOccupied() const
 {
-    return { poolIdx(), spawnerID(), entVersion() };
+    return { poolIdx(), spawnerId(), entVersion() };
 }
 
 EntityCell::Free EntityCell::asFree() const
@@ -63,93 +64,93 @@ EntityCell::Free EntityCell::asFree() const
 
 EntityList::~EntityList()
 {
-    if (memory)
-        operator delete[](memory);
+    // no need to destroy
+    if (data)
+        operator delete[](data);
 }
 
-Entity EntityList::allocEntity(PoolIdx poolIdx, SpawnerID spawnerID)
+Entity EntityList::allocEntity(PoolIdx poolIdx, SpawnerId spawnerId)
 {
-    assert(poolIdx.value != PoolIdx::BadValue && spawnerID.value != SpawnerID::BadValue);
-    if (!freeLeft)
-        resize(Size_t(std::max(reserved, InitReserveSize) * GrowthFactor));
+    EPP_ASSERT(poolIdx.value != PoolIdx::BadValue && spawnerId.value != SpawnerId::BadValue);
+    if (freeLeft == 0)
+        if (reserved)
+            reserve(2 * reserved);
+        else
+            reserve(InitReserveSize); // first alloc
 
-    ListIdx    idx     = freeIndex;
-    EntVersion version = memory[idx.value].entVersion();
-    freeIndex          = memory[idx.value].nextFreeListIdx();
-    memory[idx.value]  = EntityCell({ poolIdx, spawnerID, version });
+    ListIdx idx = freeIndex;
+    EntVersion version = data[idx.value].entVersion();
+    freeIndex = data[idx.value].nextFreeListIdx();
+    data[idx.value] = EntityCell({ poolIdx, spawnerId, version });
     --freeLeft;
 
     return Entity{ idx, version };
 }
 
-void EntityList::changeEntity(Entity ent, PoolIdx index, SpawnerID spawnerID)
+void EntityList::changeEntity(Entity ent, PoolIdx index, SpawnerId spawnerId)
 {
-    assert(index.value != PoolIdx::BadValue && spawnerID.value != SpawnerID::BadValue);
-    assert(isValid(ent));
+    EPP_ASSERT(index.value != PoolIdx::BadValue && spawnerId.value != SpawnerId::BadValue);
+    EPP_ASSERT(isValid(ent));
 
-    memory[ent.listIdx.value] = EntityCell({ index, spawnerID, ent.version });
+    data[ent.listIdx.value] = EntityCell({ index, spawnerId, ent.version });
 }
 
 void EntityList::freeEntity(Entity ent)
 {
-    assert(isValid(ent));
+    EPP_ASSERT(isValid(ent));
     // increment version now, so old references wont be valid for deleted cells
-    memory[ent.listIdx.value] = EntityCell({ freeIndex, ent.version.nextVersion() });
-    freeIndex                 = ent.listIdx;
+    data[ent.listIdx.value] = EntityCell({ freeIndex, ent.version.nextVersion() });
+    freeIndex = ent.listIdx;
     ++freeLeft;
 }
 
 void EntityList::freeAll()
 {
-    if (!reserved)
+    if (!reserved || freeLeft == reserved)
         return;
-    freeLeft  = reserved;
+    freeLeft = reserved;
     freeIndex = ListIdx(0);
     for (auto i = freeIndex; i.value < reserved - 1; ++i.value)
-        memory[i.value] = EntityCell({ ListIdx(i.value + 1), EntVersion(memory[i.value].entVersion().value + 1) });
-    memory[reserved - 1] = EntityCell({ ListIdx(ListIdx::BadValue), memory[reserved - 1].entVersion() });
+        data[i.value] = EntityCell({ ListIdx(i.value + 1), data[i.value].entVersion().nextVersion() });
+    data[reserved - 1] = EntityCell({ ListIdx(ListIdx::BadValue), data[reserved - 1].entVersion().nextVersion() });
 }
 
-void EntityList::prepareToFitNMore(Size_t n)
+void EntityList::fitNextN(Size_t n)
 {
-    if (freeLeft >= n)
+    reserve(SizeToFitNextN(n, reserved, freeLeft));
+}
+
+void EntityList::reserve(Size_t newReserved)
+{
+    EPP_ASSERT(newReserved >= reserved);
+    if (newReserved == reserved)
         return;
-    resize(Size_t((reserved + (n - freeLeft)) * GrowthFactor));
-}
-
-void EntityList::resize(Size_t n)
-{
-    ListIdx first{ reserved };
-    reserve(n); // makes reserved > 0
-    for (ListIdx i = first; i.value < reserved - 1; ++i.value)
-        memory[i.value] = EntityCell({ ListIdx(i.value + 1), EntVersion(0) });
-    memory[reserved - 1] = EntityCell({ ListIdx(freeIndex), EntVersion(0) });
-    freeIndex            = first;
-}
-
-void EntityList::reserve(Size_t n)
-{
-    assert(n > reserved);
-    EntityCell* newMemory = reinterpret_cast<EntityCell*>(operator new[](n * sizeof(EntityCell)));
-    if (memory)
-    {
-        std::memcpy(newMemory, memory, reserved * sizeof(EntityCell));
-        operator delete[](memory);
+    EntityCell* newMemory = reinterpret_cast<EntityCell*>(operator new[](sizeof(EntityCell) * std::uint64_t(newReserved)));
+    if (data) {
+        std::memcpy(newMemory, data, reserved * sizeof(EntityCell));
+        operator delete[](data);
     }
-    freeLeft += n - reserved;
-    reserved = n;
-    memory   = newMemory;
+    freeLeft += newReserved - reserved;
+    data = newMemory;
+
+    // init new elements
+    for (ListIdx i(reserved); i.value < newReserved - 1; ++i.value)
+        new (data + i.value) EntityCell({ ListIdx(i.value + 1), EntVersion(0) });
+    new (data + (newReserved - 1)) EntityCell({ ListIdx(freeIndex), EntVersion(0) });
+
+    freeIndex = ListIdx(reserved);
+    reserved = newReserved;
 }
 
 EntityCell::Occupied EntityList::get(Entity ent) const
 {
-    assert(isValid(ent));
-    return memory[ent.listIdx.value].asOccupied();
+    EPP_ASSERT(isValid(ent));
+    return data[ent.listIdx.value].asOccupied();
 }
 
 bool EntityList::isValid(Entity ent) const
 {
-    return ent.listIdx.value < reserved && ent.version.value == memory[ent.listIdx.value].entVersion().value; // UB here, casting  to EntityCell
+    return ent.listIdx.value < reserved && ent.version.value == data[ent.listIdx.value].entVersion().value;
 }
 
 EntityList::Size_t EntityList::size() const

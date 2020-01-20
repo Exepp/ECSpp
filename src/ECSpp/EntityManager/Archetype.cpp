@@ -1,70 +1,61 @@
-#include <ECSpp/EntityManager/Archetype.h>
+#include <ECSpp/Internal/Archetype.h>
 
 using namespace epp;
 
-Archetype::Archetype(IDList_t initList)
+Archetype::Archetype(IdList_t initList)
 {
     addComponent(initList);
 }
 
-void Archetype::addComponent(IDList_t ids)
+Archetype& Archetype::addComponent(IdList_t ids)
 {
     for (auto id : ids)
         addComponent(id);
+    return *this;
 }
 
-void Archetype::addComponent(ComponentID id)
+Archetype& Archetype::addComponent(ComponentId id)
 {
-    if (cMask.get(id))
-        return;
-    cMask.set(id);
-    creators.push_back({ id, ComponentUtility::GetCPoolsFactory()[id] });
+    if (!cMask.get(id)) {
+        cMask.set(id);
+        cIds.push_back(id);
+    }
+    return *this;
 }
 
-void Archetype::removeComponent(IDList_t ids)
+Archetype& Archetype::removeComponent(IdList_t ids)
 {
     for (auto id : ids)
         removeComponent(id);
+    return *this;
 }
 
-void Archetype::removeComponent(ComponentID id)
+Archetype& Archetype::removeComponent(ComponentId id)
 {
-    if (!has(id))
-        return;
-    cMask.unset(id);
-    creators.erase(std::find_if(creators.begin(), creators.end(),
-                                [id](auto const& creator) { return creator.id == id; }));
+    if (has(id)) {
+        cMask.unset(id);
+        cIds.erase(std::find_if(cIds.begin(), cIds.end(), [id](auto const& cId) { return cId == id; }));
+    }
+    return *this;
 }
 
 void Archetype::reset()
 {
     cMask.clear();
-    creators.clear();
+    cIds.clear();
 }
 
-bool Archetype::hasAllOf(IDList_t ids) const
+bool Archetype::hasAllOf(IdList_t ids) const
 {
-    bool result = true;
-    for (auto id : ids)
-        result &= has(id);
-    return result;
+    return cMask.contains(ids);
 }
 
-bool Archetype::hasAnyOf(IDList_t ids) const
+bool Archetype::hasAnyOf(IdList_t ids) const
 {
-    bool result = false;
-    for (auto id : ids)
-        result |= has(id);
-    return result;
+    return cMask.hasCommon(ids);
 }
 
-bool Archetype::has(ComponentID id) const
+bool Archetype::has(ComponentId id) const
 {
     return cMask.get(id);
-}
-
-
-Bitmask const& Archetype::getMask() const
-{
-    return cMask;
 }

@@ -1,90 +1,119 @@
-#include <ECSpp/EntityManager/EntitySpawner.h>
-#include <assert.h>
+#include <ECSpp/Internal/EntitySpawner.h>
+#include <ECSpp/Utility/Assert.h>
 
 using namespace epp;
 
 
-EntitySpawner::EntitySpawner(Archetype arche, SpawnerID id)
-    : spawnerID(id)
-    , archetype(std::move(arche))
+EntitySpawner::Creator::Creator(EntitySpawner& spr, PoolIdx const index, CMask const& cstred)
+    : spawner(spr), idx(index), constructed(cstred)
+{}
+
+EntitySpawner::Creator::~Creator()
 {
-    for (auto const& creator : archetype.creators)
-        cPools.push_back({ creator.id, creator.create() });
-    std::sort(cPools.begin(), cPools.end(),
-              [](auto const& lhs, auto const& rhs) { return lhs.id < rhs.id; });
+    for (auto& pool : spawner.cPools)
+        if (constructed.get(pool.getCId()) == false)
+            pool.construct(idx.value);
 }
 
-Entity EntitySpawner::create(EntityList& entList)
+//////////////// EntitySpawner
+
+EntitySpawner::EntitySpawner(SpawnerId id, Archetype const& arch)
+    : spawnerId(id), mask(arch.getMask())
 {
-    Entity ent = entList.allocEntity(PoolIdx(uint32_t(entityPool.content.size())), spawnerID);
-    entityPool.alloc(ent);
+    cPools.reserve(arch.getCIds().size());
+    for (auto cId : arch.getCIds())
+        cPools.emplace_back(cId);
+    std::sort(cPools.begin(), cPools.end(), [](auto const& lhs, auto const& rhs) { return lhs.getCId() < rhs.getCId(); });
+}
+
+Entity EntitySpawner::spawn(EntityList& entList, UserCreationFn_t const& fn)
+{
+    EPP_ASSERT(fn);
+    PoolIdx idx(uint32_t(entityPool.data.size()));
+    Entity ent = entList.allocEntity(idx, spawnerId);
+    entityPool.create(ent);
     for (auto& pool : cPools)
-        pool.ptr->alloc();
+        pool.alloc(); // only allocates memory (constructor is not called yet)
+    fn(Creator(*this, idx));
+    // constructors of the components are now already called
     notify({ EntityEvent::Type::Creation, ent });
     return ent;
 }
 
 void EntitySpawner::destroy(Entity ent, EntityList& entList)
 {
-    assert(entList.isValid(ent));
+    EPP_ASSERT(entList.isValid(ent));
 
     notify({ EntityEvent::Type::Destruction, ent });
 
     PoolIdx entPoolIdx = entList.get(ent).poolIdx;
     for (auto& pool : cPools)
-        pool.ptr->free(entPoolIdx.value);
-    removeEntityFromEntityPoolOnly(entPoolIdx, entList);
+        pool.destroy(entPoolIdx.value);
+    removeFromEntityPool(entPoolIdx, entList);
     entList.freeEntity(ent);
 }
 
-void EntitySpawner::removeEntityFromEntityPoolOnly(PoolIdx idx, EntityList& entList)
+void EntitySpawner::removeFromEntityPool(PoolIdx idx, EntityList& entList)
 {
-    if (entityPool.free(idx.value)) // if data was relocated in pools, change poolIdx in entList
-        entList.changeEntity(entityPool.content[idx.value], idx, spawnerID);
+    if (entityPool.destroy(idx.value)) // if data was relocated in pools, change poolIdx in entList
+        entList.changeEntity(entityPool.data[idx.value], idx, spawnerId);
+}
+
+void EntitySpawner::clear(EntityList& entList)
+{
+    for (auto ent : entityPool.data)
+        entList.freeEntity(ent);
+    clear();
 }
 
 void EntitySpawner::clear()
 {
-    entityPool.content.clear();
+    entityPool.data.clear();
     for (auto& pool : cPools)
-        pool.ptr->clear();
+        pool.clear();
 }
 
-void EntitySpawner::moveEntityHere(Entity ent, EntityList& entList, EntitySpawner& originSpawner)
+void EntitySpawner::fitNextN(EntityList::Size_t n)
 {
-    assert(entList.isValid(ent) && &originSpawner != this);
-
-    PoolIdx entPoolIdx  = entList.get(ent).poolIdx;
-    auto    orgPoolsPtr = originSpawner.cPools.begin();
-    auto    orgPoolsEnd = originSpawner.cPools.end();
-
-    // moving/creating components
+    entityPool.fitNextN(n);
     for (auto& pool : cPools)
-    {
-        while (orgPoolsPtr != orgPoolsEnd && orgPoolsPtr->id < pool.id)
-        {
-            orgPoolsPtr->ptr->free(entPoolIdx.value);
-            ++orgPoolsPtr;
-        }
-        if (orgPoolsPtr == orgPoolsEnd || orgPoolsPtr->id != pool.id)
-            pool.ptr->alloc();
-        else
-        {
-            pool.ptr->alloc(std::move((*orgPoolsPtr->ptr)[entPoolIdx.value]));
-            orgPoolsPtr->ptr->free(entPoolIdx.value);
-        }
+        pool.fitNextN(n);
+}
+
+void EntitySpawner::moveEntityHere(Entity ent, EntityList& entList, EntitySpawner& originSpawner, UserCreationFn_t const& fn)
+{
+    EPP_ASSERT(entList.isValid(ent) && &originSpawner != this && fn);
+
+    PoolIdx entPoolIdx = entList.get(ent).poolIdx;
+    auto oriPoolsPtr = originSpawner.cPools.begin();
+    auto oriPoolsEnd = originSpawner.cPools.end();
+
+    // moving/creating/destroying components
+    // this loop uses the fact, that the pools are sorted by their cIds
+    for (auto& pool : cPools) {
+        while (oriPoolsPtr != oriPoolsEnd && oriPoolsPtr->getCId() < pool.getCId())
+            (oriPoolsPtr++)->destroy(entPoolIdx.value);
+        if (oriPoolsPtr != oriPoolsEnd && oriPoolsPtr->getCId() == pool.getCId()) // this component is in the original spawner, move it
+            // component from the original will be destroyed either on the next loop, or
+            // for the last one, after the whole loop
+            pool.create((*oriPoolsPtr)[entPoolIdx.value]);
+        else              // oriPoolsPtr->cId > pool.cId || oriPoolsPtr == oriPoolsEnd - this component in not in the original spawner
+            pool.alloc(); // only allocates memory (constructor is not called yet)
     }
-    originSpawner.removeEntityFromEntityPoolOnly(entPoolIdx, entList);
-    entList.changeEntity(ent, PoolIdx(uint32_t(entityPool.content.size())), spawnerID);
-    entityPool.alloc(ent);
+    while (oriPoolsPtr != oriPoolsEnd) // destroy the rest (if there is any)
+        (oriPoolsPtr++)->destroy(entPoolIdx.value);
+    originSpawner.removeFromEntityPool(entPoolIdx, entList);
+
+    PoolIdx newIdx(uint32_t(entityPool.data.size()));
+    entList.changeEntity(ent, newIdx, spawnerId);
+    entityPool.create(ent);
+    fn(Creator(*this, newIdx, originSpawner.mask)); // originSpawner.mask contains all the components that were moved, no need to delete possible excess
 }
 
-const Archetype& EntitySpawner::getArchetype() const
+Archetype EntitySpawner::makeArchetype() const
 {
-    return archetype;
-}
-
-EntitySpawner::EntityPool_t const& EntitySpawner::getEntities() const
-{
-    return entityPool;
+    Archetype arch;
+    for (auto const& pool : cPools)
+        arch.addComponent(pool.getCId());
+    return arch;
 }

@@ -1,0 +1,82 @@
+\hypertarget{classepp_1_1EntitySpawner}{}\doxysection{epp\+::Entity\+Spawner Class Reference}
+\label{classepp_1_1EntitySpawner}\index{epp::EntitySpawner@{epp::EntitySpawner}}
+Inheritance diagram for epp\+::Entity\+Spawner\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classepp_1_1EntitySpawner}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classepp_1_1EntitySpawner_1_1Creator}{Creator}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classepp_1_1EntitySpawner_a16800e20c5c52cfd8b599c529d39d281}\label{classepp_1_1EntitySpawner_a16800e20c5c52cfd8b599c529d39d281}} 
+using {\bfseries User\+Creation\+Fn\+\_\+t} = std\+::function$<$ void(\mbox{\hyperlink{classepp_1_1EntitySpawner_1_1Creator}{Creator}} \&\&)$>$
+\item 
+\mbox{\Hypertarget{classepp_1_1EntitySpawner_a8c192a12670e8a12f286a4ee73a74fd0}\label{classepp_1_1EntitySpawner_a8c192a12670e8a12f286a4ee73a74fd0}} 
+using {\bfseries Entity\+Pool\+\_\+t} = \mbox{\hyperlink{structepp_1_1Pool}{Pool}}$<$ \mbox{\hyperlink{structepp_1_1Entity}{Entity}} $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classepp_1_1EntitySpawner_aa97a2cff03446282f0d49413675c7e75}\label{classepp_1_1EntitySpawner_aa97a2cff03446282f0d49413675c7e75}} 
+{\bfseries Entity\+Spawner} (\mbox{\hyperlink{structepp_1_1SpawnerId}{Spawner\+Id}} id, \mbox{\hyperlink{classepp_1_1Archetype}{Archetype}} const \&arch)
+\item 
+\mbox{\Hypertarget{classepp_1_1EntitySpawner_aa6a7c003327aefebfb0bdc918bcbae9d}\label{classepp_1_1EntitySpawner_aa6a7c003327aefebfb0bdc918bcbae9d}} 
+{\bfseries Entity\+Spawner} (\mbox{\hyperlink{classepp_1_1EntitySpawner}{Entity\+Spawner}} \&\&)=delete
+\item 
+\mbox{\Hypertarget{classepp_1_1EntitySpawner_a9c26ff56dad6bee181160a92fa03445c}\label{classepp_1_1EntitySpawner_a9c26ff56dad6bee181160a92fa03445c}} 
+\mbox{\hyperlink{classepp_1_1EntitySpawner}{Entity\+Spawner}} \& {\bfseries operator=} (\mbox{\hyperlink{classepp_1_1EntitySpawner}{Entity\+Spawner}} \&\&)=delete
+\item 
+\mbox{\Hypertarget{classepp_1_1EntitySpawner_aa55ce8cb69131f7cbd5fc2e99e03490d}\label{classepp_1_1EntitySpawner_aa55ce8cb69131f7cbd5fc2e99e03490d}} 
+\mbox{\hyperlink{classepp_1_1EntitySpawner}{Entity\+Spawner}} \& {\bfseries operator=} (\mbox{\hyperlink{classepp_1_1EntitySpawner}{Entity\+Spawner}} const \&)=delete
+\item 
+\mbox{\Hypertarget{classepp_1_1EntitySpawner_a510d7d5a47df2a3d7744d31f5ac2d9ec}\label{classepp_1_1EntitySpawner_a510d7d5a47df2a3d7744d31f5ac2d9ec}} 
+{\bfseries Entity\+Spawner} (\mbox{\hyperlink{classepp_1_1EntitySpawner}{Entity\+Spawner}} const \&)=delete
+\item 
+\mbox{\Hypertarget{classepp_1_1EntitySpawner_a765dd7fecb10bf78b0f0f12e0e1febb5}\label{classepp_1_1EntitySpawner_a765dd7fecb10bf78b0f0f12e0e1febb5}} 
+\mbox{\hyperlink{structepp_1_1Entity}{Entity}} {\bfseries spawn} (\mbox{\hyperlink{classepp_1_1EntityList}{Entity\+List}} \&ent\+List, User\+Creation\+Fn\+\_\+t const \&fn)
+\item 
+\mbox{\Hypertarget{classepp_1_1EntitySpawner_a4b806f6609382c2ae03ca5bffe13fd34}\label{classepp_1_1EntitySpawner_a4b806f6609382c2ae03ca5bffe13fd34}} 
+void {\bfseries destroy} (\mbox{\hyperlink{structepp_1_1Entity}{Entity}} ent, \mbox{\hyperlink{classepp_1_1EntityList}{Entity\+List}} \&ent\+List)
+\item 
+\mbox{\Hypertarget{classepp_1_1EntitySpawner_a8202e0fc16705b87121ca17d21145f56}\label{classepp_1_1EntitySpawner_a8202e0fc16705b87121ca17d21145f56}} 
+void {\bfseries clear} (\mbox{\hyperlink{classepp_1_1EntityList}{Entity\+List}} \&ent\+List)
+\item 
+\mbox{\Hypertarget{classepp_1_1EntitySpawner_a4b6e8a87824aae0c308925d95c8e977a}\label{classepp_1_1EntitySpawner_a4b6e8a87824aae0c308925d95c8e977a}} 
+void {\bfseries clear} ()
+\item 
+\mbox{\Hypertarget{classepp_1_1EntitySpawner_ad809785ce41c484c18b25751b53aa9c4}\label{classepp_1_1EntitySpawner_ad809785ce41c484c18b25751b53aa9c4}} 
+void {\bfseries fit\+NextN} (Entity\+List\+::\+Size\+\_\+t n)
+\item 
+\mbox{\Hypertarget{classepp_1_1EntitySpawner_ab8166674e381bdcd6d168ac44a6f2149}\label{classepp_1_1EntitySpawner_ab8166674e381bdcd6d168ac44a6f2149}} 
+void {\bfseries move\+Entity\+Here} (\mbox{\hyperlink{structepp_1_1Entity}{Entity}} ent, \mbox{\hyperlink{classepp_1_1EntityList}{Entity\+List}} \&ent\+List, \mbox{\hyperlink{classepp_1_1EntitySpawner}{Entity\+Spawner}} \&origin\+Spawner, User\+Creation\+Fn\+\_\+t const \&fn)
+\item 
+\mbox{\Hypertarget{classepp_1_1EntitySpawner_a055f2f91dee11893837fd80f8a871fef}\label{classepp_1_1EntitySpawner_a055f2f91dee11893837fd80f8a871fef}} 
+\mbox{\hyperlink{classepp_1_1CPool}{C\+Pool}} \& {\bfseries get\+Pool} (\mbox{\hyperlink{structepp_1_1ComponentId}{Component\+Id}} c\+Id)
+\item 
+\mbox{\Hypertarget{classepp_1_1EntitySpawner_af241df5e9ec56bbfe6a1e043873a20fe}\label{classepp_1_1EntitySpawner_af241df5e9ec56bbfe6a1e043873a20fe}} 
+\mbox{\hyperlink{structepp_1_1Pool}{Entity\+Pool\+\_\+t}} const  \& {\bfseries get\+Entities} () const
+\item 
+\mbox{\Hypertarget{classepp_1_1EntitySpawner_a478fba120df1000cbb1ecfd4a65ac67b}\label{classepp_1_1EntitySpawner_a478fba120df1000cbb1ecfd4a65ac67b}} 
+\mbox{\hyperlink{classepp_1_1Archetype}{Archetype}} {\bfseries make\+Archetype} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classepp_1_1EntitySpawner_a909c9f23ccb9ccf4912a789b2c38b9fb}\label{classepp_1_1EntitySpawner_a909c9f23ccb9ccf4912a789b2c38b9fb}} 
+const \mbox{\hyperlink{structepp_1_1SpawnerId}{Spawner\+Id}} {\bfseries spawner\+Id}
+\item 
+\mbox{\Hypertarget{classepp_1_1EntitySpawner_a52f25da6462a9bd8e9054b72d9cadbaa}\label{classepp_1_1EntitySpawner_a52f25da6462a9bd8e9054b72d9cadbaa}} 
+const \mbox{\hyperlink{classepp_1_1CMask}{C\+Mask}} {\bfseries mask}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/\+E\+C\+Spp/\+Internal/Entity\+Spawner.\+h\end{DoxyCompactItemize}
