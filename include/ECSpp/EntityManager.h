@@ -67,14 +67,12 @@ public:
     }
 
     /// Changes the archetype of entities of oldArchetype to newArchetype
-    /**
-     * @param oldArchetype One of archetypes that were used to spawn entities during this application (throws for other archetypes)
+    /** Memory reserved in the spawner of oldArchetype will be reset (only if that spawner is not empty)
+     * @param oldArchetype One of archetypes that were already used to spawn entities during this application (throws for other archetypes)
      * @param newArchetype Any archetype
      * @param fn A callable object that can use the Creator instance to construct the added components
-     * @param resetOldReserved Specifies whether memory reserved in the spawner of oldArchetype will be reset (only if that spawner is not empty)
      */
-    std::pair<EPoolCIter_t, EPoolCIter_t> changeArchetype(Archetype const& oldArchetype, Archetype const& newArchetype,
-                                                          bool resetOldReserved = true, EntitySpawner::UserCreationFn_t const& fn = ([](EntityCreator&&) {}));
+    std::pair<EPoolCIter_t, EPoolCIter_t> changeArchetype(Archetype const& oldArchetype, Archetype const& newArchetype, EntitySpawner::UserCreationFn_t const& fn = ([](EntityCreator&&) {}));
 
 
     // ent - valid entity
@@ -149,7 +147,7 @@ public:
         return getSpawner(ent).makeArchetype();
     }
 
-    // arch - one of archetypes that were used to spawn entities during this application (throws for other archetypes)
+    // arch - one of archetypes that were already used to spawn entities during this application (throws for other archetypes)
     EntityPool_t const& entitiesOf(Archetype const& arch) const
     {
         EPP_ASSERT(findSpawner(arch) != spawners.end());

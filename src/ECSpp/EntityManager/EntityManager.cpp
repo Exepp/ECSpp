@@ -34,7 +34,7 @@ void EntityManager::changeArchetype(Entity ent, IdList_t toAdd, IdList_t toRemov
 }
 
 std::pair<EntityManager::EPoolCIter_t, EntityManager::EPoolCIter_t>
-EntityManager::changeArchetype(Archetype const& oldArchetype, Archetype const& newArchetype, bool resetOldReserved, EntitySpawner::UserCreationFn_t const& fn)
+EntityManager::changeArchetype(Archetype const& oldArchetype, Archetype const& newArchetype, EntitySpawner::UserCreationFn_t const& fn)
 {
     EPP_ASSERT(findSpawner(oldArchetype) != spawners.end());
     EntitySpawner& oldSp = getSpawner(oldArchetype);
@@ -42,7 +42,7 @@ EntityManager::changeArchetype(Archetype const& oldArchetype, Archetype const& n
     if (oldSp.mask == newSp.mask)
         return { EntityManager::EPoolCIter_t(), EntityManager::EPoolCIter_t() };
     std::size_t newSpSize = newSp.getEntities().data.size();
-    newSp.moveEntitiesHere(oldSp, entList, resetOldReserved, fn);
+    newSp.moveEntitiesHere(oldSp, entList, fn);
     return { newSp.getEntities().data.begin() + newSpSize, newSp.getEntities().data.end() };
 }
 

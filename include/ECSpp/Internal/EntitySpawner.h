@@ -107,9 +107,8 @@ public:
 
     /// Reuses the data from originSpawner
     /**
-     * @param resetOriginReserved Specifies whether originSpawner's reserved memory will be reset (only if originSpawner is not empty)
      */
-    void moveEntitiesHere(EntitySpawner& originSpawner, EntityList& entList, bool resetOriginReserved, UserCreationFn_t fn);
+    void moveEntitiesHere(EntitySpawner& originSpawner, EntityList& entList, UserCreationFn_t fn);
 
 
     CPool& getPool(ComponentId cId)

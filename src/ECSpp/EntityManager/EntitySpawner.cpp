@@ -95,7 +95,7 @@ void EntitySpawner::moveEntityHere(Entity ent, EntityList& entList, EntitySpawne
     fn(Creator(*this, newIdx, originSpawner.mask)); // originSpawner.mask contains all the components that were moved, no need to delete possible excess
 }
 
-void EntitySpawner::moveEntitiesHere(EntitySpawner& originSpawner, EntityList& entList, bool resetOriginReserved, UserCreationFn_t fn)
+void EntitySpawner::moveEntitiesHere(EntitySpawner& originSpawner, EntityList& entList, UserCreationFn_t fn)
 {
     if (originSpawner.entityPool.data.empty())
         return;
@@ -105,14 +105,14 @@ void EntitySpawner::moveEntitiesHere(EntitySpawner& originSpawner, EntityList& e
     auto oriPoolsEnd = originSpawner.cPools.end();
     for (auto& pool : cPools) {
         for (; oriPoolsPtr != oriPoolsEnd && oriPoolsPtr->getCId() < pool.getCId(); ++oriPoolsPtr)
-            resetOriginReserved ? oriPoolsPtr->reset() : oriPoolsPtr->clear();
+            oriPoolsPtr->clear();
         pool.alloc(oriSize);
         if (oriPoolsPtr != oriPoolsEnd && oriPoolsPtr->getCId() == pool.getCId())
             for (std::size_t i = 0; i < oriSize; ++i)
                 pool.construct(thisSize + i, (*oriPoolsPtr)[i]);
     }
     for (; oriPoolsPtr != oriPoolsEnd; ++oriPoolsPtr)
-        resetOriginReserved ? oriPoolsPtr->reset() : oriPoolsPtr->clear();
+        oriPoolsPtr->clear();
 
     entityPool.fitNextN(oriSize);
     for (PoolIdx i(thisSize), end(thisSize + oriSize); i.value < end.value; ++i.value) {
@@ -121,8 +121,6 @@ void EntitySpawner::moveEntitiesHere(EntitySpawner& originSpawner, EntityList& e
         originSpawner.entityPool.destroy(0);
         fn(Creator(*this, i, originSpawner.mask));
     }
-    if (resetOriginReserved)
-        originSpawner.entityPool.data.reserve(0);
 }
 
 Archetype EntitySpawner::makeArchetype() const

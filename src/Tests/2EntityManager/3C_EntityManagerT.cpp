@@ -392,7 +392,7 @@ TEST(EntityManager, ChangeArchetype_IsValid)
         epp::Archetype archMissing = epp::Archetype(epp::IdOf<TComp1, TComp2>());
         epp::Archetype archFull = epp::Archetype(epp::IdOf<TComp1, TComp2, TComp3, TComp4>());
         mgr.spawn(archMissing, 1e4, [](epp::EntityCreator&& creator) { creator.construct<TComp1>().a = creator.idx.value; });
-        mgr.changeArchetype(archMissing, archFull, true, [](epp::EntityCreator&& creator) { creator.construct<TComp4>().data[0] = 2 * creator.idx.value; });
+        mgr.changeArchetype(archMissing, archFull, [](epp::EntityCreator&& creator) { creator.construct<TComp4>().data[0] = 2 * creator.idx.value; });
         epp::EntityCollection<TComp1, TComp2, TComp3, TComp4> coll;
         mgr.updateCollection(coll);
         int i = 0;
