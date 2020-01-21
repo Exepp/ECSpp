@@ -104,7 +104,6 @@ static void BM_EntitiesAtOnceDestroy(benchmark::State& state)
     epp::Archetype arch = makeArchetype<cNum>();
 
     mgr.spawn(arch, state.range(0));
-    auto& entities = mgr.entitiesOf(arch);
     for (auto _ : state)
         mgr.clear(arch);
 }
@@ -141,7 +140,6 @@ static void BM_EntitiesIterationHalf(benchmark::State& state)
         else
             mgr.spawn(archMissing);
     mgr.updateCollection(coll);
-
     for (auto _ : state)
         for (auto it = coll.begin(), end = coll.end(); it != end; ++it)
             assignComponents<cNum>(it);
@@ -160,7 +158,7 @@ static void BM_EntitiesIterationOneOfMany(benchmark::State& state)
     mgr.spawn(archMissing, state.range(0) / 2);
     mgr.spawn(archFull);
     mgr.spawn(archMissing, state.range(0) / 2 - 1);
-
+    mgr.updateCollection(coll);
     for (auto _ : state)
         for (auto it = coll.begin(), end = coll.end(); it != end; ++it)
             assignComponents<cNum>(it);
@@ -195,13 +193,8 @@ static void BM_EntitiesIterationReal(benchmark::State& state)
             mgr.spawn(archs[4], 10);
     }
 
-    // static std::vector<comp<0>> vec;
-    // vec = std::vector<comp<0>>(1e7);
-    // vec.resize(0);
-
     auto coll = makeCollection<cNum>();
     mgr.updateCollection(coll);
-
     for (auto _ : state)
         for (auto it = coll.begin(), end = coll.end(); it != end; ++it)
             assignComponents<cNum>(it);
@@ -217,30 +210,45 @@ static void BM_AddComponents(benchmark::State& state)
     epp::Archetype archFull = makeArchetype<2 + cNum>();
     auto coll = makeCollection<2>();
 
-    mgr.spawn(archMissing, state.range(0));
+    mgr.spawn(archMissing, state.range(0), [](epp::EntityCreator&& creator) { creator.construct<comp<1>>().x = creator.idx.value; });
     mgr.updateCollection(coll);
-    auto const& ents = mgr.entitiesOf(archMissing);
     for (auto _ : state)
         for (auto it = coll.begin(), end = coll.end(); it != end;)
-            it = mgr.changeArchetype(it, archFull);
+            it = mgr.changeArchetype(it, archFull, [](epp::EntityCreator&& creator) { creator.construct<comp<4>>().y = 2 * creator.idx.value; });
+    // mgr.changeArchetype(archMissing, archFull, true, [](epp::EntityCreator&& creator) { creator.construct<comp<4>>().y = 2 * creator.idx.value; });
+}
+
+template <int cNum>
+static void BM_RemoveComponents(benchmark::State& state)
+{
+    static NewLine nl;
+
+    epp::EntityManager mgr;
+    epp::Archetype archFull = makeArchetype<2 + cNum>();
+    epp::Archetype archMissing = makeArchetype<2>();
+    auto coll = makeCollection<2 + cNum>();
+
+    mgr.spawn(archFull, state.range(0));
+    mgr.updateCollection(coll);
+    for (auto _ : state)
+        for (auto it = coll.begin(), end = coll.end(); it != end;)
+            it = mgr.changeArchetype(it, archMissing);
 }
 
 
-#define MYBENCHMARK_TEMPLATE(name, ...) BENCHMARK_TEMPLATE(name, __VA_ARGS__)->Range(1e6, 5e6)->Iterations(1)->Repetitions(Repetitions * 10)->ReportAggregatesOnly(true);
-#define MYBENCHMARK_TEMPLATE_2_3_5(name) \
-    MYBENCHMARK_TEMPLATE(name, 2)        \
-    MYBENCHMARK_TEMPLATE(name, 3)        \
-    MYBENCHMARK_TEMPLATE(name, 5)
+#define MYBENCHMARK_TEMPLATE(name, shortReport, ...) BENCHMARK_TEMPLATE(name, __VA_ARGS__)->Range(1e6, 1e6)->Iterations(1)->Repetitions(Repetitions * 5)->ReportAggregatesOnly(shortReport);
+#define MYBENCHMARK_TEMPLATE_N(name, shortReport) MYBENCHMARK_TEMPLATE(name, shortReport, 5)
 
-MYBENCHMARK_TEMPLATE_2_3_5(BM_EntitiesSequentialCreation)
-MYBENCHMARK_TEMPLATE_2_3_5(BM_EntitiesSequentialCreationReserved)
-MYBENCHMARK_TEMPLATE_2_3_5(BM_EntitiesAtOnceCreation)
-MYBENCHMARK_TEMPLATE_2_3_5(BM_EntitiesSequentialDestroy)
-MYBENCHMARK_TEMPLATE_2_3_5(BM_EntitiesAtOnceDestroy)
-MYBENCHMARK_TEMPLATE_2_3_5(BM_EntitiesIteration)
-MYBENCHMARK_TEMPLATE_2_3_5(BM_EntitiesIterationHalf)
-MYBENCHMARK_TEMPLATE_2_3_5(BM_EntitiesIterationOneOfMany)
-MYBENCHMARK_TEMPLATE_2_3_5(BM_EntitiesIterationReal)
-MYBENCHMARK_TEMPLATE_2_3_5(BM_AddComponents)
+MYBENCHMARK_TEMPLATE_N(BM_EntitiesSequentialCreation, false)
+MYBENCHMARK_TEMPLATE_N(BM_EntitiesSequentialCreationReserved, false)
+MYBENCHMARK_TEMPLATE_N(BM_EntitiesAtOnceCreation, true)
+MYBENCHMARK_TEMPLATE_N(BM_EntitiesSequentialDestroy, true)
+MYBENCHMARK_TEMPLATE_N(BM_EntitiesAtOnceDestroy, true)
+MYBENCHMARK_TEMPLATE_N(BM_EntitiesIteration, true)
+MYBENCHMARK_TEMPLATE_N(BM_EntitiesIterationHalf, true)
+MYBENCHMARK_TEMPLATE_N(BM_EntitiesIterationOneOfMany, true)
+MYBENCHMARK_TEMPLATE_N(BM_EntitiesIterationReal, true)
+MYBENCHMARK_TEMPLATE_N(BM_AddComponents, false)
+// MYBENCHMARK_TEMPLATE_N(BM_RemoveComponents, false)
 
 BENCHMARK_MAIN();
