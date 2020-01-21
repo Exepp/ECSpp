@@ -8,7 +8,7 @@ Entity EntityManager::spawn(Archetype const& arch, EntitySpawner::UserCreationFn
 }
 
 std::pair<EntityManager::EPoolCIter_t, EntityManager::EPoolCIter_t>
-EntityManager::spawn(Archetype const& arch, std::size_t n, EntitySpawner::UserCreationFn_t const& fn)
+EntityManager::spawn(Archetype const& arch, std::uint32_t n, EntitySpawner::UserCreationFn_t const& fn)
 {
     EntitySpawner& spawner = _prepareToSpawn(arch, n);
     for (std::size_t i = 0; i < n; ++i)
@@ -60,12 +60,12 @@ void EntityManager::clear(Archetype const& arch)
 }
 
 
-void EntityManager::prepareToSpawn(Archetype const& arch, std::size_t n)
+void EntityManager::prepareToSpawn(Archetype const& arch, std::uint32_t n)
 {
     _prepareToSpawn(arch, n);
 }
 
-inline EntitySpawner& EntityManager::_prepareToSpawn(Archetype const& arch, std::size_t n)
+inline EntitySpawner& EntityManager::_prepareToSpawn(Archetype const& arch, std::uint32_t n)
 {
     EntitySpawner& spawner = getSpawner(arch);
     entList.fitNextN(n);

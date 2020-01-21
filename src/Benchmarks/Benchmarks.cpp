@@ -214,7 +214,7 @@ static void BM_AddComponents(benchmark::State& state)
     mgr.updateCollection(coll);
     for (auto _ : state)
         for (auto it = coll.begin(), end = coll.end(); it != end;)
-            it = mgr.changeArchetype(it, archFull, [](epp::EntityCreator&& creator) { creator.construct<comp<4>>().y = 2 * creator.idx.value; });
+            it = mgr.changeArchetype(it, archFull, [](epp::EntityCreator&& creator) { creator.construct<comp<4>>().y = 2ll * creator.idx.value; });
     // mgr.changeArchetype(archMissing, archFull, true, [](epp::EntityCreator&& creator) { creator.construct<comp<4>>().y = 2 * creator.idx.value; });
 }
 
@@ -237,7 +237,7 @@ static void BM_RemoveComponents(benchmark::State& state)
 
 
 #define MYBENCHMARK_TEMPLATE(name, shortReport, ...) BENCHMARK_TEMPLATE(name, __VA_ARGS__)->Range(1e6, 1e6)->Iterations(1)->Repetitions(Repetitions * 5)->ReportAggregatesOnly(shortReport);
-#define MYBENCHMARK_TEMPLATE_N(name, shortReport) MYBENCHMARK_TEMPLATE(name, shortReport, 5)
+#define MYBENCHMARK_TEMPLATE_N(name, shortReport) MYBENCHMARK_TEMPLATE(name, shortReport, 2)
 
 MYBENCHMARK_TEMPLATE_N(BM_EntitiesSequentialCreation, false)
 MYBENCHMARK_TEMPLATE_N(BM_EntitiesSequentialCreationReserved, false)

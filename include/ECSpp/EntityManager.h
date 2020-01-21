@@ -24,7 +24,7 @@ public:
 
     // first - iterator to the first of spawned entities
     // second - end iterator
-    std::pair<EPoolCIter_t, EPoolCIter_t> spawn(Archetype const& arch, std::size_t n, EntitySpawner::UserCreationFn_t const& fn = ([](EntityCreator&&) {}));
+    std::pair<EPoolCIter_t, EPoolCIter_t> spawn(Archetype const& arch, std::uint32_t n, EntitySpawner::UserCreationFn_t const& fn = ([](EntityCreator&&) {}));
 
 
     // ent - valid entity
@@ -110,7 +110,7 @@ public:
     void clear(Archetype const& arch);
 
     // the next n spawn(arche, ...) calls will not require reallocation in any of the internal structures
-    void prepareToSpawn(Archetype const& arch, std::size_t n);
+    void prepareToSpawn(Archetype const& arch, std::uint32_t n);
 
 
     template <typename... CTypes>
@@ -167,7 +167,7 @@ public:
     }
 
 private:
-    EntitySpawner& _prepareToSpawn(Archetype const& arch, std::size_t n);
+    EntitySpawner& _prepareToSpawn(Archetype const& arch, std::uint32_t n);
 
     EntitySpawner& getSpawner(Archetype const& arch)
     {

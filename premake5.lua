@@ -10,13 +10,12 @@ workspace "ECSpp"
 
 
 	filter {"system:windows"}
-		links { "Shlwapi" }
 		systemversion "latest"
+		staticruntime "on"
 
 	filter {"system:linux"}
 		toolset "clang"
 		buildoptions{"-fPIC -Wno-dangling-else"}
-
 
 	filter "configurations:Debug"
 		defines "EPP_DEBUG"
@@ -27,6 +26,7 @@ workspace "ECSpp"
 		optimize "Speed"
 		symbols "On"
 	filter{}
+
 	
 	includedirs
 	{
@@ -49,7 +49,7 @@ outDir = "%{cfg.system}_%{cfg.architecture}/%{cfg.buildcfg}/"
 project "ECSpp"
 
 	filter "configurations:Debug"
-		targetsuffix "_d"
+		targetsuffix "d"
 	filter {}
 
 	kind "StaticLib"
@@ -70,9 +70,17 @@ project "Tests"
 	location "./"
 
 	files { "%{prj.location}/src/%{prj.name}/**" }
-	links {"ECSpp", "gtest_main", "gtest", "pthread"}
 
-	
+	filter "configurations:Debug"
+		links {"ECSpp", "gtest_maind", "gtestd"}
+	filter "configurations:Release"
+		links {"ECSpp", "gtest_main", "gtest"}
+	filter{}
+
+	filter {"system:linux"}
+		links {"pthread"}
+	filter{}
+
 project "Benchmarks"
 
 	kind "ConsoleApp"
@@ -81,4 +89,12 @@ project "Benchmarks"
 
 	files { "%{prj.location}/src/%{prj.name}/**" }
 
-	links {"ECSpp", "benchmark_main", "benchmark", "pthread"}
+	filter "configurations:Debug"
+		links {"ECSpp", "benchmark_maind", "benchmarkd"}
+	filter "configurations:Release"
+		links {"ECSpp", "benchmark_main", "benchmark"}
+	filter{}
+
+	filter {"system:linux"}
+		links {"pthread"}
+	filter{}

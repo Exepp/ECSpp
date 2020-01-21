@@ -83,7 +83,7 @@ private:
         data.size = sizeof(CType);
         data.alignment = alignof(CType);
         MetadataVec.push_back(data);
-        return ComponentId(MetadataVec.size() - 1);
+        return ComponentId(ComponentId::Val_t(MetadataVec.size() - 1));
     }
 
 public:

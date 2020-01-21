@@ -99,8 +99,8 @@ void EntitySpawner::moveEntitiesHere(EntitySpawner& originSpawner, EntityList& e
 {
     if (originSpawner.entityPool.data.empty())
         return;
-    std::size_t oriSize = originSpawner.entityPool.data.size();
-    std::size_t thisSize = entityPool.data.size();
+    std::uint32_t oriSize(originSpawner.entityPool.data.size());
+    std::uint32_t thisSize(entityPool.data.size());
     auto oriPoolsPtr = originSpawner.cPools.begin();
     auto oriPoolsEnd = originSpawner.cPools.end();
     for (auto& pool : cPools) {
@@ -108,7 +108,7 @@ void EntitySpawner::moveEntitiesHere(EntitySpawner& originSpawner, EntityList& e
             oriPoolsPtr->clear();
         pool.alloc(oriSize);
         if (oriPoolsPtr != oriPoolsEnd && oriPoolsPtr->getCId() == pool.getCId())
-            for (std::size_t i = 0; i < oriSize; ++i)
+            for (std::uint32_t i = 0; i < oriSize; ++i)
                 pool.construct(thisSize + i, (*oriPoolsPtr)[i]);
     }
     for (; oriPoolsPtr != oriPoolsEnd; ++oriPoolsPtr)

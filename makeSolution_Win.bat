@@ -1,1 +1,1 @@
-call external\bin\premake\premake5.exe vs2017
+call external\bin\premake\premake5.exe vs2019

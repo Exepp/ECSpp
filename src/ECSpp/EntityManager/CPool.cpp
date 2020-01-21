@@ -24,7 +24,7 @@ CPool& CPool::operator=(CPool&& rval)
 void* CPool::alloc()
 {
     if (dataUsed >= reserved)
-        reserve(2 * reserved ?: 4);  // 4 as first size
+        reserve(reserved ? 2 * reserved : 4); // 4 as first size
     return addressAtIdx(dataUsed++); // post-inc here
 }
 
