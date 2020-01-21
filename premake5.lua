@@ -69,16 +69,8 @@ project "Tests"
 
 	location "./"
 
-	files
-	{
-		"%{prj.location}/src/%{prj.name}/**"
-	}
+	files { "%{prj.location}/src/%{prj.name}/**" }
 	links {"ECSpp", "gtest_main", "gtest", "pthread"}
-	-- filter "configurations:Debug"
-	-- 	links {}
-	-- filter "configurations:Release"
-	-- 	links {}
-	filter {}
 
 	
 project "Benchmarks"
@@ -87,14 +79,6 @@ project "Benchmarks"
 
 	location "./"
 
-	files
-	{
-		"%{prj.location}/src/%{prj.name}/**"
-	}
+	files { "%{prj.location}/src/%{prj.name}/**" }
 
-	links {"pthread", "ECSpp", "benchmark_main", "benchmark"}
-	-- filter "configurations:Debug"
-	-- 	links {}
-	-- filter "configurations:Release"
-	-- 	links {}
-	-- filter {}
+	links {"ECSpp", "benchmark_main", "benchmark", "pthread"}
