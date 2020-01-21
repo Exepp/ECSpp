@@ -16,6 +16,14 @@ EntityManager::spawn(Archetype const& arch, std::size_t n, EntitySpawner::UserCr
     return { spawner.getEntities().data.end() - n, spawner.getEntities().data.end() };
 }
 
+void EntityManager::changeArchetype(Entity ent, Archetype const& newArchetype, EntitySpawner::UserCreationFn_t const& fn)
+{
+    EPP_ASSERT(entList.isValid(ent));
+    EntitySpawner& spawner = getSpawner(ent);
+    if (spawner.mask != newArchetype.getMask())
+        getSpawner(newArchetype).moveEntityHere(ent, entList, spawner, fn);
+}
+
 void EntityManager::changeArchetype(Entity ent, IdList_t toAdd, IdList_t toRemove, EntitySpawner::UserCreationFn_t const& fn)
 {
     EPP_ASSERT(entList.isValid(ent));
@@ -25,23 +33,17 @@ void EntityManager::changeArchetype(Entity ent, IdList_t toAdd, IdList_t toRemov
         getSpawner(newArchetype).moveEntityHere(ent, entList, spawner, fn);
 }
 
-void EntityManager::prepareToSpawn(Archetype const& arch, std::size_t n)
+std::pair<EntityManager::EPoolCIter_t, EntityManager::EPoolCIter_t>
+EntityManager::changeArchetype(Archetype const& oldArchetype, Archetype const& newArchetype, bool resetOldReserved, EntitySpawner::UserCreationFn_t const& fn)
 {
-    _prepareToSpawn(arch, n);
-}
-
-inline EntitySpawner& EntityManager::_prepareToSpawn(Archetype const& arch, std::size_t n)
-{
-    EntitySpawner& spawner = getSpawner(arch);
-    entList.fitNextN(n);
-    spawner.fitNextN(n);
-    return spawner;
-}
-
-void EntityManager::destroy(Entity ent)
-{
-    EPP_ASSERT(entList.isValid(ent));
-    getSpawner(ent).destroy(ent, entList);
+    EPP_ASSERT(findSpawner(oldArchetype) != spawners.end());
+    EntitySpawner& oldSp = getSpawner(oldArchetype);
+    EntitySpawner& newSp = getSpawner(newArchetype);
+    if (oldSp.mask == newSp.mask)
+        return { EntityManager::EPoolCIter_t(), EntityManager::EPoolCIter_t() };
+    std::size_t newSpSize = newSp.getEntities().data.size();
+    newSp.moveEntitiesHere(oldSp, entList, resetOldReserved, fn);
+    return { newSp.getEntities().data.begin() + newSpSize, newSp.getEntities().data.end() };
 }
 
 void EntityManager::clear()
@@ -57,48 +59,16 @@ void EntityManager::clear(Archetype const& arch)
         found->clear(entList);
 }
 
-CMask const& EntityManager::maskOf(Entity ent) const
+
+void EntityManager::prepareToSpawn(Archetype const& arch, std::size_t n)
 {
-    EPP_ASSERT(entList.isValid(ent));
-    return getSpawner(ent).mask;
+    _prepareToSpawn(arch, n);
 }
 
-Archetype EntityManager::archetypeOf(Entity ent) const
+inline EntitySpawner& EntityManager::_prepareToSpawn(Archetype const& arch, std::size_t n)
 {
-    EPP_ASSERT(entList.isValid(ent));
-    return getSpawner(ent).makeArchetype();
-}
-
-std::size_t EntityManager::size(Archetype const& arch) const
-{
-    if (auto found = findSpawner(arch); found != spawners.end())
-        return found->getEntities().data.size();
-    return 0;
-}
-
-EntitySpawner& EntityManager::getSpawner(Archetype const& arch)
-{
-    if (auto found = findSpawner(arch); found != spawners.end())
-        return *found;
-    return spawners.emplace_back(SpawnerId(std::uint32_t(spawners.size())), arch); // if not found, make one
-}
-
-EntitySpawner& EntityManager::getSpawner(Entity ent)
-{
-    return spawners[entList.get(ent).spawnerId.value];
-}
-
-EntitySpawner const& EntityManager::getSpawner(Entity ent) const
-{
-    return spawners[entList.get(ent).spawnerId.value];
-}
-
-EntityManager::Spawners_t::iterator EntityManager::findSpawner(Archetype const& arch)
-{
-    return std::find_if(spawners.begin(), spawners.end(), [mask = arch.getMask()](EntitySpawner const& spawner) { return spawner.mask == mask; });
-}
-
-EntityManager::Spawners_t::const_iterator EntityManager::findSpawner(Archetype const& arch) const
-{
-    return std::find_if(spawners.begin(), spawners.end(), [mask = arch.getMask()](EntitySpawner const& spawner) { return spawner.mask == mask; });
+    EntitySpawner& spawner = getSpawner(arch);
+    entList.fitNextN(n);
+    spawner.fitNextN(n);
+    return spawner;
 }

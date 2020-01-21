@@ -1,5 +1,4 @@
 #include <ECSpp/Internal/EntityList.h>
-#include <ECSpp/Utility/Assert.h>
 #include <ECSpp/Utility/Pool.h>
 #include <algorithm>
 #include <cmath>
@@ -117,14 +116,14 @@ void EntityList::freeAll()
 
 void EntityList::fitNextN(Size_t n)
 {
-    reserve(SizeToFitNextN(n, reserved, freeLeft));
+    n = SizeToFitNextN(n, reserved, freeLeft);
+    if (n > reserved)
+        reserve(n);
 }
 
 void EntityList::reserve(Size_t newReserved)
 {
-    EPP_ASSERT(newReserved >= reserved);
-    if (newReserved == reserved)
-        return;
+    EPP_ASSERT(newReserved > reserved);
     EntityCell* newMemory = reinterpret_cast<EntityCell*>(operator new[](sizeof(EntityCell) * std::uint64_t(newReserved)));
     if (data) {
         std::memcpy(newMemory, data, reserved * sizeof(EntityCell));
@@ -140,20 +139,4 @@ void EntityList::reserve(Size_t newReserved)
 
     freeIndex = ListIdx(reserved);
     reserved = newReserved;
-}
-
-EntityCell::Occupied EntityList::get(Entity ent) const
-{
-    EPP_ASSERT(isValid(ent));
-    return data[ent.listIdx.value].asOccupied();
-}
-
-bool EntityList::isValid(Entity ent) const
-{
-    return ent.listIdx.value < reserved && ent.version.value == data[ent.listIdx.value].entVersion().value;
-}
-
-EntityList::Size_t EntityList::size() const
-{
-    return reserved - freeLeft;
 }

@@ -1,6 +1,7 @@
 #ifndef ENTITYLIST_H
 #define ENTITYLIST_H
 
+#include <ECSpp/Utility/Assert.h>
 #include <cstddef>
 #include <cstdint>
 
@@ -123,13 +124,15 @@ public:
     // makes sure, to fit n more elements without realloc
     void fitNextN(Size_t n);
 
+    bool isValid(Entity ent) const { return ent.listIdx.value < reserved && ent.version.value == data[ent.listIdx.value].entVersion().value; }
 
-    bool isValid(Entity ent) const;
+    EntityCell::Occupied get(Entity ent) const
+    {
+        EPP_ASSERT(isValid(ent));
+        return data[ent.listIdx.value].asOccupied();
+    }
 
-
-    EntityCell::Occupied get(Entity ent) const;
-
-    Size_t size() const;
+    Size_t size() const { return reserved - freeLeft; }
 
 private:
     void reserve(Size_t newReserved);

@@ -49,16 +49,23 @@ public:
         }
 
     private:
-        Creator(EntitySpawner& spawner, PoolIdx idx, CMask const& constructed = CMask());
+        Creator(EntitySpawner& sp, PoolIdx index, CMask const& cstred = CMask()) : spawner(sp), idx(index), constructed(cstred) {}
         Creator(Creator&& rVal) = delete;
         Creator(Creator const&) = delete;
         Creator& operator=(Creator const&) = delete;
         Creator& operator=(Creator&&) = delete;
-        ~Creator(); // constructs components that the user didnt construct himself
+        ~Creator() /** constructs components that the user didnt construct himself */
+        {
+            for (auto& pool : spawner.cPools)
+                if (constructed.get(pool.getCId()) == false)
+                    pool.construct(idx.value);
+        }
+
+    public:
+        PoolIdx const idx; /** Current index in pools */
 
     private:
         EntitySpawner& spawner;
-        PoolIdx const idx;
         CMask constructed;
 
         friend class EntitySpawner;
@@ -98,6 +105,12 @@ public:
 
     void moveEntityHere(Entity ent, EntityList& entList, EntitySpawner& originSpawner, UserCreationFn_t const& fn);
 
+    /// Reuses the data from originSpawner
+    /**
+     * @param resetOriginReserved Specifies whether originSpawner's reserved memory will be reset (only if originSpawner is not empty)
+     */
+    void moveEntitiesHere(EntitySpawner& originSpawner, EntityList& entList, bool resetOriginReserved, UserCreationFn_t fn);
+
 
     CPool& getPool(ComponentId cId)
     {
@@ -122,6 +135,9 @@ private:
 
     CPools_t cPools;
 };
+
+
+using EntityCreator = EntitySpawner::Creator;
 
 } // namespace epp
 

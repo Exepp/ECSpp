@@ -20,22 +20,38 @@ class EntityManager {
     using IdList_t = decltype(IdOfL<>());
 
 public:
-    Entity spawn(Archetype const& arch, EntitySpawner::UserCreationFn_t const& fn = ([](EntitySpawner::Creator&&) {}));
+    Entity spawn(Archetype const& arch, EntitySpawner::UserCreationFn_t const& fn = ([](EntityCreator&&) {}));
 
     // first - iterator to the first of spawned entities
     // second - end iterator
-    std::pair<EPoolCIter_t, EPoolCIter_t> spawn(Archetype const& arch, std::size_t n, EntitySpawner::UserCreationFn_t const& fn = ([](EntitySpawner::Creator&&) {}));
+    std::pair<EPoolCIter_t, EPoolCIter_t> spawn(Archetype const& arch, std::size_t n, EntitySpawner::UserCreationFn_t const& fn = ([](EntityCreator&&) {}));
 
 
     // ent - valid entity
     // newArchetype - any archetype
-    void changeArchetype(Entity ent, Archetype const& newArchetype, EntitySpawner::UserCreationFn_t const& fn = ([](EntitySpawner::Creator&&) {}));
+    void changeArchetype(Entity ent, Archetype const& newArchetype, EntitySpawner::UserCreationFn_t const& fn = ([](EntityCreator&&) {}));
 
 
-    // changes the archetype of the entity associated with the iterator and returns the next valid one
-    // iterator - valid and non-end iterator
+    /// Changes the archetype of ent, removing components from toRemove list and adding the ones from toAdd list
+    /**
+     * There are no overloaded versions of this function (for iterators) on purpose - it is more optimal to create a separate archetype for those situations
+     * @param ent A valid entity
+     * @param toAdd Components that will be added to ent (or kept it these are already there). toAdd has a priority over toRemove
+     * @param toRemove Components that will be removed from ent (except for the ones specified in toAdd)
+     * @param fn A callable object that can use the Creator instance to construct the added components
+     */
+    void changeArchetype(Entity ent, IdList_t toAdd, IdList_t toRemove = IdOfL<>(), EntitySpawner::UserCreationFn_t const& fn = ([](EntityCreator&&) {}));
+
+
+    /// Changes the archetype of the entity associated with the iterator and returns the next valid one
+    /**
+     * There are no overloaded versions of this function (for iterators) on purpose - it is more optimal to create a separate archetype for those situations
+     * @param it A valid and non-end iterator
+     * @param newArchetype Any archetype - a new archetype of the entity associated with the iterator  
+     * @param fn A callable object that can use the Creator instance to construct the added components
+     */
     template <typename Iterator>
-    Iterator changeArchetype(Iterator it, Archetype const& newArchetype, EntitySpawner::UserCreationFn_t const& fn = ([](EntitySpawner::Creator&&) {}))
+    Iterator changeArchetype(Iterator it, Archetype const& newArchetype, EntitySpawner::UserCreationFn_t const& fn = ([](EntityCreator&&) {}))
     {
         changeArchetype(*it, newArchetype, fn);
         if (!it.isValid())
@@ -43,21 +59,30 @@ public:
         return it;
     }
 
-
-    EPoolCIter_t changeArchetype(EPoolCIter_t const& it, Archetype const& newArchetype, EntitySpawner::UserCreationFn_t const& fn = ([](EntitySpawner::Creator&&) {}))
+    /** @copydoc EntityManager::changeArchetype(Iterator, Archetype const&, EntitySpawner::UserCreationFn_t const&) */
+    EPoolCIter_t changeArchetype(EPoolCIter_t const& it, Archetype const& newArchetype, EntitySpawner::UserCreationFn_t const& fn = ([](EntityCreator&&) {}))
     {
         changeArchetype(*it, newArchetype, fn);
         return it; // same iterator (valid for vector)
     }
 
-
-    // the next n spawn(arche, ...) calls will not require reallocation in any of the internal structures
-    void prepareToSpawn(Archetype const& arch, std::size_t n);
+    /// Changes the archetype of entities of oldArchetype to newArchetype
+    /**
+     * @param oldArchetype One of archetypes that were used to spawn entities during this application (throws for other archetypes)
+     * @param newArchetype Any archetype
+     * @param fn A callable object that can use the Creator instance to construct the added components
+     * @param resetOldReserved Specifies whether memory reserved in the spawner of oldArchetype will be reset (only if that spawner is not empty)
+     */
+    std::pair<EPoolCIter_t, EPoolCIter_t> changeArchetype(Archetype const& oldArchetype, Archetype const& newArchetype,
+                                                          bool resetOldReserved = true, EntitySpawner::UserCreationFn_t const& fn = ([](EntityCreator&&) {}));
 
 
     // ent - valid entity
-    void destroy(Entity ent);
-
+    void destroy(Entity ent)
+    {
+        EPP_ASSERT(entList.isValid(ent));
+        getSpawner(ent).destroy(ent, entList);
+    }
 
     // destroys the entity associated with the iterator and returns the next valid one
     // iterator - valid and non-end iterator
@@ -86,6 +111,9 @@ public:
     // arch - any archetype
     void clear(Archetype const& arch);
 
+    // the next n spawn(arche, ...) calls will not require reallocation in any of the internal structures
+    void prepareToSpawn(Archetype const& arch, std::size_t n);
+
 
     template <typename... CTypes>
     void updateCollection(EntityCollection<CTypes...>& collection)
@@ -107,13 +135,19 @@ public:
 
     // ent - valid entity
     // returns the CMask of the spawner that ent is currently in
-    CMask const& maskOf(Entity ent) const;
-
+    CMask const& maskOf(Entity ent) const
+    {
+        EPP_ASSERT(entList.isValid(ent));
+        return getSpawner(ent).mask;
+    }
 
     // ent - valid entity
     // returns the archetype of ent
-    Archetype archetypeOf(Entity ent) const;
-
+    Archetype archetypeOf(Entity ent) const
+    {
+        EPP_ASSERT(entList.isValid(ent));
+        return getSpawner(ent).makeArchetype();
+    }
 
     // arch - one of archetypes that were used to spawn entities during this application (throws for other archetypes)
     EntityPool_t const& entitiesOf(Archetype const& arch) const
@@ -122,28 +156,41 @@ public:
         return findSpawner(arch)->getEntities();
     }
 
-
     bool isValid(Entity ent) const { return entList.isValid(ent); }
-
 
     std::size_t size() const { return entList.size(); }
 
-
     // arch - any archetype
-    std::size_t size(Archetype const& arch) const;
+    std::size_t size(Archetype const& arch) const
+    {
+        if (auto found = findSpawner(arch); found != spawners.end())
+            return found->getEntities().data.size();
+        return 0;
+    }
 
 private:
     EntitySpawner& _prepareToSpawn(Archetype const& arch, std::size_t n);
 
-    EntitySpawner& getSpawner(Archetype const& arch); // makes spawner, if missing
+    EntitySpawner& getSpawner(Archetype const& arch)
+    {
+        if (auto found = findSpawner(arch); found != spawners.end())
+            return *found;
+        return spawners.emplace_back(SpawnerId(std::uint32_t(spawners.size())), arch); // if not found, make one
+    }
 
-    EntitySpawner& getSpawner(Entity ent); // assumes ent is valid
+    EntitySpawner& getSpawner(Entity ent) { return spawners[entList.get(ent).spawnerId.value]; }
 
-    EntitySpawner const& getSpawner(Entity ent) const; // assumes ent is valid
+    EntitySpawner const& getSpawner(Entity ent) const { return spawners[entList.get(ent).spawnerId.value]; }
 
-    Spawners_t::iterator findSpawner(Archetype const& arch);
+    Spawners_t::iterator findSpawner(Archetype const& arch)
+    {
+        return std::find_if(spawners.begin(), spawners.end(), [mask = arch.getMask()](EntitySpawner const& spawner) { return spawner.mask == mask; });
+    }
 
-    Spawners_t::const_iterator findSpawner(Archetype const& arch) const;
+    Spawners_t::const_iterator findSpawner(Archetype const& arch) const
+    {
+        return std::find_if(spawners.begin(), spawners.end(), [mask = arch.getMask()](EntitySpawner const& spawner) { return spawner.mask == mask; });
+    }
 
 private:
     Spawners_t spawners;

@@ -17,33 +17,53 @@ class Archetype {
 public:
     Archetype() = default;
 
-    explicit Archetype(IdList_t initList);
+    explicit Archetype(IdList_t initList) { addComponent(initList); }
 
-    // resets to an empty archetype (with no set components)
-    void reset();
+    template <typename... CTypes>
+    Archetype& addComponent() { return addComponent(IdOfL<CTypes...>()); }
+
+    Archetype& addComponent(IdList_t ids)
+    {
+        for (auto id : ids)
+            addComponent(id);
+        return *this;
+    }
+
+    Archetype& addComponent(CId_t id)
+    {
+        if (!cMask.get(id)) {
+            cMask.set(id);
+            cIds.push_back(id);
+        }
+        return *this;
+    }
 
 
     template <typename... CTypes>
-    Archetype& addComponent();
+    Archetype& removeComponent() { return removeComponent(IdOfL<CTypes...>()); }
 
-    Archetype& addComponent(IdList_t ids);
+    Archetype& removeComponent(IdList_t ids)
+    {
+        for (auto id : ids)
+            removeComponent(id);
+        return *this;
+    }
 
-    Archetype& addComponent(CId_t id);
+    Archetype& removeComponent(CId_t id)
+    {
+        if (has(id)) {
+            cMask.unset(id);
+            cIds.erase(std::find_if(cIds.begin(), cIds.end(), [id](auto const& cId) { return cId == id; }));
+        }
+        return *this;
+    }
 
-    template <typename... CTypes>
-    Archetype& removeComponent();
 
-    Archetype& removeComponent(IdList_t ids);
+    bool hasAllOf(IdList_t ids) const { return cMask.contains(ids); }
 
-    Archetype& removeComponent(CId_t id);
+    bool hasAnyOf(IdList_t ids) const { return cMask.hasCommon(ids); }
 
-
-    bool hasAllOf(IdList_t ids) const;
-
-    bool hasAnyOf(IdList_t ids) const;
-
-    bool has(CId_t id) const;
-
+    bool has(CId_t id) const { return cMask.get(id); }
 
     IdVec_t const& getCIds() const { return cIds; }
 
@@ -54,19 +74,6 @@ private:
 
     IdVec_t cIds;
 };
-
-
-template <typename... CTypes>
-inline Archetype& Archetype::addComponent()
-{
-    return addComponent(IdOfL<CTypes...>());
-}
-
-template <typename... CTypes>
-inline Archetype& Archetype::removeComponent()
-{
-    return removeComponent(IdOfL<CTypes...>());
-}
 
 } // namespace epp
 

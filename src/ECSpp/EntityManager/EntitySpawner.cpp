@@ -4,17 +4,6 @@
 using namespace epp;
 
 
-EntitySpawner::Creator::Creator(EntitySpawner& spr, PoolIdx const index, CMask const& cstred)
-    : spawner(spr), idx(index), constructed(cstred)
-{}
-
-EntitySpawner::Creator::~Creator()
-{
-    for (auto& pool : spawner.cPools)
-        if (constructed.get(pool.getCId()) == false)
-            pool.construct(idx.value);
-}
-
 //////////////// EntitySpawner
 
 EntitySpawner::EntitySpawner(SpawnerId id, Archetype const& arch)
@@ -84,30 +73,56 @@ void EntitySpawner::moveEntityHere(Entity ent, EntityList& entList, EntitySpawne
 {
     EPP_ASSERT(entList.isValid(ent) && &originSpawner != this && fn);
 
-    PoolIdx entPoolIdx = entList.get(ent).poolIdx;
+    PoolIdx oldIdx = entList.get(ent).poolIdx;
+    PoolIdx newIdx(uint32_t(entityPool.data.size()));
     auto oriPoolsPtr = originSpawner.cPools.begin();
     auto oriPoolsEnd = originSpawner.cPools.end();
 
     // moving/creating/destroying components
     // this loop uses the fact, that the pools are sorted by their cIds
     for (auto& pool : cPools) {
-        while (oriPoolsPtr != oriPoolsEnd && oriPoolsPtr->getCId() < pool.getCId())
-            (oriPoolsPtr++)->destroy(entPoolIdx.value);
+        while (oriPoolsPtr != oriPoolsEnd && oriPoolsPtr->getCId() < pool.getCId()) // omit (destroy) components that were not specified (in archetype) to be in this spawner
+            (oriPoolsPtr++)->destroy(oldIdx.value);
+        pool.alloc();                                                             // only allocates memory (constructor is not called yet)
         if (oriPoolsPtr != oriPoolsEnd && oriPoolsPtr->getCId() == pool.getCId()) // this component is in the original spawner, move it
-            // component from the original will be destroyed either on the next loop, or
-            // for the last one, after the whole loop
-            pool.create((*oriPoolsPtr)[entPoolIdx.value]);
-        else              // oriPoolsPtr->cId > pool.cId || oriPoolsPtr == oriPoolsEnd - this component in not in the original spawner
-            pool.alloc(); // only allocates memory (constructor is not called yet)
+            pool.construct(newIdx.value, (*oriPoolsPtr)[oldIdx.value]);           // component from the original will be destroyed either on the next loop or, for the last one, after the whole loop
     }
     while (oriPoolsPtr != oriPoolsEnd) // destroy the rest (if there is any)
-        (oriPoolsPtr++)->destroy(entPoolIdx.value);
-    originSpawner.removeFromEntityPool(entPoolIdx, entList);
-
-    PoolIdx newIdx(uint32_t(entityPool.data.size()));
+        (oriPoolsPtr++)->destroy(oldIdx.value);
+    originSpawner.removeFromEntityPool(oldIdx, entList); // remove entity
+    entityPool.create(ent);                              // add entity
     entList.changeEntity(ent, newIdx, spawnerId);
-    entityPool.create(ent);
     fn(Creator(*this, newIdx, originSpawner.mask)); // originSpawner.mask contains all the components that were moved, no need to delete possible excess
+}
+
+void EntitySpawner::moveEntitiesHere(EntitySpawner& originSpawner, EntityList& entList, bool resetOriginReserved, UserCreationFn_t fn)
+{
+    if (originSpawner.entityPool.data.empty())
+        return;
+    std::size_t oriSize = originSpawner.entityPool.data.size();
+    std::size_t thisSize = entityPool.data.size();
+    auto oriPoolsPtr = originSpawner.cPools.begin();
+    auto oriPoolsEnd = originSpawner.cPools.end();
+    for (auto& pool : cPools) {
+        for (; oriPoolsPtr != oriPoolsEnd && oriPoolsPtr->getCId() < pool.getCId(); ++oriPoolsPtr)
+            resetOriginReserved ? oriPoolsPtr->reset() : oriPoolsPtr->clear();
+        pool.alloc(oriSize);
+        if (oriPoolsPtr != oriPoolsEnd && oriPoolsPtr->getCId() == pool.getCId())
+            for (std::size_t i = 0; i < oriSize; ++i)
+                pool.construct(thisSize + i, (*oriPoolsPtr)[i]);
+    }
+    for (; oriPoolsPtr != oriPoolsEnd; ++oriPoolsPtr)
+        resetOriginReserved ? oriPoolsPtr->reset() : oriPoolsPtr->clear();
+
+    entityPool.fitNextN(oriSize);
+    for (PoolIdx i(thisSize), end(thisSize + oriSize); i.value < end.value; ++i.value) {
+        entityPool.create(originSpawner.entityPool.data.front());
+        entList.changeEntity(originSpawner.entityPool.data.front(), i, spawnerId);
+        originSpawner.entityPool.destroy(0);
+        fn(Creator(*this, i, originSpawner.mask));
+    }
+    if (resetOriginReserved)
+        originSpawner.entityPool.data.reserve(0);
 }
 
 Archetype EntitySpawner::makeArchetype() const

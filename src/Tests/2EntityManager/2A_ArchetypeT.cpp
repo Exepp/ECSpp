@@ -56,25 +56,6 @@ TEST(Archetype, Remove)
     ASSERT_FALSE(archeT.hasAnyOf(IdOf<TComp1, TComp2, TComp3>()));
 }
 
-TEST(Archetype, Reset)
-{
-    Archetype archeT;
-    archeT.addComponent<TComp1, TComp2>();
-    archeT.reset();
-    ASSERT_FALSE(archeT.hasAnyOf(IdOf<TComp1, TComp2, TComp3, TComp4>()));
-
-    // still can add and remove
-    archeT.addComponent<TComp1, TComp2, TComp3, TComp4>();
-    ASSERT_TRUE(archeT.hasAllOf(IdOf<TComp1, TComp2, TComp3, TComp4>()));
-
-    archeT.removeComponent(IdOf<TComp4, TComp3>());
-    ASSERT_TRUE(archeT.hasAllOf(IdOf<TComp1, TComp2>()));
-    ASSERT_FALSE(archeT.hasAnyOf(IdOf<TComp3, TComp4>()));
-
-    archeT.reset();
-    ASSERT_FALSE(archeT.hasAnyOf(IdOf<TComp1, TComp2, TComp3, TComp4>()));
-}
-
 TEST(Archetype, GetMask)
 {
     Archetype archeT;
@@ -99,10 +80,6 @@ TEST(Archetype, GetMask)
     ASSERT_EQ(moved.getMask(), cMask);
     ASSERT_EQ(archeT.getMask(), cMask);
     ASSERT_EQ(copy.getMask(), CMask());
-
-    archeT.reset();
-    cMask.clear();
-    ASSERT_EQ(archeT.getMask(), cMask);
 }
 
 TEST(Archetype, GetCIds)
@@ -135,12 +112,6 @@ TEST(Archetype, GetCIds)
     ASSERT_EQ(archeT.getCIds(), cIds);
 
     archeT.removeComponent<TComp2>(); // again the same, in separate call
-    ASSERT_EQ(archeT.getCIds(), cIds);
-
-    archeT.reset();
-    ASSERT_NE(archeT.getCIds(), cIds);
-
-    cIds.clear();
     ASSERT_EQ(archeT.getCIds(), cIds);
 }
 

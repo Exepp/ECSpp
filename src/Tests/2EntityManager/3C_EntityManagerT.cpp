@@ -10,21 +10,21 @@ TEST(EntityManager, Spawn_Creator)
         EntityManager mgr;
         Archetype arch(IdOf<TComp1, TComp2>());
         mgr.spawn(arch,
-                  [](EntitySpawner::Creator&& creator) {
+                  [](EntityCreator&& creator) {
                       creator.construct<TComp2>();
                   });
         ASSERT_EQ(TComp2::AliveCounter, 1); // Creator did not call default constructor on its own
         ASSERT_EQ(TComp1::AliveCounter, 1); // Creator called default constructor on its own
 
         mgr.spawn(arch,
-                  [](EntitySpawner::Creator&& creator) {
+                  [](EntityCreator&& creator) {
                       creator.construct<TComp1>();
                       creator.construct<TComp2>();
                   });
         ASSERT_EQ(TComp2::AliveCounter, 2); // Creator did not call default constructor on its own
         ASSERT_EQ(TComp1::AliveCounter, 2);
 
-        arch.reset();
+        arch = Archetype();
         arch.addComponent<TComp3>();
         for (int i = 0; i < 1e4; ++i)
             mgr.spawn(arch);
@@ -39,7 +39,7 @@ TEST(EntityManager, Spawn_Creator)
         Archetype arch(IdOf<TComp1, TComp2>());
         {
             auto [begin, end] = mgr.spawn(arch, 1, // spawn n = 1
-                                          [](EntitySpawner::Creator&& creator) {
+                                          [](EntityCreator&& creator) {
                                               creator.construct<TComp2>();
                                           });
             ASSERT_EQ(TComp2::AliveCounter, 1); // Creator did not call default constructor on its own
@@ -50,14 +50,14 @@ TEST(EntityManager, Spawn_Creator)
         ASSERT_THROW(mgr.entitiesOf(Archetype()), epp::AssertFailed);
 
         mgr.spawn(arch, 1e5,
-                  [](EntitySpawner::Creator&& creator) {
+                  [](EntityCreator&& creator) {
                       creator.construct<TComp1>();
                       creator.construct<TComp2>();
                   });
         ASSERT_EQ(TComp2::AliveCounter, 1 + 1e5); // Creator did not call default constructor on its own
         ASSERT_EQ(TComp1::AliveCounter, 1 + 1e5);
 
-        arch.reset();
+        arch = Archetype();
         arch.addComponent<TComp3>();
         {
             auto [begin, end] = mgr.spawn(arch, 1e4);
@@ -235,7 +235,7 @@ TEST(EntityManager, ComponentOf)
     std::vector<Entity> ents;
 
     for (int i = 0; i < 1e3; ++i)
-        ents.push_back(mgr.spawn(arch, [&](EntitySpawner::Creator&& creator) {
+        ents.push_back(mgr.spawn(arch, [&](EntityCreator&& creator) {
             creator.construct<TComp1>(tester1.a + i, tester1.b + i, tester1.c + i);
             creator.construct<TComp2>(tester2.data);
         }));
@@ -267,11 +267,11 @@ TEST(EntityManager, ComponentOf)
     for (int i = 0; i < 1e3; ++i) {
         mgr.spawn(Archetype());
         ents.push_back(mgr.spawn(arch,
-                                 [&](EntitySpawner::Creator&& creator) {
+                                 [&](EntityCreator&& creator) {
                                      creator.construct<TComp1>(tester1.a + i, tester1.b + i, tester1.c + i);
                                  }));
         ents.push_back(mgr.spawn(Archetype(IdOf<TComp1, TComp4>()),
-                                 [&](EntitySpawner::Creator&& creator) {
+                                 [&](EntityCreator&& creator) {
                                      creator.construct<TComp1>(tester1.a + 2 * i, tester1.b + 2 * i, tester1.c + 2 * i);
                                      creator.construct<TComp4>(tester4.data);
                                  }));
@@ -348,44 +348,59 @@ TEST(EntityManager, ArchetypeOf)
 
 TEST(EntityManager, ChangeArchetype_IsValid)
 {
-    EntityManager mgr;
-    Archetype arch(IdOf<TComp1, TComp2>());
-    Entity ent = mgr.spawn(arch,
-                           [](EntitySpawner::Creator&& creator) {
-                               creator.construct<TComp1>(4321, 43.21f, 4.321);
-                           });
-    ASSERT_TRUE(mgr.isValid(ent));
+    {
+        EntityManager mgr;
+        Archetype arch(IdOf<TComp1, TComp2>());
+        Entity ent = mgr.spawn(arch,
+                               [](EntityCreator&& creator) {
+                                   creator.construct<TComp1>(4321, 43.21f, 4.321);
+                               });
+        ASSERT_TRUE(mgr.isValid(ent));
 
-    mgr.changeArchetype(ent, arch); // to the same archetype
-    ASSERT_EQ(TComp1::AliveCounter, 1);
-    ASSERT_EQ(TComp2::AliveCounter, 1);
-    ASSERT_EQ(TComp2::AliveCounter, 1);
-    ASSERT_TRUE(mgr.isValid(ent));
-    ASSERT_EQ(mgr.componentOf<TComp1>(ent), TComp1(4321, 43.21f, 4.321));
+        mgr.changeArchetype(ent, arch); // to the same archetype
+        ASSERT_EQ(TComp1::AliveCounter, 1);
+        ASSERT_EQ(TComp2::AliveCounter, 1);
+        ASSERT_EQ(TComp2::AliveCounter, 1);
+        ASSERT_TRUE(mgr.isValid(ent));
+        ASSERT_EQ(mgr.componentOf<TComp1>(ent), TComp1(4321, 43.21f, 4.321));
 
-    mgr.changeArchetype(ent, arch.addComponent<TComp3>());
-    ASSERT_EQ(TComp1::AliveCounter, 1);
-    ASSERT_EQ(TComp2::AliveCounter, 1);
-    ASSERT_EQ(TComp3::AliveCounter, 1);
-    ASSERT_TRUE(mgr.isValid(ent));
-    ASSERT_EQ(mgr.componentOf<TComp1>(ent), TComp1(4321, 43.21f, 4.321));
+        mgr.changeArchetype(ent, arch.addComponent<TComp3>());
+        ASSERT_EQ(TComp1::AliveCounter, 1);
+        ASSERT_EQ(TComp2::AliveCounter, 1);
+        ASSERT_EQ(TComp3::AliveCounter, 1);
+        ASSERT_TRUE(mgr.isValid(ent));
+        ASSERT_EQ(mgr.componentOf<TComp1>(ent), TComp1(4321, 43.21f, 4.321));
 
-    mgr.changeArchetype(ent, arch.addComponent<TComp4>().removeComponent<TComp1, TComp3>());
-    ASSERT_EQ(TComp1::AliveCounter, 0);
-    ASSERT_EQ(TComp2::AliveCounter, 1);
-    ASSERT_EQ(TComp3::AliveCounter, 0);
-    ASSERT_EQ(TComp4::AliveCounter, 1);
-    ASSERT_TRUE(mgr.isValid(ent));
+        mgr.changeArchetype(ent, arch.addComponent<TComp4>().removeComponent<TComp1, TComp3>());
+        ASSERT_EQ(TComp1::AliveCounter, 0);
+        ASSERT_EQ(TComp2::AliveCounter, 1);
+        ASSERT_EQ(TComp3::AliveCounter, 0);
+        ASSERT_EQ(TComp4::AliveCounter, 1);
+        ASSERT_TRUE(mgr.isValid(ent));
 
-    mgr.destroy(ent);
-    ASSERT_FALSE(mgr.isValid(ent));
-    ASSERT_THROW(mgr.changeArchetype(ent, arch.addComponent<TComp1>().removeComponent<TComp4>()), AssertFailed);
+        mgr.destroy(ent);
+        ASSERT_FALSE(mgr.isValid(ent));
+        ASSERT_THROW(mgr.changeArchetype(ent, arch.addComponent<TComp1>().removeComponent<TComp4>()), AssertFailed);
 
-    ent = mgr.spawn(arch);
-    mgr.clear();
-    ASSERT_FALSE(mgr.isValid(ent));
-    ASSERT_THROW(mgr.changeArchetype(ent, arch.addComponent<TComp1>().removeComponent<TComp4>()), AssertFailed);
+        ent = mgr.spawn(arch);
+        mgr.clear();
+        ASSERT_FALSE(mgr.isValid(ent));
+        ASSERT_THROW(mgr.changeArchetype(ent, arch.addComponent<TComp1>().removeComponent<TComp4>()), AssertFailed);
+    }
+    {
+        epp::EntityManager mgr;
+        epp::Archetype archMissing = epp::Archetype(epp::IdOf<TComp1, TComp2>());
+        epp::Archetype archFull = epp::Archetype(epp::IdOf<TComp1, TComp2, TComp3, TComp4>());
+        mgr.spawn(archMissing, 1e4, [](epp::EntityCreator&& creator) { creator.construct<TComp1>().a = creator.idx.value; });
+        mgr.changeArchetype(archMissing, archFull, true, [](epp::EntityCreator&& creator) { creator.construct<TComp4>().data[0] = 2 * creator.idx.value; });
+        epp::EntityCollection<TComp1, TComp2, TComp3, TComp4> coll;
+        mgr.updateCollection(coll);
+        int i = 0;
+        for (auto it = coll.begin(), end = coll.end(); it != end; ++it, ++i) {
+            ASSERT_EQ(it.getComponent<TComp1>().a, i);
+            ASSERT_EQ(2 * it.getComponent<TComp1>().a, it.getComponent<TComp4>().data[0]);
+        }
+    }
 }
-
 // no need for clear tests
 // updateCollection test with EntityCollection tests

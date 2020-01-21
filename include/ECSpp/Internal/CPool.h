@@ -5,6 +5,7 @@
 
 namespace epp {
 
+// TODO: redo the tests
 class CPool final {
     using CId_t = decltype(IdOfL<>())::value_type;
 
@@ -21,7 +22,7 @@ public:
 
     CPool& operator=(CPool const&) = delete;
 
-    ~CPool();
+    ~CPool() { reset(); }
 
 
     // raw (no constructor call)
@@ -31,16 +32,30 @@ public:
     // so move constructor and destructor will be called on the uninitialized component from the first call
     void* alloc();
 
-    // alloc + default constructor
-    void* create();
+    // TODO: tests
+    // same as above
+    // allocates at once n components
+    // returns nullptr for n == 0
+    void* alloc(Idx_t n);
 
-    // alloc + move constructor
-    void* create(void* rVal);
-
-    // calls constructor on an object located at given index
+    // calls constructor on the object located at given index
     // it is up to the caller to make sure this function is called only on components
     // that are not yet constructed (that is, created with alloc)
-    void* construct(Idx_t idx);
+    void* construct(Idx_t idx)
+    {
+        EPP_ASSERT(idx < dataUsed);
+        return metadata.defaultConstructor(addressAtIdx(idx));
+    }
+
+    // TODO: tests
+    // calls move constructor on the object located at given index
+    // it is up to the caller to make sure this function is called only on components
+    // that are not yet constructed (that is, created with alloc) and that rValComp is of the same type as components of this pool
+    void* construct(Idx_t idx, void* rValComp)
+    {
+        EPP_ASSERT(idx < dataUsed);
+        return metadata.moveConstructor(addressAtIdx(idx), rValComp);
+    }
 
     // expects an index to a constructed component (calls destructor)
     // returns true if deleted object was replaced with the last element (false only for the last element)
@@ -51,39 +66,34 @@ public:
 
     void clear();
 
+    // TODO: tests
+    // clear + deallocation
+    void reset();
 
-    void* operator[](Idx_t i);
+
+    void* operator[](Idx_t i)
+    {
+        EPP_ASSERT(i < dataUsed)
+        return addressAtIdx(i);
+    }
 
     CId_t getCId() const { return cId; }
 
     std::size_t size() const { return dataUsed; }
 
-    std::size_t reserved() const { return dataSize; }
+    std::size_t capacity() const { return reserved; }
 
 private:
     void reserve(Idx_t n);
 
-    // constructs the object at the given address with default constructor
-    void* _construct(void* address);
+    void* addressAtIdx(Idx_t i) const { return addressAtIdx(data, i); }
 
-    // constructs the object at the given address with move constructor
-    void* _moveConstruct(void* dest, void* src);
-
-    // calls destructor on the component at the given address
-    void _destroy(void* address);
-
-    std::uint32_t _getComponentSize() const;
-
-    std::align_val_t _getComponentAlign() const;
-
-    void* addressAtIdx(Idx_t i) const;
-
-    void* addressAtIdx(void* base, Idx_t i) const;
+    void* addressAtIdx(void* base, Idx_t i) const { return reinterpret_cast<void*>(static_cast<std::uint8_t*>(base) + metadata.size * std::uint64_t(i)); }
 
 private:
     void* data = nullptr;
 
-    Idx_t dataSize = 0;
+    Idx_t reserved = 0;
 
     Idx_t dataUsed = 0;
 
