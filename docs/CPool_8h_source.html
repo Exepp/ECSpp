@@ -77,97 +77,108 @@ $(function() {
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">namespace </span>epp {</div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="classepp_1_1CPool.html">    8</a></span>&#160;<span class="keyword">class </span><a class="code" href="classepp_1_1CPool.html">CPool</a> final {</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <span class="keyword">using</span> Idx_t = std::uint32_t;</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classepp_1_1CPool.html">CPool</a>(<a class="code" href="structepp_1_1ComponentId.html">ComponentId</a> cId);</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">// TODO: redo the tests</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="classepp_1_1CPool.html">    9</a></span>&#160;<span class="keyword">class </span><a class="code" href="classepp_1_1CPool.html">CPool</a> final {</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <span class="keyword">using</span> CId_t = decltype(IdOfL&lt;&gt;())::value_type;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="keyword">using</span> Idx_t = std::uint32_t;</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <a class="code" href="classepp_1_1CPool.html">CPool</a>(<a class="code" href="classepp_1_1CPool.html">CPool</a>&amp;&amp; rval);</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <a class="code" href="classepp_1_1CPool.html">CPool</a>&amp; operator=(<a class="code" href="classepp_1_1CPool.html">CPool</a>&amp;&amp; rval);</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <a class="code" href="classepp_1_1CPool.html">CPool</a>(<a class="code" href="classepp_1_1CPool.html">CPool</a> <span class="keyword">const</span>&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <a class="code" href="classepp_1_1CPool.html">CPool</a>&amp; operator=(<a class="code" href="classepp_1_1CPool.html">CPool</a> <span class="keyword">const</span>&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    ~<a class="code" href="classepp_1_1CPool.html">CPool</a>();</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classepp_1_1CPool.html">CPool</a>(CId_t cId);</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <a class="code" href="classepp_1_1CPool.html">CPool</a>(<a class="code" href="classepp_1_1CPool.html">CPool</a>&amp;&amp; rval);</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <a class="code" href="classepp_1_1CPool.html">CPool</a>&amp; operator=(<a class="code" href="classepp_1_1CPool.html">CPool</a>&amp;&amp; rval);</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <a class="code" href="classepp_1_1CPool.html">CPool</a>(<a class="code" href="classepp_1_1CPool.html">CPool</a> <span class="keyword">const</span>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <a class="code" href="classepp_1_1CPool.html">CPool</a>&amp; operator=(<a class="code" href="classepp_1_1CPool.html">CPool</a> <span class="keyword">const</span>&amp;) = <span class="keyword">delete</span>;</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="comment">// raw (no constructor call)</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="comment">// !! EVERY ALLOCATED COMPONENT MUST BE CONSTRUCTED BEFORE NEXT ALLOC CALL !!</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="comment">// if there are 2 consecutive calls, the second one may lead to reallocation of the internal storage</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="comment">// which will move and destroy all components (even the uninitialized ones)</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="comment">// so move constructor and destructor will be called on the uninitialized component from the first call</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordtype">void</span>* alloc();</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="comment">// alloc + default constructor</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordtype">void</span>* create();</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    ~<a class="code" href="classepp_1_1CPool.html">CPool</a>() { reset(); }</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="comment">// raw (no constructor call)</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="comment">// !! EVERY ALLOCATED COMPONENT MUST BE CONSTRUCTED BEFORE NEXT ALLOC CALL !!</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="comment">// if there are 2 consecutive calls, the second one may lead to reallocation of the internal storage</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="comment">// which will move and destroy all components (even the uninitialized ones)</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="comment">// so move constructor and destructor will be called on the uninitialized component from the first call</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordtype">void</span>* alloc();</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="comment">// alloc + move constructor</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">void</span>* create(<span class="keywordtype">void</span>* rVal);</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="comment">// calls constructor on an object located at given index</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="comment">// it is up to the caller to make sure this function is called only on components</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="comment">// that are not yet constructed (that is, created with alloc)</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordtype">void</span>* construct(Idx_t idx);</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="comment">// expects an index to a constructed component (calls destructor)</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="comment">// returns true if deleted object was replaced with the last element (false only for the last element)</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">bool</span> destroy(Idx_t i);</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="comment">// makes sure, to fit n more elements without realloc</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordtype">void</span> fitNextN(Idx_t n);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="comment">// TODO: tests</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="comment">// same as above</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="comment">// allocates at once n components</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="comment">// returns nullptr for n == 0</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">void</span>* alloc(Idx_t n);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="comment">// calls constructor on the object located at given index</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="comment">// it is up to the caller to make sure this function is called only on components</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="comment">// that are not yet constructed (that is, created with alloc)</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordtype">void</span>* construct(Idx_t idx)</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    {</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        EPP_ASSERT(idx &lt; dataUsed);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="keywordflow">return</span> metadata.defaultConstructor(addressAtIdx(idx));</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    }</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">void</span> clear();</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">void</span>* operator[](Idx_t i);</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <a class="code" href="structepp_1_1ComponentId.html">ComponentId</a> getCId()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> cId; }</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    std::size_t size()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> dataUsed; }</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    std::size_t reserved()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> dataSize; }</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordtype">void</span> reserve(Idx_t n);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="comment">// TODO: tests</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="comment">// calls move constructor on the object located at given index</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="comment">// it is up to the caller to make sure this function is called only on components</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="comment">// that are not yet constructed (that is, created with alloc) and that rValComp is of the same type as components of this pool</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">void</span>* construct(Idx_t idx, <span class="keywordtype">void</span>* rValComp)</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    {</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        EPP_ASSERT(idx &lt; dataUsed);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keywordflow">return</span> metadata.moveConstructor(addressAtIdx(idx), rValComp);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    }</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="comment">// expects an index to a constructed component (calls destructor)</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="comment">// returns true if deleted object was replaced with the last element (false only for the last element)</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordtype">bool</span> destroy(Idx_t i);</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="comment">// constructs the object at the given address with default constructor</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordtype">void</span>* _construct(<span class="keywordtype">void</span>* address);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="comment">// makes sure, to fit n more elements without realloc</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordtype">void</span> fitNextN(Idx_t n);</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="comment">// constructs the object at the given address with move constructor</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordtype">void</span>* _moveConstruct(<span class="keywordtype">void</span>* dest, <span class="keywordtype">void</span>* src);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="comment">// calls destructor on the component at the given address</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordtype">void</span> _destroy(<span class="keywordtype">void</span>* address);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordtype">void</span> clear();</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="comment">// TODO: tests</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="comment">// clear + deallocation</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordtype">void</span> reset();</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    std::uint32_t _getComponentSize() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    std::align_val_t _getComponentAlign() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordtype">void</span>* addressAtIdx(Idx_t i) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordtype">void</span>* addressAtIdx(<span class="keywordtype">void</span>* base, Idx_t i) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordtype">void</span>* data = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordtype">void</span>* operator[](Idx_t i)</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    {</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        EPP_ASSERT(i &lt; dataUsed)</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <span class="keywordflow">return</span> addressAtIdx(i);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    }</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    CId_t getCId()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> cId; }</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    std::size_t size()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> dataUsed; }</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    Idx_t dataSize = 0;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    std::size_t capacity()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> reserved; }</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    Idx_t dataUsed = 0;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <a class="code" href="structepp_1_1CMetadata.html">CMetadata</a> metadata;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <a class="code" href="structepp_1_1ComponentId.html">ComponentId</a> <span class="keyword">const</span> cId; <span class="comment">// may change on assignment</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;};</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keywordtype">void</span> reserve(Idx_t n);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keywordtype">void</span>* addressAtIdx(Idx_t i)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> addressAtIdx(data, i); }</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keywordtype">void</span>* addressAtIdx(<span class="keywordtype">void</span>* base, Idx_t i)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <span class="keyword">reinterpret_cast&lt;</span><span class="keywordtype">void</span>*<span class="keyword">&gt;</span>(<span class="keyword">static_cast&lt;</span>std::uint8_t*<span class="keyword">&gt;</span>(base) + metadata.size * std::uint64_t(i)); }</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;} <span class="comment">// namespace epp</span></div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="preprocessor">#endif // CPool_H</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keywordtype">void</span>* data = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    Idx_t reserved = 0;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    Idx_t dataUsed = 0;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <a class="code" href="structepp_1_1CMetadata.html">CMetadata</a> metadata;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    CId_t <span class="keyword">const</span> cId; <span class="comment">// may change on assignment</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;};</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;} <span class="comment">// namespace epp</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="preprocessor">#endif // CPool_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclassepp_1_1CPool_html"><div class="ttname"><a href="classepp_1_1CPool.html">epp::CPool</a></div><div class="ttdef"><b>Definition:</b> CPool.h:8</div></div>
-<div class="ttc" id="astructepp_1_1ComponentId_html"><div class="ttname"><a href="structepp_1_1ComponentId.html">epp::ComponentId</a></div><div class="ttdef"><b>Definition:</b> Component.h:11</div></div>
+<div class="ttc" id="aclassepp_1_1CPool_html"><div class="ttname"><a href="classepp_1_1CPool.html">epp::CPool</a></div><div class="ttdef"><b>Definition:</b> CPool.h:9</div></div>
 <div class="ttc" id="astructepp_1_1CMetadata_html"><div class="ttname"><a href="structepp_1_1CMetadata.html">epp::CMetadata</a></div><div class="ttdef"><b>Definition:</b> Component.h:30</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

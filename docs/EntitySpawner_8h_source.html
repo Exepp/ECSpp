@@ -106,9 +106,9 @@ $(function() {
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keyword">template</span> &lt;<span class="keyword">typename</span> CType, <span class="keyword">typename</span>... Args&gt;</div>
 <div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="classepp_1_1EntitySpawner_1_1Creator.html#a1f8bb53cbcb8ba21685e329a8f52895d">   38</a></span>&#160;        CType&amp; <a class="code" href="classepp_1_1EntitySpawner_1_1Creator.html#a1f8bb53cbcb8ba21685e329a8f52895d">construct</a>(Args&amp;&amp;... args)</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        {</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            <a class="code" href="structepp_1_1ComponentId.html">ComponentId</a> cId = IdOf&lt;CType&gt;();</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            EPP_ASSERT(spawner.mask.get(cId));</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            CType* component = <span class="keyword">static_cast&lt;</span>CType*<span class="keyword">&gt;</span>(spawner.getPool(cId)[idx.value]);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            <span class="keyword">auto</span> cId = IdOf&lt;CType&gt;();</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            EPP_ASSERT(<a class="code" href="classepp_1_1EntitySpawner_1_1Creator.html#a873cf9d64c04664f2a8a92a15158033c">spawner</a>.mask.get(cId));</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            CType* component = <span class="keyword">static_cast&lt;</span>CType*<span class="keyword">&gt;</span>(<a class="code" href="classepp_1_1EntitySpawner_1_1Creator.html#a873cf9d64c04664f2a8a92a15158033c">spawner</a>.getPool(cId)[idx.value]);</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            <span class="keywordflow">if</span> (constructed.get(cId))</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                component-&gt;~CType();</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            <span class="keyword">new</span> (component) CType(std::forward&lt;Args&gt;(args)...);</div>
@@ -118,98 +118,113 @@ $(function() {
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        }</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <a class="code" href="classepp_1_1EntitySpawner_1_1Creator.html">Creator</a>(<a class="code" href="classepp_1_1EntitySpawner.html">EntitySpawner</a>&amp; spawner, <a class="code" href="structepp_1_1PoolIdx.html">PoolIdx</a> idx, <a class="code" href="classepp_1_1CMask.html">CMask</a> <span class="keyword">const</span>&amp; constructed = <a class="code" href="classepp_1_1CMask.html">CMask</a>());</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <a class="code" href="classepp_1_1EntitySpawner_1_1Creator.html">Creator</a>(<a class="code" href="classepp_1_1EntitySpawner_1_1Creator.html">Creator</a>&amp;&amp; rVal) = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <a class="code" href="classepp_1_1EntitySpawner_1_1Creator.html">Creator</a>(<a class="code" href="classepp_1_1EntitySpawner_1_1Creator.html">Creator</a> <span class="keyword">const</span>&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <a class="code" href="classepp_1_1EntitySpawner_1_1Creator.html">Creator</a>&amp; operator=(<a class="code" href="classepp_1_1EntitySpawner_1_1Creator.html">Creator</a> <span class="keyword">const</span>&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <a class="code" href="classepp_1_1EntitySpawner_1_1Creator.html">Creator</a>&amp; operator=(<a class="code" href="classepp_1_1EntitySpawner_1_1Creator.html">Creator</a>&amp;&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        ~<a class="code" href="classepp_1_1EntitySpawner_1_1Creator.html">Creator</a>(); <span class="comment">// constructs components that the user didnt construct himself</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <a class="code" href="classepp_1_1EntitySpawner.html">EntitySpawner</a>&amp; spawner;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <a class="code" href="structepp_1_1PoolIdx.html">PoolIdx</a> <span class="keyword">const</span> idx;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <a class="code" href="classepp_1_1CMask.html">CMask</a> constructed;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <a class="code" href="classepp_1_1EntitySpawner_1_1Creator.html">Creator</a>(<a class="code" href="classepp_1_1EntitySpawner.html">EntitySpawner</a>&amp; sp, <a class="code" href="structepp_1_1PoolIdx.html">PoolIdx</a> index, <a class="code" href="classepp_1_1CMask.html">CMask</a> <span class="keyword">const</span>&amp; cstred = <a class="code" href="classepp_1_1CMask.html">CMask</a>()) : <a class="code" href="classepp_1_1EntitySpawner_1_1Creator.html#a873cf9d64c04664f2a8a92a15158033c">spawner</a>(sp), idx(index), constructed(cstred) {}</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        Creator(Creator&amp;&amp; rVal) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        Creator(Creator <span class="keyword">const</span>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        Creator&amp; operator=(Creator <span class="keyword">const</span>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        Creator&amp; operator=(Creator&amp;&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="classepp_1_1EntitySpawner_1_1Creator.html#ac34dd537444547900b038b6261137bab">   57</a></span>&#160;        <a class="code" href="classepp_1_1EntitySpawner_1_1Creator.html#ac34dd537444547900b038b6261137bab">~Creator</a>() </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        {</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; pool : <a class="code" href="classepp_1_1EntitySpawner_1_1Creator.html#a873cf9d64c04664f2a8a92a15158033c">spawner</a>.cPools)</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                <span class="keywordflow">if</span> (constructed.get(pool.getCId()) == <span class="keyword">false</span>)</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                    pool.construct(idx.value);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        }</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="classepp_1_1EntitySpawner.html">EntitySpawner</a>;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    };</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keyword">using</span> UserCreationFn_t = std::function&lt;void(Creator&amp;&amp;)&gt;;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keyword">using</span> EntityPool_t = <a class="code" href="structepp_1_1Pool.html">Pool&lt;Entity&gt;</a>;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <a class="code" href="structepp_1_1PoolIdx.html">PoolIdx</a> <span class="keyword">const</span> idx; </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="classepp_1_1EntitySpawner_1_1Creator.html#a873cf9d64c04664f2a8a92a15158033c">   68</a></span>&#160;        <a class="code" href="classepp_1_1EntitySpawner.html">EntitySpawner</a>&amp; <a class="code" href="classepp_1_1EntitySpawner_1_1Creator.html#a873cf9d64c04664f2a8a92a15158033c">spawner</a>;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <a class="code" href="classepp_1_1CMask.html">CMask</a> constructed;</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keyword">using</span> CPools_t = std::vector&lt;CPool&gt;;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="classepp_1_1EntitySpawner.html">EntitySpawner</a>;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    };</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <a class="code" href="classepp_1_1EntitySpawner.html">EntitySpawner</a>(<a class="code" href="structepp_1_1SpawnerId.html">SpawnerId</a> <span class="keywordtype">id</span>, <a class="code" href="classepp_1_1Archetype.html">Archetype</a> <span class="keyword">const</span>&amp; arch);</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <a class="code" href="classepp_1_1EntitySpawner.html">EntitySpawner</a>(<a class="code" href="classepp_1_1EntitySpawner.html">EntitySpawner</a>&amp;&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <a class="code" href="classepp_1_1EntitySpawner.html">EntitySpawner</a>&amp; operator=(<a class="code" href="classepp_1_1EntitySpawner.html">EntitySpawner</a>&amp;&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keyword">using</span> UserCreationFn_t = std::function&lt;void(<a class="code" href="classepp_1_1EntitySpawner_1_1Creator.html">Creator</a>&amp;&amp;)&gt;;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keyword">using</span> <a class="code" href="structepp_1_1Pool.html">EntityPool_t</a> = <a class="code" href="structepp_1_1Pool.html">Pool&lt;Entity&gt;</a>;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keyword">using</span> CPools_t = std::vector&lt;CPool&gt;;</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <a class="code" href="classepp_1_1EntitySpawner.html">EntitySpawner</a>&amp; operator=(<a class="code" href="classepp_1_1EntitySpawner.html">EntitySpawner</a> <span class="keyword">const</span>&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <a class="code" href="classepp_1_1EntitySpawner.html">EntitySpawner</a>(<a class="code" href="classepp_1_1EntitySpawner.html">EntitySpawner</a> <span class="keyword">const</span>&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <a class="code" href="classepp_1_1EntitySpawner.html">EntitySpawner</a>(<a class="code" href="structepp_1_1SpawnerId.html">SpawnerId</a> <span class="keywordtype">id</span>, <a class="code" href="classepp_1_1Archetype.html">Archetype</a> <span class="keyword">const</span>&amp; arch);</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <a class="code" href="classepp_1_1EntitySpawner.html">EntitySpawner</a>(<a class="code" href="classepp_1_1EntitySpawner.html">EntitySpawner</a>&amp;&amp;) = <span class="keyword">delete</span>;</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <a class="code" href="structepp_1_1Entity.html">Entity</a> spawn(<a class="code" href="classepp_1_1EntityList.html">EntityList</a>&amp; entList, UserCreationFn_t <span class="keyword">const</span>&amp; fn);</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <a class="code" href="classepp_1_1EntitySpawner.html">EntitySpawner</a>&amp; operator=(<a class="code" href="classepp_1_1EntitySpawner.html">EntitySpawner</a>&amp;&amp;) = <span class="keyword">delete</span>;</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keywordtype">void</span> destroy(<a class="code" href="structepp_1_1Entity.html">Entity</a> ent, <a class="code" href="classepp_1_1EntityList.html">EntityList</a>&amp; entList);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <a class="code" href="classepp_1_1EntitySpawner.html">EntitySpawner</a>&amp; operator=(<a class="code" href="classepp_1_1EntitySpawner.html">EntitySpawner</a> <span class="keyword">const</span>&amp;) = <span class="keyword">delete</span>;</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="comment">// destroys all entities, keeps allocated memory</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keywordtype">void</span> clear(<a class="code" href="classepp_1_1EntityList.html">EntityList</a>&amp; entList);</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <a class="code" href="classepp_1_1EntitySpawner.html">EntitySpawner</a>(<a class="code" href="classepp_1_1EntitySpawner.html">EntitySpawner</a> <span class="keyword">const</span>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keywordtype">void</span> clear(); <span class="comment">// for clear-all (no need to free indices, all will be freed)</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <a class="code" href="structepp_1_1Entity.html">Entity</a> spawn(<a class="code" href="classepp_1_1EntityList.html">EntityList</a>&amp; entList, UserCreationFn_t <span class="keyword">const</span>&amp; fn);</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="comment">// makes sure, to fit n more elements without realloc</span></div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keywordtype">void</span> fitNextN(EntityList::Size_t n);</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keywordtype">void</span> moveEntityHere(<a class="code" href="structepp_1_1Entity.html">Entity</a> ent, <a class="code" href="classepp_1_1EntityList.html">EntityList</a>&amp; entList, <a class="code" href="classepp_1_1EntitySpawner.html">EntitySpawner</a>&amp; originSpawner, UserCreationFn_t <span class="keyword">const</span>&amp; fn);</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keywordtype">void</span> destroy(<a class="code" href="structepp_1_1Entity.html">Entity</a> ent, <a class="code" href="classepp_1_1EntityList.html">EntityList</a>&amp; entList);</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="comment">// destroys all entities, keeps allocated memory</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keywordtype">void</span> clear(<a class="code" href="classepp_1_1EntityList.html">EntityList</a>&amp; entList);</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keywordtype">void</span> clear(); <span class="comment">// for clear-all (no need to free indices, all will be freed)</span></div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <a class="code" href="classepp_1_1CPool.html">CPool</a>&amp; getPool(<a class="code" href="structepp_1_1ComponentId.html">ComponentId</a> cId)</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    {</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        EPP_ASSERT(mask.get(cId));</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        <span class="keywordflow">return</span> *std::find_if(cPools.begin(), cPools.end(), [cId](<a class="code" href="classepp_1_1CPool.html">CPool</a> <span class="keyword">const</span>&amp; pool) { return pool.getCId() == cId; });</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    }</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="comment">// makes sure, to fit n more elements without realloc</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keywordtype">void</span> fitNextN(EntityList::Size_t n);</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keywordtype">void</span> moveEntityHere(<a class="code" href="structepp_1_1Entity.html">Entity</a> ent, <a class="code" href="classepp_1_1EntityList.html">EntityList</a>&amp; entList, <a class="code" href="classepp_1_1EntitySpawner.html">EntitySpawner</a>&amp; originSpawner, UserCreationFn_t <span class="keyword">const</span>&amp; fn);</div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    EntityPool_t <span class="keyword">const</span>&amp; getEntities()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> entityPool; }</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    Archetype makeArchetype() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keywordtype">void</span> removeFromEntityPool(PoolIdx idx, EntityList&amp; entList);</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classepp_1_1EntitySpawner.html#aa95a0079b9e9408d97f384b1531b336d">moveEntitiesHere</a>(<a class="code" href="classepp_1_1EntitySpawner.html">EntitySpawner</a>&amp; originSpawner, <a class="code" href="classepp_1_1EntityList.html">EntityList</a>&amp; entList, <span class="keywordtype">bool</span> resetOriginReserved, UserCreationFn_t fn);</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    SpawnerId <span class="keyword">const</span> spawnerId;</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    CMask <span class="keyword">const</span> mask;</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    EntityPool_t entityPool;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <a class="code" href="classepp_1_1CPool.html">CPool</a>&amp; getPool(<a class="code" href="structepp_1_1ComponentId.html">ComponentId</a> cId)</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    {</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        EPP_ASSERT(mask.get(cId));</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        <span class="keywordflow">return</span> *std::find_if(cPools.begin(), cPools.end(), [cId](<a class="code" href="classepp_1_1CPool.html">CPool</a> <span class="keyword">const</span>&amp; pool) { return pool.getCId() == cId; });</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    }</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    EntityPool_t <span class="keyword">const</span>&amp; getEntities()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> entityPool; }</div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    CPools_t cPools;</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;};</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160; </div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;} <span class="comment">// namespace epp</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    Archetype makeArchetype() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    <span class="keywordtype">void</span> removeFromEntityPool(PoolIdx idx, EntityList&amp; entList);</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="preprocessor">#endif // ENTITYSPAWNER_H</span></div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    SpawnerId <span class="keyword">const</span> spawnerId;</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; </div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    CMask <span class="keyword">const</span> mask;</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    EntityPool_t entityPool;</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160; </div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    CPools_t cPools;</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;};</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160; </div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160; </div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="keyword">using</span> EntityCreator = EntitySpawner::Creator;</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160; </div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;} <span class="comment">// namespace epp</span></div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160; </div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="preprocessor">#endif // ENTITYSPAWNER_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="astructepp_1_1SpawnerId_html"><div class="ttname"><a href="structepp_1_1SpawnerId.html">epp::SpawnerId</a></div><div class="ttdef"><b>Definition:</b> EntityList.h:19</div></div>
-<div class="ttc" id="aclassepp_1_1CPool_html"><div class="ttname"><a href="classepp_1_1CPool.html">epp::CPool</a></div><div class="ttdef"><b>Definition:</b> CPool.h:8</div></div>
+<div class="ttc" id="aclassepp_1_1EntitySpawner_html_aa95a0079b9e9408d97f384b1531b336d"><div class="ttname"><a href="classepp_1_1EntitySpawner.html#aa95a0079b9e9408d97f384b1531b336d">epp::EntitySpawner::moveEntitiesHere</a></div><div class="ttdeci">void moveEntitiesHere(EntitySpawner &amp;originSpawner, EntityList &amp;entList, bool resetOriginReserved, UserCreationFn_t fn)</div><div class="ttdoc">Reuses the data from originSpawner.</div></div>
+<div class="ttc" id="astructepp_1_1SpawnerId_html"><div class="ttname"><a href="structepp_1_1SpawnerId.html">epp::SpawnerId</a></div><div class="ttdef"><b>Definition:</b> EntityList.h:20</div></div>
+<div class="ttc" id="aclassepp_1_1CPool_html"><div class="ttname"><a href="classepp_1_1CPool.html">epp::CPool</a></div><div class="ttdef"><b>Definition:</b> CPool.h:9</div></div>
 <div class="ttc" id="aclassepp_1_1EntitySpawner_1_1Creator_html"><div class="ttname"><a href="classepp_1_1EntitySpawner_1_1Creator.html">epp::EntitySpawner::Creator</a></div><div class="ttdef"><b>Definition:</b> EntitySpawner.h:32</div></div>
 <div class="ttc" id="aclassepp_1_1EntitySpawner_1_1Creator_html_a1f8bb53cbcb8ba21685e329a8f52895d"><div class="ttname"><a href="classepp_1_1EntitySpawner_1_1Creator.html#a1f8bb53cbcb8ba21685e329a8f52895d">epp::EntitySpawner::Creator::construct</a></div><div class="ttdeci">CType &amp; construct(Args &amp;&amp;... args)</div><div class="ttdef"><b>Definition:</b> EntitySpawner.h:38</div></div>
-<div class="ttc" id="astructepp_1_1Entity_html"><div class="ttname"><a href="structepp_1_1Entity.html">epp::Entity</a></div><div class="ttdef"><b>Definition:</b> EntityList.h:55</div></div>
+<div class="ttc" id="astructepp_1_1Entity_html"><div class="ttname"><a href="structepp_1_1Entity.html">epp::Entity</a></div><div class="ttdef"><b>Definition:</b> EntityList.h:56</div></div>
 <div class="ttc" id="aclassepp_1_1CMask_html"><div class="ttname"><a href="classepp_1_1CMask.html">epp::CMask</a></div><div class="ttdef"><b>Definition:</b> CMask.h:11</div></div>
-<div class="ttc" id="aclassepp_1_1EntityList_html"><div class="ttname"><a href="classepp_1_1EntityList.html">epp::EntityList</a></div><div class="ttdef"><b>Definition:</b> EntityList.h:94</div></div>
+<div class="ttc" id="aclassepp_1_1EntityList_html"><div class="ttname"><a href="classepp_1_1EntityList.html">epp::EntityList</a></div><div class="ttdef"><b>Definition:</b> EntityList.h:95</div></div>
+<div class="ttc" id="aclassepp_1_1EntitySpawner_1_1Creator_html_ac34dd537444547900b038b6261137bab"><div class="ttname"><a href="classepp_1_1EntitySpawner_1_1Creator.html#ac34dd537444547900b038b6261137bab">epp::EntitySpawner::Creator::~Creator</a></div><div class="ttdeci">~Creator()</div><div class="ttdef"><b>Definition:</b> EntitySpawner.h:57</div></div>
 <div class="ttc" id="aclassepp_1_1Archetype_html"><div class="ttname"><a href="classepp_1_1Archetype.html">epp::Archetype</a></div><div class="ttdef"><b>Definition:</b> Archetype.h:10</div></div>
 <div class="ttc" id="aclassepp_1_1Notifier_html"><div class="ttname"><a href="classepp_1_1Notifier.html">epp::Notifier</a></div><div class="ttdef"><b>Definition:</b> Notifier.h:10</div></div>
 <div class="ttc" id="aclassepp_1_1EntitySpawner_html"><div class="ttname"><a href="classepp_1_1EntitySpawner.html">epp::EntitySpawner</a></div><div class="ttdef"><b>Definition:</b> EntitySpawner.h:30</div></div>
 <div class="ttc" id="astructepp_1_1Pool_html"><div class="ttname"><a href="structepp_1_1Pool.html">epp::Pool&lt; Entity &gt;</a></div></div>
+<div class="ttc" id="aclassepp_1_1EntitySpawner_1_1Creator_html_a873cf9d64c04664f2a8a92a15158033c"><div class="ttname"><a href="classepp_1_1EntitySpawner_1_1Creator.html#a873cf9d64c04664f2a8a92a15158033c">epp::EntitySpawner::Creator::spawner</a></div><div class="ttdeci">EntitySpawner &amp; spawner</div><div class="ttdef"><b>Definition:</b> EntitySpawner.h:68</div></div>
 <div class="ttc" id="astructepp_1_1ComponentId_html"><div class="ttname"><a href="structepp_1_1ComponentId.html">epp::ComponentId</a></div><div class="ttdef"><b>Definition:</b> Component.h:11</div></div>
 <div class="ttc" id="astructepp_1_1EntityEvent_html"><div class="ttname"><a href="structepp_1_1EntityEvent.html">epp::EntityEvent</a></div><div class="ttdef"><b>Definition:</b> EntitySpawner.h:13</div></div>
-<div class="ttc" id="astructepp_1_1PoolIdx_html"><div class="ttname"><a href="structepp_1_1PoolIdx.html">epp::PoolIdx</a></div><div class="ttdef"><b>Definition:</b> EntityList.h:9</div></div>
+<div class="ttc" id="astructepp_1_1PoolIdx_html"><div class="ttname"><a href="structepp_1_1PoolIdx.html">epp::PoolIdx</a></div><div class="ttdef"><b>Definition:</b> EntityList.h:10</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

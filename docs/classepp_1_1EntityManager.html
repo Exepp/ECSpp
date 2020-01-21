@@ -68,6 +68,9 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-types">Private Types</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classepp_1_1EntityManager-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">epp::EntityManager Class Reference</div>  </div>
@@ -76,22 +79,28 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad67129cb2bb9cb453be5d21364f4f91d"><td class="memItemLeft" align="right" valign="top"><a id="ad67129cb2bb9cb453be5d21364f4f91d"></a>
-<a class="el" href="structepp_1_1Entity.html">Entity</a>&#160;</td><td class="memItemRight" valign="bottom"><b>spawn</b> (<a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;arch, EntitySpawner::UserCreationFn_t const &amp;fn=([](<a class="el" href="classepp_1_1EntitySpawner_1_1Creator.html">EntitySpawner::Creator</a> &amp;&amp;) {}))</td></tr>
-<tr class="separator:ad67129cb2bb9cb453be5d21364f4f91d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5ca8f2efdd761d78334a42facfabc758"><td class="memItemLeft" align="right" valign="top"><a id="a5ca8f2efdd761d78334a42facfabc758"></a>
-std::pair&lt; EPoolCIter_t, EPoolCIter_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>spawn</b> (<a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;arch, std::size_t n, EntitySpawner::UserCreationFn_t const &amp;fn=([](<a class="el" href="classepp_1_1EntitySpawner_1_1Creator.html">EntitySpawner::Creator</a> &amp;&amp;) {}))</td></tr>
-<tr class="separator:a5ca8f2efdd761d78334a42facfabc758"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0521c8c9568f1ef50b2a13bc0f466e17"><td class="memItemLeft" align="right" valign="top"><a id="a0521c8c9568f1ef50b2a13bc0f466e17"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>changeArchetype</b> (<a class="el" href="structepp_1_1Entity.html">Entity</a> ent, <a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;newArchetype, EntitySpawner::UserCreationFn_t const &amp;fn=([](<a class="el" href="classepp_1_1EntitySpawner_1_1Creator.html">EntitySpawner::Creator</a> &amp;&amp;) {}))</td></tr>
-<tr class="separator:a0521c8c9568f1ef50b2a13bc0f466e17"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2d1f8d871426cdb0d690423e2e53a717"><td class="memTemplParams" colspan="2"><a id="a2d1f8d871426cdb0d690423e2e53a717"></a>
-template&lt;typename Iterator &gt; </td></tr>
-<tr class="memitem:a2d1f8d871426cdb0d690423e2e53a717"><td class="memTemplItemLeft" align="right" valign="top">Iterator&#160;</td><td class="memTemplItemRight" valign="bottom"><b>changeArchetype</b> (Iterator it, <a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;newArchetype, EntitySpawner::UserCreationFn_t const &amp;fn=([](<a class="el" href="classepp_1_1EntitySpawner_1_1Creator.html">EntitySpawner::Creator</a> &amp;&amp;) {}))</td></tr>
-<tr class="separator:a2d1f8d871426cdb0d690423e2e53a717"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a22bcca7da714d912c4a0fa835d5197be"><td class="memItemLeft" align="right" valign="top"><a id="a22bcca7da714d912c4a0fa835d5197be"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>prepareToSpawn</b> (<a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;arch, std::size_t n)</td></tr>
-<tr class="separator:a22bcca7da714d912c4a0fa835d5197be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1e10c9b5175fbfc1bf9637a92bfd7c3"><td class="memItemLeft" align="right" valign="top"><a id="ac1e10c9b5175fbfc1bf9637a92bfd7c3"></a>
+<a class="el" href="structepp_1_1Entity.html">Entity</a>&#160;</td><td class="memItemRight" valign="bottom"><b>spawn</b> (<a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;arch, EntitySpawner::UserCreationFn_t const &amp;fn=([](<a class="el" href="classepp_1_1EntitySpawner_1_1Creator.html">EntityCreator</a> &amp;&amp;) {}))</td></tr>
+<tr class="separator:ac1e10c9b5175fbfc1bf9637a92bfd7c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad79cf4ac3763d6454f75314d59db5225"><td class="memItemLeft" align="right" valign="top"><a id="ad79cf4ac3763d6454f75314d59db5225"></a>
+std::pair&lt; EPoolCIter_t, EPoolCIter_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>spawn</b> (<a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;arch, std::size_t n, EntitySpawner::UserCreationFn_t const &amp;fn=([](<a class="el" href="classepp_1_1EntitySpawner_1_1Creator.html">EntityCreator</a> &amp;&amp;) {}))</td></tr>
+<tr class="separator:ad79cf4ac3763d6454f75314d59db5225"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a023b179e8998015494c5a2addc4a607c"><td class="memItemLeft" align="right" valign="top"><a id="a023b179e8998015494c5a2addc4a607c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>changeArchetype</b> (<a class="el" href="structepp_1_1Entity.html">Entity</a> ent, <a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;newArchetype, EntitySpawner::UserCreationFn_t const &amp;fn=([](<a class="el" href="classepp_1_1EntitySpawner_1_1Creator.html">EntityCreator</a> &amp;&amp;) {}))</td></tr>
+<tr class="separator:a023b179e8998015494c5a2addc4a607c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a71c8030b6d2f8cdc64ea16565fa2a1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1EntityManager.html#a5a71c8030b6d2f8cdc64ea16565fa2a1">changeArchetype</a> (<a class="el" href="structepp_1_1Entity.html">Entity</a> ent, IdList_t toAdd, IdList_t toRemove=IdOfL&lt;&gt;(), EntitySpawner::UserCreationFn_t const &amp;fn=([](<a class="el" href="classepp_1_1EntitySpawner_1_1Creator.html">EntityCreator</a> &amp;&amp;) {}))</td></tr>
+<tr class="memdesc:a5a71c8030b6d2f8cdc64ea16565fa2a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes the archetype of ent, removing components from toRemove list and adding the ones from toAdd list.  <a href="classepp_1_1EntityManager.html#a5a71c8030b6d2f8cdc64ea16565fa2a1">More...</a><br /></td></tr>
+<tr class="separator:a5a71c8030b6d2f8cdc64ea16565fa2a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3293cd21b4b75a047991b619f21c1af5"><td class="memTemplParams" colspan="2">template&lt;typename Iterator &gt; </td></tr>
+<tr class="memitem:a3293cd21b4b75a047991b619f21c1af5"><td class="memTemplItemLeft" align="right" valign="top">Iterator&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classepp_1_1EntityManager.html#a3293cd21b4b75a047991b619f21c1af5">changeArchetype</a> (Iterator it, <a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;newArchetype, EntitySpawner::UserCreationFn_t const &amp;fn=([](<a class="el" href="classepp_1_1EntitySpawner_1_1Creator.html">EntityCreator</a> &amp;&amp;) {}))</td></tr>
+<tr class="memdesc:a3293cd21b4b75a047991b619f21c1af5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes the archetype of the entity associated with the iterator and returns the next valid one.  <a href="classepp_1_1EntityManager.html#a3293cd21b4b75a047991b619f21c1af5">More...</a><br /></td></tr>
+<tr class="separator:a3293cd21b4b75a047991b619f21c1af5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4d7803534ef6c5676260fde65bacd55"><td class="memItemLeft" align="right" valign="top">EPoolCIter_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1EntityManager.html#ae4d7803534ef6c5676260fde65bacd55">changeArchetype</a> (EPoolCIter_t const &amp;it, <a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;newArchetype, EntitySpawner::UserCreationFn_t const &amp;fn=([](<a class="el" href="classepp_1_1EntitySpawner_1_1Creator.html">EntityCreator</a> &amp;&amp;) {}))</td></tr>
+<tr class="memdesc:ae4d7803534ef6c5676260fde65bacd55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes the archetype of the entity associated with the iterator and returns the next valid one.  <a href="classepp_1_1EntityManager.html#ae4d7803534ef6c5676260fde65bacd55">More...</a><br /></td></tr>
+<tr class="separator:ae4d7803534ef6c5676260fde65bacd55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19eb669aa9b1047945f1022afa77568f"><td class="memItemLeft" align="right" valign="top">std::pair&lt; EPoolCIter_t, EPoolCIter_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1EntityManager.html#a19eb669aa9b1047945f1022afa77568f">changeArchetype</a> (<a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;oldArchetype, <a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;newArchetype, bool resetOldReserved=true, EntitySpawner::UserCreationFn_t const &amp;fn=([](<a class="el" href="classepp_1_1EntitySpawner_1_1Creator.html">EntityCreator</a> &amp;&amp;) {}))</td></tr>
+<tr class="memdesc:a19eb669aa9b1047945f1022afa77568f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes the archetype of entities of oldArchetype to newArchetype.  <a href="classepp_1_1EntityManager.html#a19eb669aa9b1047945f1022afa77568f">More...</a><br /></td></tr>
+<tr class="separator:a19eb669aa9b1047945f1022afa77568f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1c967e0dfdd36039e965f3d8c4a71642"><td class="memItemLeft" align="right" valign="top"><a id="a1c967e0dfdd36039e965f3d8c4a71642"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>destroy</b> (<a class="el" href="structepp_1_1Entity.html">Entity</a> ent)</td></tr>
 <tr class="separator:a1c967e0dfdd36039e965f3d8c4a71642"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -108,6 +117,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> ()</td></tr
 <tr class="memitem:acd18d37f4a71d468ce96af9452f3bd91"><td class="memItemLeft" align="right" valign="top"><a id="acd18d37f4a71d468ce96af9452f3bd91"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> (<a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;arch)</td></tr>
 <tr class="separator:acd18d37f4a71d468ce96af9452f3bd91"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22bcca7da714d912c4a0fa835d5197be"><td class="memItemLeft" align="right" valign="top"><a id="a22bcca7da714d912c4a0fa835d5197be"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>prepareToSpawn</b> (<a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;arch, std::size_t n)</td></tr>
+<tr class="separator:a22bcca7da714d912c4a0fa835d5197be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae2305ba9c7e6421d1df6e3403b1e571d"><td class="memTemplParams" colspan="2"><a id="ae2305ba9c7e6421d1df6e3403b1e571d"></a>
 template&lt;typename... CTypes&gt; </td></tr>
 <tr class="memitem:ae2305ba9c7e6421d1df6e3403b1e571d"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>updateCollection</b> (<a class="el" href="classepp_1_1EntityCollection.html">EntityCollection</a>&lt; CTypes... &gt; &amp;collection)</td></tr>
@@ -134,7 +146,263 @@ std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>size</b> () co
 <tr class="memitem:a2ad8d3dc26823d236320d7fe0097467d"><td class="memItemLeft" align="right" valign="top"><a id="a2ad8d3dc26823d236320d7fe0097467d"></a>
 std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>size</b> (<a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;arch) const</td></tr>
 <tr class="separator:a2ad8d3dc26823d236320d7fe0097467d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-types"></a>
+Private Types</h2></td></tr>
+<tr class="memitem:a8c42f1c04c98ad842846619e3d49e9da"><td class="memItemLeft" align="right" valign="top"><a id="a8c42f1c04c98ad842846619e3d49e9da"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>Spawners_t</b> = std::deque&lt; <a class="el" href="classepp_1_1EntitySpawner.html">EntitySpawner</a> &gt;</td></tr>
+<tr class="separator:a8c42f1c04c98ad842846619e3d49e9da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb21a688409fa17a14b08eeaec253615"><td class="memItemLeft" align="right" valign="top"><a id="adb21a688409fa17a14b08eeaec253615"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>EntityPool_t</b> = <a class="el" href="structepp_1_1Pool.html">EntitySpawner::EntityPool_t</a></td></tr>
+<tr class="separator:adb21a688409fa17a14b08eeaec253615"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a906e0948c83df7b95c1a3f6a10bd2d86"><td class="memItemLeft" align="right" valign="top"><a id="a906e0948c83df7b95c1a3f6a10bd2d86"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>EPoolCIter_t</b> = EntitySpawner::EntityPool_t::Container_t::const_iterator</td></tr>
+<tr class="separator:a906e0948c83df7b95c1a3f6a10bd2d86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1d44f96e0e7b25e2b986268c77d239d"><td class="memItemLeft" align="right" valign="top"><a id="ad1d44f96e0e7b25e2b986268c77d239d"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>IdList_t</b> = decltype(IdOfL&lt;&gt;())</td></tr>
+<tr class="separator:ad1d44f96e0e7b25e2b986268c77d239d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a0bd1cadee4d955996b54cac47e2b7f6c"><td class="memItemLeft" align="right" valign="top"><a id="a0bd1cadee4d955996b54cac47e2b7f6c"></a>
+<a class="el" href="classepp_1_1EntitySpawner.html">EntitySpawner</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>_prepareToSpawn</b> (<a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;arch, std::size_t n)</td></tr>
+<tr class="separator:a0bd1cadee4d955996b54cac47e2b7f6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8a882602c183ee85090317a14ec7257"><td class="memItemLeft" align="right" valign="top"><a id="af8a882602c183ee85090317a14ec7257"></a>
+<a class="el" href="classepp_1_1EntitySpawner.html">EntitySpawner</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getSpawner</b> (<a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;arch)</td></tr>
+<tr class="separator:af8a882602c183ee85090317a14ec7257"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86f037aa34f333d964666255e8116a7c"><td class="memItemLeft" align="right" valign="top"><a id="a86f037aa34f333d964666255e8116a7c"></a>
+<a class="el" href="classepp_1_1EntitySpawner.html">EntitySpawner</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getSpawner</b> (<a class="el" href="structepp_1_1Entity.html">Entity</a> ent)</td></tr>
+<tr class="separator:a86f037aa34f333d964666255e8116a7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe4508619ee16c47304325abbad1c114"><td class="memItemLeft" align="right" valign="top"><a id="abe4508619ee16c47304325abbad1c114"></a>
+<a class="el" href="classepp_1_1EntitySpawner.html">EntitySpawner</a> const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getSpawner</b> (<a class="el" href="structepp_1_1Entity.html">Entity</a> ent) const</td></tr>
+<tr class="separator:abe4508619ee16c47304325abbad1c114"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c64d31ccf090406b660b394b83aa3f2"><td class="memItemLeft" align="right" valign="top"><a id="a6c64d31ccf090406b660b394b83aa3f2"></a>
+Spawners_t::iterator&#160;</td><td class="memItemRight" valign="bottom"><b>findSpawner</b> (<a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;arch)</td></tr>
+<tr class="separator:a6c64d31ccf090406b660b394b83aa3f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada4c26c73659bb7ed505fbfc1b0f7732"><td class="memItemLeft" align="right" valign="top"><a id="ada4c26c73659bb7ed505fbfc1b0f7732"></a>
+Spawners_t::const_iterator&#160;</td><td class="memItemRight" valign="bottom"><b>findSpawner</b> (<a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;arch) const</td></tr>
+<tr class="separator:ada4c26c73659bb7ed505fbfc1b0f7732"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a05250b6de4f4bc7aafa518feb99bef2e"><td class="memItemLeft" align="right" valign="top"><a id="a05250b6de4f4bc7aafa518feb99bef2e"></a>
+Spawners_t&#160;</td><td class="memItemRight" valign="bottom"><b>spawners</b></td></tr>
+<tr class="separator:a05250b6de4f4bc7aafa518feb99bef2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed0b1bee18f1d193af3b9fd1294b113b"><td class="memItemLeft" align="right" valign="top"><a id="aed0b1bee18f1d193af3b9fd1294b113b"></a>
+<a class="el" href="classepp_1_1EntityList.html">EntityList</a>&#160;</td><td class="memItemRight" valign="bottom"><b>entList</b></td></tr>
+<tr class="separator:aed0b1bee18f1d193af3b9fd1294b113b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a19eb669aa9b1047945f1022afa77568f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19eb669aa9b1047945f1022afa77568f">&#9670;&nbsp;</a></span>changeArchetype() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::pair&lt;EPoolCIter_t, EPoolCIter_t&gt; epp::EntityManager::changeArchetype </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;&#160;</td>
+          <td class="paramname"><em>oldArchetype</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;&#160;</td>
+          <td class="paramname"><em>newArchetype</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>resetOldReserved</em> = <code>true</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">EntitySpawner::UserCreationFn_t const &amp;&#160;</td>
+          <td class="paramname"><em>fn</em> = <code>([](<a class="el" href="classepp_1_1EntitySpawner_1_1Creator.html">EntityCreator</a>&#160;&amp;&amp;)&#160;{})</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Changes the archetype of entities of oldArchetype to newArchetype. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">oldArchetype</td><td>One of archetypes that were used to spawn entities during this application (throws for other archetypes) </td></tr>
+    <tr><td class="paramname">newArchetype</td><td>Any archetype </td></tr>
+    <tr><td class="paramname">fn</td><td>A callable object that can use the Creator instance to construct the added components </td></tr>
+    <tr><td class="paramname">resetOldReserved</td><td>Specifies whether memory reserved in the spawner of oldArchetype will be reset (only if that spawner is not empty) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a5a71c8030b6d2f8cdc64ea16565fa2a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a71c8030b6d2f8cdc64ea16565fa2a1">&#9670;&nbsp;</a></span>changeArchetype() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void epp::EntityManager::changeArchetype </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structepp_1_1Entity.html">Entity</a>&#160;</td>
+          <td class="paramname"><em>ent</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">IdList_t&#160;</td>
+          <td class="paramname"><em>toAdd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">IdList_t&#160;</td>
+          <td class="paramname"><em>toRemove</em> = <code>IdOfL&lt;&gt;()</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">EntitySpawner::UserCreationFn_t const &amp;&#160;</td>
+          <td class="paramname"><em>fn</em> = <code>([](<a class="el" href="classepp_1_1EntitySpawner_1_1Creator.html">EntityCreator</a>&#160;&amp;&amp;)&#160;{})</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Changes the archetype of ent, removing components from toRemove list and adding the ones from toAdd list. </p>
+<p>There are no overloaded versions of this function (for iterators) on purpose - it is more optimal to create a separate archetype for those situations </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ent</td><td>A valid entity </td></tr>
+    <tr><td class="paramname">toAdd</td><td>Components that will be added to ent (or kept it these are already there). toAdd has a priority over toRemove </td></tr>
+    <tr><td class="paramname">toRemove</td><td>Components that will be removed from ent (except for the ones specified in toAdd) </td></tr>
+    <tr><td class="paramname">fn</td><td>A callable object that can use the Creator instance to construct the added components </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ae4d7803534ef6c5676260fde65bacd55"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4d7803534ef6c5676260fde65bacd55">&#9670;&nbsp;</a></span>changeArchetype() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">EPoolCIter_t epp::EntityManager::changeArchetype </td>
+          <td>(</td>
+          <td class="paramtype">EPoolCIter_t const &amp;&#160;</td>
+          <td class="paramname"><em>it</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;&#160;</td>
+          <td class="paramname"><em>newArchetype</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">EntitySpawner::UserCreationFn_t const &amp;&#160;</td>
+          <td class="paramname"><em>fn</em> = <code>([](<a class="el" href="classepp_1_1EntitySpawner_1_1Creator.html">EntityCreator</a>&amp;&amp;)&#160;{})</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Changes the archetype of the entity associated with the iterator and returns the next valid one. </p>
+<p>There are no overloaded versions of this function (for iterators) on purpose - it is more optimal to create a separate archetype for those situations </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">it</td><td>A valid and non-end iterator </td></tr>
+    <tr><td class="paramname">newArchetype</td><td>Any archetype - a new archetype of the entity associated with the iterator <br  />
+ </td></tr>
+    <tr><td class="paramname">fn</td><td>A callable object that can use the Creator instance to construct the added components </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a3293cd21b4b75a047991b619f21c1af5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3293cd21b4b75a047991b619f21c1af5">&#9670;&nbsp;</a></span>changeArchetype() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Iterator epp::EntityManager::changeArchetype </td>
+          <td>(</td>
+          <td class="paramtype">Iterator&#160;</td>
+          <td class="paramname"><em>it</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;&#160;</td>
+          <td class="paramname"><em>newArchetype</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">EntitySpawner::UserCreationFn_t const &amp;&#160;</td>
+          <td class="paramname"><em>fn</em> = <code>([](<a class="el" href="classepp_1_1EntitySpawner_1_1Creator.html">EntityCreator</a>&amp;&amp;)&#160;{})</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Changes the archetype of the entity associated with the iterator and returns the next valid one. </p>
+<p>There are no overloaded versions of this function (for iterators) on purpose - it is more optimal to create a separate archetype for those situations </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">it</td><td>A valid and non-end iterator </td></tr>
+    <tr><td class="paramname">newArchetype</td><td>Any archetype - a new archetype of the entity associated with the iterator <br  />
+ </td></tr>
+    <tr><td class="paramname">fn</td><td>A callable object that can use the Creator instance to construct the added components </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>include/ECSpp/<a class="el" href="EntityManager_8h_source.html">EntityManager.h</a></li>
 </ul>

@@ -71,6 +71,9 @@ $(function() {
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pri-types">Private Types</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classepp_1_1EntitySpawner-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">epp::EntitySpawner Class Reference</div>  </div>
@@ -139,6 +142,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>fitNextN</b> (EntityL
 <tr class="memitem:ab8166674e381bdcd6d168ac44a6f2149"><td class="memItemLeft" align="right" valign="top"><a id="ab8166674e381bdcd6d168ac44a6f2149"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>moveEntityHere</b> (<a class="el" href="structepp_1_1Entity.html">Entity</a> ent, <a class="el" href="classepp_1_1EntityList.html">EntityList</a> &amp;entList, <a class="el" href="classepp_1_1EntitySpawner.html">EntitySpawner</a> &amp;originSpawner, UserCreationFn_t const &amp;fn)</td></tr>
 <tr class="separator:ab8166674e381bdcd6d168ac44a6f2149"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa95a0079b9e9408d97f384b1531b336d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1EntitySpawner.html#aa95a0079b9e9408d97f384b1531b336d">moveEntitiesHere</a> (<a class="el" href="classepp_1_1EntitySpawner.html">EntitySpawner</a> &amp;originSpawner, <a class="el" href="classepp_1_1EntityList.html">EntityList</a> &amp;entList, bool resetOriginReserved, UserCreationFn_t fn)</td></tr>
+<tr class="memdesc:aa95a0079b9e9408d97f384b1531b336d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reuses the data from originSpawner.  <a href="classepp_1_1EntitySpawner.html#aa95a0079b9e9408d97f384b1531b336d">More...</a><br /></td></tr>
+<tr class="separator:aa95a0079b9e9408d97f384b1531b336d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a055f2f91dee11893837fd80f8a871fef"><td class="memItemLeft" align="right" valign="top"><a id="a055f2f91dee11893837fd80f8a871fef"></a>
 <a class="el" href="classepp_1_1CPool.html">CPool</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getPool</b> (<a class="el" href="structepp_1_1ComponentId.html">ComponentId</a> cId)</td></tr>
 <tr class="separator:a055f2f91dee11893837fd80f8a871fef"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -174,6 +180,27 @@ const <a class="el" href="structepp_1_1SpawnerId.html">SpawnerId</a>&#160;</td><
 const <a class="el" href="classepp_1_1CMask.html">CMask</a>&#160;</td><td class="memItemRight" valign="bottom"><b>mask</b></td></tr>
 <tr class="separator:a52f25da6462a9bd8e9054b72d9cadbaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-types"></a>
+Private Types</h2></td></tr>
+<tr class="memitem:ab53773748cfc9e094256b8572efcc79a"><td class="memItemLeft" align="right" valign="top"><a id="ab53773748cfc9e094256b8572efcc79a"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>CPools_t</b> = std::vector&lt; <a class="el" href="classepp_1_1CPool.html">CPool</a> &gt;</td></tr>
+<tr class="separator:ab53773748cfc9e094256b8572efcc79a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:ae2cc5645dd48626f8beef87a6dafa38e"><td class="memItemLeft" align="right" valign="top"><a id="ae2cc5645dd48626f8beef87a6dafa38e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>removeFromEntityPool</b> (<a class="el" href="structepp_1_1PoolIdx.html">PoolIdx</a> idx, <a class="el" href="classepp_1_1EntityList.html">EntityList</a> &amp;entList)</td></tr>
+<tr class="separator:ae2cc5645dd48626f8beef87a6dafa38e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:aa9c56cbd629ed2089bfe1e68a0c3ac1b"><td class="memItemLeft" align="right" valign="top"><a id="aa9c56cbd629ed2089bfe1e68a0c3ac1b"></a>
+<a class="el" href="structepp_1_1Pool.html">EntityPool_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>entityPool</b></td></tr>
+<tr class="separator:aa9c56cbd629ed2089bfe1e68a0c3ac1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4d8012e2aeab1f7f585191ca51b422e"><td class="memItemLeft" align="right" valign="top"><a id="af4d8012e2aeab1f7f585191ca51b422e"></a>
+CPools_t&#160;</td><td class="memItemRight" valign="bottom"><b>cPools</b></td></tr>
+<tr class="separator:af4d8012e2aeab1f7f585191ca51b422e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pro_methods_classepp_1_1Notifier"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classepp_1_1Notifier')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classepp_1_1Notifier.html">epp::Notifier&lt; Event &gt;</a></td></tr>
@@ -181,6 +208,55 @@ Additional Inherited Members</h2></td></tr>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>notify</b> (Event const &amp;event) const</td></tr>
 <tr class="separator:aaeb2fe0955e8f29864ddaeb20527581d inherit pro_methods_classepp_1_1Notifier"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="aa95a0079b9e9408d97f384b1531b336d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa95a0079b9e9408d97f384b1531b336d">&#9670;&nbsp;</a></span>moveEntitiesHere()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void epp::EntitySpawner::moveEntitiesHere </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classepp_1_1EntitySpawner.html">EntitySpawner</a> &amp;&#160;</td>
+          <td class="paramname"><em>originSpawner</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classepp_1_1EntityList.html">EntityList</a> &amp;&#160;</td>
+          <td class="paramname"><em>entList</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>resetOriginReserved</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">UserCreationFn_t&#160;</td>
+          <td class="paramname"><em>fn</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reuses the data from originSpawner. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">resetOriginReserved</td><td>Specifies whether originSpawner's reserved memory will be reset (only if originSpawner is not empty) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>include/ECSpp/Internal/<a class="el" href="EntitySpawner_8h_source.html">EntitySpawner.h</a></li>
 </ul>

@@ -69,6 +69,7 @@ $(function() {
   <div class="summary">
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classepp_1_1CMask-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">epp::CMask Class Reference</div>  </div>
@@ -77,12 +78,12 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a040229fc8c9be9b724f5958baf09b426"><td class="memItemLeft" align="right" valign="top"><a id="a040229fc8c9be9b724f5958baf09b426"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>Idx_t</b> = <a class="el" href="structepp_1_1ComponentId.html">ComponentId</a></td></tr>
-<tr class="separator:a040229fc8c9be9b724f5958baf09b426"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a597a933cbe26474adcbcc0ac5adeda08"><td class="memItemLeft" align="right" valign="top"><a id="a597a933cbe26474adcbcc0ac5adeda08"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>IdxList_t</b> = std::initializer_list&lt; <a class="el" href="structepp_1_1ComponentId.html">Idx_t</a> &gt;</td></tr>
-<tr class="separator:a597a933cbe26474adcbcc0ac5adeda08"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d0cbe260e80f43944ee4cf139387f64"><td class="memItemLeft" align="right" valign="top"><a id="a2d0cbe260e80f43944ee4cf139387f64"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>IdxList_t</b> = decltype(IdOfL&lt;&gt;())</td></tr>
+<tr class="separator:a2d0cbe260e80f43944ee4cf139387f64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3f760175f9a9800782b7bd57bf1b209"><td class="memItemLeft" align="right" valign="top"><a id="ad3f760175f9a9800782b7bd57bf1b209"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>Idx_t</b> = IdxList_t::value_type</td></tr>
+<tr class="separator:ad3f760175f9a9800782b7bd57bf1b209"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a81c6bf5c2aee5584a27442bf936a347e"><td class="memItemLeft" align="right" valign="top"><a id="a81c6bf5c2aee5584a27442bf936a347e"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>Bitset_t</b> = std::bitset&lt; CMetadata::MaxRegisteredComponents &gt;</td></tr>
 <tr class="separator:a81c6bf5c2aee5584a27442bf936a347e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -105,13 +106,13 @@ Public Member Functions</h2></td></tr>
 <a class="el" href="classepp_1_1CMask.html">CMask</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classepp_1_1CMask.html">CMask</a> const &amp;)=default</td></tr>
 <tr class="separator:a98a0a6e3f39828169a6da42d17b74222"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aff8b0bd8d29885040e65d16986c90b0c"><td class="memItemLeft" align="right" valign="top"><a id="aff8b0bd8d29885040e65d16986c90b0c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>set</b> (<a class="el" href="structepp_1_1ComponentId.html">Idx_t</a> bitIndex)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>set</b> (Idx_t bitIndex)</td></tr>
 <tr class="separator:aff8b0bd8d29885040e65d16986c90b0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aae8e1a3dc15fc3f4b7d49fdbd820d605"><td class="memItemLeft" align="right" valign="top"><a id="aae8e1a3dc15fc3f4b7d49fdbd820d605"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>set</b> (IdxList_t list)</td></tr>
 <tr class="separator:aae8e1a3dc15fc3f4b7d49fdbd820d605"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a958f33824898c5dd13fdf82054a42c25"><td class="memItemLeft" align="right" valign="top"><a id="a958f33824898c5dd13fdf82054a42c25"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>unset</b> (<a class="el" href="structepp_1_1ComponentId.html">Idx_t</a> bitIndex)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>unset</b> (Idx_t bitIndex)</td></tr>
 <tr class="separator:a958f33824898c5dd13fdf82054a42c25"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa5c50bbccd1ab04bda0900146a86c349"><td class="memItemLeft" align="right" valign="top"><a id="aa5c50bbccd1ab04bda0900146a86c349"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>unset</b> (IdxList_t list)</td></tr>
@@ -123,7 +124,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>unset</b> (IdxList_t 
 void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> ()</td></tr>
 <tr class="separator:ac594331ce970374fe84822a8aa050300"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adbdf15fdd83d649f650e5801ad00ce1f"><td class="memItemLeft" align="right" valign="top"><a id="adbdf15fdd83d649f650e5801ad00ce1f"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>get</b> (<a class="el" href="structepp_1_1ComponentId.html">Idx_t</a> bitIndex) const</td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>get</b> (Idx_t bitIndex) const</td></tr>
 <tr class="separator:adbdf15fdd83d649f650e5801ad00ce1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad63f6eb27581a441df886bf9da1e3d9d"><td class="memItemLeft" align="right" valign="top"><a id="ad63f6eb27581a441df886bf9da1e3d9d"></a>
 std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>getSetCount</b> () const</td></tr>
@@ -149,6 +150,12 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator==</b> (<a cl
 <tr class="memitem:a33423686ff86104067c6166ef86ae315"><td class="memItemLeft" align="right" valign="top"><a id="a33423686ff86104067c6166ef86ae315"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator!=</b> (<a class="el" href="classepp_1_1CMask.html">CMask</a> const &amp;rhs) const</td></tr>
 <tr class="separator:a33423686ff86104067c6166ef86ae315"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:aeaaeb0bdcc24c502117141a875a6e348"><td class="memItemLeft" align="right" valign="top"><a id="aeaaeb0bdcc24c502117141a875a6e348"></a>
+Bitset_t&#160;</td><td class="memItemRight" valign="bottom"><b>bitset</b></td></tr>
+<tr class="separator:aeaaeb0bdcc24c502117141a875a6e348"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>include/ECSpp/Internal/<a class="el" href="CMask_8h_source.html">CMask.h</a></li>

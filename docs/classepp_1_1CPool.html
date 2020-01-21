@@ -68,6 +68,9 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-types">Private Types</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classepp_1_1CPool-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">epp::CPool Class Reference<span class="mlabels"><span class="mlabel">final</span></span></div>  </div>
@@ -76,9 +79,9 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a3016062239c37162a1da5b48cf042655"><td class="memItemLeft" align="right" valign="top"><a id="a3016062239c37162a1da5b48cf042655"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>CPool</b> (<a class="el" href="structepp_1_1ComponentId.html">ComponentId</a> cId)</td></tr>
-<tr class="separator:a3016062239c37162a1da5b48cf042655"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a496aa85b41f4dae6c45f7c57741db46a"><td class="memItemLeft" align="right" valign="top"><a id="a496aa85b41f4dae6c45f7c57741db46a"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>CPool</b> (CId_t cId)</td></tr>
+<tr class="separator:a496aa85b41f4dae6c45f7c57741db46a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3922714d2f749e7253eb2cb45908f60a"><td class="memItemLeft" align="right" valign="top"><a id="a3922714d2f749e7253eb2cb45908f60a"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>CPool</b> (<a class="el" href="classepp_1_1CPool.html">CPool</a> &amp;&amp;rval)</td></tr>
 <tr class="separator:a3922714d2f749e7253eb2cb45908f60a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -94,15 +97,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab0fc90e080eb4e52fdb5e8c67deb6d3d"><td class="memItemLeft" align="right" valign="top"><a id="ab0fc90e080eb4e52fdb5e8c67deb6d3d"></a>
 void *&#160;</td><td class="memItemRight" valign="bottom"><b>alloc</b> ()</td></tr>
 <tr class="separator:ab0fc90e080eb4e52fdb5e8c67deb6d3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab58b0eeb50fb4d31a836803b7469b624"><td class="memItemLeft" align="right" valign="top"><a id="ab58b0eeb50fb4d31a836803b7469b624"></a>
-void *&#160;</td><td class="memItemRight" valign="bottom"><b>create</b> ()</td></tr>
-<tr class="separator:ab58b0eeb50fb4d31a836803b7469b624"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1b94ff1b0e5b3672131a2f0bf6dcbb2b"><td class="memItemLeft" align="right" valign="top"><a id="a1b94ff1b0e5b3672131a2f0bf6dcbb2b"></a>
-void *&#160;</td><td class="memItemRight" valign="bottom"><b>create</b> (void *rVal)</td></tr>
-<tr class="separator:a1b94ff1b0e5b3672131a2f0bf6dcbb2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6bb29f8d03cf8bfd6b809d5a48025842"><td class="memItemLeft" align="right" valign="top"><a id="a6bb29f8d03cf8bfd6b809d5a48025842"></a>
+void *&#160;</td><td class="memItemRight" valign="bottom"><b>alloc</b> (Idx_t n)</td></tr>
+<tr class="separator:a6bb29f8d03cf8bfd6b809d5a48025842"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeae5547901ec6adc1950dea7c92f0b2c"><td class="memItemLeft" align="right" valign="top"><a id="aeae5547901ec6adc1950dea7c92f0b2c"></a>
 void *&#160;</td><td class="memItemRight" valign="bottom"><b>construct</b> (Idx_t idx)</td></tr>
 <tr class="separator:aeae5547901ec6adc1950dea7c92f0b2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6afab247e1dca6760724365574355872"><td class="memItemLeft" align="right" valign="top"><a id="a6afab247e1dca6760724365574355872"></a>
+void *&#160;</td><td class="memItemRight" valign="bottom"><b>construct</b> (Idx_t idx, void *rValComp)</td></tr>
+<tr class="separator:a6afab247e1dca6760724365574355872"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4a575ec5afac34ba428693f2b381664a"><td class="memItemLeft" align="right" valign="top"><a id="a4a575ec5afac34ba428693f2b381664a"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>destroy</b> (Idx_t i)</td></tr>
 <tr class="separator:a4a575ec5afac34ba428693f2b381664a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -112,18 +115,60 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>fitNextN</b> (Idx_t n
 <tr class="memitem:a4546a94f6425051c0f63ff9da8895834"><td class="memItemLeft" align="right" valign="top"><a id="a4546a94f6425051c0f63ff9da8895834"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> ()</td></tr>
 <tr class="separator:a4546a94f6425051c0f63ff9da8895834"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a46c003d7bffa9077df61fe44975d15"><td class="memItemLeft" align="right" valign="top"><a id="a5a46c003d7bffa9077df61fe44975d15"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>reset</b> ()</td></tr>
+<tr class="separator:a5a46c003d7bffa9077df61fe44975d15"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a117a33c97082e4f7d2142f8818dd5aa3"><td class="memItemLeft" align="right" valign="top"><a id="a117a33c97082e4f7d2142f8818dd5aa3"></a>
 void *&#160;</td><td class="memItemRight" valign="bottom"><b>operator[]</b> (Idx_t i)</td></tr>
 <tr class="separator:a117a33c97082e4f7d2142f8818dd5aa3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3776120ed4a8ed08f2ba8948ae280e58"><td class="memItemLeft" align="right" valign="top"><a id="a3776120ed4a8ed08f2ba8948ae280e58"></a>
-<a class="el" href="structepp_1_1ComponentId.html">ComponentId</a>&#160;</td><td class="memItemRight" valign="bottom"><b>getCId</b> () const</td></tr>
-<tr class="separator:a3776120ed4a8ed08f2ba8948ae280e58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcaa1d13b5368e0496aa3735f180174e"><td class="memItemLeft" align="right" valign="top"><a id="afcaa1d13b5368e0496aa3735f180174e"></a>
+CId_t&#160;</td><td class="memItemRight" valign="bottom"><b>getCId</b> () const</td></tr>
+<tr class="separator:afcaa1d13b5368e0496aa3735f180174e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae8e2f12cf23ebbcda96b56889aceb9fc"><td class="memItemLeft" align="right" valign="top"><a id="ae8e2f12cf23ebbcda96b56889aceb9fc"></a>
 std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>size</b> () const</td></tr>
 <tr class="separator:ae8e2f12cf23ebbcda96b56889aceb9fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a68a06a8d5a5827c46b99e58cd44d4ca0"><td class="memItemLeft" align="right" valign="top"><a id="a68a06a8d5a5827c46b99e58cd44d4ca0"></a>
-std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>reserved</b> () const</td></tr>
-<tr class="separator:a68a06a8d5a5827c46b99e58cd44d4ca0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9e298ce6457a0092240dc0d617da5c8"><td class="memItemLeft" align="right" valign="top"><a id="ac9e298ce6457a0092240dc0d617da5c8"></a>
+std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>capacity</b> () const</td></tr>
+<tr class="separator:ac9e298ce6457a0092240dc0d617da5c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-types"></a>
+Private Types</h2></td></tr>
+<tr class="memitem:a142b3c7a9c05acec4738d28a3daa931f"><td class="memItemLeft" align="right" valign="top"><a id="a142b3c7a9c05acec4738d28a3daa931f"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>CId_t</b> = decltype(IdOfL&lt;&gt;())::value_type</td></tr>
+<tr class="separator:a142b3c7a9c05acec4738d28a3daa931f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31d6cebe92a6e526a4cd3bfa95307159"><td class="memItemLeft" align="right" valign="top"><a id="a31d6cebe92a6e526a4cd3bfa95307159"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>Idx_t</b> = std::uint32_t</td></tr>
+<tr class="separator:a31d6cebe92a6e526a4cd3bfa95307159"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a75331bd01ac473bf30c27f7f8cd42324"><td class="memItemLeft" align="right" valign="top"><a id="a75331bd01ac473bf30c27f7f8cd42324"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>reserve</b> (Idx_t n)</td></tr>
+<tr class="separator:a75331bd01ac473bf30c27f7f8cd42324"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af82cf672e32061453f3bf714cfdbd1d2"><td class="memItemLeft" align="right" valign="top"><a id="af82cf672e32061453f3bf714cfdbd1d2"></a>
+void *&#160;</td><td class="memItemRight" valign="bottom"><b>addressAtIdx</b> (Idx_t i) const</td></tr>
+<tr class="separator:af82cf672e32061453f3bf714cfdbd1d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d0cdc3be54ef973619d3a29dc46d3c0"><td class="memItemLeft" align="right" valign="top"><a id="a6d0cdc3be54ef973619d3a29dc46d3c0"></a>
+void *&#160;</td><td class="memItemRight" valign="bottom"><b>addressAtIdx</b> (void *base, Idx_t i) const</td></tr>
+<tr class="separator:a6d0cdc3be54ef973619d3a29dc46d3c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:afd5e9bef90edf26b291ab4bfad606015"><td class="memItemLeft" align="right" valign="top"><a id="afd5e9bef90edf26b291ab4bfad606015"></a>
+void *&#160;</td><td class="memItemRight" valign="bottom"><b>data</b> = nullptr</td></tr>
+<tr class="separator:afd5e9bef90edf26b291ab4bfad606015"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8acaa07d6333fefb09cb769fd555e7b3"><td class="memItemLeft" align="right" valign="top"><a id="a8acaa07d6333fefb09cb769fd555e7b3"></a>
+Idx_t&#160;</td><td class="memItemRight" valign="bottom"><b>reserved</b> = 0</td></tr>
+<tr class="separator:a8acaa07d6333fefb09cb769fd555e7b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0cfe84b081c74d7c5e6bf8265904ea71"><td class="memItemLeft" align="right" valign="top"><a id="a0cfe84b081c74d7c5e6bf8265904ea71"></a>
+Idx_t&#160;</td><td class="memItemRight" valign="bottom"><b>dataUsed</b> = 0</td></tr>
+<tr class="separator:a0cfe84b081c74d7c5e6bf8265904ea71"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9bacb00a97be1ddbbd11f208f9408b2"><td class="memItemLeft" align="right" valign="top"><a id="ac9bacb00a97be1ddbbd11f208f9408b2"></a>
+<a class="el" href="structepp_1_1CMetadata.html">CMetadata</a>&#160;</td><td class="memItemRight" valign="bottom"><b>metadata</b></td></tr>
+<tr class="separator:ac9bacb00a97be1ddbbd11f208f9408b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada02ddde62f2b8ded873851c5a7df72c"><td class="memItemLeft" align="right" valign="top"><a id="ada02ddde62f2b8ded873851c5a7df72c"></a>
+const CId_t&#160;</td><td class="memItemRight" valign="bottom"><b>cId</b></td></tr>
+<tr class="separator:ada02ddde62f2b8ded873851c5a7df72c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>include/ECSpp/Internal/<a class="el" href="CPool_8h_source.html">CPool.h</a></li>

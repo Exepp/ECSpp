@@ -69,6 +69,8 @@ $(function() {
   <div class="summary">
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classepp_1_1EntityList-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">epp::EntityList Class Reference</div>  </div>
@@ -110,15 +112,36 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>freeAll</b> ()</td></
 <tr class="memitem:a6c80c0270c0af96ea7cbc105e0d9ab4e"><td class="memItemLeft" align="right" valign="top"><a id="a6c80c0270c0af96ea7cbc105e0d9ab4e"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>fitNextN</b> (Size_t n)</td></tr>
 <tr class="separator:a6c80c0270c0af96ea7cbc105e0d9ab4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac84ebe6df88d3d0f9268b8998a9fbaff"><td class="memItemLeft" align="right" valign="top"><a id="ac84ebe6df88d3d0f9268b8998a9fbaff"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>isValid</b> (<a class="el" href="structepp_1_1Entity.html">Entity</a> ent) const</td></tr>
-<tr class="separator:ac84ebe6df88d3d0f9268b8998a9fbaff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6b99683870936332862233ba43abadd1"><td class="memItemLeft" align="right" valign="top"><a id="a6b99683870936332862233ba43abadd1"></a>
 <a class="el" href="structepp_1_1EntityCell_1_1Occupied.html">EntityCell::Occupied</a>&#160;</td><td class="memItemRight" valign="bottom"><b>get</b> (<a class="el" href="structepp_1_1Entity.html">Entity</a> ent) const</td></tr>
 <tr class="separator:a6b99683870936332862233ba43abadd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac84ebe6df88d3d0f9268b8998a9fbaff"><td class="memItemLeft" align="right" valign="top"><a id="ac84ebe6df88d3d0f9268b8998a9fbaff"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isValid</b> (<a class="el" href="structepp_1_1Entity.html">Entity</a> ent) const</td></tr>
+<tr class="separator:ac84ebe6df88d3d0f9268b8998a9fbaff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a753e722a5c118b2ebfa78ec46b44ebf6"><td class="memItemLeft" align="right" valign="top"><a id="a753e722a5c118b2ebfa78ec46b44ebf6"></a>
 Size_t&#160;</td><td class="memItemRight" valign="bottom"><b>size</b> () const</td></tr>
 <tr class="separator:a753e722a5c118b2ebfa78ec46b44ebf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a7caaa2b6a72859364c71cf89446d9521"><td class="memItemLeft" align="right" valign="top"><a id="a7caaa2b6a72859364c71cf89446d9521"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>reserve</b> (Size_t newReserved)</td></tr>
+<tr class="separator:a7caaa2b6a72859364c71cf89446d9521"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a4efa4dc93f14430a5869c2f9bf5f21e7"><td class="memItemLeft" align="right" valign="top"><a id="a4efa4dc93f14430a5869c2f9bf5f21e7"></a>
+<a class="el" href="classepp_1_1EntityCell.html">EntityCell</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>data</b> = nullptr</td></tr>
+<tr class="separator:a4efa4dc93f14430a5869c2f9bf5f21e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f6bb2539d8bacbaae6dbe2ac34e0adb"><td class="memItemLeft" align="right" valign="top"><a id="a9f6bb2539d8bacbaae6dbe2ac34e0adb"></a>
+Size_t&#160;</td><td class="memItemRight" valign="bottom"><b>freeLeft</b> = 0</td></tr>
+<tr class="separator:a9f6bb2539d8bacbaae6dbe2ac34e0adb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af43bc45fdd5c2f6b25d7050a74d09baf"><td class="memItemLeft" align="right" valign="top"><a id="af43bc45fdd5c2f6b25d7050a74d09baf"></a>
+Size_t&#160;</td><td class="memItemRight" valign="bottom"><b>reserved</b> = 0</td></tr>
+<tr class="separator:af43bc45fdd5c2f6b25d7050a74d09baf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8fd5f074fb6d5c6af7053b8cad181bb8"><td class="memItemLeft" align="right" valign="top"><a id="a8fd5f074fb6d5c6af7053b8cad181bb8"></a>
+<a class="el" href="structepp_1_1ListIdx.html">ListIdx</a>&#160;</td><td class="memItemRight" valign="bottom"><b>freeIndex</b></td></tr>
+<tr class="separator:a8fd5f074fb6d5c6af7053b8cad181bb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>include/ECSpp/Internal/<a class="el" href="EntityList_8h_source.html">EntityList.h</a></li>

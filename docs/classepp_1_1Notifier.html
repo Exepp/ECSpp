@@ -70,6 +70,9 @@ $(function() {
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pri-types">Private Types</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="#pri-static-attribs">Static Private Attributes</a> &#124;
 <a href="classepp_1_1Notifier-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">epp::Notifier&lt; Event &gt; Class Template Reference</div>  </div>
@@ -114,6 +117,33 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:aaeb2fe0955e8f29864ddaeb20527581d"><td class="memItemLeft" align="right" valign="top"><a id="aaeb2fe0955e8f29864ddaeb20527581d"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>notify</b> (Event const &amp;event) const</td></tr>
 <tr class="separator:aaeb2fe0955e8f29864ddaeb20527581d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-types"></a>
+Private Types</h2></td></tr>
+<tr class="memitem:a5d9d58882a86a21412157ef0bc0804e9"><td class="memItemLeft" align="right" valign="top"><a id="a5d9d58882a86a21412157ef0bc0804e9"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>Callback_t</b> = std::function&lt; void(Event const  &amp;)&gt;</td></tr>
+<tr class="separator:a5d9d58882a86a21412157ef0bc0804e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb8a13516011a9068da5b1b1f77810fa"><td class="memItemLeft" align="right" valign="top"><a id="acb8a13516011a9068da5b1b1f77810fa"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>EvCbVec_t</b> = std::vector&lt; Callback_t &gt;</td></tr>
+<tr class="separator:acb8a13516011a9068da5b1b1f77810fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65532ededefd39f93797a9428701b2eb"><td class="memItemLeft" align="right" valign="top"><a id="a65532ededefd39f93797a9428701b2eb"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>EvCbVecArr_t</b> = std::vector&lt; EvCbVec_t &gt;</td></tr>
+<tr class="separator:a65532ededefd39f93797a9428701b2eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a9b45c406d64d9cbfe1dfaeb257a38832"><td class="memItemLeft" align="right" valign="top"><a id="a9b45c406d64d9cbfe1dfaeb257a38832"></a>
+EvCbVecArr_t&#160;</td><td class="memItemRight" valign="bottom"><b>callbacks</b> = EvCbVecArr_t(NumOfEv + 1)</td></tr>
+<tr class="separator:a9b45c406d64d9cbfe1dfaeb257a38832"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
+Static Private Attributes</h2></td></tr>
+<tr class="memitem:af1fc3b419473688388cd3afe26c985bc"><td class="memItemLeft" align="right" valign="top"><a id="af1fc3b419473688388cd3afe26c985bc"></a>
+static constexpr const EvType_t&#160;</td><td class="memItemRight" valign="bottom"><b>EveryType</b> = EvType_t::_Every</td></tr>
+<tr class="separator:af1fc3b419473688388cd3afe26c985bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba39ea872cb091900bb8b49721e389d1"><td class="memItemLeft" align="right" valign="top"><a id="aba39ea872cb091900bb8b49721e389d1"></a>
+static constexpr const std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>NumOfEv</b> = std::size_t(EveryType)</td></tr>
+<tr class="separator:aba39ea872cb091900bb8b49721e389d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>include/ECSpp/Utility/<a class="el" href="Notifier_8h_source.html">Notifier.h</a></li>

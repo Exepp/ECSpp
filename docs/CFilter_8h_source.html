@@ -81,7 +81,7 @@ $(function() {
 <div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="classepp_1_1CFilter.html">    9</a></span>&#160;<span class="keyword">class </span><a class="code" href="classepp_1_1CFilter.html">CFilter</a> {</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <span class="keyword">using</span> IdxList_t = CMask::IdxList_t;</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="keyword">using</span> <a class="code" href="structepp_1_1ComponentId.html">Idx_t</a> = <a class="code" href="structepp_1_1ComponentId.html">CMask::Idx_t</a>;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="keyword">using</span> Idx_t = CMask::Idx_t;</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="comment">// if wanted &amp; unwated (common part) != 0, then unwanted = unwanted &amp; ~wanted</span></div>
@@ -94,7 +94,7 @@ $(function() {
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        unwantedMask.removeCommon(wantedMask);</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    }</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="classepp_1_1CFilter.html">CFilter</a>&amp; addWanted(<a class="code" href="structepp_1_1ComponentId.html">Idx_t</a> idx)</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="classepp_1_1CFilter.html">CFilter</a>&amp; addWanted(Idx_t idx)</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    {</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        wantedMask.set(idx);</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        unwantedMask.unset(idx);</div>
@@ -108,7 +108,7 @@ $(function() {
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    }</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <a class="code" href="classepp_1_1CFilter.html">CFilter</a>&amp; removeWanted(<a class="code" href="structepp_1_1ComponentId.html">Idx_t</a> idx)</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <a class="code" href="classepp_1_1CFilter.html">CFilter</a>&amp; removeWanted(Idx_t idx)</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    {</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        wantedMask.unset(idx);</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
@@ -126,7 +126,7 @@ $(function() {
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        wantedMask.removeCommon(unwantedMask);</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    }</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <a class="code" href="classepp_1_1CFilter.html">CFilter</a>&amp; addUnwanted(<a class="code" href="structepp_1_1ComponentId.html">Idx_t</a> idx)</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <a class="code" href="classepp_1_1CFilter.html">CFilter</a>&amp; addUnwanted(Idx_t idx)</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    {</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        unwantedMask.set(idx);</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        wantedMask.unset(idx);</div>
@@ -140,7 +140,7 @@ $(function() {
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    }</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <a class="code" href="classepp_1_1CFilter.html">CFilter</a>&amp; removeUnwanted(<a class="code" href="structepp_1_1ComponentId.html">Idx_t</a> idx)</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <a class="code" href="classepp_1_1CFilter.html">CFilter</a>&amp; removeUnwanted(Idx_t idx)</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    {</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        unwantedMask.unset(idx);</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
@@ -181,7 +181,6 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclassepp_1_1CFilter_html"><div class="ttname"><a href="classepp_1_1CFilter.html">epp::CFilter</a></div><div class="ttdef"><b>Definition:</b> CFilter.h:9</div></div>
 <div class="ttc" id="aclassepp_1_1CMask_html"><div class="ttname"><a href="classepp_1_1CMask.html">epp::CMask</a></div><div class="ttdef"><b>Definition:</b> CMask.h:11</div></div>
-<div class="ttc" id="astructepp_1_1ComponentId_html"><div class="ttname"><a href="structepp_1_1ComponentId.html">epp::ComponentId</a></div><div class="ttdef"><b>Definition:</b> Component.h:11</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

@@ -70,6 +70,9 @@ $(function() {
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
+<a href="#pri-types">Private Types</a> &#124;
+<a href="#pri-static-methods">Static Private Member Functions</a> &#124;
+<a href="#pri-static-attribs">Static Private Attributes</a> &#124;
 <a href="structepp_1_1CMetadata-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">epp::CMetadata Struct Reference</div>  </div>
@@ -113,6 +116,37 @@ Static Public Attributes</h2></td></tr>
 <tr class="memitem:a5956e9e02615d4ed133a193dfc545c86"><td class="memItemLeft" align="right" valign="top"><a id="a5956e9e02615d4ed133a193dfc545c86"></a>
 static constexpr const std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>MaxRegisteredComponents</b> = 64</td></tr>
 <tr class="separator:a5956e9e02615d4ed133a193dfc545c86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-types"></a>
+Private Types</h2></td></tr>
+<tr class="memitem:a2bace143d9f5bfbe7e12b261e459202f"><td class="memItemLeft" align="right" valign="top"><a id="a2bace143d9f5bfbe7e12b261e459202f"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>DefCstrFnPtr_t</b> = void *(*)(void *)</td></tr>
+<tr class="separator:a2bace143d9f5bfbe7e12b261e459202f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a8d633164970e3c2106b20dd3c373b4"><td class="memItemLeft" align="right" valign="top"><a id="a6a8d633164970e3c2106b20dd3c373b4"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>MoveCstrFnPtr_t</b> = void *(*)(void *dest, void *src)</td></tr>
+<tr class="separator:a6a8d633164970e3c2106b20dd3c373b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a245d33ae4e8b7a10389ae1c5b839a891"><td class="memItemLeft" align="right" valign="top"><a id="a245d33ae4e8b7a10389ae1c5b839a891"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>DestrFnPtr_t</b> = void(*)(void *)</td></tr>
+<tr class="separator:a245d33ae4e8b7a10389ae1c5b839a891"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21f25fcc9af5c8a3fe88745659e7c689"><td class="memItemLeft" align="right" valign="top"><a id="a21f25fcc9af5c8a3fe88745659e7c689"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>MetadataVec_t</b> = std::vector&lt; <a class="el" href="structepp_1_1CMetadata.html">CMetadata</a> &gt;</td></tr>
+<tr class="separator:a21f25fcc9af5c8a3fe88745659e7c689"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-methods"></a>
+Static Private Member Functions</h2></td></tr>
+<tr class="memitem:aefac5987b3c02e7ff9b2a1b026a8ddb5"><td class="memTemplParams" colspan="2"><a id="aefac5987b3c02e7ff9b2a1b026a8ddb5"></a>
+template&lt;class CType &gt; </td></tr>
+<tr class="memitem:aefac5987b3c02e7ff9b2a1b026a8ddb5"><td class="memTemplItemLeft" align="right" valign="top">static <a class="el" href="structepp_1_1ComponentId.html">ComponentId</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><b>RegisterComponent</b> ()</td></tr>
+<tr class="separator:aefac5987b3c02e7ff9b2a1b026a8ddb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
+Static Private Attributes</h2></td></tr>
+<tr class="memitem:af928657a1689720f56867166a8442068"><td class="memItemLeft" align="right" valign="top"><a id="af928657a1689720f56867166a8442068"></a>
+static bool&#160;</td><td class="memItemRight" valign="bottom"><b>Registered</b> = false</td></tr>
+<tr class="separator:af928657a1689720f56867166a8442068"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5478a9cfd1e22859f0a43e3dd422c927"><td class="memItemLeft" align="right" valign="top"><a id="a5478a9cfd1e22859f0a43e3dd422c927"></a>
+static MetadataVec_t&#160;</td><td class="memItemRight" valign="bottom"><b>MetadataVec</b></td></tr>
+<tr class="separator:a5478a9cfd1e22859f0a43e3dd422c927"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li>include/ECSpp/<a class="el" href="Component_8h_source.html">Component.h</a></li>
