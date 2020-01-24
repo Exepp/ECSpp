@@ -97,4 +97,6 @@ project "Benchmarks"
 
 	filter {"system:linux"}
 		links {"pthread"}
+	filter {"system:windows"}
+		links {"Shlwapi"}
 	filter{}
