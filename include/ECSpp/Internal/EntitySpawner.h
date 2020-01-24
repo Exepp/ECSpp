@@ -27,29 +27,28 @@ struct EntityEvent {
 using SpawnerNotifier = Notifier<EntityEvent>;
 
 
-class EntitySpawner : public SpawnerNotifier {
+class EntitySpawner {
 public:
     class Creator {
     public:
         /** 
-         * Consecutive calls to construct already constructed components will result in their reconstruction (destruction -> construction)
+         * Consecutive calls to constructed already constructed components will just return the reference
+         * TODO: Tests
         */
         template <typename CType, typename... Args>
-        CType& construct(Args&&... args)
+        CType& constructed(Args&&... args)
         {
             auto cId = IdOf<CType>();
             EPP_ASSERT(spawner.mask.get(cId));
             CType* component = static_cast<CType*>(spawner.getPool(cId)[idx.value]);
-            if (constructed.get(cId))
-                component->~CType();
-            new (component) CType(std::forward<Args>(args)...);
-            constructed.set(cId);
-
-            return *component;
+            if (constrMask.get(cId))
+                return *component;
+            constrMask.set(cId);
+            return *(new (component) CType(std::forward<Args>(args)...));
         }
 
     private:
-        Creator(EntitySpawner& sp, PoolIdx index, CMask const& cstred = CMask()) : spawner(sp), idx(index), constructed(cstred) {}
+        Creator(EntitySpawner& sp, PoolIdx index, CMask const& cstred = CMask()) : spawner(sp), idx(index), constrMask(cstred) {}
         Creator(Creator&& rVal) = delete;
         Creator(Creator const&) = delete;
         Creator& operator=(Creator const&) = delete;
@@ -57,7 +56,7 @@ public:
         ~Creator() /** constructs components that the user didnt construct himself */
         {
             for (auto& pool : spawner.cPools)
-                if (constructed.get(pool.getCId()) == false)
+                if (constrMask.get(pool.getCId()) == false)
                     pool.construct(idx.value);
         }
 
@@ -66,7 +65,7 @@ public:
 
     private:
         EntitySpawner& spawner;
-        CMask constructed;
+        CMask constrMask;
 
         friend class EntitySpawner;
     };
@@ -105,17 +104,13 @@ public:
 
     void moveEntityHere(Entity ent, EntityList& entList, EntitySpawner& originSpawner, UserCreationFn_t const& fn);
 
-    /// Reuses the data from originSpawner
+    ///
     /**
      */
     void moveEntitiesHere(EntitySpawner& originSpawner, EntityList& entList, UserCreationFn_t fn);
 
 
-    CPool& getPool(ComponentId cId)
-    {
-        EPP_ASSERT(mask.get(cId));
-        return *std::find_if(cPools.begin(), cPools.end(), [cId](CPool const& pool) { return pool.getCId() == cId; });
-    }
+    CPool& getPool(ComponentId cId);
 
     EntityPool_t const& getEntities() const { return entityPool; }
 
@@ -134,6 +129,16 @@ private:
 
     CPools_t cPools;
 };
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+inline CPool& EntitySpawner::getPool(ComponentId cId)
+{
+    EPP_ASSERT(mask.get(cId));
+    return *std::find_if(cPools.begin(), cPools.end(), [cId](CPool const& pool) { return pool.getCId() == cId; });
+}
 
 
 using EntityCreator = EntitySpawner::Creator;

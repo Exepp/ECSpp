@@ -25,7 +25,7 @@ Entity EntitySpawner::spawn(EntityList& entList, UserCreationFn_t const& fn)
         pool.alloc(); // only allocates memory (constructor is not called yet)
     fn(Creator(*this, idx));
     // constructors of the components are now already called
-    notify({ EntityEvent::Type::Creation, ent });
+    // notify({ EntityEvent::Type::Creation, ent });
     return ent;
 }
 
@@ -33,7 +33,7 @@ void EntitySpawner::destroy(Entity ent, EntityList& entList)
 {
     EPP_ASSERT(entList.isValid(ent));
 
-    notify({ EntityEvent::Type::Destruction, ent });
+    // notify({ EntityEvent::Type::Destruction, ent });
 
     PoolIdx entPoolIdx = entList.get(ent).poolIdx;
     for (auto& pool : cPools)
@@ -99,8 +99,8 @@ void EntitySpawner::moveEntitiesHere(EntitySpawner& originSpawner, EntityList& e
 {
     if (originSpawner.entityPool.data.empty())
         return;
-    std::uint32_t oriSize(originSpawner.entityPool.data.size());
-    std::uint32_t thisSize(entityPool.data.size());
+    auto oriSize = std::uint32_t(originSpawner.entityPool.data.size());
+    auto thisSize = std::uint32_t(entityPool.data.size());
     auto oriPoolsPtr = originSpawner.cPools.begin();
     auto oriPoolsEnd = originSpawner.cPools.end();
     for (auto& pool : cPools) {

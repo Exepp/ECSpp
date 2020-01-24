@@ -123,8 +123,8 @@ TEST(EntityCollection, IterationValidation)
                          Archetype(IdOf<TComp1, TComp3, TComp4>()) };
     int n = 0;
     auto fn = [& n = std::as_const(n)](EntityCreator&& creator) {
-        creator.construct<TComp1>(n, n, n);
-        creator.construct<TComp3>(std::array<int, 3>{ -n, -n, -n }); };
+        creator.constructed<TComp1>(n, n, n);
+        creator.constructed<TComp3>(std::array<int, 3>{ -n, -n, -n }); };
 
     for (; n < 1024; ++n)
         mgr.spawn(arch[0], fn);

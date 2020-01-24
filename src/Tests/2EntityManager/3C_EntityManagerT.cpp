@@ -11,15 +11,15 @@ TEST(EntityManager, Spawn_Creator)
         Archetype arch(IdOf<TComp1, TComp2>());
         mgr.spawn(arch,
                   [](EntityCreator&& creator) {
-                      creator.construct<TComp2>();
+                      creator.constructed<TComp2>();
                   });
         ASSERT_EQ(TComp2::AliveCounter, 1); // Creator did not call default constructor on its own
         ASSERT_EQ(TComp1::AliveCounter, 1); // Creator called default constructor on its own
 
         mgr.spawn(arch,
                   [](EntityCreator&& creator) {
-                      creator.construct<TComp1>();
-                      creator.construct<TComp2>();
+                      creator.constructed<TComp1>();
+                      creator.constructed<TComp2>();
                   });
         ASSERT_EQ(TComp2::AliveCounter, 2); // Creator did not call default constructor on its own
         ASSERT_EQ(TComp1::AliveCounter, 2);
@@ -40,7 +40,7 @@ TEST(EntityManager, Spawn_Creator)
         {
             auto [begin, end] = mgr.spawn(arch, 1, // spawn n = 1
                                           [](EntityCreator&& creator) {
-                                              creator.construct<TComp2>();
+                                              creator.constructed<TComp2>();
                                           });
             ASSERT_EQ(TComp2::AliveCounter, 1); // Creator did not call default constructor on its own
             ASSERT_EQ(TComp1::AliveCounter, 1); // Creator called default constructor on its own
@@ -51,8 +51,8 @@ TEST(EntityManager, Spawn_Creator)
 
         mgr.spawn(arch, 1e5,
                   [](EntityCreator&& creator) {
-                      creator.construct<TComp1>();
-                      creator.construct<TComp2>();
+                      creator.constructed<TComp1>();
+                      creator.constructed<TComp2>();
                   });
         ASSERT_EQ(TComp2::AliveCounter, 1 + 1e5); // Creator did not call default constructor on its own
         ASSERT_EQ(TComp1::AliveCounter, 1 + 1e5);
@@ -236,8 +236,8 @@ TEST(EntityManager, ComponentOf)
 
     for (int i = 0; i < 1e3; ++i)
         ents.push_back(mgr.spawn(arch, [&](EntityCreator&& creator) {
-            creator.construct<TComp1>(tester1.a + i, tester1.b + i, tester1.c + i);
-            creator.construct<TComp2>(tester2.data);
+            creator.constructed<TComp1>(tester1.a + i, tester1.b + i, tester1.c + i);
+            creator.constructed<TComp2>(tester2.data);
         }));
     for (int i = 0; i < ents.size(); ++i) {
         ASSERT_EQ(mgr.componentOf<TComp1>(ents[i]), tester1.copy(i));
@@ -268,12 +268,12 @@ TEST(EntityManager, ComponentOf)
         mgr.spawn(Archetype());
         ents.push_back(mgr.spawn(arch,
                                  [&](EntityCreator&& creator) {
-                                     creator.construct<TComp1>(tester1.a + i, tester1.b + i, tester1.c + i);
+                                     creator.constructed<TComp1>(tester1.a + i, tester1.b + i, tester1.c + i);
                                  }));
         ents.push_back(mgr.spawn(Archetype(IdOf<TComp1, TComp4>()),
                                  [&](EntityCreator&& creator) {
-                                     creator.construct<TComp1>(tester1.a + 2 * i, tester1.b + 2 * i, tester1.c + 2 * i);
-                                     creator.construct<TComp4>(tester4.data);
+                                     creator.constructed<TComp1>(tester1.a + 2 * i, tester1.b + 2 * i, tester1.c + 2 * i);
+                                     creator.constructed<TComp4>(tester4.data);
                                  }));
     }
     for (int i = 0; i < ents.size(); i += 2) {
@@ -353,7 +353,7 @@ TEST(EntityManager, ChangeArchetype_IsValid)
         Archetype arch(IdOf<TComp1, TComp2>());
         Entity ent = mgr.spawn(arch,
                                [](EntityCreator&& creator) {
-                                   creator.construct<TComp1>(4321, 43.21f, 4.321);
+                                   creator.constructed<TComp1>(4321, 43.21f, 4.321);
                                });
         ASSERT_TRUE(mgr.isValid(ent));
 
@@ -391,8 +391,8 @@ TEST(EntityManager, ChangeArchetype_IsValid)
         epp::EntityManager mgr;
         epp::Archetype archMissing = epp::Archetype(epp::IdOf<TComp1, TComp2>());
         epp::Archetype archFull = epp::Archetype(epp::IdOf<TComp1, TComp2, TComp3, TComp4>());
-        mgr.spawn(archMissing, 1e4, [](epp::EntityCreator&& creator) { creator.construct<TComp1>().a = creator.idx.value; });
-        mgr.changeArchetype(archMissing, archFull, [](epp::EntityCreator&& creator) { creator.construct<TComp4>().data[0] = 2 * creator.idx.value; });
+        mgr.spawn(archMissing, 1e4, [](epp::EntityCreator&& creator) { creator.constructed<TComp1>().a = creator.idx.value; });
+        mgr.changeArchetype(archMissing, archFull, [](epp::EntityCreator&& creator) { creator.constructed<TComp4>().data[0] = 2 * creator.idx.value; });
         epp::EntityCollection<TComp1, TComp2, TComp3, TComp4> coll;
         mgr.updateCollection(coll);
         int i = 0;
