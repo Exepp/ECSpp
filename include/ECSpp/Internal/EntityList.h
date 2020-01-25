@@ -139,8 +139,11 @@ private:
 
 private:
     EntityCell* data = nullptr;
+
     Size_t freeLeft = 0;
+
     Size_t reserved = 0;
+
     ListIdx freeIndex;
 };
 
