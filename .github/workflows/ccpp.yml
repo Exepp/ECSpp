@@ -1,0 +1,12 @@
+name: C/C++ CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: makeSolution_linux.sh
+      run: ./makeSolution_linux.sh
+    - name: runTests.sh
+      run: ./runTests.sh
