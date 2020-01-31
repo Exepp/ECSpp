@@ -1,6 +1,7 @@
 #include <ECSpp/Internal/CPool.h>
 #include <ECSpp/Utility/Pool.h>
 #include <cmath>
+#include <algorithm>
 
 using namespace epp;
 
@@ -25,7 +26,7 @@ void* CPool::alloc()
 {
     if (dataUsed >= reserved)
         reserve(reserved ? 2 * reserved : 4); // 4 as first size
-    return addressAtIdx(dataUsed++); // post-inc here
+    return addressAtIdx(dataUsed++);          // post-inc here
 }
 
 void* CPool::alloc(Idx_t n)
@@ -58,20 +59,23 @@ void CPool::fitNextN(Idx_t n)
         reserve(n);
 }
 
-void CPool::reserve(Idx_t newSize)
+void CPool::reserve(Idx_t newReserved)
 {
-    EPP_ASSERT(newSize > reserved);
-    void* newData = operator new[](metadata.size* std::uint64_t(newSize), std::align_val_t(metadata.alignment));
-
+    if (newReserved == reserved)
+        return;
+    void* newData = newReserved ? operator new[](metadata.size* std::uint64_t(newReserved), std::align_val_t(metadata.alignment))
+                                : nullptr;
     if (data) {
-        for (Idx_t i = 0; i < dataUsed; ++i) {
+        auto toMove = std::min(newReserved, dataUsed);
+        for (Idx_t i = 0; i < toMove; ++i)
             metadata.moveConstructor(addressAtIdx(newData, i), addressAtIdx(i));
+        for (Idx_t i = 0; i < dataUsed; ++i)
             metadata.destructor(addressAtIdx(i));
-        }
+        dataUsed = toMove;
         operator delete[](data, std::align_val_t(metadata.alignment));
     }
     data = newData;
-    reserved = newSize;
+    reserved = newReserved;
 }
 
 void CPool::clear()
@@ -79,13 +83,4 @@ void CPool::clear()
     for (Idx_t i = 0; i < dataUsed; ++i)
         metadata.destructor(addressAtIdx(i));
     dataUsed = 0;
-}
-
-void CPool::reset()
-{
-    clear(); // dataUsed = 0;
-    if (data)
-        operator delete[](data, std::align_val_t(metadata.alignment));
-    data = nullptr;
-    reserved = 0;
 }

@@ -69,6 +69,13 @@ void EntitySpawner::fitNextN(EntityList::Size_t n)
         pool.fitNextN(n);
 }
 
+void EntitySpawner::shrinkToFit()
+{
+    entityPool.data.shrink_to_fit();
+    for (auto& pool : cPools)
+        pool.shrinkToFit();
+}
+
 void EntitySpawner::moveEntityHere(Entity ent, EntityList& entList, EntitySpawner& originSpawner, UserCreationFn_t const& fn)
 {
     EPP_ASSERT(entList.isValid(ent) && &originSpawner != this && fn);

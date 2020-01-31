@@ -105,7 +105,7 @@ void EntityList::freeEntity(Entity ent)
 
 void EntityList::freeAll()
 {
-    if (!reserved || freeLeft == reserved)
+    if (reserved == 0 || reserved == freeLeft)
         return;
     freeLeft = reserved;
     freeIndex = ListIdx(0);

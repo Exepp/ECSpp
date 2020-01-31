@@ -61,7 +61,7 @@ public:
         Registered = i;
     }
 
-    inline static CMetadata const& GetData(ComponentId id)
+    static CMetadata const& GetData(ComponentId id)
     {
         return MetadataVec[id.value];
     }

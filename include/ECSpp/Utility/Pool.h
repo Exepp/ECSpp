@@ -48,7 +48,6 @@ struct Pool {
 };
 
 
-
 } // namespace epp
 
 #endif // POOL_H

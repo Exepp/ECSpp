@@ -9,7 +9,7 @@ namespace epp {
 
 struct PoolIdx {
     PoolIdx() = default;
-    explicit PoolIdx(uint32_t val) : value(val) {}
+    explicit PoolIdx(uint32_t val) : value(val) { EPP_ASSERT(value <= BadValue); }
     constexpr static std::size_t const BitLength = 26; // max 32
     constexpr static uint32_t const BadValue = (1ull << BitLength) - 1;
     constexpr static uint64_t const Mask = uint64_t(BadValue);
@@ -19,7 +19,7 @@ struct PoolIdx {
 
 struct SpawnerId {
     SpawnerId() = default;
-    explicit SpawnerId(uint32_t val) : value(val) {}
+    explicit SpawnerId(uint32_t val) : value(val) { EPP_ASSERT(value <= BadValue); }
     constexpr static std::size_t const BitLength = 12; // max 32
     constexpr static uint32_t const BadValue = (1ull << BitLength) - 1;
     constexpr static uint64_t const Mask = uint64_t(BadValue) << PoolIdx::BitLength;
@@ -29,7 +29,7 @@ struct SpawnerId {
 
 struct EntVersion {
     EntVersion() = default;
-    explicit EntVersion(uint32_t val) : value(val) {}
+    explicit EntVersion(uint32_t val) : value(val) {} // version can overflow
     constexpr static std::size_t const BitLength = 64 - (PoolIdx::BitLength + SpawnerId::BitLength);
     constexpr static uint32_t const MaxValue = (1ull << BitLength) - 1;
     constexpr static uint64_t const Mask = uint64_t(MaxValue) << (PoolIdx::BitLength + SpawnerId::BitLength);
@@ -44,7 +44,7 @@ static_assert(EntVersion::BitLength != 0 && PoolIdx::BitLength + SpawnerId::BitL
 
 struct ListIdx {
     ListIdx() = default;
-    explicit ListIdx(uint32_t val) : value(val) {}
+    explicit ListIdx(uint32_t val) : value(val) { EPP_ASSERT(value <= BadValue); }
     constexpr static std::size_t const BitLength = 32;
     constexpr static uint32_t const BadValue = (1ull << BitLength) - 1;
     constexpr static uint64_t const Mask = uint64_t(BadValue);

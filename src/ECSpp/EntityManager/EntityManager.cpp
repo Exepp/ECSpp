@@ -55,14 +55,26 @@ void EntityManager::clear()
 
 void EntityManager::clear(Archetype const& arch)
 {
-    if (auto found = findSpawner(arch); found != spawners.end())
-        found->clear(entList);
+    if (auto spawner = findSpawner(arch); spawner != spawners.end())
+        spawner->clear(entList);
 }
 
 
 void EntityManager::prepareToSpawn(Archetype const& arch, std::uint32_t n)
 {
     _prepareToSpawn(arch, n);
+}
+
+void EntityManager::shrinkToFit(Archetype const& arch)
+{
+    if (auto spawner = findSpawner(arch); spawner != spawners.end())
+        spawner->shrinkToFit();
+}
+
+void EntityManager::shrinkToFit()
+{
+    for (auto& spawner : spawners)
+        spawner.shrinkToFit();
 }
 
 inline EntitySpawner& EntityManager::_prepareToSpawn(Archetype const& arch, std::uint32_t n)

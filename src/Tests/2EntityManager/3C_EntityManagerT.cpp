@@ -391,16 +391,20 @@ TEST(EntityManager, ChangeArchetype_IsValid)
         epp::EntityManager mgr;
         epp::Archetype archMissing = epp::Archetype(epp::IdOf<TComp1, TComp2>());
         epp::Archetype archFull = epp::Archetype(epp::IdOf<TComp1, TComp2, TComp3, TComp4>());
-        mgr.spawn(archMissing, 1e4, [](epp::EntityCreator&& creator) { creator.constructed<TComp1>().a = creator.idx.value; });
-        mgr.changeArchetype(archMissing, archFull, [](epp::EntityCreator&& creator) { creator.constructed<TComp4>().data[0] = 2 * creator.idx.value; });
-        epp::EntityCollection<TComp1, TComp2, TComp3, TComp4> coll;
-        mgr.updateCollection(coll);
         int i = 0;
-        for (auto it = coll.begin(), end = coll.end(); it != end; ++it, ++i) {
+        mgr.spawn(archMissing, 1e4, [&i](epp::EntityCreator&& creator) {
+            creator.constructed<TComp1>().a = i++;
+        });
+        i = 0;
+        mgr.changeArchetype(archMissing, archFull, [&i](epp::EntityCreator&& creator) { creator.constructed<TComp4>().data[0] = 2 * i++; });
+        epp::Selection<TComp1, TComp2, TComp3, TComp4> sel;
+        mgr.updateSelection(sel);
+        i = 0;
+        for (auto it = sel.begin(), end = sel.end(); it != end; ++it, ++i) {
             ASSERT_EQ(it.getComponent<TComp1>().a, i);
             ASSERT_EQ(2 * it.getComponent<TComp1>().a, it.getComponent<TComp4>().data[0]);
         }
     }
 }
 // no need for clear tests
-// updateCollection test with EntityCollection tests
+// updateSelection test with Selection tests

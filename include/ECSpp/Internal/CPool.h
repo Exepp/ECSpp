@@ -22,7 +22,7 @@ public:
 
     CPool& operator=(CPool const&) = delete;
 
-    ~CPool() { reset(); }
+    ~CPool() { reserve(0); }
 
 
     // raw (no constructor call)
@@ -41,21 +41,13 @@ public:
     // calls constructor on the object located at given index
     // it is up to the caller to make sure this function is called only on components
     // that are not yet constructed (that is, created with alloc)
-    void* construct(Idx_t idx)
-    {
-        EPP_ASSERT(idx < dataUsed);
-        return metadata.defaultConstructor(addressAtIdx(idx));
-    }
+    void* construct(Idx_t idx);
 
     // TODO: tests
     // calls move constructor on the object located at given index
     // it is up to the caller to make sure this function is called only on components
     // that are not yet constructed (that is, created with alloc) and that rValComp is of the same type as components of this pool
-    void* construct(Idx_t idx, void* rValComp)
-    {
-        EPP_ASSERT(idx < dataUsed);
-        return metadata.moveConstructor(addressAtIdx(idx), rValComp);
-    }
+    void* construct(Idx_t idx, void* rValComp);
 
     // expects an index to a constructed component (calls destructor)
     // returns true if deleted object was replaced with the last element (false only for the last element)
@@ -64,18 +56,15 @@ public:
     // makes sure, to fit n more elements without realloc
     void fitNextN(Idx_t n);
 
+    void shrinkToFit() { reserve(dataUsed); }
+
     void clear();
 
-    // TODO: tests
-    // clear + deallocation
-    void reset();
+
+    void reserve(Idx_t newReserved);
 
 
-    void* operator[](Idx_t i)
-    {
-        EPP_ASSERT(i < dataUsed)
-        return addressAtIdx(i);
-    }
+    void* operator[](Idx_t i);
 
     CId_t getCId() const { return cId; }
 
@@ -84,8 +73,6 @@ public:
     std::size_t capacity() const { return reserved; }
 
 private:
-    void reserve(Idx_t n);
-
     void* addressAtIdx(Idx_t i) const { return addressAtIdx(data, i); }
 
     void* addressAtIdx(void* base, Idx_t i) const { return reinterpret_cast<void*>(static_cast<std::uint8_t*>(base) + metadata.size * std::uint64_t(i)); }
@@ -101,6 +88,28 @@ private:
 
     CId_t const cId; // may change on assignment
 };
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+inline void* CPool::construct(Idx_t idx)
+{
+    EPP_ASSERT(idx < dataUsed);
+    return metadata.defaultConstructor(addressAtIdx(idx));
+}
+
+inline void* CPool::construct(Idx_t idx, void* rValComp)
+{
+    EPP_ASSERT(idx < dataUsed);
+    return metadata.moveConstructor(addressAtIdx(idx), rValComp);
+}
+
+inline void* CPool::operator[](Idx_t i)
+{
+    EPP_ASSERT(i < dataUsed)
+    return addressAtIdx(i);
+}
 
 } // namespace epp
 

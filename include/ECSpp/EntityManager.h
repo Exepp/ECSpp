@@ -1,9 +1,9 @@
 #ifndef ENTITYMANAGER_H
 #define ENTITYMANAGER_H
 
-#include <ECSpp/Internal/EntityCollection.h>
 #include <ECSpp/Internal/EntityList.h>
 #include <ECSpp/Internal/EntitySpawner.h>
+#include <ECSpp/Internal/Selection.h>
 #include <deque>
 #include <unordered_map>
 
@@ -11,7 +11,7 @@ namespace epp {
 
 // TODO: redo the tests
 class EntityManager {
-    using Spawners_t = std::deque<EntitySpawner>; // deque, to keep collections' references valid
+    using Spawners_t = std::deque<EntitySpawner>; // deque, to keep selections' references valid
 
     using EntityPool_t = EntitySpawner::EntityPool_t;
 
@@ -94,8 +94,16 @@ public:
     void prepareToSpawn(Archetype const& arch, std::uint32_t n);
 
 
+    // TODO: tests
+    void shrinkToFit(Archetype const& arch);
+
+
+    // TODO: tests
+    void shrinkToFit();
+
+
     template <typename... CTypes>
-    void updateCollection(EntityCollection<CTypes...>& collection);
+    void updateSelection(Selection<CTypes...>& selection);
 
 
     // ent - valid entity that owns given component (to be sure that an entity owns a component, use maskOf(ent).get(Component::Id().value))
@@ -188,10 +196,10 @@ inline EntityManager::EPoolCIter_t EntityManager::destroy(EPoolCIter_t const& it
 }
 
 template <typename... CTypes>
-inline void EntityManager::updateCollection(EntityCollection<CTypes...>& collection)
+inline void EntityManager::updateSelection(Selection<CTypes...>& selection)
 {
-    for (; collection.checkedSpawnersCount < spawners.size(); ++collection.checkedSpawnersCount)
-        collection.addSpawnerIfMeetsRequirements(spawners[collection.checkedSpawnersCount]);
+    for (; selection.checkedSpawnersCount < spawners.size(); ++selection.checkedSpawnersCount)
+        selection.addSpawnerIfMeetsRequirements(spawners[selection.checkedSpawnersCount]);
 }
 
 template <typename TComp>

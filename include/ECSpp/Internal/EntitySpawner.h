@@ -14,9 +14,9 @@ struct EntityEvent {
     enum class Type : uint8_t {
         Creation,
         Destruction,
-        JoinedCollection, // when existing entity's archetype changes to the ones, that are accepted by this collection
-        LeftCollection,   // when entity gets/loses component and no longer passes through the collection's filter
-        _Every            // must be the last one
+        JoinedSelection, // when existing entity's archetype changes to the ones, that are accepted by this selection
+        LeftSelection,   // when entity gets/loses component and no longer passes through the selection's filter
+        _Every           // must be the last one
     };
 
     Type const type;
@@ -38,8 +38,8 @@ public:
         template <typename CType, typename... Args>
         CType& constructed(Args&&... args)
         {
+            EPP_ASSERT(spawner.mask.get(IdOf<CType>()));
             auto cId = IdOf<CType>();
-            EPP_ASSERT(spawner.mask.get(cId));
             CType* component = static_cast<CType*>(spawner.getPool(cId)[idx.value]);
             if (constrMask.get(cId))
                 return *component;
@@ -53,6 +53,7 @@ public:
         Creator(Creator const&) = delete;
         Creator& operator=(Creator const&) = delete;
         Creator& operator=(Creator&&) = delete;
+
         ~Creator() /** constructs components that the user didnt construct himself */
         {
             for (auto& pool : spawner.cPools)
@@ -60,11 +61,9 @@ public:
                     pool.construct(idx.value);
         }
 
-    public:
-        PoolIdx const idx; /** Current index in pools */
-
     private:
         EntitySpawner& spawner;
+        PoolIdx const idx;
         CMask constrMask;
 
         friend class EntitySpawner;
@@ -100,6 +99,9 @@ public:
 
     // makes sure, to fit n more elements without realloc
     void fitNextN(EntityList::Size_t n);
+
+    // TODO: tests
+    void shrinkToFit();
 
 
     void moveEntityHere(Entity ent, EntityList& entList, EntitySpawner& originSpawner, UserCreationFn_t const& fn);
