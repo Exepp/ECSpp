@@ -15,7 +15,20 @@ workspace "ECSpp"
 
 	filter {"system:linux"}
 		toolset "clang"
-		buildoptions{"-fPIC -Wno-dangling-else"}
+		buildoptions{"-fPIC",
+					"-Wno-dangling-else",
+					-- "-Weverything",
+					-- "-Wno-c++98-compat",
+					-- "-Wno-unused-template",
+					-- "-Wno-c++98-compat-pedantic",
+					-- "-Wno-extra-semi-stmt",
+					-- "-Wno-newline-eof",
+					-- "-Wno-documentation-unknown-command",
+					-- "-Wno-weak-vtables",
+					-- "-Wno-exit-time-destructors",
+					-- "-Wno-global-constructors",
+					-- "-Wno-padded",
+					}
 
 	filter "configurations:Debug"
 		defines "EPP_DEBUG"
@@ -99,4 +112,18 @@ project "Benchmarks"
 		links {"pthread"}
 	filter {"system:windows"}
 		links {"Shlwapi"}
+	filter{}
+
+project "UBTests"
+
+	kind "ConsoleApp"
+
+	location "./"
+
+	files { "%{prj.location}/src/%{prj.name}/**" }
+
+	filter "configurations:Debug"
+		links {"ECSpp"}
+	filter "configurations:Release"
+		links {"ECSpp"}
 	filter{}
