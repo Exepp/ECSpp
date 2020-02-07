@@ -1,7 +1,8 @@
 #ifndef ARCHETYPE_H
 #define ARCHETYPE_H
 
-#include <ECSpp/Internal/CFilter.h>
+#include <ECSpp/Internal/CMask.h>
+#include <ECSpp/external/llvm/SmallVector.h>
 #include <algorithm>
 #include <memory>
 
@@ -9,10 +10,8 @@ namespace epp {
 
 class Archetype {
     using IdList_t = decltype(IdOfL<>());
-
     using CId_t = IdList_t::value_type;
-
-    using IdVec_t = std::vector<CId_t>;
+    using IdVec_t = llvm::SmallVector<CId_t, 8>;
 
 public:
     Archetype() = default;
@@ -21,7 +20,6 @@ public:
 
     template <typename... CTypes>
     Archetype& addComponent() { return addComponent(IdOfL<CTypes...>()); }
-
     Archetype& addComponent(IdList_t ids)
     {
         for (auto id : ids)
@@ -41,7 +39,6 @@ public:
 
     template <typename... CTypes>
     Archetype& removeComponent() { return removeComponent(IdOfL<CTypes...>()); }
-
     Archetype& removeComponent(IdList_t ids)
     {
         for (auto id : ids)
@@ -58,20 +55,15 @@ public:
         return *this;
     }
 
-
     bool hasAllOf(IdList_t ids) const { return cMask.contains(ids); }
-
     bool hasAnyOf(IdList_t ids) const { return cMask.hasCommon(ids); }
-
     bool has(CId_t id) const { return cMask.get(id); }
 
     IdVec_t const& getCIds() const { return cIds; }
-
     CMask const& getMask() const { return cMask; }
 
 private:
     CMask cMask;
-
     IdVec_t cIds;
 };
 
