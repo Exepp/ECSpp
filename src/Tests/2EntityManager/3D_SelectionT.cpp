@@ -4,22 +4,29 @@
 
 using namespace epp;
 
-TEST(Selection, GetFilter)
+TEST(Selection, GetMasks)
 {
     EntityManager mgr;
-    CFilter filter;
+    CMask wanted;
+    CMask unwanted;
 
-    filter = CFilter(IdOf<TComp1, TComp4>(), {});
+    wanted = CMask(IdOf<TComp1, TComp4>());
     Selection<TComp1, TComp4> selection1;
-    ASSERT_EQ(selection1.getFilter(), filter);
+    ASSERT_EQ(selection1.getWanted(), wanted);
+    ASSERT_EQ(selection1.getUnwanted(), unwanted);
 
-    filter = CFilter(IdOf<TComp2, TComp3>(), IdOf<TComp1, TComp4>());
-    Selection<TComp2, TComp3> selection3(IdOf<TComp1, TComp4>());
-    ASSERT_EQ(selection3.getFilter(), filter);
+    wanted = CMask(IdOf<TComp2, TComp3>());
+    unwanted = CMask(IdOf<TComp1, TComp4>());
+    Selection<TComp2, TComp3> selection2(IdOf<TComp1, TComp4>());
+    ASSERT_EQ(selection2.getWanted(), wanted);
+    ASSERT_EQ(selection2.getUnwanted(), unwanted);
 
-    filter = CFilter(IdOf<TComp2, TComp3>(), IdOf<TComp1, TComp2, TComp3, TComp4>());
-    Selection<TComp2, TComp3> selection4(IdOf<TComp1, TComp2, TComp3, TComp4>());
-    ASSERT_EQ(selection4.getFilter(), filter);
+    wanted = CMask(IdOf<TComp2, TComp3>());
+    unwanted = CMask(IdOf<TComp1, TComp2, TComp3, TComp4>());
+    Selection<TComp2, TComp3> selection3(IdOf<TComp1, TComp2, TComp3, TComp4>());
+    ASSERT_EQ(selection3.getWanted(), wanted);
+    ASSERT_NE(selection3.getUnwanted(), unwanted);
+    ASSERT_EQ(selection3.getUnwanted(), unwanted.removeCommon(wanted));
 }
 
 TEST(Selection, UpdateSelection_Begin_End)
