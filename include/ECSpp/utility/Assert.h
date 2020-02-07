@@ -7,7 +7,7 @@
 namespace epp {
 struct AssertFailed : public std::exception {
     AssertFailed() = default;
-    AssertFailed(std::string str) noexcept : str(std::move(str)) {}
+    AssertFailed(std::string msg) noexcept : str(std::move(msg)) {}
     virtual char const* what() const noexcept override { return str.c_str(); }
     std::string str;
 };

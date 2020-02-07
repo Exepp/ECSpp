@@ -1,6 +1,6 @@
 #include "ComponentsT.h"
 
-#include <ECSpp/Internal/CMask.h>
+#include <ECSpp/internal/CMask.h>
 #include <gtest/gtest.h>
 
 using namespace epp;

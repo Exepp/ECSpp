@@ -1,15 +1,19 @@
-#include <ECSpp/Internal/CPool.h>
-#include <ECSpp/Utility/Pool.h>
-#include <cmath>
+#include <ECSpp/internal/CPool.h>
+#include <ECSpp/utility/Pool.h>
 #include <algorithm>
+#include <cmath>
 
 using namespace epp;
 
 
-CPool::CPool(CId_t cId) : cId(cId), metadata(CMetadata::GetData(cId)) {}
+CPool::CPool(CId_t cid) : metadata(CMetadata::GetData(cid)), cId(cid) {}
 
 CPool::CPool(CPool&& rval)
-    : data(rval.data), reserved(rval.reserved), dataUsed(rval.dataUsed), cId(rval.cId), metadata(rval.metadata)
+    : data(rval.data),
+      reserved(rval.reserved),
+      dataUsed(rval.dataUsed),
+      metadata(rval.metadata),
+      cId(rval.cId)
 {
     rval.data = nullptr;
     rval.reserved = 0;
@@ -52,18 +56,16 @@ bool CPool::destroy(Idx_t i)
     return notLast;
 }
 
-void CPool::fitNextN(Idx_t n)
+void CPool::fitNextN(std::size_t n)
 {
-    n = SizeToFitNextN(n, reserved, reserved - dataUsed);
-    if (n > reserved)
-        reserve(n);
+    reserve(SizeToFitNextN(n, reserved, reserved - dataUsed));
 }
 
-void CPool::reserve(Idx_t newReserved)
+void CPool::reserve(std::size_t newReserved)
 {
     if (newReserved == reserved)
         return;
-    void* newData = newReserved ? operator new[](metadata.size* std::uint64_t(newReserved), std::align_val_t(metadata.alignment))
+    void* newData = newReserved ? operator new[](metadata.size* newReserved, std::align_val_t(metadata.alignment))
                                 : nullptr;
     if (data) {
         auto toMove = std::min(newReserved, dataUsed);

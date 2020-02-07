@@ -1,8 +1,8 @@
 #ifndef ARCHETYPE_H
 #define ARCHETYPE_H
 
-#include <ECSpp/Internal/CMask.h>
 #include <ECSpp/external/llvm/SmallVector.h>
+#include <ECSpp/internal/CMask.h>
 #include <algorithm>
 #include <memory>
 

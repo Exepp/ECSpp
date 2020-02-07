@@ -16,18 +16,13 @@ public:
 private:
     using Callback_t = std::function<void(Event const&)>;
 
-
     static constexpr EvType_t const EveryType = EvType_t::_Every;
-
     static constexpr std::size_t const NumOfEv = std::size_t(EveryType);
 
     static_assert(NumOfEv > 0, "Cannot create an empty event notifier");
 
-
     using EvCbVec_t = std::vector<Callback_t>;
-
     using EvCbVecArr_t = std::vector<EvCbVec_t>;
-
 
 public:
     Notifier() = default;

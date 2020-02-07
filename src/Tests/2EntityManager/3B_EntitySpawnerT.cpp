@@ -1,5 +1,5 @@
 #include "ComponentsT.h"
-#include <ECSpp/Internal/EntitySpawner.h>
+#include <ECSpp/internal/EntitySpawner.h>
 #include <gtest/gtest.h>
 
 using namespace epp;

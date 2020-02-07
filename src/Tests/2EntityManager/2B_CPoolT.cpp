@@ -1,5 +1,5 @@
 // #include "ComponentsT.h"
-// #include <ECSpp/Internal/CPool.h>
+// #include <ECSpp/internal/CPool.h>
 // #include <gtest/gtest.h>
 
 // using namespace epp;

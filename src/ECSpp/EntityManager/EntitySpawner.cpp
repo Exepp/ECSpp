@@ -1,5 +1,5 @@
-#include <ECSpp/Internal/EntitySpawner.h>
-#include <ECSpp/Utility/Assert.h>
+#include <ECSpp/internal/EntitySpawner.h>
+#include <ECSpp/utility/Assert.h>
 
 using namespace epp;
 
@@ -18,7 +18,7 @@ EntitySpawner::EntitySpawner(SpawnerId id, Archetype const& arch)
 Entity EntitySpawner::spawn(EntityList& entList, UserCreationFn_t const& fn)
 {
     EPP_ASSERT(fn);
-    PoolIdx idx(uint32_t(entityPool.data.size()));
+    PoolIdx idx(entityPool.data.size());
     Entity ent = entList.allocEntity(idx, spawnerId);
     entityPool.create(ent);
     for (auto& pool : cPools)
@@ -62,7 +62,7 @@ void EntitySpawner::clear()
         pool.clear();
 }
 
-void EntitySpawner::fitNextN(EntityList::Size_t n)
+void EntitySpawner::fitNextN(std::size_t n)
 {
     entityPool.fitNextN(n);
     for (auto& pool : cPools)
@@ -81,7 +81,7 @@ void EntitySpawner::moveEntityHere(Entity ent, EntityList& entList, EntitySpawne
     EPP_ASSERT(entList.isValid(ent) && &originSpawner != this && fn);
 
     PoolIdx oldIdx = entList.get(ent).poolIdx;
-    PoolIdx newIdx(uint32_t(entityPool.data.size()));
+    PoolIdx newIdx(entityPool.data.size());
     auto oriPoolsPtr = originSpawner.cPools.begin();
     auto oriPoolsEnd = originSpawner.cPools.end();
 
@@ -106,8 +106,8 @@ void EntitySpawner::moveEntitiesHere(EntitySpawner& originSpawner, EntityList& e
 {
     if (originSpawner.entityPool.data.empty())
         return;
-    auto oriSize = std::uint32_t(originSpawner.entityPool.data.size());
-    auto thisSize = std::uint32_t(entityPool.data.size());
+    std::size_t oriSize = originSpawner.entityPool.data.size();
+    std::size_t thisSize = entityPool.data.size();
     auto oriPoolsPtr = originSpawner.cPools.begin();
     auto oriPoolsEnd = originSpawner.cPools.end();
     for (auto& pool : cPools) {
@@ -115,7 +115,7 @@ void EntitySpawner::moveEntitiesHere(EntitySpawner& originSpawner, EntityList& e
             oriPoolsPtr->clear();
         pool.alloc(oriSize);
         if (oriPoolsPtr != oriPoolsEnd && oriPoolsPtr->getCId() == pool.getCId())
-            for (std::uint32_t i = 0; i < oriSize; ++i)
+            for (std::size_t i = 0; i < oriSize; ++i)
                 pool.construct(thisSize + i, (*oriPoolsPtr)[i]);
     }
     for (; oriPoolsPtr != oriPoolsEnd; ++oriPoolsPtr)

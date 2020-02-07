@@ -1,17 +1,17 @@
 #ifndef ENTITYSPAWNER_H
 #define ENTITYSPAWNER_H
 
-#include <ECSpp/Internal/Archetype.h>
-#include <ECSpp/Internal/CPool.h>
-#include <ECSpp/Internal/EntityList.h>
-#include <ECSpp/Utility/Notifier.h>
-#include <ECSpp/Utility/Pool.h>
+#include <ECSpp/internal/Archetype.h>
+#include <ECSpp/internal/CPool.h>
+#include <ECSpp/internal/EntityList.h>
+#include <ECSpp/utility/Notifier.h>
+#include <ECSpp/utility/Pool.h>
 #include <functional>
 
 namespace epp {
 
 struct EntityEvent {
-    enum class Type : uint8_t {
+    enum class Type : std::uint8_t {
         Creation,
         Destruction,
         JoinedSelection, // when existing entity's archetype changes to the ones, that are accepted by this selection
@@ -20,7 +20,6 @@ struct EntityEvent {
     };
 
     Type const type;
-
     Entity entity;
 };
 
@@ -48,7 +47,9 @@ public:
         }
 
     private:
-        Creator(EntitySpawner& sp, PoolIdx index, CMask const& cstred = CMask()) : spawner(sp), idx(index), constrMask(cstred) {}
+        Creator(EntitySpawner& sp, PoolIdx index, CMask const& cstred = CMask()) : spawner(sp),
+                                                                                   constrMask(cstred),
+                                                                                   idx(index) {}
         Creator(Creator&& rVal) = delete;
         Creator(Creator const&) = delete;
         Creator& operator=(Creator const&) = delete;
@@ -63,8 +64,8 @@ public:
 
     private:
         EntitySpawner& spawner;
-        PoolIdx const idx;
         CMask constrMask;
+        PoolIdx const idx;
 
         friend class EntitySpawner;
     };
@@ -98,7 +99,7 @@ public:
     void clear(); // for clear-all (no need to free indices, all will be freed)
 
     // makes sure, to fit n more elements without realloc
-    void fitNextN(EntityList::Size_t n);
+    void fitNextN(std::size_t n);
 
     // TODO: tests
     void shrinkToFit();
@@ -123,7 +124,6 @@ private:
 
 public:
     SpawnerId const spawnerId;
-
     CMask const mask;
 
 private:

@@ -1,5 +1,5 @@
 #include "ComponentsT.h"
-#include <ECSpp/Internal/Archetype.h>
+#include <ECSpp/internal/Archetype.h>
 #include <gtest/gtest.h>
 
 using namespace epp;

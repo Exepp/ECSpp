@@ -17,7 +17,7 @@
 #ifndef LLVM_ADT_SMALLVECTOR_H
 #define LLVM_ADT_SMALLVECTOR_H
 
-#include <ECSpp/Utility/Assert.h>
+#include <ECSpp/utility/Assert.h>
 #include <algorithm>
 #include <cassert>
 #include <cstddef>

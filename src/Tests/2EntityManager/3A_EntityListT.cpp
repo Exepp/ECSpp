@@ -1,4 +1,4 @@
-#include <ECSpp/Internal/EntityList.h>
+#include <ECSpp/internal/EntityList.h>
 #include <gtest/gtest.h>
 
 using namespace epp;

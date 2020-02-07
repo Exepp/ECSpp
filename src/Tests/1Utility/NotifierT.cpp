@@ -1,5 +1,5 @@
-#include <ECSpp/Internal/EntitySpawner.h>
-#include <ECSpp/Utility/Notifier.h>
+#include <ECSpp/internal/EntitySpawner.h>
+#include <ECSpp/utility/Notifier.h>
 #include <gtest/gtest.h>
 
 using namespace epp;

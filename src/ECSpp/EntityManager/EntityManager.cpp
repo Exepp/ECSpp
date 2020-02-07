@@ -8,12 +8,12 @@ Entity EntityManager::spawn(Archetype const& arch, EntitySpawner::UserCreationFn
 }
 
 std::pair<EntityManager::EPoolCIter_t, EntityManager::EPoolCIter_t>
-EntityManager::spawn(Archetype const& arch, std::uint32_t n, EntitySpawner::UserCreationFn_t const& fn)
+EntityManager::spawn(Archetype const& arch, std::size_t n, EntitySpawner::UserCreationFn_t const& fn)
 {
     EntitySpawner& spawner = _prepareToSpawn(arch, n);
     for (std::size_t i = 0; i < n; ++i)
         spawner.spawn(entList, fn);
-    return { spawner.getEntities().data.end() - n, spawner.getEntities().data.end() };
+    return { spawner.getEntities().data.end() - std::ptrdiff_t(n), spawner.getEntities().data.end() };
 }
 
 void EntityManager::changeArchetype(Entity ent, Archetype const& newArchetype, EntitySpawner::UserCreationFn_t const& fn)
@@ -41,7 +41,7 @@ EntityManager::changeArchetype(Archetype const& oldArchetype, Archetype const& n
     EntitySpawner& newSp = getSpawner(newArchetype);
     if (oldSp.mask == newSp.mask)
         return { EntityManager::EPoolCIter_t(), EntityManager::EPoolCIter_t() };
-    std::size_t newSpSize = newSp.getEntities().data.size();
+    auto newSpSize = std::ptrdiff_t(newSp.getEntities().data.size());
     newSp.moveEntitiesHere(oldSp, entList, fn);
     return { newSp.getEntities().data.begin() + newSpSize, newSp.getEntities().data.end() };
 }
@@ -60,7 +60,7 @@ void EntityManager::clear(Archetype const& arch)
 }
 
 
-void EntityManager::prepareToSpawn(Archetype const& arch, std::uint32_t n)
+void EntityManager::prepareToSpawn(Archetype const& arch, std::size_t n)
 {
     _prepareToSpawn(arch, n);
 }
@@ -77,7 +77,7 @@ void EntityManager::shrinkToFit()
         spawner.shrinkToFit();
 }
 
-inline EntitySpawner& EntityManager::_prepareToSpawn(Archetype const& arch, std::uint32_t n)
+inline EntitySpawner& EntityManager::_prepareToSpawn(Archetype const& arch, std::size_t n)
 {
     EntitySpawner& spawner = getSpawner(arch);
     entList.fitNextN(n);

@@ -1,30 +1,15 @@
 #ifndef COMPONENT_H
 #define COMPONENT_H
 
-#include <ECSpp/Utility/Assert.h>
+#include <ECSpp/utility/Assert.h>
+#include <ECSpp/utility/IndexType.h>
 #include <cstdint>
 #include <memory>
 #include <vector>
 
 namespace epp {
 
-struct ComponentId {
-    using Val_t = std::uint16_t;
-
-    ComponentId() = default;
-    explicit ComponentId(Val_t val) : value(val) {}
-
-    bool operator==(ComponentId const& rhs) const { return value == rhs.value; }
-    bool operator!=(ComponentId const& rhs) const { return value != rhs.value; }
-    bool operator<(ComponentId const& rhs) const { return value < rhs.value; }
-    bool operator>(ComponentId const& rhs) const { return value > rhs.value; }
-    bool operator<=(ComponentId const& rhs) const { return value <= rhs.value; }
-    bool operator>=(ComponentId const& rhs) const { return value >= rhs.value; }
-
-    constexpr static Val_t const BadValue = std::numeric_limits<Val_t>::max();
-
-    Val_t value = BadValue;
-};
+using ComponentId = IndexType<0>;
 
 
 struct CMetadata {
@@ -40,7 +25,7 @@ public:
     DestrFnPtr_t destructor;
 
     std::uint32_t size;
-    std::uint16_t alignment;
+    std::uint32_t alignment;
 
 public:
     template <class CType>

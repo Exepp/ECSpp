@@ -8,20 +8,14 @@ namespace epp {
 // TODO: redo the tests
 class CPool final {
     using CId_t = decltype(IdOfL<>())::value_type;
-
-    using Idx_t = std::uint32_t;
+    using Idx_t = std::size_t;
 
 public:
     explicit CPool(CId_t cId);
-
     CPool(CPool&& rval);
-
     CPool& operator=(CPool&& rval);
-
     CPool(CPool const&) = delete;
-
     CPool& operator=(CPool const&) = delete;
-
     ~CPool() { reserve(0); }
 
 
@@ -54,22 +48,15 @@ public:
     bool destroy(Idx_t i);
 
     // makes sure, to fit n more elements without realloc
-    void fitNextN(Idx_t n);
-
+    void fitNextN(std::size_t n);
     void shrinkToFit() { reserve(dataUsed); }
-
     void clear();
-
-
-    void reserve(Idx_t newReserved);
-
+    void reserve(std::size_t newReserved);
 
     void* operator[](Idx_t i);
 
     CId_t getCId() const { return cId; }
-
     std::size_t size() const { return dataUsed; }
-
     std::size_t capacity() const { return reserved; }
 
 private:
@@ -79,14 +66,10 @@ private:
 
 private:
     void* data = nullptr;
-
-    Idx_t reserved = 0;
-
-    Idx_t dataUsed = 0;
-
+    std::size_t reserved = 0;
+    std::size_t dataUsed = 0;
     CMetadata metadata;
-
-    CId_t const cId; // may change on assignment
+    CId_t cId;
 };
 
 

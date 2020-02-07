@@ -1,9 +1,9 @@
 #ifndef ENTITYMANAGER_H
 #define ENTITYMANAGER_H
 
-#include <ECSpp/Internal/EntityList.h>
-#include <ECSpp/Internal/EntitySpawner.h>
-#include <ECSpp/Internal/Selection.h>
+#include <ECSpp/internal/EntityList.h>
+#include <ECSpp/internal/EntitySpawner.h>
+#include <ECSpp/internal/Selection.h>
 #include <deque>
 #include <unordered_map>
 
@@ -25,7 +25,7 @@ public:
 
     // first - iterator to the first of spawned entities
     // second - end iterator
-    std::pair<EPoolCIter_t, EPoolCIter_t> spawn(Archetype const& arch, std::uint32_t n, EntitySpawner::UserCreationFn_t const& fn = ([](EntityCreator&&) {}));
+    std::pair<EPoolCIter_t, EPoolCIter_t> spawn(Archetype const& arch, std::size_t n, EntitySpawner::UserCreationFn_t const& fn = ([](EntityCreator&&) {}));
 
 
     // ent - valid entity
@@ -91,7 +91,7 @@ public:
 
 
     // the next n spawn(arche, ...) calls will not require reallocation in any of the internal structures
-    void prepareToSpawn(Archetype const& arch, std::uint32_t n);
+    void prepareToSpawn(Archetype const& arch, std::size_t n);
 
 
     // TODO: tests
@@ -136,7 +136,7 @@ public:
     std::size_t size(Archetype const& arch) const;
 
 private:
-    EntitySpawner& _prepareToSpawn(Archetype const& arch, std::uint32_t n);
+    EntitySpawner& _prepareToSpawn(Archetype const& arch, std::size_t n);
 
     EntitySpawner& getSpawner(Archetype const& arch);
 
@@ -198,8 +198,8 @@ inline EntityManager::EPoolCIter_t EntityManager::destroy(EPoolCIter_t const& it
 template <typename... CTypes>
 inline void EntityManager::updateSelection(Selection<CTypes...>& selection)
 {
-    for (; selection.checkedSpawnersCount < spawners.size(); ++selection.checkedSpawnersCount)
-        selection.addSpawnerIfMeetsRequirements(spawners[selection.checkedSpawnersCount]);
+    for (; selection.checkedSpawnersNum < spawners.size(); ++selection.checkedSpawnersNum)
+        selection.addSpawnerIfMeetsRequirements(spawners[selection.checkedSpawnersNum]);
 }
 
 template <typename TComp>
@@ -239,7 +239,7 @@ inline EntitySpawner& EntityManager::getSpawner(Archetype const& arch)
 {
     if (auto found = findSpawner(arch); found != spawners.end())
         return *found;
-    return spawners.emplace_back(SpawnerId(std::uint32_t(spawners.size())), arch); // if not found, make one
+    return spawners.emplace_back(SpawnerId(spawners.size()), arch); // if not found, make one
 }
 
 inline EntityManager::Spawners_t::iterator

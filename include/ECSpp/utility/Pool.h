@@ -1,7 +1,7 @@
 #ifndef POOL_H
 #define POOL_H
 
-#include <ECSpp/Utility/Assert.h>
+#include <ECSpp/utility/Assert.h>
 #include <cmath>
 #include <memory>
 #include <vector>
@@ -9,9 +9,9 @@
 namespace epp {
 
 
-inline std::uint32_t SizeToFitNextN(std::uint32_t n, std::uint32_t reserved, std::uint32_t freeLeft)
+inline std::size_t SizeToFitNextN(std::size_t n, std::size_t reserved, std::size_t freeLeft)
 {
-    return freeLeft >= n ? reserved : (std::uint32_t(0x1) << std::uint8_t(std::ceil(std::log2(reserved + (n - freeLeft)))));
+    return freeLeft >= n ? reserved : (std::size_t(0x1) << std::uint8_t(std::ceil(std::log2(reserved + (n - freeLeft)))));
 }
 
 
@@ -38,9 +38,9 @@ struct Pool {
         return notLast;
     }
 
-    void fitNextN(std::uint32_t n)
+    void fitNextN(std::size_t n)
     {
-        data.reserve(SizeToFitNextN(n, std::uint32_t(data.capacity()), std::uint32_t(data.capacity() - data.size())));
+        data.reserve(SizeToFitNextN(n, data.capacity(), data.capacity() - data.size()));
     }
 
 

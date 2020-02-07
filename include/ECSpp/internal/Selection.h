@@ -1,9 +1,9 @@
 #ifndef SELECTION_H
 #define SELECTION_H
 
-#include <ECSpp/Internal/CMask.h>
-#include <ECSpp/Internal/EntitySpawner.h>
-#include <ECSpp/Utility/TuplePP.h>
+#include <ECSpp/internal/CMask.h>
+#include <ECSpp/internal/EntitySpawner.h>
+#include <ECSpp/utility/TuplePP.h>
 
 namespace epp {
 
