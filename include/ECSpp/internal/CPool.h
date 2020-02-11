@@ -1,7 +1,8 @@
-#ifndef CPOOL_H
-#define CPOOL_H
+#ifndef EPP_CPOOL_H
+#define EPP_CPOOL_H
 
 #include <ECSpp/Component.h>
+#include <ECSpp/utility/Pool.h>
 
 namespace epp {
 
@@ -76,6 +77,43 @@ private:
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+inline CPool::CPool(CId_t cid) : metadata(CMetadata::GetData(cid)), cId(cid) {}
+
+inline CPool::CPool(CPool&& rval)
+    : data(rval.data),
+      reserved(rval.reserved),
+      dataUsed(rval.dataUsed),
+      metadata(rval.metadata),
+      cId(rval.cId)
+{
+    rval.data = nullptr;
+    rval.reserved = 0;
+    rval.dataUsed = 0;
+}
+
+inline CPool& CPool::operator=(CPool&& rval)
+{
+    this->~CPool();
+    return *(new (this) CPool(std::move(rval)));
+}
+
+inline void* CPool::alloc()
+{
+    if (dataUsed >= reserved)
+        reserve(reserved ? 2 * reserved : 4); // 4 as first size
+    return addressAtIdx(dataUsed++);          // post-inc here
+}
+
+inline void* CPool::alloc(Idx_t n)
+{
+    if (n == 0)
+        return nullptr;
+    fitNextN(n);
+    void* ptr = addressAtIdx(dataUsed);
+    dataUsed += n;
+    return ptr;
+}
+
 inline void* CPool::construct(Idx_t idx)
 {
     EPP_ASSERT(idx < dataUsed);
@@ -86,6 +124,50 @@ inline void* CPool::construct(Idx_t idx, void* rValComp)
 {
     EPP_ASSERT(idx < dataUsed);
     return metadata.moveConstructor(addressAtIdx(idx), rValComp);
+}
+
+inline bool CPool::destroy(Idx_t i)
+{
+    EPP_ASSERT(i < dataUsed);
+
+    bool notLast = (i + 1) < dataUsed;
+    if (notLast) {
+        metadata.destructor(addressAtIdx(i));
+        construct(i, addressAtIdx(dataUsed - 1));
+    }
+    metadata.destructor(addressAtIdx(--dataUsed)); // pre-dec here
+    return notLast;
+}
+
+inline void CPool::fitNextN(std::size_t n)
+{
+    reserve(SizeToFitNextN(n, reserved, reserved - dataUsed));
+}
+
+inline void CPool::reserve(std::size_t newReserved)
+{
+    if (newReserved == reserved)
+        return;
+    void* newData = newReserved ? operator new[](metadata.size* newReserved, std::align_val_t(metadata.alignment))
+                                : nullptr;
+    if (data) {
+        auto toMove = std::min(newReserved, dataUsed);
+        for (Idx_t i = 0; i < toMove; ++i)
+            metadata.moveConstructor(addressAtIdx(newData, i), addressAtIdx(i));
+        for (Idx_t i = 0; i < dataUsed; ++i)
+            metadata.destructor(addressAtIdx(i));
+        dataUsed = toMove;
+        operator delete[](data, std::align_val_t(metadata.alignment));
+    }
+    data = newData;
+    reserved = newReserved;
+}
+
+inline void CPool::clear()
+{
+    for (Idx_t i = 0; i < dataUsed; ++i)
+        metadata.destructor(addressAtIdx(i));
+    dataUsed = 0;
 }
 
 inline void* CPool::operator[](Idx_t i)

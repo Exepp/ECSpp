@@ -1,5 +1,5 @@
-#ifndef COMPONENT_H
-#define COMPONENT_H
+#ifndef EPP_COMPONENT_H
+#define EPP_COMPONENT_H
 
 #include <ECSpp/utility/Assert.h>
 #include <ECSpp/utility/IndexType.h>
@@ -12,8 +12,7 @@ namespace epp {
 using ComponentId = IndexType<0>;
 
 
-struct CMetadata {
-private:
+class CMetadata {
     using DefCstrFnPtr_t = void* (*)(void*);
     using MoveCstrFnPtr_t = void* (*)(void* dest, void* src);
     using DestrFnPtr_t = void (*)(void*);
@@ -28,7 +27,7 @@ public:
     std::uint32_t alignment;
 
 public:
-    template <class CType>
+    template <typename CType>
     static ComponentId Id()
     {
         static ComponentId id = RegisterComponent<CType>();
@@ -52,15 +51,15 @@ public:
     }
 
 private:
-    template <class CType>
+    template <typename CType>
     static ComponentId RegisterComponent()
     {
+        static_assert(std::is_same_v<std::remove_pointer_t<std::decay_t<CType>>, CType>);
         static_assert(std::is_default_constructible_v<CType>);
         static_assert(std::is_move_constructible_v<CType>);
 
         EPP_ASSERTA(!CMetadata::Registered); // if CMetadata::Register was used
                                              // further registration is not allowed
-
         CMetadata data;
         data.defaultConstructor = [](void* mem) -> void* { return new (mem) CType(); };
         data.moveConstructor = [](void* dest, void* src) -> void* { return new (dest) CType(std::move(*static_cast<CType*>(src))); };
@@ -79,6 +78,9 @@ private:
     inline static bool Registered = false;
     inline static MetadataVec_t MetadataVec;
 };
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 template <typename T>
@@ -102,4 +104,4 @@ inline decltype(auto) IdOf()
 
 } // namespace epp
 
-#endif // COMPONENT_H
+#endif // EPP_COMPONENT_H

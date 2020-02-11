@@ -1,6 +1,7 @@
-#ifndef POOL_H
-#define POOL_H
+#ifndef EPP_POOL_H
+#define EPP_POOL_H
 
+#include <ECSpp/external/llvm/SmallVector.h>
 #include <ECSpp/utility/Assert.h>
 #include <cmath>
 #include <memory>
@@ -11,7 +12,7 @@ namespace epp {
 
 inline std::size_t SizeToFitNextN(std::size_t n, std::size_t reserved, std::size_t freeLeft)
 {
-    return freeLeft >= n ? reserved : (std::size_t(0x1) << std::uint8_t(std::ceil(std::log2(reserved + (n - freeLeft)))));
+    return freeLeft >= n ? reserved : llvm::NextPowerOf2(reserved + (n - freeLeft) - 1);
 }
 
 
@@ -50,4 +51,4 @@ struct Pool {
 
 } // namespace epp
 
-#endif // POOL_H
+#endif // EPP_POOL_H

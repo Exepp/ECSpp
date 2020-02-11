@@ -1,7 +1,6 @@
-#ifndef SELECTION_H
-#define SELECTION_H
+#ifndef EPP_SELECTION_H
+#define EPP_SELECTION_H
 
-#include <ECSpp/internal/CMask.h>
 #include <ECSpp/internal/EntitySpawner.h>
 #include <ECSpp/utility/TuplePP.h>
 
@@ -10,8 +9,12 @@ namespace epp {
 template <typename... CTypes>
 class Selection;
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 template <bool IsConst, typename T>
-using CondConstType = std::conditional_t<IsConst, T const, T>;
+using CondConstType = std::conditional_t<IsConst, std::add_const_t<T>, T>;
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <bool _HasTypes, typename... CTypes> // false version
 struct SelectionBase {
@@ -22,6 +25,8 @@ struct SelectionBase {
         IteratorBase(Selection_t&) {}
     };
 };
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <typename... CTypes> // true version
 struct SelectionBase<true, CTypes...> {
@@ -41,6 +46,7 @@ struct SelectionBase<true, CTypes...> {
                                // one pool for every accepted spawner
 };
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <typename... CTypes>
 class Selection : SelectionBase<(sizeof...(CTypes) > 0), CTypes...> {
@@ -56,13 +62,17 @@ class Selection : SelectionBase<(sizeof...(CTypes) > 0), CTypes...> {
         using SIdx_t = std::uint64_t;
         using PIdx_t = SIdx_t; // compiles better (at least on my machine) with 64 bits
 
+        // so user can call getComponent<CType> for const and non-const types
+        template <class T>
+        using CondConstComp_t = CondConstType<IsConst || isTypeInPack<std::add_const_t<T>, CTypes...>(), T>;
+
         constexpr static SIdx_t const EndValue = std::numeric_limits<SIdx_t>::max();
 
     public:
         Iterator(Selection_t& sel, bool end = false);
 
         template <typename T>
-        std::enable_if_t<(sizeof...(CTypes) > 0), CondConstType<IsConst, T>>&
+        std::enable_if_t<(sizeof...(CTypes) > 0), CondConstComp_t<T>>&
         getComponent() const;
 
         Iterator& operator++();                   // incrementing an end iterator throws
@@ -96,25 +106,22 @@ public:
     using ConstIterator_t = Iterator<true>;
 
 public:
-    Selection() : wantedMask(IdOfL<CTypes...>()) {}
+    Selection();
 
-    explicit Selection(CMask unwanted) : wantedMask(IdOfL<CTypes...>()),
-                                         unwantedMask(unwanted.removeCommon(wantedMask)) {}
+    explicit Selection(CMask unwanted);
 
     template <typename Func>
-    void forEach(Func func)
-    {
-        for (Iterator_t it = begin(), itEnd = end(); it != itEnd; ++it)
-            func(it.template getComponent<CTypes>()...);
-    }
+    void forEach(Func func);
 
     Iterator_t begin();
     Iterator_t end();
     ConstIterator_t begin() const;
     ConstIterator_t end() const;
 
-    CMask const& getWanted() const { return wantedMask; }
-    CMask const& getUnwanted() const { return unwantedMask; }
+    CMask const& getWanted() const;
+    CMask const& getUnwanted() const;
+
+    std::size_t countEntities() const;
 
 private:
     void addSpawnerIfMeetsRequirements(EntitySpawner& spawner);
@@ -126,7 +133,7 @@ private:
     std::size_t checkedSpawnersNum = 0;
 
 
-    friend SelectionBase<true, CTypes...>;
+    friend SelectionBase<true, CTypes...>; // in used iterator
 
     friend class EntityManager;
 };
@@ -148,13 +155,15 @@ inline Selection<CTypes...>::Iterator<IsConst>::Iterator(Selection_t& sel, bool 
 template <typename... CTypes>
 template <bool IsConst>
 template <typename T>
-inline std::enable_if_t<(sizeof...(CTypes) > 0), CondConstType<IsConst, T>>&
+inline std::enable_if_t<(sizeof...(CTypes) > 0),
+                        typename Selection<CTypes...>::template Iterator<IsConst>::template CondConstComp_t<T>>&
 Selection<CTypes...>::Iterator<IsConst>::getComponent() const
 {
-    // redundant (with tuple's assert), but a more verbose message
-    static_assert(isTypeInPack<T, CTypes...>(), "This type is not specified in this sel's declaration");
+    // redundant (with tuple's assert), but a more specific message
+    static_assert(isTypeInPack<std::remove_const_t<T>, std::remove_const_t<CTypes>...>(),
+                  "This type is not specified in the declaration of this selection");
     EPP_ASSERT(isValid());
-    return *static_cast<T*>((*this->poolsPack->template get<typename Base_t::template PoolsPtrs_t<T>>()[spawnerIdx])[poolIdx]);
+    return *static_cast<CondConstComp_t<T>*>((*this->poolsPack->template get<typename Base_t::template PoolsPtrs_t<CondConstComp_t<T>>>()[spawnerIdx])[poolIdx]);
 }
 
 template <typename... CTypes>
@@ -278,6 +287,20 @@ Selection<CTypes...>::Iterator<IsConst>::numOfSpawners() const
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <typename... CTypes>
+Selection<CTypes...>::Selection() : wantedMask(IdOfL<std::remove_const_t<CTypes>...>()) {}
+
+template <typename... CTypes>
+Selection<CTypes...>::Selection(CMask unwanted) : wantedMask(IdOfL<std::remove_const_t<CTypes>...>()),
+                                                  unwantedMask(unwanted.removeCommon(wantedMask)) {}
+template <typename... CTypes>
+template <typename Func>
+void Selection<CTypes...>::forEach(Func func)
+{
+    for (Iterator_t it = begin(), itEnd = end(); it != itEnd; ++it)
+        func(it.template getComponent<CTypes>()...);
+}
+
+template <typename... CTypes>
 inline typename Selection<CTypes...>::Iterator_t
 Selection<CTypes...>::begin()
 {
@@ -306,16 +329,33 @@ Selection<CTypes...>::end() const
 }
 
 template <typename... CTypes>
+CMask const& Selection<CTypes...>::getWanted() const { return wantedMask; }
+
+template <typename... CTypes>
+CMask const& Selection<CTypes...>::getUnwanted() const { return unwantedMask; }
+
+
+template <typename... CTypes>
+inline std::size_t
+Selection<CTypes...>::countEntities() const
+{
+    std::size_t sum = 0;
+    for (auto const& pool : entityPools)
+        sum += pool->data.size();
+    return sum;
+}
+
+template <typename... CTypes>
 inline void Selection<CTypes...>::addSpawnerIfMeetsRequirements(EntitySpawner& spawner)
 {
     if (spawner.mask.contains(wantedMask) && !spawner.mask.hasCommon(unwantedMask)) {
         entityPools.push_back(&spawner.getEntities());
         if constexpr (sizeof...(CTypes) > 0)
-            (this->poolsPack.template get<typename Base_t::template PoolsPtrs_t<CTypes>>().push_back(&spawner.getPool(IdOf<CTypes>())), ...);
+            (this->poolsPack.template get<typename Base_t::template PoolsPtrs_t<CTypes>>().push_back(&spawner.getPool(IdOf<std::remove_const_t<CTypes>>())), ...);
     }
 }
 
 
 } // namespace epp
 
-#endif // SELECTION_H
+#endif // EPP_SELECTION_H

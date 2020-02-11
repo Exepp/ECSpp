@@ -1,5 +1,5 @@
-#ifndef ENTITYMANAGER_H
-#define ENTITYMANAGER_H
+#ifndef EPP_ENTITYMANAGER_H
+#define EPP_ENTITYMANAGER_H
 
 #include <ECSpp/internal/EntityList.h>
 #include <ECSpp/internal/EntitySpawner.h>
@@ -12,25 +12,31 @@ namespace epp {
 // TODO: redo the tests
 class EntityManager {
     using Spawners_t = std::deque<EntitySpawner>; // deque, to keep selections' references valid
-
     using EntityPool_t = EntitySpawner::EntityPool_t;
-
     using EPoolCIter_t = EntitySpawner::EntityPool_t::Container_t::const_iterator;
-
     using IdList_t = decltype(IdOfL<>());
 
+    inline static auto DefCreationFn = [](EntityCreator&&) {};
+    using DefCreationFn_t = decltype(DefCreationFn);
+
 public:
-    Entity spawn(Archetype const& arch, EntitySpawner::UserCreationFn_t const& fn = ([](EntityCreator&&) {}));
+    template <typename FnType = DefCreationFn_t>
+    std::enable_if_t<std::is_invocable_v<FnType, EntityCreator&&>, Entity> // disable for spawn(arche, n)
+    spawn(Archetype const& arch, FnType fn = DefCreationFn);
 
 
     // first - iterator to the first of spawned entities
     // second - end iterator
-    std::pair<EPoolCIter_t, EPoolCIter_t> spawn(Archetype const& arch, std::size_t n, EntitySpawner::UserCreationFn_t const& fn = ([](EntityCreator&&) {}));
+    template <typename FnType = DefCreationFn_t>
+    std::pair<EPoolCIter_t, EPoolCIter_t>
+    spawn(Archetype const& arch, std::size_t n, FnType fn = DefCreationFn);
 
 
     // ent - valid entity
     // newArchetype - any archetype
-    void changeArchetype(Entity ent, Archetype const& newArchetype, EntitySpawner::UserCreationFn_t const& fn = ([](EntityCreator&&) {}));
+    template <typename FnType = DefCreationFn_t>
+    void
+    changeArchetype(Entity ent, Archetype const& newArchetype, FnType fn = DefCreationFn);
 
 
     /// Changes the archetype of ent, removing components from toRemove list and adding the ones from toAdd list
@@ -41,7 +47,9 @@ public:
      * @param toRemove Components that will be removed from ent (except for the ones specified in toAdd)
      * @param fn A callable object that can use the Creator instance to construct the added components
      */
-    void changeArchetype(Entity ent, IdList_t toAdd, IdList_t toRemove = IdOfL<>(), EntitySpawner::UserCreationFn_t const& fn = ([](EntityCreator&&) {}));
+    template <typename FnType = DefCreationFn_t>
+    void
+    changeArchetype(Entity ent, IdList_t toAdd, IdList_t toRemove = IdOfL<>(), FnType fn = DefCreationFn);
 
 
     /// Changes the archetype of the entity associated with the iterator and returns the next valid one
@@ -51,12 +59,15 @@ public:
      * @param newArchetype Any archetype - a new archetype of the entity associated with the iterator  
      * @param fn A callable object that can use the Creator instance to construct the added components
      */
-    template <typename Iterator>
-    Iterator changeArchetype(Iterator it, Archetype const& newArchetype, EntitySpawner::UserCreationFn_t const& fn = ([](EntityCreator&&) {}));
+    template <typename Iterator, typename FnType = DefCreationFn_t>
+    Iterator
+    changeArchetype(Iterator it, Archetype const& newArchetype, FnType fn = DefCreationFn);
 
 
     /** @copydoc EntityManager::changeArchetype(Iterator, Archetype const&, EntitySpawner::UserCreationFn_t const&) */
-    EPoolCIter_t changeArchetype(EPoolCIter_t const& it, Archetype const& newArchetype, EntitySpawner::UserCreationFn_t const& fn = ([](EntityCreator&&) {}));
+    template <typename FnType = DefCreationFn_t>
+    EPoolCIter_t
+    changeArchetype(EPoolCIter_t const& it, Archetype const& newArchetype, FnType fn = DefCreationFn);
 
 
     /// Changes the archetype of entities of oldArchetype to newArchetype
@@ -65,7 +76,9 @@ public:
      * @param newArchetype Any archetype
      * @param fn A callable object that can use the Creator instance to construct the added components
      */
-    std::pair<EPoolCIter_t, EPoolCIter_t> changeArchetype(Archetype const& oldArchetype, Archetype const& newArchetype, EntitySpawner::UserCreationFn_t const& fn = ([](EntityCreator&&) {}));
+    template <typename FnType = DefCreationFn_t>
+    std::pair<EPoolCIter_t, EPoolCIter_t>
+    changeArchetype(Archetype const& oldArchetype, Archetype const& newArchetype, FnType fn = DefCreationFn);
 
 
     // ent - valid entity
@@ -75,7 +88,8 @@ public:
     // destroys the entity associated with the iterator and returns the next valid one
     // iterator - valid and non-end iterator
     template <typename Iterator>
-    Iterator destroy(Iterator it);
+    Iterator
+    destroy(Iterator it);
 
 
     EPoolCIter_t destroy(EPoolCIter_t const& it);
@@ -137,15 +151,10 @@ public:
 
 private:
     EntitySpawner& _prepareToSpawn(Archetype const& arch, std::size_t n);
-
     EntitySpawner& getSpawner(Archetype const& arch);
-
     EntitySpawner& getSpawner(Entity ent) { return spawners[entList.get(ent).spawnerId.value]; }
-
     EntitySpawner const& getSpawner(Entity ent) const { return spawners[entList.get(ent).spawnerId.value]; }
-
     Spawners_t::iterator findSpawner(Archetype const& arch);
-
     Spawners_t::const_iterator findSpawner(Archetype const& arch) const;
 
 private:
@@ -158,19 +167,70 @@ private:
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-template <typename Iterator>
-inline Iterator EntityManager::changeArchetype(Iterator it, Archetype const& newArchetype, EntitySpawner::UserCreationFn_t const& fn)
+template <typename FnType>
+inline std::enable_if_t<std::is_invocable_v<FnType, EntityCreator&&>, Entity>
+EntityManager::spawn(Archetype const& arch, FnType fn)
 {
-    changeArchetype(*it, newArchetype, fn);
+    return getSpawner(arch).spawn(entList, std::move(fn));
+}
+
+template <typename FnType>
+inline std::pair<EntityManager::EPoolCIter_t, EntityManager::EPoolCIter_t>
+EntityManager::spawn(Archetype const& arch, std::size_t n, FnType fn)
+{
+    EntitySpawner& spawner = _prepareToSpawn(arch, n);
+    for (std::size_t i = 0; i < n; ++i)
+        spawner.spawn(entList, std::move(fn));
+    return { spawner.getEntities().data.end() - std::ptrdiff_t(n), spawner.getEntities().data.end() };
+}
+
+template <typename FnType>
+inline void EntityManager::changeArchetype(Entity ent, Archetype const& newArchetype, FnType fn)
+{
+    EPP_ASSERT(entList.isValid(ent));
+    EntitySpawner& spawner = getSpawner(ent);
+    if (spawner.mask != newArchetype.getMask())
+        getSpawner(newArchetype).moveEntityHere(ent, entList, spawner, std::move(fn));
+}
+
+template <typename FnType>
+inline void EntityManager::changeArchetype(Entity ent, IdList_t toAdd, IdList_t toRemove, FnType fn)
+{
+    EPP_ASSERT(entList.isValid(ent));
+    EntitySpawner& spawner = getSpawner(ent);
+    Archetype newArchetype = spawner.makeArchetype().removeComponent(toRemove).addComponent(toAdd);
+    if (spawner.mask != newArchetype.getMask())
+        getSpawner(newArchetype).moveEntityHere(ent, entList, spawner, std::move(fn));
+}
+
+template <typename FnType>
+inline std::pair<EntityManager::EPoolCIter_t, EntityManager::EPoolCIter_t>
+EntityManager::changeArchetype(Archetype const& oldArchetype, Archetype const& newArchetype, FnType fn)
+{
+    EPP_ASSERT(findSpawner(oldArchetype) != spawners.end());
+    EntitySpawner& oldSp = getSpawner(oldArchetype);
+    EntitySpawner& newSp = getSpawner(newArchetype);
+    if (oldSp.mask == newSp.mask)
+        return { EntityManager::EPoolCIter_t(), EntityManager::EPoolCIter_t() };
+    auto newSpSize = std::ptrdiff_t(newSp.getEntities().data.size());
+    newSp.moveEntitiesHere(oldSp, entList, std::move(fn));
+    return { newSp.getEntities().data.begin() + newSpSize, newSp.getEntities().data.end() };
+}
+
+template <typename Iterator, typename FnType>
+inline Iterator EntityManager::changeArchetype(Iterator it, Archetype const& newArchetype, FnType fn)
+{
+    changeArchetype(*it, newArchetype, std::move(fn));
     if (!it.isValid())
         return ++it;
     return it;
 }
 
+template <typename FnType>
 inline EntityManager::EPoolCIter_t
-EntityManager::changeArchetype(EPoolCIter_t const& it, Archetype const& newArchetype, EntitySpawner::UserCreationFn_t const& fn)
+EntityManager::changeArchetype(EPoolCIter_t const& it, Archetype const& newArchetype, FnType fn)
 {
-    changeArchetype(*it, newArchetype, fn);
+    changeArchetype(*it, newArchetype, std::move(fn));
     return it; // same iterator (valid for vector)
 }
 
@@ -192,7 +252,37 @@ inline Iterator EntityManager::destroy(Iterator it)
 inline EntityManager::EPoolCIter_t EntityManager::destroy(EPoolCIter_t const& it)
 {
     destroy(*it);
-    return it; // same iterator (valid for vector)
+    return it; // same iterator (valid for vector - last element was removed)
+}
+
+inline void EntityManager::clear()
+{
+    for (auto& spawner : spawners)
+        spawner.clear();
+    entList.freeAll();
+}
+
+inline void EntityManager::clear(Archetype const& arch)
+{
+    if (auto spawner = findSpawner(arch); spawner != spawners.end())
+        spawner->clear(entList);
+}
+
+inline void EntityManager::prepareToSpawn(Archetype const& arch, std::size_t n)
+{
+    _prepareToSpawn(arch, n);
+}
+
+inline void EntityManager::shrinkToFit(Archetype const& arch)
+{
+    if (auto spawner = findSpawner(arch); spawner != spawners.end())
+        spawner->shrinkToFit();
+}
+
+inline void EntityManager::shrinkToFit()
+{
+    for (auto& spawner : spawners)
+        spawner.shrinkToFit();
 }
 
 template <typename... CTypes>
@@ -235,6 +325,14 @@ inline std::size_t EntityManager::size(Archetype const& arch) const
     return 0;
 }
 
+inline EntitySpawner& EntityManager::_prepareToSpawn(Archetype const& arch, std::size_t n)
+{
+    EntitySpawner& spawner = getSpawner(arch);
+    entList.fitNextN(n);
+    spawner.fitNextN(n);
+    return spawner;
+}
+
 inline EntitySpawner& EntityManager::getSpawner(Archetype const& arch)
 {
     if (auto found = findSpawner(arch); found != spawners.end())
@@ -257,4 +355,4 @@ EntityManager::findSpawner(Archetype const& arch) const
 
 } // namespace epp
 
-#endif // ENTITYMANAGER_H
+#endif // EPP_ENTITYMANAGER_H

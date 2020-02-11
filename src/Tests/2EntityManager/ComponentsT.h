@@ -1,5 +1,5 @@
-#ifndef COMPONENTS_H
-#define COMPONENTS_H
+#ifndef EPP_COMPONENTS_H
+#define EPP_COMPONENTS_H
 
 #include <ECSpp/Component.h>
 #include <array>
@@ -66,4 +66,4 @@ struct TComp4 : public TCompBase<TComp4> {
     TComp4(Arr_t data) : Base_t(data) {}
 };
 
-#endif // COMPONENTS_H
+#endif // EPP_COMPONENTS_H

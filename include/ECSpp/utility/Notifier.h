@@ -1,5 +1,5 @@
-#ifndef NOTIFIER_H
-#define NOTIFIER_H
+#ifndef EPP_NOTIFIER_H
+#define EPP_NOTIFIER_H
 
 #include <functional>
 #include <vector>
@@ -53,4 +53,4 @@ private:
 
 } // namespace epp
 
-#endif // NOTIFIER_H
+#endif // EPP_NOTIFIER_H

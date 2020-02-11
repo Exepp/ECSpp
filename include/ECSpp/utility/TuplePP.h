@@ -1,5 +1,5 @@
-#ifndef TUPLEPP_H
-#define TUPLEPP_H
+#ifndef EPP_TUPLEPP_H
+#define EPP_TUPLEPP_H
 
 #include <tuple>
 
@@ -111,4 +111,4 @@ struct TuplePP : public std::tuple<TplTypes...> {
 
 } // namespace epp
 
-#endif // TUPLEPP_H
+#endif // EPP_TUPLEPP_H

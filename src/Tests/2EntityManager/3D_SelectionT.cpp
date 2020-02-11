@@ -206,3 +206,49 @@ TEST(Selection, Empty)
         ASSERT_TRUE(mgr.maskOf(*it).contains(CMask(IdOf<TComp1, TComp3>())));
     }
 }
+
+TEST(Selection, Iterator)
+{
+    EntityManager mgr;
+    Selection<TComp3 const, TComp1 const> sel;
+    Archetype arch[] = { Archetype(IdOf<TComp1, TComp3>()),
+                         Archetype(IdOf<TComp1, TComp3, TComp2>()),
+                         Archetype(IdOf<TComp1, TComp3, TComp4>()) };
+    int n = 0;
+    auto fn = [& n = std::as_const(n)](EntityCreator&& creator) {
+        creator.constructed<TComp1>(n, n, n);
+        creator.constructed<TComp3>(std::array<int, 3>{ -n, -n, -n }); };
+
+    for (; n < 1024; ++n)
+        mgr.spawn(arch[0], fn);
+    for (; n < 2 * 1024; ++n)
+        mgr.spawn(arch[1], fn);
+    for (; n < 3 * 1024; ++n)
+        mgr.spawn(arch[2], fn);
+    mgr.updateSelection(sel);
+
+    auto it1 = sel.begin();
+    auto it2 = it1 + sel.countEntities() / 4;
+    auto it3 = it2 + sel.countEntities() / 4;
+    auto it4 = it3 + sel.countEntities() / 4;
+    auto it5 = sel.end();
+
+    int cn = 0;
+    for (; it1 != it2; ++it1, ++cn) {
+        ASSERT_EQ(it1.getComponent<TComp1>(), TComp1(cn, cn, cn));
+        ASSERT_EQ(it1.getComponent<TComp3>(), TComp3({ -cn, -cn, -cn }));
+    }
+    for (; it2 != it3; ++it2, ++cn) {
+        ASSERT_EQ(it2.getComponent<TComp1>(), TComp1(cn, cn, cn));
+        ASSERT_EQ(it2.getComponent<TComp3>(), TComp3({ -cn, -cn, -cn }));
+    }
+    for (; it3 != it4; ++it3, ++cn) {
+        ASSERT_EQ(it3.getComponent<TComp1>(), TComp1(cn, cn, cn));
+        ASSERT_EQ(it3.getComponent<TComp3>(), TComp3({ -cn, -cn, -cn }));
+    }
+    for (; it4 != it5; ++it4, ++cn) {
+        ASSERT_EQ(it4.getComponent<TComp1>(), TComp1(cn, cn, cn));
+        ASSERT_EQ(it4.getComponent<TComp3>(), TComp3({ -cn, -cn, -cn }));
+    }
+    ASSERT_EQ(cn, n);
+}

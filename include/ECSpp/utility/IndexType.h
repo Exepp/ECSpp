@@ -1,5 +1,7 @@
-#ifndef INDEXTYPE_H
-#define INDEXTYPE_H
+#ifndef EPP_INDEXTYPE_H
+#define EPP_INDEXTYPE_H
+
+#include <ECSpp/utility/Assert.h>
 #include <cstdint>
 
 namespace epp {
@@ -25,4 +27,4 @@ struct IndexType {
 };
 } // namespace epp
 
-#endif // INDEXTYPE_H
+#endif // EPP_INDEXTYPE_H
