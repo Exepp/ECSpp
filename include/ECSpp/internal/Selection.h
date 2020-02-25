@@ -1,6 +1,7 @@
 #ifndef EPP_SELECTION_H
 #define EPP_SELECTION_H
 
+#include <ECSpp/internal/EntityList.h>
 #include <ECSpp/internal/EntitySpawner.h>
 #include <ECSpp/utility/TuplePP.h>
 
@@ -52,6 +53,7 @@ template <typename... CTypes>
 class Selection : SelectionBase<(sizeof...(CTypes) > 0), CTypes...> {
     using Base_t = SelectionBase<(sizeof...(CTypes) > 0), CTypes...>;
     using EntityPools_t = std::vector<Pool<Entity> const*>;
+    using SpawnerIds_t = std::vector<SpawnerId>;
 
     //////////////////////// <iterator>
 
@@ -84,6 +86,15 @@ class Selection : SelectionBase<(sizeof...(CTypes) > 0), CTypes...> {
         bool operator==(Iterator const& other) const;
         bool operator!=(Iterator const& other) const;
 
+        // Makes this iterator point to the entity located at {sId, pIdx}
+        // If sId is not contained within this selection, iterator will point to the first entity of
+        // a spawner which has id greater than sId or to end if no spawner with greater id is found.
+        // sId ought to be greater or equal to the id of spawner iterator is currently pointing to
+        Iterator& jumpToOrBeyond(SpawnerId sId, PoolIdx pIdx);
+        Iterator& jumpToOrBeyond(EntityList::Cell::Occupied entCell);
+        SpawnerId getSpawnerId() const;
+        PoolIdx getPoolIdx() const;
+
     private:
         bool isValid() const;
         void findNextSpawner();
@@ -94,6 +105,7 @@ class Selection : SelectionBase<(sizeof...(CTypes) > 0), CTypes...> {
         EntityPools_t const* entityPools;
         PIdx_t poolIdx;
         SIdx_t spawnerIdx;
+        SpawnerIds_t const* spawnerIds;
 
         friend class EntityManager;
     };
@@ -130,11 +142,11 @@ private:
     CMask const wantedMask;    // must be declared before unwanted
     CMask const unwantedMask;  // if wanted & unwated (common part) != 0, then unwanted = unwanted \ (unwanted & wanted)
     EntityPools_t entityPools; // one pool for every accepted spawner
+    SpawnerIds_t spawnerIds;
     std::size_t checkedSpawnersNum = 0;
 
 
     friend SelectionBase<true, CTypes...>; // in used iterator
-
     friend class EntityManager;
 };
 
@@ -147,9 +159,13 @@ template <bool IsConst>
 inline Selection<CTypes...>::Iterator<IsConst>::Iterator(Selection_t& sel, bool end)
     : ItBase_t(sel),
       entityPools(&sel.entityPools),
+      spawnerIds(&sel.spawnerIds),
       spawnerIdx(end ? EndValue : 0)
 {
-    findNextSpawner();
+    if (end)
+        poolIdx = 0;
+    else
+        findNextSpawner(); // always sets poolIdx to 0
 }
 
 template <typename... CTypes>
@@ -203,6 +219,7 @@ Selection<CTypes...>::Iterator<IsConst>::operator+=(std::size_t offset)
         else
             return *this;
     spawnerIdx = EndValue;
+    poolIdx = 0;
     return *this;
 }
 
@@ -238,6 +255,47 @@ inline bool
 Selection<CTypes...>::Iterator<IsConst>::operator!=(Iterator const& other) const
 {
     return !(*this == other);
+}
+template <typename... CTypes>
+template <bool IsConst>
+inline typename Selection<CTypes...>::template Iterator<IsConst>&
+Selection<CTypes...>::Iterator<IsConst>::jumpToOrBeyond(EntityList::Cell::Occupied entCell)
+{
+    return jumpToOrBeyond(entCell.spawnerId, entCell.poolIdx);
+}
+
+template <typename... CTypes>
+template <bool IsConst>
+inline typename Selection<CTypes...>::template Iterator<IsConst>&
+Selection<CTypes...>::Iterator<IsConst>::jumpToOrBeyond(SpawnerId sId, PoolIdx pIdx)
+{
+    if (sId != SpawnerId(SpawnerId::BadValue)) {
+        auto spawnersNum = numOfSpawners();
+        for (; spawnerIdx < spawnersNum; ++spawnerIdx)
+            if ((*spawnerIds)[spawnerIdx] >= sId) { // dont use getSpawnerId to avoid additional check
+                poolIdx = pIdx.value;
+                return *this;
+            }
+    }
+    spawnerIdx = EndValue;
+    poolIdx = 0;
+    return *this;
+}
+
+template <typename... CTypes>
+template <bool IsConst>
+inline SpawnerId
+Selection<CTypes...>::Iterator<IsConst>::getSpawnerId() const
+{
+    return spawnerIdx != EndValue ? (*spawnerIds)[spawnerIdx] : SpawnerId();
+}
+
+template <typename... CTypes>
+template <bool IsConst>
+inline PoolIdx
+Selection<CTypes...>::Iterator<IsConst>::getPoolIdx() const
+{
+    return PoolIdx(poolIdx);
 }
 
 template <typename... CTypes>
@@ -296,8 +354,9 @@ template <typename... CTypes>
 template <typename Func>
 void Selection<CTypes...>::forEach(Func func)
 {
+    static_assert(std::is_invocable_v<Func, Iterator_t const&>);
     for (Iterator_t it = begin(), itEnd = end(); it != itEnd; ++it)
-        func(it.template getComponent<CTypes>()...);
+        func(it);
 }
 
 template <typename... CTypes>
@@ -350,6 +409,7 @@ inline void Selection<CTypes...>::addSpawnerIfMeetsRequirements(EntitySpawner& s
 {
     if (spawner.mask.contains(wantedMask) && !spawner.mask.hasCommon(unwantedMask)) {
         entityPools.push_back(&spawner.getEntities());
+        spawnerIds.push_back(spawner.spawnerId);
         if constexpr (sizeof...(CTypes) > 0)
             (this->poolsPack.template get<typename Base_t::template PoolsPtrs_t<CTypes>>().push_back(&spawner.getPool(IdOf<std::remove_const_t<CTypes>>())), ...);
     }
