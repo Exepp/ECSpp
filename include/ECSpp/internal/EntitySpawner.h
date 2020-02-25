@@ -4,45 +4,19 @@
 #include <ECSpp/internal/Archetype.h>
 #include <ECSpp/internal/CPool.h>
 #include <ECSpp/internal/EntityList.h>
-#include <ECSpp/utility/Notifier.h>
 
 namespace epp {
-
-struct EntityEvent {
-    enum class Type : std::uint8_t {
-        Creation,
-        Destruction,
-        JoinedSelection, // when existing entity's archetype changes to the ones, that are accepted by this selection
-        LeftSelection,   // when entity gets/loses component and no longer passes through the selection's filter
-        _Every           // must be the last one
-    };
-
-    Type const type;
-    Entity entity;
-};
-
-using SpawnerNotifier = Notifier<EntityEvent>;
-
 
 class EntitySpawner {
 public:
     class Creator {
     public:
         /** 
-         * Consecutive calls to constructed already constructed components will just return the reference
+         * Consecutive calls to "constructed" on already constructed components will only return the reference
          * TODO: Tests
         */
         template <typename CType, typename... Args>
-        CType& constructed(Args&&... args)
-        {
-            EPP_ASSERT(spawner.mask.get(IdOf<CType>()));
-            auto cId = IdOf<CType>();
-            CType* component = static_cast<CType*>(spawner.getPool(cId)[idx.value]);
-            if (constrMask.get(cId))
-                return *component;
-            constrMask.set(cId);
-            return *(new (component) CType(std::forward<Args>(args)...));
-        }
+        CType& constructed(Args&&... args);
 
     private:
         Creator(EntitySpawner& sp, PoolIdx index, CMask const& cstred = CMask()) : spawner(sp),
@@ -52,12 +26,8 @@ public:
         Creator(Creator const&) = delete;
         Creator& operator=(Creator const&) = delete;
         Creator& operator=(Creator&&) = delete;
-        ~Creator() /** constructs components that the user didnt construct himself */
-        {
-            for (auto& pool : spawner.cPools)
-                if (constrMask.get(pool.getCId()) == false)
-                    pool.construct(idx.value);
-        }
+        ~Creator(); /** constructs components that the user didnt construct himself */
+
 
     private:
         EntitySpawner& spawner;
@@ -120,6 +90,29 @@ private:
 
 
 using EntityCreator = EntitySpawner::Creator;
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+template <typename CType, typename... Args>
+CType& EntityCreator::constructed(Args&&... args)
+{
+    EPP_ASSERT(spawner.mask.get(IdOf<CType>()));
+    auto cId = IdOf<CType>();
+    CType* component = static_cast<CType*>(spawner.getPool(cId)[idx.value]);
+    if (constrMask.get(cId))
+        return *component;
+    constrMask.set(cId);
+    return *(new (component) CType(std::forward<Args>(args)...));
+}
+
+inline EntityCreator::~Creator()
+{
+    for (auto& pool : spawner.cPools)
+        if (constrMask.get(pool.getCId()) == false)
+            pool.construct(idx.value);
+}
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
