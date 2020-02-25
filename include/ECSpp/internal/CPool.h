@@ -8,11 +8,10 @@ namespace epp {
 
 // TODO: redo the tests
 class CPool final {
-    using CId_t = decltype(IdOfL<>())::value_type;
     using Idx_t = std::size_t;
 
 public:
-    explicit CPool(CId_t cId);
+    explicit CPool(ComponentId cId);
     CPool(CPool&& rval);
     CPool& operator=(CPool&& rval);
     CPool(CPool const&) = delete;
@@ -55,8 +54,9 @@ public:
     void reserve(std::size_t newReserved);
 
     void* operator[](Idx_t i);
+    void const* operator[](Idx_t i) const;
 
-    CId_t getCId() const { return cId; }
+    ComponentId getCId() const { return metadata.cId; }
     std::size_t size() const { return dataUsed; }
     std::size_t capacity() const { return reserved; }
 
@@ -69,22 +69,17 @@ private:
     void* data = nullptr;
     std::size_t reserved = 0;
     std::size_t dataUsed = 0;
-    CMetadata metadata;
-    CId_t cId;
+    CMetadata const metadata;
 };
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-inline CPool::CPool(CId_t cid) : metadata(CMetadata::GetData(cid)), cId(cid) {}
+inline CPool::CPool(ComponentId cid) : metadata(CMetadata::GetData(cid)) {}
 
 inline CPool::CPool(CPool&& rval)
     : data(rval.data),
       reserved(rval.reserved),
       dataUsed(rval.dataUsed),
-      metadata(rval.metadata),
-      cId(rval.cId)
+      metadata(rval.metadata)
 {
     rval.data = nullptr;
     rval.reserved = 0;
@@ -171,6 +166,12 @@ inline void CPool::clear()
 }
 
 inline void* CPool::operator[](Idx_t i)
+{
+    EPP_ASSERT(i < dataUsed)
+    return addressAtIdx(i);
+}
+
+inline void const* CPool::operator[](Idx_t i) const
 {
     EPP_ASSERT(i < dataUsed)
     return addressAtIdx(i);

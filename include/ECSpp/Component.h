@@ -4,12 +4,11 @@
 #include <ECSpp/utility/Assert.h>
 #include <ECSpp/utility/IndexType.h>
 #include <cstdint>
-#include <memory>
 #include <vector>
 
 namespace epp {
 
-using ComponentId = IndexType<0>;
+using ComponentId = IndexType<0, std::uint16_t>;
 
 
 class CMetadata {
@@ -22,16 +21,15 @@ public:
     DefCstrFnPtr_t defaultConstructor;
     MoveCstrFnPtr_t moveConstructor;
     DestrFnPtr_t destructor;
-
     std::uint32_t size;
     std::uint32_t alignment;
+    ComponentId cId;
 
 public:
     template <typename CType>
     static ComponentId Id()
     {
         static ComponentId id = RegisterComponent<CType>();
-        EPP_ASSERTA(id.value < MaxRegisteredComponents);
         return id;
     }
 
@@ -45,7 +43,7 @@ public:
         Registered = i;
     }
 
-    static CMetadata const& GetData(ComponentId id)
+    static CMetadata GetData(ComponentId id)
     {
         return MetadataVec[id.value];
     }
@@ -58,6 +56,7 @@ private:
         static_assert(std::is_default_constructible_v<CType>);
         static_assert(std::is_move_constructible_v<CType>);
 
+        EPP_ASSERTA(MetadataVec.size() < MaxRegisteredComponents);
         EPP_ASSERTA(!CMetadata::Registered); // if CMetadata::Register was used
                                              // further registration is not allowed
         CMetadata data;
@@ -66,8 +65,9 @@ private:
         data.destructor = [](void* mem) { static_cast<CType*>(mem)->~CType(); };
         data.size = sizeof(CType);
         data.alignment = alignof(CType);
+        data.cId = ComponentId(MetadataVec.size());
         MetadataVec.push_back(data);
-        return ComponentId(ComponentId::Val_t(MetadataVec.size() - 1));
+        return data.cId;
     }
 
 public:
@@ -84,20 +84,20 @@ private:
 
 
 template <typename T>
-inline decltype(auto) IdOf()
+inline ComponentId IdOf()
 {
     return CMetadata::Id<T>();
 }
 
 template <typename... Comps>
-inline decltype(auto) IdOfL()
+inline std::initializer_list<ComponentId> IdOfL()
 {
     static std::initializer_list<ComponentId> list = { IdOf<Comps>()... };
     return list;
 }
 
 template <typename C1, typename C2, typename... CRest>
-inline decltype(auto) IdOf()
+inline std::initializer_list<ComponentId> IdOf()
 {
     return IdOfL<C1, C2, CRest...>();
 }

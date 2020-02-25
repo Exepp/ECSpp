@@ -33,7 +33,7 @@ struct Entity {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 class EntityList {
-
+public:
     class Cell {
     public:
         struct Occupied {
@@ -84,7 +84,6 @@ public:
     EntityList& operator=(const EntityList&) = delete;
     ~EntityList();
 
-
     Entity allocEntity(PoolIdx privIndex, SpawnerId spawnerId);
     void changeEntity(Entity ent, PoolIdx privIndex, SpawnerId spawnerId);
     void freeEntity(Entity ent);
@@ -97,11 +96,7 @@ public:
 
     bool isValid(Entity ent) const { return ent.listIdx.value < reserved && ent.version.value == data[ent.listIdx.value].entVersion().value; }
 
-    Cell::Occupied get(Entity ent) const
-    {
-        EPP_ASSERT(isValid(ent));
-        return data[ent.listIdx.value].asOccupied();
-    }
+    Cell::Occupied get(Entity ent) const;
 
     std::size_t size() const { return reserved - freeLeft; }
 
@@ -195,6 +190,12 @@ inline void EntityList::reserve(std::size_t newReserved)
 
     freeIndex = ListIdx(reserved);
     reserved = newReserved;
+}
+
+inline EntityList::Cell::Occupied EntityList::get(Entity ent) const
+{
+    EPP_ASSERT(isValid(ent));
+    return data[ent.listIdx.value].asOccupied();
 }
 
 } // namespace epp

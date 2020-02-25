@@ -32,6 +32,7 @@
 
 #include <cstddef>
 
+namespace epp {
 namespace llvm {
 
 /// Returns the next power of two (in 64-bits) that is strictly greater than A.
@@ -111,19 +112,16 @@ union SizerImpl<T> {
 /// any of these types.
 template <typename T, typename... Ts>
 struct AlignedCharArrayUnion {
-    alignas(::llvm::detail::AlignerImpl<T, Ts...>) char buffer[sizeof(
+    alignas(::epp::llvm::detail::AlignerImpl<T, Ts...>) char buffer[sizeof(
         llvm::detail::SizerImpl<T, Ts...>)];
 };
 
-} // end namespace llvm
-
-namespace llvm {
 
 /// This is all the non-templated stuff common to all SmallVectors.
 class SmallVectorBase {
 protected:
     void* BeginX;
-    unsigned Size = 0, Capacity;
+    size_t Size = 0, Capacity;
 
     SmallVectorBase() = delete;
     SmallVectorBase(void* FirstEl, size_t TotalCapacity)
@@ -1075,14 +1073,15 @@ inline size_t capacity_in_bytes(const SmallVector<T, N>& X)
     return X.capacity_in_bytes();
 }
 
-} // end namespace llvm
+} // namespace llvm
+} // namespace epp
 
 namespace std {
 
 /// Implement std::swap in terms of SmallVector swap.
 template <typename T>
 inline void
-swap(llvm::SmallVectorImpl<T>& LHS, llvm::SmallVectorImpl<T>& RHS)
+swap(epp::llvm::SmallVectorImpl<T>& LHS, epp::llvm::SmallVectorImpl<T>& RHS)
 {
     LHS.swap(RHS);
 }
@@ -1090,7 +1089,7 @@ swap(llvm::SmallVectorImpl<T>& LHS, llvm::SmallVectorImpl<T>& RHS)
 /// Implement std::swap in terms of SmallVector swap.
 template <typename T, unsigned N>
 inline void
-swap(llvm::SmallVector<T, N>& LHS, llvm::SmallVector<T, N>& RHS)
+swap(epp::llvm::SmallVector<T, N>& LHS, epp::llvm::SmallVector<T, N>& RHS)
 {
     LHS.swap(RHS);
 }

@@ -120,6 +120,12 @@ public:
     void updateSelection(Selection<CTypes...>& selection);
 
 
+    // ent - valid entity
+    // returns default-constructed cell for invalid
+    // this data can be used with selections' iterators
+    EntityList::Cell::Occupied cellOf(Entity ent);
+
+
     // ent - valid entity that owns given component (to be sure that an entity owns a component, use maskOf(ent).get(Component::Id().value))
     // returns a reference to the component associated with ent
     template <typename TComp>
@@ -290,6 +296,12 @@ inline void EntityManager::updateSelection(Selection<CTypes...>& selection)
 {
     for (; selection.checkedSpawnersNum < spawners.size(); ++selection.checkedSpawnersNum)
         selection.addSpawnerIfMeetsRequirements(spawners[selection.checkedSpawnersNum]);
+}
+
+inline EntityList::Cell::Occupied EntityManager::cellOf(Entity ent)
+{
+    EPP_ASSERT(entList.isValid(ent));
+    return entList.get(ent);
 }
 
 template <typename TComp>
