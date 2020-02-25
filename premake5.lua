@@ -28,6 +28,8 @@ workspace "ECSpp"
 					-- "-Wno-exit-time-destructors",
 					-- "-Wno-global-constructors",
 					-- "-Wno-padded",
+
+					-- "-fno-omit-frame-pointer",
 					}
 
 	filter "configurations:Debug"
@@ -59,21 +61,21 @@ outDir = "%{cfg.system}_%{cfg.architecture}/%{cfg.buildcfg}/"
 	objdir ("bin_inter/" .. outDir .. "%{prj.name}")
 
 
-project "ECSpp"
+-- project "ECSpp"
 
-	filter "configurations:Debug"
-		targetsuffix "d"
-	filter {}
+-- 	filter "configurations:Debug"
+-- 		targetsuffix "d"
+-- 	filter {}
 
-	kind "StaticLib"
+-- 	kind "StaticLib"
 
-	location "./"
+-- 	location "./"
 
-	files
-	{
-		"%{prj.location}/src/%{prj.name}/**",
-		"%{prj.location}/external/src/%{prj.name}/**",
-	}
+-- 	files
+-- 	{
+-- 		"%{prj.location}/src/%{prj.name}/**",
+-- 		"%{prj.location}/external/src/%{prj.name}/**",
+-- 	}
 
 
 project "Tests"
@@ -85,13 +87,13 @@ project "Tests"
 	files { "%{prj.location}/src/%{prj.name}/**" }
 
 	filter "configurations:Debug"
-		links {"ECSpp", "gtest_maind", "gtestd"}
+		links {"gtest_maind", "gtestd"}
 	filter "configurations:Release"
-		links {"ECSpp", "gtest_main", "gtest"}
+		links {"gtest_main", "gtest"}
 	filter{}
 
 	filter {"system:linux"}
-		links {"pthread"}
+		links {"pthread", "atomic"}
 	filter{}
 
 project "Benchmarks"
@@ -103,27 +105,13 @@ project "Benchmarks"
 	files { "%{prj.location}/src/%{prj.name}/**" }
 
 	filter "configurations:Debug"
-		links {"ECSpp", "benchmark_maind", "benchmarkd"}
+		links {"benchmark_maind", "benchmarkd"}
 	filter "configurations:Release"
-		links {"ECSpp", "benchmark_main", "benchmark"}
+		links {"benchmark_main", "benchmark"}
 	filter{}
 
 	filter {"system:linux"}
 		links {"pthread"}
 	filter {"system:windows"}
 		links {"Shlwapi"}
-	filter{}
-
-project "UBTests"
-
-	kind "ConsoleApp"
-
-	location "./"
-
-	files { "%{prj.location}/src/%{prj.name}/**" }
-
-	filter "configurations:Debug"
-		links {"ECSpp"}
-	filter "configurations:Release"
-		links {"ECSpp"}
 	filter{}
