@@ -101,9 +101,10 @@ TEST(EntitySpawner, MoveEntityHere)
     ASSERT_THROW(spawner2.moveEntityHere(Entity(), list, spawner, [](auto&&) {}), AssertFailed);
 
     auto ents = spawner.getEntities().data; // copy
-    for (int i = 0; i < 1024; ++i)
-        spawner2.spawn(list, [](auto&&) {});
-    TestSpawner<TComp1, TComp2>(spawner2, SpawnerId(0), list, 1024);
+    for (auto ent : ents)
+        spawner2.moveEntityHere(ent, list, spawner, [](auto&&) {});
+    TestSpawner<TComp1, TComp2>(spawner2, SpawnerId(0), list);
+    TestSpawner<TComp1, TComp2>(spawner, SpawnerId(0), list, 1024);
 
     ents = spawner.getEntities().data; // copy, not spawner2
     for (auto ent : ents)

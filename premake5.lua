@@ -14,7 +14,7 @@ workspace "ECSpp"
 		staticruntime "on"
 
 	filter {"system:linux"}
-		toolset "clang"
+		toolset "gcc"
 		buildoptions{"-fPIC",
 					"-Wno-dangling-else",
 					-- "-Weverything",
@@ -30,6 +30,9 @@ workspace "ECSpp"
 					-- "-Wno-padded",
 
 					-- "-fno-omit-frame-pointer",
+
+					-- gcc
+					"-ftest-coverage"
 					}
 
 	filter "configurations:Debug"
