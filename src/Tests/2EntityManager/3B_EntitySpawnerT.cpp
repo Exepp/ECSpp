@@ -30,7 +30,6 @@ TEST(EntitySpawner, Constructor)
         TestSpawner<>(spawner, SpawnerId(0), list);
 
         EntitySpawner spawner2(SpawnerId(1), Archetype(IdOfL<TComp1>()));
-        printf("%d\n", TComp1::AliveCounter == list.size());
         TestSpawner<TComp1>(spawner2, SpawnerId(1), list);
 
         EntitySpawner spawner3(SpawnerId(0), Archetype(IdOfL<TComp2, TComp4>()));
@@ -213,14 +212,38 @@ TEST(EntitySpawner, FitNextN)
     EntitySpawner spawner(SpawnerId(0), Archetype(IdOf<TComp1, TComp2>()));
     spawner.fitNextN(1024);
     spawner.fitNextN(512); // 512 elements will fit in 1024 reserved ones
+    spawner.fitNextN(0);
+    TestSpawner<TComp1, TComp2>(spawner, SpawnerId(0), list);
+
     Entity ent = spawner.spawn(list, [](auto&&) {});
     auto ptr = spawner.getPool(IdOf<TComp1>())[list.get(ent).poolIdx.value];
     auto eptr = &spawner.getEntities().data[list.get(ent).poolIdx.value];
     for (int i = 1; i < 1024; ++i)
         spawner.spawn(list, [](auto&&) {});
+    TestSpawner<TComp1, TComp2>(spawner, SpawnerId(0), list);
     ASSERT_EQ(ptr, spawner.getPool(IdOf<TComp1>())[list.get(ent).poolIdx.value]);
     ASSERT_EQ(eptr, &spawner.getEntities().data[list.get(ent).poolIdx.value]);
     spawner.spawn(list, [](auto&&) {}); // 1025. does not fit
+    TestSpawner<TComp1, TComp2>(spawner, SpawnerId(0), list);
     ASSERT_NE(ptr, spawner.getPool(IdOf<TComp1>())[list.get(ent).poolIdx.value]);
     ASSERT_NE(eptr, &spawner.getEntities().data[list.get(ent).poolIdx.value]);
+}
+
+TEST(EntitySpawner, ShrinkToFit)
+{
+    EntityList list;
+    EntitySpawner spawner(SpawnerId(0), Archetype(IdOf<TComp1, TComp2>()));
+
+    spawner.fitNextN(1024);
+    Entity ent = spawner.spawn(list, [](auto&&) {});
+    void* ptr = spawner.getPool(IdOf<TComp1>())[0];
+    for (int i = 0; i < 512; ++i)
+        spawner.spawn(list, [](auto&&) {});
+    spawner.shrinkToFit();
+    TestSpawner<TComp1, TComp2>(spawner, SpawnerId(0), list);
+
+    spawner.spawn(list, [](auto&&) {}); // new one does not fit
+    TestSpawner<TComp1, TComp2>(spawner, SpawnerId(0), list);
+    ASSERT_NE(ptr, spawner.getPool(IdOf<TComp1>())[list.get(ent).poolIdx.value]);
+    ASSERT_NE(ptr, spawner.getPool(IdOf<TComp1>())[0]);
 }

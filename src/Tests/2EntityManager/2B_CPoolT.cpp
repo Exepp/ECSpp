@@ -77,7 +77,7 @@ static void CreateNDistinct(CPool& pool, Pool<CompT>& correct, std::size_t const
 TEST(CPool, MoveConstr)
 {
     {
-        CPool pool(CPool(IdOf<TComp2>()));
+        CPool pool((CPool(IdOf<TComp2>())));
         TestCPool(pool, Pool<TComp2>());
     }
     {

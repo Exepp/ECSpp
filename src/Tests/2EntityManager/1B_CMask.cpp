@@ -23,6 +23,7 @@ static void testComps(CMask const& cmask)
     EXPECT_NE(cmask, CMask(IdOf<SetT1, SetT2, UnsetT1, UnsetT2>()));
     EXPECT_NE(cmask, CMask(IdOf<SetT1, UnsetT2>()));
     EXPECT_NE(cmask, CMask());
+    EXPECT_EQ(cmask.getBitset(), CMask::Bitset_t((1ull << IdOf<SetT1>().value) | (1ull << IdOf<SetT2>().value)));
 }
 
 TEST(CMask, DefaultConstr)
