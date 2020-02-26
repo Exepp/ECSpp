@@ -1,248 +1,232 @@
-// #include "ComponentsT.h"
-// #include <ECSpp/internal/CPool.h>
-// #include <gtest/gtest.h>
+#include "ComponentsT.h"
+#include <ECSpp/internal/CPool.h>
+#include <gtest/gtest.h>
 
-// using namespace epp;
+using namespace epp;
+
+template <typename CompT>
+static void TestCPool(CPool& pool, Pool<CompT> const& correct)
+{
+    ASSERT_EQ(pool.getCId(), IdOf<CompT>());
+    ASSERT_EQ(pool.size(), correct.data.size());
+    ASSERT_GE(pool.capacity(), pool.size());
+    ASSERT_EQ(CompT::AliveCounter, 2 * correct.data.size()); // constructed correctly (there are many tests, so it also tests destruction)
+                                                             // * 2, to accout also for the "correct" vector
+    for (std::size_t i = 0; i < correct.data.size(); ++i) {
+        ASSERT_EQ(std::uintptr_t(pool[i]) & (alignof(CompT) - 1), 0);
+        ASSERT_EQ(*static_cast<CompT*>(pool[i]), correct.data[i]);
+    }
+}
 
 
-// TEST(CPool, GetCId)
-// {
-//     CPool pool1(IdOf<TComp1>());
-//     ASSERT_EQ(pool1.getCId(), IdOf<TComp1>());
+TEST(CPool, ComponentIdConstr)
+{
+    CPool pool(IdOf<TComp1>());
+    TestCPool(pool, Pool<TComp1>());
+}
 
-//     // the only way to change the CId of a pool
-//     pool1 = CPool(IdOf<TComp2>());
-//     ASSERT_NE(pool1.getCId(), IdOf<TComp1>());
-//     ASSERT_EQ(pool1.getCId(), IdOf<TComp2>());
+TEST(CPool, Alloc_Construct)
+{
+    CPool pool(IdOf<TComp1>());
+    Pool<TComp1> correct;
+    correct.data.resize(100);
+    for (int i = 0; i < 100; ++i) {
+        pool.alloc();
+        pool.construct(i);
+    }
+    TestCPool(pool, correct);
+}
 
-//     CPool pool2 = std::move(pool1);
-//     ASSERT_EQ(pool1.getCId(), IdOf<TComp2>()); // still same
-//     ASSERT_EQ(pool2.getCId(), IdOf<TComp2>());
-// }
+TEST(CPool, AllocN)
+{
+    CPool pool(IdOf<TComp2>());
+    Pool<TComp2> correct;
+    for (int n = 0; n < 10; ++n) {
+        correct.data.resize(correct.data.size() + 100);
+        pool.alloc(100);
+        for (int i = 0; i < 100; ++i)
+            pool.construct(n * 100 + i);
+        TestCPool(pool, correct);
+    }
+}
 
-// TEST(CPool, Size_Reserved)
-// {
-//     CPool pool(IdOf<TComp2>());
-//     for (std::size_t i = 0; i < 1e4; ++i) {
-//         pool.create();
-//         ASSERT_LE(pool.size(), pool.capacity());
-//     }
-//     ASSERT_EQ(pool.size(), 1e4);
-//     std::size_t reserved = pool.capacity();
+TEST(CPool, MoveConstruct)
+{
+    CPool pool(IdOf<TComp3>());
+    Pool<TComp3> correct;
+    for (int i = 0; i < 100; ++i) {
+        TComp3 temp({ 1, 2, 3 });
+        correct.create(temp.data);
+        pool.alloc();
+        pool.construct(i, &temp);
+    }
+    TestCPool(pool, correct);
+}
 
-//     for (std::size_t i = 0; i < 1e4; ++i) {
-//         pool.destroy(0);
-//         ASSERT_LE(pool.size(), pool.capacity());
-//     }
-//     ASSERT_EQ(pool.size(), 0);
-//     ASSERT_EQ(pool.capacity(), reserved);
+template <typename CompT>
+static void CreateNDistinct(CPool& pool, Pool<CompT>& correct, std::size_t const N)
+{
+    for (int i = 0; i < N; ++i) {
+        CompT temp({ (int)correct.data.size() + 1, (int)correct.data.size() + 2, (int)correct.data.size() + 3 });
+        correct.create(temp.data);
+        pool.alloc();
+        pool.construct(pool.size() - 1, &temp);
+    }
+}
 
-//     for (std::size_t i = 0; i < 1e4; ++i) {
-//         TComp2 tmp;
-//         pool.create(&tmp);
-//     }
-//     ASSERT_EQ(pool.size(), 1e4);
-//     ASSERT_EQ(pool.capacity(), reserved);
+TEST(CPool, MoveConstr)
+{
+    {
+        CPool pool(CPool(IdOf<TComp2>()));
+        TestCPool(pool, Pool<TComp2>());
+    }
+    {
+        CPool poolToMove(IdOf<TComp3>());
+        Pool<TComp3> correct;
+        CreateNDistinct(poolToMove, correct, 100);
+        {
+            CPool pool(std::move(poolToMove));
+            TestCPool(pool, correct);
+        }
+        correct = Pool<TComp3>();
+        TestCPool(poolToMove, correct);
+    }
+}
 
-//     pool.clear();
-//     ASSERT_EQ(pool.size(), 0);
-//     ASSERT_EQ(pool.capacity(), reserved);
+TEST(CPool, MoveAssign)
+{
+    CPool poolToMove(IdOf<TComp4>());
+    Pool<TComp4> correct;
+    CreateNDistinct(poolToMove, correct, 100);
+    {
+        CPool pool(IdOf<TComp4>());
+        pool = std::move(poolToMove);
+        TestCPool(pool, correct);
+    }
+    correct = Pool<TComp4>();
+    TestCPool(poolToMove, correct);
+}
 
-//     for (std::size_t i = 0; i < 10; ++i)
-//         pool.alloc(); // no reallocation will happen (10 < 1e4)
-//     ASSERT_EQ(pool.size(), 10);
-//     ASSERT_EQ(pool.capacity(), reserved);
-//     pool.fitNextN(123); // size == 10 & reserved > 10 + 123 -> does nothing
-//     ASSERT_EQ(pool.size(), 10);
-//     ASSERT_EQ(pool.capacity(), reserved);
-//     for (std::size_t i = 0; i < 10; ++i)
-//         pool.construct(i);
-//     ASSERT_EQ(pool.size(), 10);
+TEST(CPool, Destroy)
+{
+    CPool pool(IdOf<TComp4>());
+    Pool<TComp4> correct;
+    CreateNDistinct(pool, correct, 100);
 
-//     pool.fitNextN(reserved + 123);
-//     ASSERT_EQ(pool.size(), 10);
-//     ASSERT_NE(pool.capacity(), reserved);
-//     ASSERT_GE(pool.capacity(), 10 + reserved + 123);
+    for (int i = 0; i < correct.data.size() / 2; ++i) {
+        std::size_t idxToErase = rand() % correct.data.size();
+        correct.destroy(idxToErase);
+        pool.destroy(idxToErase);
+    }
+    TestCPool(pool, correct);
 
-//     CPool pool2(std::move(pool));
-//     ASSERT_EQ(pool2.size(), 10);
-//     ASSERT_GE(pool2.capacity(), 10 + reserved + 123);
-//     ASSERT_EQ(pool.size(), 0);
-//     ASSERT_EQ(pool.capacity(), 0);
+    for (int i = 0; i < correct.data.size(); ++i) { // remove rest
+        std::size_t idxToErase = rand() % correct.data.size();
+        correct.destroy(idxToErase);
+        pool.destroy(idxToErase);
+    }
+    TestCPool(pool, correct);
+}
 
-//     pool = std::move(pool2);
-//     ASSERT_EQ(pool.size(), 10);
-//     ASSERT_GE(pool.capacity(), 10 + reserved + 123);
-//     ASSERT_EQ(pool2.size(), 0);
-//     ASSERT_EQ(pool2.capacity(), 0);
-// }
+template <typename CompT>
+static void TestFitNextN(CPool& pool, Pool<CompT>& correct) // increases capacity 2 times, sets size to oldCapacity + 1
+{
+    std::size_t befSize = pool.size();
+    std::size_t befCap = pool.capacity();
+    ASSERT_GE(befCap, 16);
+    ASSERT_GE(befCap - befSize, 2);
 
-// TEST(CPool, Alloc_GetOperator_Construct)
-// {
-//     {
-//         CPool pool(IdOf<TComp1>());
-//         pool.fitNextN(1e5); // for no reallocations (crucial for no memory leaks for this test)
+    TestCPool(pool, correct);
 
-//         void* ptr1 = pool.alloc();
-//         void* ptr2 = pool.alloc();
-//         ASSERT_TRUE((std::uintptr_t(ptr1) & (alignof(TComp1) - 1)) == 0);       // aligned properly
-//         ASSERT_EQ(std::uintptr_t(ptr2) - std::uintptr_t(ptr1), sizeof(TComp1)); // one is placed next to the other
+    correct.create();
+    pool.alloc();
+    pool.construct(pool.size() - 1);
+    void* first = pool[0];
+    CreateNDistinct(pool, correct, befCap - befSize - 1);
+    ASSERT_EQ(first, pool[0]);
 
-//         // operator[] tests
-//         ASSERT_EQ(pool[0], ptr1);
-//         ASSERT_EQ(pool[1], ptr2);
+    TestCPool(pool, correct);
 
-//         for (int i = 0; i < 1e4; ++i)
-//             ASSERT_EQ(pool.alloc(), pool[pool.size() - 1]); // more operator[] tests
-//         ASSERT_EQ(TComp1::AliveCounter, 0);                 // alloc should not construct anything
+    // one more than reserved
+    correct.create();
+    pool.alloc();
+    pool.construct(pool.size() - 1);
+    ASSERT_NE(first, pool[0]);
+    ASSERT_GT(pool.capacity(), befCap);
 
-//         ASSERT_TRUE((std::uintptr_t(pool[0]) & (alignof(TComp1) - 1)) == 0); // still aligned
-//         for (std::size_t i = 0; i < pool.size() - 1; ++i)                    // check if all are placed contiguously
-//             ASSERT_EQ(std::uintptr_t(pool[i + 1]) - std::uintptr_t(pool[i]), sizeof(TComp1));
+    TestCPool(pool, correct);
+}
 
-//         // pool expects every allocated object to be constructed before it itself is destroyed
-//         for (std::size_t i = 0; i < pool.size(); ++i)
-//             pool.construct(i);
-//         ASSERT_EQ(TComp1::AliveCounter, pool.size()); // called default constructor properly
-//     }
-//     ASSERT_EQ(TComp1::AliveCounter, 0); // destructor test when using alloc only
-// }
+TEST(CPool, FitNextN)
+{
+    CPool pool(IdOf<TComp1>());
+    Pool<TComp1> correct;
+    pool.fitNextN(100); // capacity = 128
+    pool.fitNextN(50);  // still capacity = 128
+    TestFitNextN(pool, correct);
 
-// TEST(CPool, Create)
-// {
-//     {
-//         CPool pool(IdOf<TComp1>());
+    CreateNDistinct(pool, correct, 50);
 
-//         void* ptr1 = pool.create();
-//         ASSERT_TRUE((std::uintptr_t(ptr1) & (alignof(TComp1) - 1)) == 0); // aligned properly
+    pool.fitNextN(1024); // capacity = 2048
+    TestFitNextN(pool, correct);
+    ASSERT_EQ(pool.size(), 2049);
+    ASSERT_EQ(pool.capacity(), 4096);
+}
 
-//         void* ptr2 = pool.create();
-//         ASSERT_TRUE((std::uintptr_t(ptr2) & (alignof(TComp1) - 1)) == 0);       // second one is also aligned
-//         ASSERT_EQ(std::uintptr_t(ptr2) - std::uintptr_t(ptr1), sizeof(TComp1)); // and one is placed next to the other
 
-//         for (int i = 0; i < 1e4; ++i)
-//             ASSERT_EQ(pool.create(), pool[pool.size() - 1]);
+template <typename CompT>
+static void TestShrink(CPool& pool, Pool<CompT>& correct) // increases capacity 4 times, changes size to 2*capacity + 1 and shrinks to fit
+{
+    pool.fitNextN(llvm::NextPowerOf2(pool.capacity() + 16));
+    TestFitNextN(pool, correct); // size = always 2^x + 1
+    pool.shrinkToFit();
+    TestCPool(pool, correct);
+}
 
-//         ASSERT_TRUE((std::uintptr_t(pool[0]) & (alignof(TComp1) - 1)) == 0); // still aligned
-//         for (int i = 0; i < pool.size() - 1; ++i)                            // check if all are placed next to the other
-//             ASSERT_EQ(std::uintptr_t(pool[i + 1]) - std::uintptr_t(pool[i]), sizeof(TComp1));
+TEST(CPool, shrinkToFit)
+{
+    CPool pool(IdOf<TComp2>());
+    Pool<TComp2> correct;
+    pool.shrinkToFit();
+    TestCPool(pool, correct);
+    TestShrink(pool, correct); // 0 + 16 -> 16 --*2--> 32
 
-//         TComp1 tester;
-//         for (std::size_t i = 0; i < pool.size(); ++i) // check if all were constructed correctly
-//             ASSERT_EQ(*static_cast<TComp1*>(pool[i]), tester);
-//         ASSERT_EQ(TComp1::AliveCounter, pool.size() + 1); // + 1 - tester
-//     }
-//     ASSERT_EQ(TComp1::AliveCounter, 0); // destructor test when using create only
-// }
+    pool.fitNextN(256);
+    TestShrink(pool, correct); // 32 + 256 (capacity = 512) --*2--> 1024 --TestFitNextN--> 2049
+    ASSERT_EQ(pool.capacity(), 2049);
+    ASSERT_EQ(pool.size(), 2049);
+}
 
-// TEST(CPool, Create_Move)
-// {
-//     {
-//         CPool pool(IdOf<TComp1>());
-//         TComp1 tester(2222, 22.22f, 222.222);
-//         for (int n = 0; n < 1e4; ++n) {
-//             TComp1 temp = tester.copy(n);
-//             ASSERT_EQ(pool.create(&temp), pool[pool.size() - 1]);
-//             // was the move constructor invoked correctly
-//             ASSERT_EQ(temp, TComp1(0, 0, 0));
-//         }
+TEST(CPool, clear)
+{
+    CPool pool(IdOf<TComp3>());
+    Pool<TComp3> correct;
+    pool.clear();
+    TestCPool(pool, correct);
+    TestShrink(pool, correct);
+    correct.data.clear();
+    pool.clear();
+    ASSERT_GT(pool.capacity(), 0);
 
-//         ASSERT_TRUE((std::uintptr_t(pool[0]) & (alignof(TComp1) - 1)) == 0); // check alignment
-//         for (int i = 0; i < pool.size() - 1; ++i)                            // check if all are placed next to the other
-//             ASSERT_EQ(std::uintptr_t(pool[i + 1]) - std::uintptr_t(pool[i]), sizeof(TComp1));
+    TestCPool(pool, correct);
+    TestShrink(pool, correct);
+}
 
-//         for (int i = 0; i < pool.size(); ++i) // check if all were constructed correctly
-//             ASSERT_EQ(*static_cast<TComp1*>(pool[i]), tester.copy(i));
-//         ASSERT_EQ(TComp1::AliveCounter, pool.size() + 1); // + 1 - tester
-//     }
-//     ASSERT_EQ(TComp1::AliveCounter, 0); // destructor test when using create only, move version
-// }
+TEST(CPool, reserve)
+{
+    CPool pool(IdOf<TComp1>());
+    Pool<TComp1> correct;
+    pool.reserve(100); // capacity = 128
+    pool.reserve(50);  // still capacity = 128
+    TestFitNextN(pool, correct);
 
-// TEST(CPool, Clear)
-// {
-//     CPool pool(IdOf<TComp1>());
-//     for (int i = 0; i < 1e4; ++i)
-//         pool.create();
-//     pool.clear();
-//     ASSERT_EQ(TComp1::AliveCounter, 0);
-//     ASSERT_EQ(pool.create(), pool[0]); // check if objects are added at the beginning
-//     // tests of how CPool::clear influences the CPool::size and CPool:;reserved values are already in size_reserved test
-// }
+    pool.reserve(10); // destroy 90
+    correct.data.resize(10);
+    correct.data.shrink_to_fit();
+    TestCPool(pool, correct);
 
-// TEST(CPool, Destroy)
-// {
-//     CPool pool(IdOf<TComp1>());
-//     // pool.destroy(0); - program will terminate
-//     pool.create();
-//     pool.create();
-//     TComp1 tester(12345, 123.45f, 1.2345);
-//     {
-//         TComp1 temp = tester.copy();
-//         pool.create(&temp);
-//     }
-//     ASSERT_NE(*static_cast<TComp1*>(pool[0]), tester);
-//     ASSERT_TRUE(pool.destroy(0)); // there was a swap: first <- last
-//     ASSERT_EQ(*static_cast<TComp1*>(pool[0]), tester);
-//     ASSERT_EQ(TComp1::AliveCounter, pool.size() + 1); // + 1 to account for the local variable (tester)
-
-//     pool.clear();
-
-//     // bigger scale test:
-//     for (int i = 0; i < 1e4; ++i) {
-//         TComp1 temp = tester.copy(i);
-//         pool.create(&temp);
-//     }
-//     for (int i = pool.size() - 1, limit = pool.size() / 2; i >= limit; --i) {
-//         ASSERT_TRUE(pool.destroy(0)); // there was a swap: first <- last
-//         ASSERT_EQ(*static_cast<TComp1*>(pool[0]), tester.copy(i));
-//     }
-//     // test if there are any side effects
-//     for (int i = 1; i < pool.size(); ++i) // skipping the first one
-//         ASSERT_EQ(*static_cast<TComp1*>(pool[i]), tester.copy(i));
-
-//     // check if destroying the last element has any side effects
-//     for (int i = pool.size() / 2; i > 0; --i)
-//         pool.destroy(pool.size() - 1);
-//     for (int i = 1; i < pool.size(); ++i) // skipping the first one
-//         ASSERT_EQ(*static_cast<TComp1*>(pool[i]), tester.copy(i));
-// }
-
-// TEST(CPool, FitNextN)
-// {
-//     CPool pool(IdOf<TComp1>());
-//     TComp1 tester(2222, 22.22f, 2.222);
-//     TComp1 tmp = tester.copy();
-//     void* ptr = pool.create(&tmp);
-//     pool.fitNextN(512);
-//     ASSERT_NE(ptr, pool[0]); // data was reallocated
-//     ASSERT_EQ(tester, *static_cast<TComp1*>(pool[0]));
-
-//     pool.clear();
-//     std::vector<void*> ptrs(512);
-//     for (int i = 0; i < 512; ++i) {
-//         TComp1 tmp2 = tester.copy(i);
-//         ptrs[i] = pool.create(&tmp2);
-//     }
-//     for (int i = 0; i < 512; ++i)
-//         ASSERT_EQ(ptrs[i], pool[i]);
-
-//     pool.fitNextN(5096);
-//     for (int i = 0; i < 512; ++i) {
-//         ASSERT_NE(ptrs[i], pool[i]);
-//         ASSERT_EQ(*static_cast<TComp1*>(pool[i]), tester.copy(i));
-//     }
-// }
-
-// TEST(CPool, MoveConstructorAssignment)
-// {
-//     CPool pool(IdOf<TComp1>());
-
-//     for (int i = 0; i < 1e3; ++i)
-//         pool.create();
-
-//     CPool pool2(std::move(pool));
-//     ASSERT_EQ(TComp1::AliveCounter, pool2.size());
-
-//     pool = std::move(pool2);
-//     ASSERT_EQ(TComp1::AliveCounter, pool.size());
-// }
+    pool.reserve(0);
+    correct.data.resize(0);
+    correct.data.shrink_to_fit();
+    TestCPool(pool, correct);
+}

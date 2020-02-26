@@ -3,15 +3,28 @@
 
 #include <ECSpp/Component.h>
 #include <array>
+#include <vector>
 
-template <typename T>
+template <int N>
 struct TCompBase {
-    using Base_t = TCompBase<T>;
+    using Base_t = TCompBase<N>;
     using Arr_t = std::array<int, 3>;
     TCompBase() { ++AliveCounter; }
     TCompBase(Arr_t arr) : data(arr) { ++AliveCounter; }
     TCompBase(Base_t&& rval) : data(rval.data) { ++AliveCounter; }
-    TCompBase(Base_t const&) = delete;
+    TCompBase(Base_t const& other) : TCompBase(other.data) {}
+    TCompBase& operator=(TCompBase const& other)
+    {
+        Base_t::~Base_t();
+        new (this) TCompBase(other);
+        return *this;
+    }
+    TCompBase& operator=(TCompBase&& other)
+    {
+        Base_t::~Base_t();
+        new (this) TCompBase(std::move(other));
+        return *this;
+    }
     ~TCompBase() { --AliveCounter; }
 
     bool operator==(Base_t const& rhs) const { return data == rhs.data; }
@@ -23,47 +36,46 @@ struct TCompBase {
     std::vector<int> dynamicData = std::vector<int>(10);
 };
 
-struct TComp1 : public TCompBase<TComp1> {
-    TComp1() = default;
-    TComp1(int a, float b, double c) : a(a), b(b), c(c) {}
-    TComp1(TComp1 const&) = delete;
-    TComp1(TComp1&& other)
+template <>
+struct TCompBase<1> : public TCompBase<0> {
+    TCompBase(Arr_t arr = {}) : Base_t(arr), a(arr[0]), b(arr[1]), c(arr[2]) {}
+    TCompBase(TCompBase const& other) : Base_t(other), a(other.a), b(other.b), c(other.c) {}
+    TCompBase(TCompBase&& other) : Base_t(std::move(other)), a(other.a), b(other.b), c(other.c)
     {
-        a = other.a;
-        b = other.b;
-        c = other.c;
         other.a = 0;
         other.b = 0.f;
         other.c = 0.0;
     }
-
-    TComp1 copy(int n = 0)
+    TCompBase& operator=(TCompBase const& other)
     {
-        TComp1 cpy;
-        cpy.a = a + n;
-        cpy.b = b + n;
-        cpy.c = c + n;
-        return cpy;
+        this->~TCompBase();
+        new (this) TCompBase(other);
+        return *this;
+    }
+    TCompBase& operator=(TCompBase&& other)
+    {
+        this->~TCompBase();
+        new (this) TCompBase(std::move(other));
+        return *this;
     }
 
-    bool operator==(TComp1 const& rhs) const { return a == rhs.a && b == rhs.b && c == rhs.c && Base_t::operator==(rhs); }
-    bool operator!=(TComp1 const& rhs) const { return !(*this == rhs); }
+    bool operator==(TCompBase const& rhs) const
+    {
+        return a == rhs.a && b == rhs.b && c == rhs.c && Base_t::operator==(rhs);
+    }
+    bool operator!=(TCompBase const& rhs) const
+    {
+        return !(*this == rhs);
+    }
 
-    alignas(512) int a = 1;
-    float b = 1.25f;
-    double c = 3.0;
+    alignas(512) int a = 0;
+    float b = 0.f;
+    double c = 0.0;
 };
-struct TComp2 : public TCompBase<TComp2> {
-    TComp2() = default;
-    TComp2(Arr_t data) : Base_t(data) {}
-};
-struct TComp3 : public TCompBase<TComp3> {
-    TComp3() = default;
-    TComp3(Arr_t data) : Base_t(data) {}
-};
-struct TComp4 : public TCompBase<TComp4> {
-    TComp4() = default;
-    TComp4(Arr_t data) : Base_t(data) {}
-};
+
+using TComp1 = TCompBase<1>;
+using TComp2 = TCompBase<2>;
+using TComp3 = TCompBase<3>;
+using TComp4 = TCompBase<4>;
 
 #endif // EPP_COMPONENTS_H

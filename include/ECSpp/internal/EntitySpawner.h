@@ -19,9 +19,7 @@ public:
         CType& constructed(Args&&... args);
 
     private:
-        Creator(EntitySpawner& sp, PoolIdx index, CMask const& cstred = CMask()) : spawner(sp),
-                                                                                   constrMask(cstred),
-                                                                                   idx(index) {}
+        Creator(EntitySpawner& sp, PoolIdx index, CMask const& cstred = CMask());
         Creator(Creator&& rVal) = delete;
         Creator(Creator const&) = delete;
         Creator& operator=(Creator const&) = delete;
@@ -72,6 +70,7 @@ public:
 
 
     CPool& getPool(ComponentId cId);
+    CPool const& getPool(ComponentId cId) const;
     EntityPool_t const& getEntities() const { return entityPool; }
     Archetype makeArchetype() const;
 
@@ -93,6 +92,9 @@ using EntityCreator = EntitySpawner::Creator;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+EntityCreator::Creator(EntitySpawner& sp, PoolIdx index, CMask const& cstred)
+    : spawner(sp), constrMask(cstred), idx(index) {}
 
 
 template <typename CType, typename... Args>
@@ -258,6 +260,12 @@ inline Archetype EntitySpawner::makeArchetype() const
 }
 
 inline CPool& EntitySpawner::getPool(ComponentId cId)
+{
+    EPP_ASSERT(mask.get(cId));
+    return *std::find_if(cPools.begin(), cPools.end(), [cId](CPool const& pool) { return pool.getCId() == cId; });
+}
+
+inline CPool const& EntitySpawner::getPool(ComponentId cId) const
 {
     EPP_ASSERT(mask.get(cId));
     return *std::find_if(cPools.begin(), cPools.end(), [cId](CPool const& pool) { return pool.getCId() == cId; });

@@ -8,38 +8,56 @@ struct comp {
     std::uint64_t y;
 };
 
-static constexpr std::size_t const Repetitions = 1;
-
 
 struct NewLine {
     NewLine() { printf("\n"); }
 };
 
-template <int id, int... ids>
-epp::Archetype makeArchetype()
+
+template <std::size_t... ids>
+inline epp::Archetype makeArchetype(std::index_sequence<ids...>)
 {
-    if constexpr (id != 0)
-        return makeArchetype<id - 1, id, ids...>();
-    else
-        return epp::Archetype(epp::IdOfL<comp<ids>...>());
+    return epp::Archetype(epp::IdOfL<comp<ids>...>());
+}
+template <int id>
+inline epp::Archetype makeArchetype()
+{
+    return makeArchetype(std::make_index_sequence<id>());
 }
 
-template <int id, int... ids>
-decltype(auto) makeSelection()
+template <std::size_t... ids>
+inline decltype(auto) makeSelection(std::index_sequence<ids...>)
 {
-    if constexpr (id != 0)
-        return makeSelection<id - 1, id, ids...>();
-    else
-        return epp::Selection<comp<ids>...>();
+    return epp::Selection<comp<ids>...>();
+}
+template <int id>
+inline decltype(auto) makeSelection()
+{
+    return makeSelection(std::make_index_sequence<id>());
 }
 
-template <int id, int... ids, typename It>
+template <typename It, std::size_t... ids>
+inline void assignComponents(It& it, std::index_sequence<ids...>)
+{
+    static float j = 0;
+    ((it.template getComponent<comp<ids>>() = { (std::size_t)(123e5 + j), (std::size_t)(431e6 + j) }), ...);
+    j += 123;
+}
+template <int id, typename It>
 inline void assignComponents(It& it)
 {
-    if constexpr (id != 0)
-        assignComponents<id - 1, id, ids...>(it);
-    else
-        ((it.template getComponent<comp<ids>>().x = {}), ...);
+    assignComponents(it, std::make_index_sequence<id>());
+}
+
+template <std::size_t... ids>
+inline void assignComponents(epp::EntityManager& mgr, epp::Entity ent, std::index_sequence<ids...>)
+{
+    ((mgr.componentOf<comp<ids>>(ent) = { (int)123e5, (int)431e6 }), ...);
+}
+template <int id>
+inline void assignComponents(epp::EntityManager& mgr, epp::Entity ent)
+{
+    assignComponents(mgr, ent, std::make_index_sequence<id>());
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -107,7 +125,7 @@ static void BM_EntitiesAtOnceDestroy(benchmark::State& state)
     for (auto _ : state)
         mgr.clear(arch);
 }
-
+#include <ECSpp/internal/Pipeline.h>
 template <int cNum>
 static void BM_EntitiesIteration(benchmark::State& state)
 {
@@ -117,14 +135,40 @@ static void BM_EntitiesIteration(benchmark::State& state)
     epp::Archetype arch = makeArchetype<cNum>();
     auto sel = makeSelection<cNum>();
     // epp::Selection<> sel;
-    mgr.spawn(arch, std::uint32_t(state.range(0)));
+    mgr.spawn(arch, state.range(0));
     mgr.updateSelection(sel);
-    int abc = 0;
-    for (auto _ : state)
+    epp::Pipeline tasks;
+    auto fn = [](auto const& it) {
+        static float j = 0;
+        it.template getComponent<comp<0>>() = { (std::size_t)(123e5 + j), (std::size_t)(431e6 + j) };
+        j += 123;
+    };
+    tasks.setTask<comp<0>>(fn, [](std::size_t n) { return 500; })
+        .template setSubtask<comp<0>>(fn)
+        .template setSubtask<comp<0>>(fn)
+        .template setSubtask<comp<0>>(fn);
+    ;
+    int i = 0;
+
+    auto thFn = [&] { 
         for (auto it = sel.begin(), end = sel.end(); it != end; ++it)
-            // assignComponents<cNum>(it);
-            // *it;
-            ;
+            assignComponents<cNum>(it); };
+
+    for (auto _ : state) {
+        // sel.forEach([](auto const& it) { assignComponents<cNum>(it); });
+        // for (auto it = sel.begin(), end = sel.end(); it != end; ++it)
+        // assignComponents<cNum>(mgr, *it);
+        // assignComponents<cNum>(it);
+        // for (auto it = sel.begin(), end = sel.end(); it != end; ++it)
+        //     fn(it);
+        // for (auto it = sel.begin(), end = sel.end(); it != end; ++it)
+        //     fn(it);
+        // for (auto it = sel.begin(), end = sel.end(); it != end; ++it)
+        //     fn(it);
+        // for (auto it = sel.begin(), end = sel.end(); it != end; ++it)
+        //     fn(it);
+        tasks.run(mgr);
+    }
 }
 
 template <int cNum>
@@ -239,19 +283,24 @@ static void BM_RemoveComponents(benchmark::State& state)
 }
 
 
-#define MYBENCHMARK_TEMPLATE(name, shortReport, ...) BENCHMARK_TEMPLATE(name, __VA_ARGS__)->Range(1e6, 1e6)->Iterations(1000)->Repetitions(Repetitions)->ReportAggregatesOnly(shortReport);
+#define MYBENCHMARK_TEMPLATE(name, shortReport, ...) BENCHMARK_TEMPLATE(name, __VA_ARGS__) \
+                                                         ->Range(1e6, 1e6)                 \
+                                                         ->Iterations(100)                 \
+                                                         ->Repetitions(10)                 \
+                                                         ->ReportAggregatesOnly(shortReport);
+
 #define MYBENCHMARK_TEMPLATE_N(name, shortReport) MYBENCHMARK_TEMPLATE(name, shortReport, 1)
 
-// MYBENCHMARK_TEMPLATE_N(BM_EntitiesSequentialCreation, false)
-// MYBENCHMARK_TEMPLATE_N(BM_EntitiesSequentialCreationReserved, false)
-// MYBENCHMARK_TEMPLATE_N(BM_EntitiesAtOnceCreation, true)
-// MYBENCHMARK_TEMPLATE_N(BM_EntitiesSequentialDestroy, true)
-// MYBENCHMARK_TEMPLATE_N(BM_EntitiesAtOnceDestroy, true)
+MYBENCHMARK_TEMPLATE_N(BM_EntitiesSequentialCreation, true)
+MYBENCHMARK_TEMPLATE_N(BM_EntitiesSequentialCreationReserved, true)
+MYBENCHMARK_TEMPLATE_N(BM_EntitiesAtOnceCreation, true)
+MYBENCHMARK_TEMPLATE_N(BM_EntitiesSequentialDestroy, true)
+MYBENCHMARK_TEMPLATE_N(BM_EntitiesAtOnceDestroy, true)
 MYBENCHMARK_TEMPLATE_N(BM_EntitiesIteration, true)
-// MYBENCHMARK_TEMPLATE_N(BM_EntitiesIterationHalf, true)
-// MYBENCHMARK_TEMPLATE_N(BM_EntitiesIterationOneOfMany, true)
-// MYBENCHMARK_TEMPLATE_N(BM_EntitiesIterationReal, true)
-// MYBENCHMARK_TEMPLATE_N(BM_AddComponents, false)
-// MYBENCHMARK_TEMPLATE_N(BM_RemoveComponents, false)
+MYBENCHMARK_TEMPLATE_N(BM_EntitiesIterationHalf, true)
+MYBENCHMARK_TEMPLATE_N(BM_EntitiesIterationOneOfMany, true)
+MYBENCHMARK_TEMPLATE_N(BM_EntitiesIterationReal, true)
+MYBENCHMARK_TEMPLATE_N(BM_AddComponents, false)
+MYBENCHMARK_TEMPLATE_N(BM_RemoveComponents, false)
 
 BENCHMARK_MAIN();

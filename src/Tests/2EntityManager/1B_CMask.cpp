@@ -61,6 +61,15 @@ TEST(CMask, MoveConstr)
     EXPECT_FALSE(test.hasCommon(IdOf<TComp1, TComp2, TComp3, TComp4>()));
 }
 
+TEST(CMask, CopyConstr)
+{
+    CMask test(IdOf<TComp1, TComp3>());
+    CMask cmask = test;
+    testComps<TComp1, TComp3, TComp2, TComp4>(cmask);
+
+    EXPECT_TRUE(test.contains(IdOf<TComp1, TComp3>()));
+}
+
 TEST(CMask, MoveAssign)
 {
     CMask test(IdOf<TComp1, TComp2>());
@@ -69,15 +78,6 @@ TEST(CMask, MoveAssign)
     testComps<TComp1, TComp2, TComp3, TComp4>(cmask);
 
     EXPECT_FALSE(test.hasCommon(IdOf<TComp1, TComp2, TComp3, TComp4>()));
-}
-
-TEST(CMask, CopyConstr)
-{
-    CMask test(IdOf<TComp1, TComp3>());
-    CMask cmask = test;
-    testComps<TComp1, TComp3, TComp2, TComp4>(cmask);
-
-    EXPECT_TRUE(test.contains(IdOf<TComp1, TComp3>()));
 }
 
 TEST(CMask, CopyAssign)

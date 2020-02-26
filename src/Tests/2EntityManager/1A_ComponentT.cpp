@@ -4,7 +4,6 @@
 
 using namespace epp;
 
-struct ExcTestComp {};
 
 // THIS TEST REGISTERS COMPONENTS, SO IT HAS TO BE INVOKED BEFORE ANY OTHER TEST THAT USES COMPONENTS,
 // OTHERWISE PROGRAM WILL TERMINATE ON THIS TEST
@@ -12,7 +11,7 @@ TEST(Component, Register_Id)
 {
     CMetadata::Register<TComp1, TComp2, TComp3, TComp4>();
     ASSERT_THROW((CMetadata::Register<TComp1, TComp2, TComp3, TComp4>()), AssertFailed);
-    ASSERT_THROW(auto x = IdOf<ExcTestComp>();, AssertFailed); // usage of unregistered component
+    ASSERT_THROW(auto x = IdOf<int>();, AssertFailed); // usage of unregistered component
 
     // reverse order
     ASSERT_EQ(IdOf<TComp4>().value, 3);
@@ -23,10 +22,18 @@ TEST(Component, Register_Id)
 
 TEST(Component, IdOf)
 {
+    ASSERT_NE(IdOf<TComp4>(), ComponentId());
+    ASSERT_NE(IdOf<TComp3>(), ComponentId());
+    ASSERT_NE(IdOf<TComp2>(), ComponentId());
+    ASSERT_NE(IdOf<TComp1>(), ComponentId());
+
     auto a1 = IdOf<TComp1, TComp2, TComp3, TComp4>();
     auto a2 = { IdOf<TComp1>(), IdOf<TComp2>(), IdOf<TComp3>(), IdOf<TComp4>() };
-    for (int i = 0; i < a1.size(); ++i)
+    auto a3 = IdOfL<TComp1, TComp2, TComp3, TComp4>();
+    for (int i = 0; i < a1.size(); ++i) {
         ASSERT_EQ(*(a1.begin() + i), *(a2.begin() + i));
+        ASSERT_EQ(*(a3.begin() + i), *(a2.begin() + i));
+    }
 }
 
 TEST(Component, Metadata)
