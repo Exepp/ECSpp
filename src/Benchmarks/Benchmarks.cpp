@@ -283,24 +283,24 @@ static void BM_RemoveComponents(benchmark::State& state)
 }
 
 
-#define MYBENCHMARK_TEMPLATE(name, shortReport, ...) BENCHMARK_TEMPLATE(name, __VA_ARGS__) \
-                                                         ->Range(1e6, 1e6)                 \
-                                                         ->Iterations(100)                 \
-                                                         ->Repetitions(10)                 \
-                                                         ->ReportAggregatesOnly(shortReport);
+#define MYBENCHMARK_TEMPLATE(name, iters, reps, shortReport, ...) BENCHMARK_TEMPLATE(name, __VA_ARGS__) \
+                                                                      ->Range(1e6, 1e6)                 \
+                                                                      ->Iterations(iters)               \
+                                                                      ->Repetitions(reps)               \
+                                                                      ->ReportAggregatesOnly(shortReport);
 
-#define MYBENCHMARK_TEMPLATE_N(name, shortReport) MYBENCHMARK_TEMPLATE(name, shortReport, 1)
+#define MYBENCHMARK_TEMPLATE_N(name, iters, reps, shortReport) MYBENCHMARK_TEMPLATE(name, iters, reps, shortReport, 1)
 
-MYBENCHMARK_TEMPLATE_N(BM_EntitiesSequentialCreation, true)
-MYBENCHMARK_TEMPLATE_N(BM_EntitiesSequentialCreationReserved, true)
-MYBENCHMARK_TEMPLATE_N(BM_EntitiesAtOnceCreation, true)
-MYBENCHMARK_TEMPLATE_N(BM_EntitiesSequentialDestroy, true)
-MYBENCHMARK_TEMPLATE_N(BM_EntitiesAtOnceDestroy, true)
-MYBENCHMARK_TEMPLATE_N(BM_EntitiesIteration, true)
-MYBENCHMARK_TEMPLATE_N(BM_EntitiesIterationHalf, true)
-MYBENCHMARK_TEMPLATE_N(BM_EntitiesIterationOneOfMany, true)
-MYBENCHMARK_TEMPLATE_N(BM_EntitiesIterationReal, true)
-MYBENCHMARK_TEMPLATE_N(BM_AddComponents, false)
-MYBENCHMARK_TEMPLATE_N(BM_RemoveComponents, false)
+MYBENCHMARK_TEMPLATE_N(BM_EntitiesSequentialCreation, 1, 100, true)
+MYBENCHMARK_TEMPLATE_N(BM_EntitiesSequentialCreationReserved, 1, 100, true)
+MYBENCHMARK_TEMPLATE_N(BM_EntitiesAtOnceCreation, 1, 100, true)
+MYBENCHMARK_TEMPLATE_N(BM_EntitiesSequentialDestroy, 1, 100, true)
+MYBENCHMARK_TEMPLATE_N(BM_EntitiesAtOnceDestroy, 1, 100, true)
+MYBENCHMARK_TEMPLATE_N(BM_EntitiesIteration, 100, 10, true)
+MYBENCHMARK_TEMPLATE_N(BM_EntitiesIterationHalf, 100, 10, true)
+MYBENCHMARK_TEMPLATE_N(BM_EntitiesIterationOneOfMany, 100, 10, true)
+MYBENCHMARK_TEMPLATE_N(BM_EntitiesIterationReal, 100, 10, true)
+MYBENCHMARK_TEMPLATE_N(BM_AddComponents, 1, 100, false)
+MYBENCHMARK_TEMPLATE_N(BM_RemoveComponents, 1, 100, false)
 
 BENCHMARK_MAIN();

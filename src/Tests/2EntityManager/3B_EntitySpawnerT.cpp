@@ -113,6 +113,29 @@ TEST(EntitySpawner, MoveEntityHere)
     TestSpawner<TComp1, TComp2>(spawner2, SpawnerId(0), list);
 }
 
+// TEST(EntitySpawner, MoveEntitiesHere)
+// {
+//     EntityList list;
+//     EntitySpawner spawner(SpawnerId(0), Archetype(IdOf<TComp1, TComp2>()));
+//     spawner.moveEntitiesHere(spawner, list, [](auto&&) {});
+//     TestSpawner<TComp1, TComp2>(spawner, SpawnerId(0), list);
+
+//     for (int i = 0; i < 1024; ++i)
+//         spawner.spawn(list, [](auto&&) {});
+//     auto ents = spawner.getEntities().data; // copy
+
+//     EntitySpawner spawner2(SpawnerId(0), Archetype(IdOf<TComp1, TComp2>()));
+//     spawner2.moveEntitiesHere(spawner, list, [](auto&&) {});
+//     TestSpawner<TComp1, TComp2>(spawner2, SpawnerId(0), list);
+//     TestSpawner<TComp1, TComp2>(spawner, SpawnerId(0), list, 1024);
+
+//     EntitySpawner spawner3(SpawnerId(0), Archetype(IdOf<TComp1, TComp3>()));
+//     spawner3.moveEntitiesHere(spawner2, list, [](auto&&) {});
+//     TestSpawner<TComp1, TComp3>(spawner3, SpawnerId(0), list);
+//     ASSERT_EQ(spawner.getEntities().data.size(), 0);
+//     ASSERT_EQ(spawner2.getEntities().data.size(), 0);
+// }
+
 TEST(EntitySpawner, Destroy)
 {
     EntityList list;
@@ -242,6 +265,9 @@ TEST(EntitySpawner, ShrinkToFit)
         spawner.spawn(list, [](auto&&) {});
     spawner.shrinkToFit();
     TestSpawner<TComp1, TComp2>(spawner, SpawnerId(0), list);
+    ASSERT_NE(ptr, spawner.getPool(IdOf<TComp1>())[list.get(ent).poolIdx.value]);
+    ASSERT_NE(ptr, spawner.getPool(IdOf<TComp1>())[0]);
+    ptr = spawner.getPool(IdOf<TComp1>())[0];
 
     spawner.spawn(list, [](auto&&) {}); // new one does not fit
     TestSpawner<TComp1, TComp2>(spawner, SpawnerId(0), list);

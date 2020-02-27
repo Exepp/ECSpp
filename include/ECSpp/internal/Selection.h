@@ -88,7 +88,7 @@ class Selection : SelectionBase<(sizeof...(CTypes) > 0), CTypes...> {
 
         // Makes this iterator point to the entity located at {sId, pIdx}
         // If sId is not contained within this selection, iterator will point to the first entity of
-        // a spawner which has id greater than sId or to end if no spawner with greater id is found.
+        // a spawner which has id greater than sId or to the end if there is no such spawner
         // sId ought to be greater or equal to the id of spawner iterator is currently pointing to
         Iterator& jumpToOrBeyond(SpawnerId sId, PoolIdx pIdx);
         Iterator& jumpToOrBeyond(EntityList::Cell::Occupied entCell);
@@ -272,7 +272,7 @@ Selection<CTypes...>::Iterator<IsConst>::jumpToOrBeyond(SpawnerId sId, PoolIdx p
     if (sId != SpawnerId(SpawnerId::BadValue)) {
         auto spawnersNum = numOfSpawners();
         for (; spawnerIdx < spawnersNum; ++spawnerIdx)
-            if ((*spawnerIds)[spawnerIdx] >= sId) { // dont use getSpawnerId to avoid additional check
+            if ((*spawnerIds)[spawnerIdx] == sId) { // dont use getSpawnerId to avoid additional check
                 poolIdx = pIdx.value;
                 return *this;
             }

@@ -27,6 +27,8 @@ struct TCompBase {
     }
     ~TCompBase() { --AliveCounter; }
 
+    Base_t moved(int offset) const { return Base_t({ data[0] + offset, data[1] + offset, data[2] + offset }); }
+
     bool operator==(Base_t const& rhs) const { return data == rhs.data; }
     bool operator!=(Base_t const& rhs) const { return !(*this == rhs); }
 
@@ -58,6 +60,9 @@ struct TCompBase<1> : public TCompBase<0> {
         new (this) TCompBase(std::move(other));
         return *this;
     }
+
+    TCompBase moved(int offset) const { return { TCompBase<0>::moved(offset).data }; }
+
 
     bool operator==(TCompBase const& rhs) const
     {

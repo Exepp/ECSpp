@@ -35,15 +35,16 @@ public:
 
 template <typename FnType, typename StepFnType, typename... CTypes>
 class Task : public TaskBase {
-    using Select_t = Selection<CTypes...>;
-    using Iterator_t = typename Select_t::Iterator_t;
-    static_assert(std::is_invocable_v<FnType, Iterator_t const&>);
-
     struct JoinGuard {
         JoinGuard(std::thread& thread) : thr(thread){};
         ~JoinGuard() { thr.joinable() ? thr.join() : void(); }
         std::thread& thr;
     };
+
+public:
+    using Select_t = Selection<CTypes...>;
+    using Iterator_t = typename Select_t::Iterator_t;
+    static_assert(std::is_invocable_v<FnType, Iterator_t const&>);
 
 public:
     Task(FnType fn, StepFnType sFn, TaskBase* upt = nullptr)
@@ -119,18 +120,26 @@ private:
 
 
 class Pipeline {
+    inline static auto const DefRunFn = [](auto&) {};
+    using DefaultRunFn_t = decltype(DefRunFn);
+
     inline static auto const DefStepFn = [](std::size_t n) -> std::size_t {
         return std::max(std::size_t(32), std::min(std::size_t(512), n / 10));
     };
     using DefaultStepFn_t = decltype(DefStepFn);
 
 public:
+    template <typename... CTypes>
+    using TaskIterator_t = typename Task<DefaultRunFn_t, DefaultStepFn_t, CTypes...>::Iterator_t;
+
+public:
     void run(EntityManager& mgr)
     {
-        mainTask->run(mgr);
+        if (mainTask)
+            mainTask->run(mgr);
     }
 
-    template <typename... CTypes, typename FnType, typename StepFnType>
+    template <typename... CTypes, typename FnType, typename StepFnType = DefaultStepFn_t>
     Task<FnType, StepFnType, CTypes...>& setTask(FnType fn, StepFnType stepFn = DefStepFn)
     {
         return static_cast<Task<FnType, StepFnType, CTypes...>&>(*(
@@ -140,6 +149,9 @@ public:
 private:
     std::unique_ptr<TaskBase> mainTask;
 };
+
+template <typename... CTypes>
+using TaskIterator = Pipeline::TaskIterator_t<CTypes...>;
 
 } // namespace epp
 

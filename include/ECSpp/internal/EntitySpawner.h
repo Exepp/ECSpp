@@ -55,8 +55,9 @@ public:
     template <typename FnType>
     void moveEntityHere(Entity ent, EntityList& entList, EntitySpawner& originSpawner, FnType fn);
 
-    template <typename FnType>
-    void moveEntitiesHere(EntitySpawner& originSpawner, EntityList& entList, FnType fn);
+    // TODO
+    // template <typename FnType>
+    // void moveEntitiesHere(EntitySpawner& originSpawner, EntityList& entList, FnType fn);
 
     // destroys all entities, keeps allocated memory
     void clear(EntityList& entList);
@@ -93,12 +94,12 @@ using EntityCreator = EntitySpawner::Creator;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-EntityCreator::Creator(EntitySpawner& sp, PoolIdx index, CMask const& cstred)
+inline EntityCreator::Creator(EntitySpawner& sp, PoolIdx index, CMask const& cstred)
     : spawner(sp), constrMask(cstred), idx(index) {}
 
 
 template <typename CType, typename... Args>
-CType& EntityCreator::constructed(Args&&... args)
+inline CType& EntityCreator::constructed(Args&&... args)
 {
     EPP_ASSERT(spawner.mask.get(IdOf<CType>()));
     auto cId = IdOf<CType>();
@@ -192,36 +193,38 @@ inline void EntitySpawner::moveEntityHere(Entity ent, EntityList& entList, Entit
     fn(Creator(*this, newIdx, originSpawner.mask)); // originSpawner.mask contains all the components that were moved, no need to delete possible excess
 }
 
-template <typename FnType>
-inline void EntitySpawner::moveEntitiesHere(EntitySpawner& originSpawner, EntityList& entList, FnType fn)
-{
-    static_assert(std::is_invocable_v<FnType, Creator&&>);
+// template <typename FnType>
+// inline void EntitySpawner::moveEntitiesHere(EntitySpawner& originSpawner, EntityList& entList, FnType fn)
+// {
+//     static_assert(std::is_invocable_v<FnType, Creator&&>);
+//     if (&originSpawner == this)
+//         return;
 
-    if (originSpawner.entityPool.data.empty())
-        return;
-    std::size_t oriSize = originSpawner.entityPool.data.size();
-    std::size_t thisSize = entityPool.data.size();
-    auto oriPoolsPtr = originSpawner.cPools.begin();
-    auto oriPoolsEnd = originSpawner.cPools.end();
-    for (auto& pool : cPools) {
-        for (; oriPoolsPtr != oriPoolsEnd && oriPoolsPtr->getCId() < pool.getCId(); ++oriPoolsPtr)
-            oriPoolsPtr->clear();
-        pool.alloc(oriSize);
-        if (oriPoolsPtr != oriPoolsEnd && oriPoolsPtr->getCId() == pool.getCId())
-            for (std::size_t i = 0; i < oriSize; ++i)
-                pool.construct(thisSize + i, (*oriPoolsPtr)[i]);
-    }
-    for (; oriPoolsPtr != oriPoolsEnd; ++oriPoolsPtr)
-        oriPoolsPtr->clear();
+//     if (originSpawner.entityPool.data.empty())
+//         return;
+//     std::size_t oriSize = originSpawner.entityPool.data.size();
+//     std::size_t thisSize = entityPool.data.size();
+//     auto oriPoolsPtr = originSpawner.cPools.begin();
+//     auto oriPoolsEnd = originSpawner.cPools.end();
+//     for (auto& pool : cPools) {
+//         for (; oriPoolsPtr != oriPoolsEnd && oriPoolsPtr->getCId() < pool.getCId(); ++oriPoolsPtr)
+//             oriPoolsPtr->clear();
+//         pool.alloc(oriSize);
+//         if (oriPoolsPtr != oriPoolsEnd && oriPoolsPtr->getCId() == pool.getCId())
+//             for (std::size_t i = 0; i < oriSize; ++i)
+//                 pool.construct(thisSize + i, (*oriPoolsPtr)[i]);
+//     }
+//     for (; oriPoolsPtr != oriPoolsEnd; ++oriPoolsPtr)
+//         oriPoolsPtr->clear();
 
-    entityPool.fitNextN(oriSize);
-    for (PoolIdx i(thisSize), end(thisSize + oriSize); i.value < end.value; ++i.value) {
-        entityPool.create(originSpawner.entityPool.data.front());
-        entList.changeEntity(originSpawner.entityPool.data.front(), i, spawnerId);
-        originSpawner.entityPool.destroy(0);
-        fn(Creator(*this, i, originSpawner.mask));
-    }
-}
+//     entityPool.fitNextN(oriSize);
+//     for (PoolIdx i(thisSize), end(thisSize + oriSize); i.value < end.value; ++i.value) {
+//         entityPool.create(originSpawner.entityPool.data.front());
+//         entList.changeEntity(originSpawner.entityPool.data.front(), i, spawnerId);
+//         originSpawner.entityPool.destroy(0);
+//         fn(Creator(*this, i, originSpawner.mask));
+//     }
+// }
 
 inline void EntitySpawner::clear(EntityList& entList)
 {

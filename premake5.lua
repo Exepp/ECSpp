@@ -30,9 +30,6 @@ workspace "ECSpp"
 					-- "-Wno-padded",
 
 					-- "-fno-omit-frame-pointer",
-
-					-- gcc
-					"-ftest-coverage"
 					}
 
 	filter "configurations:Debug"
