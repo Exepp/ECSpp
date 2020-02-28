@@ -75,6 +75,11 @@ $(function() {
 <div class="title">epp::CMask Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>A Bitset wrapper.  
+ <a href="classepp_1_1CMask.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="CMask_8h_source.html">CMask.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
@@ -85,70 +90,73 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>IdxList_t</b> = decl
 using&#160;</td><td class="memItemRight" valign="bottom"><b>Idx_t</b> = IdxList_t::value_type</td></tr>
 <tr class="separator:ad3f760175f9a9800782b7bd57bf1b209"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a81c6bf5c2aee5584a27442bf936a347e"><td class="memItemLeft" align="right" valign="top"><a id="a81c6bf5c2aee5584a27442bf936a347e"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>Bitset_t</b> = std::bitset&lt; CMetadata::MaxRegisteredComponents &gt;</td></tr>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>Bitset_t</b> = std::bitset&lt; <a class="el" href="classepp_1_1CMetadata.html#a5956e9e02615d4ed133a193dfc545c86">CMetadata::MaxRegisteredComponents</a> &gt;</td></tr>
 <tr class="separator:a81c6bf5c2aee5584a27442bf936a347e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:abf551b779bd05a388077bc12b0411f18"><td class="memItemLeft" align="right" valign="top"><a id="abf551b779bd05a388077bc12b0411f18"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>CMask</b> (IdxList_t list={})</td></tr>
+<tr class="memitem:abf551b779bd05a388077bc12b0411f18"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1CMask.html#abf551b779bd05a388077bc12b0411f18">CMask</a> (IdxList_t list={})</td></tr>
+<tr class="memdesc:abf551b779bd05a388077bc12b0411f18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the bits corresponding to the ComponentIds from the given list.  <a href="classepp_1_1CMask.html#abf551b779bd05a388077bc12b0411f18">More...</a><br /></td></tr>
 <tr class="separator:abf551b779bd05a388077bc12b0411f18"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a35f66106e4d3c6de3f250fcb36955616"><td class="memItemLeft" align="right" valign="top"><a id="a35f66106e4d3c6de3f250fcb36955616"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>CMask</b> (<a class="el" href="classepp_1_1CMask.html">CMask</a> &amp;&amp;rval)</td></tr>
+<tr class="memitem:a35f66106e4d3c6de3f250fcb36955616"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1CMask.html#a35f66106e4d3c6de3f250fcb36955616">CMask</a> (<a class="el" href="classepp_1_1CMask.html">CMask</a> &amp;&amp;rval)</td></tr>
+<tr class="memdesc:a35f66106e4d3c6de3f250fcb36955616"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move Constructor.  <a href="classepp_1_1CMask.html#a35f66106e4d3c6de3f250fcb36955616">More...</a><br /></td></tr>
 <tr class="separator:a35f66106e4d3c6de3f250fcb36955616"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af778de969e967dfa90d96e8405c9fc4a"><td class="memItemLeft" align="right" valign="top"><a id="af778de969e967dfa90d96e8405c9fc4a"></a>
-<a class="el" href="classepp_1_1CMask.html">CMask</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classepp_1_1CMask.html">CMask</a> &amp;&amp;rval)</td></tr>
-<tr class="separator:af778de969e967dfa90d96e8405c9fc4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab50ee639ff421f76be7f4a66ab73b130"><td class="memItemLeft" align="right" valign="top"><a id="ab50ee639ff421f76be7f4a66ab73b130"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>CMask</b> (<a class="el" href="classepp_1_1CMask.html">CMask</a> const &amp;rval)=default</td></tr>
-<tr class="separator:ab50ee639ff421f76be7f4a66ab73b130"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11ca43efbbc9162cb8f552b3c6c037aa"><td class="memItemLeft" align="right" valign="top"><a id="a11ca43efbbc9162cb8f552b3c6c037aa"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1CMask.html#a11ca43efbbc9162cb8f552b3c6c037aa">CMask</a> (<a class="el" href="classepp_1_1CMask.html">CMask</a> const &amp;)=default</td></tr>
+<tr class="memdesc:a11ca43efbbc9162cb8f552b3c6c037aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default Copy Constructor. <br /></td></tr>
+<tr class="separator:a11ca43efbbc9162cb8f552b3c6c037aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1cbb8b13dbd3abfe05c6bdf45fe2f684"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classepp_1_1CMask.html">CMask</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1CMask.html#a1cbb8b13dbd3abfe05c6bdf45fe2f684">operator=</a> (<a class="el" href="classepp_1_1CMask.html">CMask</a> &amp;&amp;rval)</td></tr>
+<tr class="memdesc:a1cbb8b13dbd3abfe05c6bdf45fe2f684"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move Assignment.  <a href="classepp_1_1CMask.html#a1cbb8b13dbd3abfe05c6bdf45fe2f684">More...</a><br /></td></tr>
+<tr class="separator:a1cbb8b13dbd3abfe05c6bdf45fe2f684"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a98a0a6e3f39828169a6da42d17b74222"><td class="memItemLeft" align="right" valign="top"><a id="a98a0a6e3f39828169a6da42d17b74222"></a>
-<a class="el" href="classepp_1_1CMask.html">CMask</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classepp_1_1CMask.html">CMask</a> const &amp;)=default</td></tr>
+<a class="el" href="classepp_1_1CMask.html">CMask</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1CMask.html#a98a0a6e3f39828169a6da42d17b74222">operator=</a> (<a class="el" href="classepp_1_1CMask.html">CMask</a> const &amp;)=default</td></tr>
+<tr class="memdesc:a98a0a6e3f39828169a6da42d17b74222"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default Copy Assignment. <br /></td></tr>
 <tr class="separator:a98a0a6e3f39828169a6da42d17b74222"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aff8b0bd8d29885040e65d16986c90b0c"><td class="memItemLeft" align="right" valign="top"><a id="aff8b0bd8d29885040e65d16986c90b0c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>set</b> (Idx_t bitIndex)</td></tr>
+<tr class="memitem:aff8b0bd8d29885040e65d16986c90b0c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1CMask.html#aff8b0bd8d29885040e65d16986c90b0c">set</a> (Idx_t bitIndex)</td></tr>
+<tr class="memdesc:aff8b0bd8d29885040e65d16986c90b0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the bit corresponding to the given ComponentId.  <a href="classepp_1_1CMask.html#aff8b0bd8d29885040e65d16986c90b0c">More...</a><br /></td></tr>
 <tr class="separator:aff8b0bd8d29885040e65d16986c90b0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aae8e1a3dc15fc3f4b7d49fdbd820d605"><td class="memItemLeft" align="right" valign="top"><a id="aae8e1a3dc15fc3f4b7d49fdbd820d605"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>set</b> (IdxList_t list)</td></tr>
+<tr class="memitem:aae8e1a3dc15fc3f4b7d49fdbd820d605"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1CMask.html#aae8e1a3dc15fc3f4b7d49fdbd820d605">set</a> (IdxList_t list)</td></tr>
+<tr class="memdesc:aae8e1a3dc15fc3f4b7d49fdbd820d605"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the bits corresponding to the ComponentIds from the given list.  <a href="classepp_1_1CMask.html#aae8e1a3dc15fc3f4b7d49fdbd820d605">More...</a><br /></td></tr>
 <tr class="separator:aae8e1a3dc15fc3f4b7d49fdbd820d605"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a958f33824898c5dd13fdf82054a42c25"><td class="memItemLeft" align="right" valign="top"><a id="a958f33824898c5dd13fdf82054a42c25"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>unset</b> (Idx_t bitIndex)</td></tr>
+<tr class="memitem:a958f33824898c5dd13fdf82054a42c25"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1CMask.html#a958f33824898c5dd13fdf82054a42c25">unset</a> (Idx_t bitIndex)</td></tr>
+<tr class="memdesc:a958f33824898c5dd13fdf82054a42c25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unsets the bit corresponding to the given ComponentId.  <a href="classepp_1_1CMask.html#a958f33824898c5dd13fdf82054a42c25">More...</a><br /></td></tr>
 <tr class="separator:a958f33824898c5dd13fdf82054a42c25"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa5c50bbccd1ab04bda0900146a86c349"><td class="memItemLeft" align="right" valign="top"><a id="aa5c50bbccd1ab04bda0900146a86c349"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>unset</b> (IdxList_t list)</td></tr>
+<tr class="memitem:aa5c50bbccd1ab04bda0900146a86c349"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1CMask.html#aa5c50bbccd1ab04bda0900146a86c349">unset</a> (IdxList_t list)</td></tr>
+<tr class="memdesc:aa5c50bbccd1ab04bda0900146a86c349"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unsets the bits corresponding to the ComponentIds from the given list.  <a href="classepp_1_1CMask.html#aa5c50bbccd1ab04bda0900146a86c349">More...</a><br /></td></tr>
 <tr class="separator:aa5c50bbccd1ab04bda0900146a86c349"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a96fbfbe98c280db0cae60afda40c53df"><td class="memItemLeft" align="right" valign="top"><a id="a96fbfbe98c280db0cae60afda40c53df"></a>
-<a class="el" href="classepp_1_1CMask.html">CMask</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>removeCommon</b> (<a class="el" href="classepp_1_1CMask.html">CMask</a> const &amp;other)</td></tr>
-<tr class="separator:a96fbfbe98c280db0cae60afda40c53df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeae82d2224f4376cffa1c97fa72dc30e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classepp_1_1CMask.html">CMask</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1CMask.html#aeae82d2224f4376cffa1c97fa72dc30e">removeCommon</a> (<a class="el" href="classepp_1_1CMask.html">CMask</a> const &amp;other)</td></tr>
+<tr class="memdesc:aeae82d2224f4376cffa1c97fa72dc30e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unsets the bits that are set both in this <a class="el" href="classepp_1_1CMask.html" title="A Bitset wrapper.">CMask</a> and in the other one.  <a href="classepp_1_1CMask.html#aeae82d2224f4376cffa1c97fa72dc30e">More...</a><br /></td></tr>
+<tr class="separator:aeae82d2224f4376cffa1c97fa72dc30e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac594331ce970374fe84822a8aa050300"><td class="memItemLeft" align="right" valign="top"><a id="ac594331ce970374fe84822a8aa050300"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> ()</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1CMask.html#ac594331ce970374fe84822a8aa050300">clear</a> ()</td></tr>
+<tr class="memdesc:ac594331ce970374fe84822a8aa050300"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unsets all bits. <br /></td></tr>
 <tr class="separator:ac594331ce970374fe84822a8aa050300"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adbdf15fdd83d649f650e5801ad00ce1f"><td class="memItemLeft" align="right" valign="top"><a id="adbdf15fdd83d649f650e5801ad00ce1f"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>get</b> (Idx_t bitIndex) const</td></tr>
+<tr class="memitem:adbdf15fdd83d649f650e5801ad00ce1f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1CMask.html#adbdf15fdd83d649f650e5801ad00ce1f">get</a> (Idx_t bitIndex) const</td></tr>
+<tr class="memdesc:adbdf15fdd83d649f650e5801ad00ce1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the value of the bit corresponding to the given ComponentId.  <a href="classepp_1_1CMask.html#adbdf15fdd83d649f650e5801ad00ce1f">More...</a><br /></td></tr>
 <tr class="separator:adbdf15fdd83d649f650e5801ad00ce1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad63f6eb27581a441df886bf9da1e3d9d"><td class="memItemLeft" align="right" valign="top"><a id="ad63f6eb27581a441df886bf9da1e3d9d"></a>
-std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>getSetCount</b> () const</td></tr>
+<tr class="memitem:ad63f6eb27581a441df886bf9da1e3d9d"><td class="memItemLeft" align="right" valign="top">std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1CMask.html#ad63f6eb27581a441df886bf9da1e3d9d">getSetCount</a> () const</td></tr>
+<tr class="memdesc:ad63f6eb27581a441df886bf9da1e3d9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of set bits.  <a href="classepp_1_1CMask.html#ad63f6eb27581a441df886bf9da1e3d9d">More...</a><br /></td></tr>
 <tr class="separator:ad63f6eb27581a441df886bf9da1e3d9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a21e9fd8acadfff32cd88752b3e821b66"><td class="memItemLeft" align="right" valign="top"><a id="a21e9fd8acadfff32cd88752b3e821b66"></a>
-std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>numberOfCommon</b> (<a class="el" href="classepp_1_1CMask.html">CMask</a> const &amp;other) const</td></tr>
+<tr class="memitem:a21e9fd8acadfff32cd88752b3e821b66"><td class="memItemLeft" align="right" valign="top">std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1CMask.html#a21e9fd8acadfff32cd88752b3e821b66">numberOfCommon</a> (<a class="el" href="classepp_1_1CMask.html">CMask</a> const &amp;other) const</td></tr>
+<tr class="memdesc:a21e9fd8acadfff32cd88752b3e821b66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of bits that are set both in this <a class="el" href="classepp_1_1CMask.html" title="A Bitset wrapper.">CMask</a> and in the other one.  <a href="classepp_1_1CMask.html#a21e9fd8acadfff32cd88752b3e821b66">More...</a><br /></td></tr>
 <tr class="separator:a21e9fd8acadfff32cd88752b3e821b66"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a026a0f8dd36ff88d16a276e06e54dfe8"><td class="memItemLeft" align="right" valign="top"><a id="a026a0f8dd36ff88d16a276e06e54dfe8"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>hasCommon</b> (<a class="el" href="classepp_1_1CMask.html">CMask</a> const &amp;other) const</td></tr>
+<tr class="memitem:a026a0f8dd36ff88d16a276e06e54dfe8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1CMask.html#a026a0f8dd36ff88d16a276e06e54dfe8">hasCommon</a> (<a class="el" href="classepp_1_1CMask.html">CMask</a> const &amp;other) const</td></tr>
+<tr class="memdesc:a026a0f8dd36ff88d16a276e06e54dfe8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether there is at least one bit that is set both in this <a class="el" href="classepp_1_1CMask.html" title="A Bitset wrapper.">CMask</a> and in the other one.  <a href="classepp_1_1CMask.html#a026a0f8dd36ff88d16a276e06e54dfe8">More...</a><br /></td></tr>
 <tr class="separator:a026a0f8dd36ff88d16a276e06e54dfe8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af9913a5600f55a6ae444dc4b6c1d28dd"><td class="memItemLeft" align="right" valign="top"><a id="af9913a5600f55a6ae444dc4b6c1d28dd"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>contains</b> (<a class="el" href="classepp_1_1CMask.html">CMask</a> const &amp;other) const</td></tr>
+<tr class="memitem:af9913a5600f55a6ae444dc4b6c1d28dd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1CMask.html#af9913a5600f55a6ae444dc4b6c1d28dd">contains</a> (<a class="el" href="classepp_1_1CMask.html">CMask</a> const &amp;other) const</td></tr>
+<tr class="memdesc:af9913a5600f55a6ae444dc4b6c1d28dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether every set bit from the given <a class="el" href="classepp_1_1CMask.html" title="A Bitset wrapper.">CMask</a> is also set in this one.  <a href="classepp_1_1CMask.html#af9913a5600f55a6ae444dc4b6c1d28dd">More...</a><br /></td></tr>
 <tr class="separator:af9913a5600f55a6ae444dc4b6c1d28dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5ff1e18d690d072c94aaed731f4b3115"><td class="memItemLeft" align="right" valign="top"><a id="a5ff1e18d690d072c94aaed731f4b3115"></a>
-Bitset_t &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getBitset</b> ()</td></tr>
-<tr class="separator:a5ff1e18d690d072c94aaed731f4b3115"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeccabd6875151a88dd9e8e63cc20fb52"><td class="memItemLeft" align="right" valign="top"><a id="aeccabd6875151a88dd9e8e63cc20fb52"></a>
-Bitset_t const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getBitset</b> () const</td></tr>
+<tr class="memitem:ae4fe47ec4e0402a6224ba8632c686689"><td class="memItemLeft" align="right" valign="top">Bitset_t &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1CMask.html#ae4fe47ec4e0402a6224ba8632c686689">getBitset</a> ()</td></tr>
+<tr class="memdesc:ae4fe47ec4e0402a6224ba8632c686689"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the underlying bitset.  <a href="classepp_1_1CMask.html#ae4fe47ec4e0402a6224ba8632c686689">More...</a><br /></td></tr>
+<tr class="separator:ae4fe47ec4e0402a6224ba8632c686689"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeccabd6875151a88dd9e8e63cc20fb52"><td class="memItemLeft" align="right" valign="top">Bitset_t const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1CMask.html#aeccabd6875151a88dd9e8e63cc20fb52">getBitset</a> () const</td></tr>
+<tr class="memdesc:aeccabd6875151a88dd9e8e63cc20fb52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the underlying bitset.  <a href="classepp_1_1CMask.html#aeccabd6875151a88dd9e8e63cc20fb52">More...</a><br /></td></tr>
 <tr class="separator:aeccabd6875151a88dd9e8e63cc20fb52"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af6f45e59a1ab93453d6772d3b91c19a5"><td class="memItemLeft" align="right" valign="top"><a id="af6f45e59a1ab93453d6772d3b91c19a5"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator==</b> (<a class="el" href="classepp_1_1CMask.html">CMask</a> const &amp;rhs) const</td></tr>
+<tr class="memitem:af6f45e59a1ab93453d6772d3b91c19a5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1CMask.html#af6f45e59a1ab93453d6772d3b91c19a5">operator==</a> (<a class="el" href="classepp_1_1CMask.html">CMask</a> const &amp;rhs) const</td></tr>
+<tr class="memdesc:af6f45e59a1ab93453d6772d3b91c19a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether all the set bits and the unset ones are the same in both CMasks.  <a href="classepp_1_1CMask.html#af6f45e59a1ab93453d6772d3b91c19a5">More...</a><br /></td></tr>
 <tr class="separator:af6f45e59a1ab93453d6772d3b91c19a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a33423686ff86104067c6166ef86ae315"><td class="memItemLeft" align="right" valign="top"><a id="a33423686ff86104067c6166ef86ae315"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator!=</b> (<a class="el" href="classepp_1_1CMask.html">CMask</a> const &amp;rhs) const</td></tr>
+<tr class="memitem:a33423686ff86104067c6166ef86ae315"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1CMask.html#a33423686ff86104067c6166ef86ae315">operator!=</a> (<a class="el" href="classepp_1_1CMask.html">CMask</a> const &amp;rhs) const</td></tr>
+<tr class="memdesc:a33423686ff86104067c6166ef86ae315"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether at least one bit is different in both CMasks.  <a href="classepp_1_1CMask.html#a33423686ff86104067c6166ef86ae315">More...</a><br /></td></tr>
 <tr class="separator:a33423686ff86104067c6166ef86ae315"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
@@ -157,8 +165,562 @@ Private Attributes</h2></td></tr>
 Bitset_t&#160;</td><td class="memItemRight" valign="bottom"><b>bitset</b></td></tr>
 <tr class="separator:aeaaeb0bdcc24c502117141a875a6e348"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A Bitset wrapper. </p>
+<p>In a <a class="el" href="classepp_1_1CMask.html" title="A Bitset wrapper.">CMask</a>, every bit represents a unique registered type. Each type has a unique id, counting sequentially from 0. Each id corresponds to exacly one bit in a <a class="el" href="classepp_1_1CMask.html" title="A Bitset wrapper.">CMask</a>. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="abf551b779bd05a388077bc12b0411f18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf551b779bd05a388077bc12b0411f18">&#9670;&nbsp;</a></span>CMask() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">epp::CMask::CMask </td>
+          <td>(</td>
+          <td class="paramtype">IdxList_t&#160;</td>
+          <td class="paramname"><em>list</em> = <code>{}</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets the bits corresponding to the ComponentIds from the given list. </p>
+<p>By default list is empty </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">list</td><td>A List of ComponentIds returned from <a class="el" href="classepp_1_1CMetadata.html#af34faf04e87f0d6248bdf61fb9cbef1f" title="Registers a component type on first call and returns a unique id for that type.">CMetadata::Id</a> (or IdOf) function </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a35f66106e4d3c6de3f250fcb36955616"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35f66106e4d3c6de3f250fcb36955616">&#9670;&nbsp;</a></span>CMask() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">epp::CMask::CMask </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classepp_1_1CMask.html">CMask</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>rval</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Move Constructor. </p>
+<p>Takes the state of rval rval is cleared </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="af9913a5600f55a6ae444dc4b6c1d28dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9913a5600f55a6ae444dc4b6c1d28dd">&#9670;&nbsp;</a></span>contains()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool epp::CMask::contains </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classepp_1_1CMask.html">CMask</a> const &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns whether every set bit from the given <a class="el" href="classepp_1_1CMask.html" title="A Bitset wrapper.">CMask</a> is also set in this one. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>Any <a class="el" href="classepp_1_1CMask.html" title="A Bitset wrapper.">CMask</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True when other is a subset of this <a class="el" href="classepp_1_1CMask.html" title="A Bitset wrapper.">CMask</a>, false otherewise </dd></dl>
+
+</div>
+</div>
+<a id="adbdf15fdd83d649f650e5801ad00ce1f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbdf15fdd83d649f650e5801ad00ce1f">&#9670;&nbsp;</a></span>get()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool epp::CMask::get </td>
+          <td>(</td>
+          <td class="paramtype">Idx_t&#160;</td>
+          <td class="paramname"><em>bitIndex</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the value of the bit corresponding to the given ComponentId. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">bitIndex</td><td>A ComponentId returned from <a class="el" href="classepp_1_1CMetadata.html#af34faf04e87f0d6248bdf61fb9cbef1f" title="Registers a component type on first call and returns a unique id for that type.">CMetadata::Id</a> (or IdOf) function </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The value of the bit </dd></dl>
+
+</div>
+</div>
+<a id="ae4fe47ec4e0402a6224ba8632c686689"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4fe47ec4e0402a6224ba8632c686689">&#9670;&nbsp;</a></span>getBitset() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">CMask::Bitset_t const  &amp; epp::CMask::getBitset </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the underlying bitset. </p>
+<dl class="section return"><dt>Returns</dt><dd>Bitset used by this class </dd></dl>
+
+</div>
+</div>
+<a id="aeccabd6875151a88dd9e8e63cc20fb52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeccabd6875151a88dd9e8e63cc20fb52">&#9670;&nbsp;</a></span>getBitset() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Bitset_t const&amp; epp::CMask::getBitset </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the underlying bitset. </p>
+<dl class="section return"><dt>Returns</dt><dd>Bitset used by this class </dd></dl>
+
+</div>
+</div>
+<a id="ad63f6eb27581a441df886bf9da1e3d9d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad63f6eb27581a441df886bf9da1e3d9d">&#9670;&nbsp;</a></span>getSetCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::size_t epp::CMask::getSetCount </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the number of set bits. </p>
+<dl class="section return"><dt>Returns</dt><dd>The number of set bits </dd></dl>
+
+</div>
+</div>
+<a id="a026a0f8dd36ff88d16a276e06e54dfe8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a026a0f8dd36ff88d16a276e06e54dfe8">&#9670;&nbsp;</a></span>hasCommon()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool epp::CMask::hasCommon </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classepp_1_1CMask.html">CMask</a> const &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns whether there is at least one bit that is set both in this <a class="el" href="classepp_1_1CMask.html" title="A Bitset wrapper.">CMask</a> and in the other one. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>Any <a class="el" href="classepp_1_1CMask.html" title="A Bitset wrapper.">CMask</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True when there is at least one common bit, false otherwise </dd></dl>
+
+</div>
+</div>
+<a id="a21e9fd8acadfff32cd88752b3e821b66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21e9fd8acadfff32cd88752b3e821b66">&#9670;&nbsp;</a></span>numberOfCommon()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::size_t epp::CMask::numberOfCommon </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classepp_1_1CMask.html">CMask</a> const &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the number of bits that are set both in this <a class="el" href="classepp_1_1CMask.html" title="A Bitset wrapper.">CMask</a> and in the other one. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>Any <a class="el" href="classepp_1_1CMask.html" title="A Bitset wrapper.">CMask</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The number of set bits </dd></dl>
+
+</div>
+</div>
+<a id="a33423686ff86104067c6166ef86ae315"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33423686ff86104067c6166ef86ae315">&#9670;&nbsp;</a></span>operator!=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool epp::CMask::operator!= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classepp_1_1CMask.html">CMask</a> const &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns whether at least one bit is different in both CMasks. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>Any <a class="el" href="classepp_1_1CMask.html" title="A Bitset wrapper.">CMask</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if both are different, false otherwise </dd></dl>
+
+</div>
+</div>
+<a id="a1cbb8b13dbd3abfe05c6bdf45fe2f684"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1cbb8b13dbd3abfe05c6bdf45fe2f684">&#9670;&nbsp;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classepp_1_1CMask.html">CMask</a> &amp; epp::CMask::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classepp_1_1CMask.html">CMask</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>rval</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Move Assignment. </p>
+<p>Takes the state of rval rval is cleared </p>
+
+</div>
+</div>
+<a id="af6f45e59a1ab93453d6772d3b91c19a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6f45e59a1ab93453d6772d3b91c19a5">&#9670;&nbsp;</a></span>operator==()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool epp::CMask::operator== </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classepp_1_1CMask.html">CMask</a> const &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns whether all the set bits and the unset ones are the same in both CMasks. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>Any <a class="el" href="classepp_1_1CMask.html" title="A Bitset wrapper.">CMask</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if both are equal, false otherwise </dd></dl>
+
+</div>
+</div>
+<a id="aeae82d2224f4376cffa1c97fa72dc30e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeae82d2224f4376cffa1c97fa72dc30e">&#9670;&nbsp;</a></span>removeCommon()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classepp_1_1CMask.html">CMask</a> &amp; epp::CMask::removeCommon </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classepp_1_1CMask.html">CMask</a> const &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Unsets the bits that are set both in this <a class="el" href="classepp_1_1CMask.html" title="A Bitset wrapper.">CMask</a> and in the other one. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>Any <a class="el" href="classepp_1_1CMask.html" title="A Bitset wrapper.">CMask</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A reference to this object </dd></dl>
+
+</div>
+</div>
+<a id="aff8b0bd8d29885040e65d16986c90b0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff8b0bd8d29885040e65d16986c90b0c">&#9670;&nbsp;</a></span>set() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void epp::CMask::set </td>
+          <td>(</td>
+          <td class="paramtype">Idx_t&#160;</td>
+          <td class="paramname"><em>bitIndex</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets the bit corresponding to the given ComponentId. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">bitIndex</td><td>A ComponentId returned from <a class="el" href="classepp_1_1CMetadata.html#af34faf04e87f0d6248bdf61fb9cbef1f" title="Registers a component type on first call and returns a unique id for that type.">CMetadata::Id</a> (or IdOf) function </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aae8e1a3dc15fc3f4b7d49fdbd820d605"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae8e1a3dc15fc3f4b7d49fdbd820d605">&#9670;&nbsp;</a></span>set() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void epp::CMask::set </td>
+          <td>(</td>
+          <td class="paramtype">IdxList_t&#160;</td>
+          <td class="paramname"><em>list</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets the bits corresponding to the ComponentIds from the given list. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">list</td><td>A List of ComponentIds returned from <a class="el" href="classepp_1_1CMetadata.html#af34faf04e87f0d6248bdf61fb9cbef1f" title="Registers a component type on first call and returns a unique id for that type.">CMetadata::Id</a> (or IdOf) function </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a958f33824898c5dd13fdf82054a42c25"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a958f33824898c5dd13fdf82054a42c25">&#9670;&nbsp;</a></span>unset() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void epp::CMask::unset </td>
+          <td>(</td>
+          <td class="paramtype">Idx_t&#160;</td>
+          <td class="paramname"><em>bitIndex</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Unsets the bit corresponding to the given ComponentId. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">bitIndex</td><td>A ComponentId returned from <a class="el" href="classepp_1_1CMetadata.html#af34faf04e87f0d6248bdf61fb9cbef1f" title="Registers a component type on first call and returns a unique id for that type.">CMetadata::Id</a> (or IdOf) function </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aa5c50bbccd1ab04bda0900146a86c349"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5c50bbccd1ab04bda0900146a86c349">&#9670;&nbsp;</a></span>unset() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void epp::CMask::unset </td>
+          <td>(</td>
+          <td class="paramtype">IdxList_t&#160;</td>
+          <td class="paramname"><em>list</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Unsets the bits corresponding to the ComponentIds from the given list. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">list</td><td>A List of ComponentIds returned from <a class="el" href="classepp_1_1CMetadata.html#af34faf04e87f0d6248bdf61fb9cbef1f" title="Registers a component type on first call and returns a unique id for that type.">CMetadata::Id</a> (or IdOf) function </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>include/ECSpp/Internal/<a class="el" href="CMask_8h_source.html">CMask.h</a></li>
+<li>include/ECSpp/internal/<a class="el" href="CMask_8h_source.html">CMask.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

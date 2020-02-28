@@ -6,31 +6,110 @@
 
 namespace epp {
 
+
 class Archetype {
     using IdList_t = decltype(IdOfL<>());
     using CId_t = IdList_t::value_type;
     using IdVec_t = llvm::SmallVector<CId_t, 8>;
 
 public:
+    /// Creates a default (empty) archetype
     Archetype() = default;
+
+
+    /// Creates an archetype with the components from the list
+    /**
+     * @param initList A List of ComponentIds returned from CMetadata::Id (or IdOf) function
+     */
     explicit Archetype(IdList_t initList);
 
+
+    /// Adds the given components to the archetype
+    /**
+     * @param CTypes A pack of any types
+     * @returns A reference to this object
+     */
     template <typename... CTypes>
     Archetype& addComponent();
+
+
+    /// Adds the given components to the archetype
+    /**
+     * @param ids A List of ComponentIds returned from CMetadata::Id (or IdOf) function
+     * @returns A reference to this object
+     */
     Archetype& addComponent(IdList_t ids);
+
+
+    /// Adds the given component to the archetype
+    /**
+     * @param id A ComponentId returned from CMetadata::Id (or IdOf) function
+     * @returns A reference to this object
+     */
     Archetype& addComponent(CId_t id);
 
+
+    /// Removes the given components from the archetype
+    /**
+     * @param CTypes A pack of any types
+     * @returns A reference to this object
+     */
     template <typename... CTypes>
     Archetype& removeComponent();
+
+
+    /// Removes the given components from the archetype
+    /**
+     * @param ids A List of ComponentIds returned from CMetadata::Id (or IdOf) function
+     * @returns A reference to this object
+     */
     Archetype& removeComponent(IdList_t ids);
+
+
+    /// Removes the given component from the archetype
+    /**
+     * @param id A ComponentId returned from CMetadata::Id (or IdOf) function
+     * @returns A reference to this object
+     */
     Archetype& removeComponent(CId_t id);
 
+
+    /// Returns whether the archetype contains all of the given components
+    /**
+     * @param ids A List of ComponentIds returned from CMetadata::Id (or IdOf) function
+     * @returns True if the archetype contains every component from the list, false otherwise
+     */
     bool hasAllOf(IdList_t ids) const;
+
+
+    /// Returns whether the archetype contains any of the given components
+    /**
+     * @param ids A List of ComponentIds returned from CMetadata::Id (or IdOf) function
+     * @returns True if the archetype contains at least one of the components from the list, false otherwise
+     */
     bool hasAnyOf(IdList_t ids) const;
+
+
+    /// Returns whether the archetype contains a given component
+    /**
+     * @param id A ComponentId returned from CMetadata::Id (or IdOf) function
+     * @returns True if the archetype contains the component, false otherwise
+     */
     bool has(CId_t id) const;
 
-    IdVec_t const& getCIds() const;
+
+    /// Returns the CMask representation of the archetype
+    /**
+     * @returns The CMask representing a set of components contained in the archetype
+     */
     CMask const& getMask() const;
+
+
+    /// Returns the vector of components that the archetype containts
+    /**
+     * @returns The vector of the archetype's components 
+     */
+    IdVec_t const& getCIds() const;
 
 private:
     CMask cMask;

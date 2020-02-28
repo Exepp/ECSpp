@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['listidx_49',['ListIdx',['../structepp_1_1ListIdx.html',1,'epp']]]
+  ['fence_153',['Fence',['../structepp_1_1TaskBase_1_1Fence.html',1,'epp::TaskBase']]]
 ];

@@ -1,9 +1,9 @@
 #ifndef EPP_ENTITYLIST_H
 #define EPP_ENTITYLIST_H
 
-#include <ECSpp/utility/Assert.h>
-#include <ECSpp/utility/IndexType.h>
-#include <ECSpp/utility/Pool.h>
+#include <ECSpp/internal/utility/Assert.h>
+#include <ECSpp/internal/utility/IndexType.h>
+#include <ECSpp/internal/utility/Pool.h>
 #include <cstring>
 
 
@@ -17,6 +17,12 @@ using SpawnerId = IndexType<2>;
 struct EntVersion : public IndexType<3> {
     EntVersion() = default;
     explicit EntVersion(Val_t val) : IndexType(val) {}
+
+    /// Returns the next version
+    /**
+     * This value can overflow
+     * @returns The next version based on the current one
+     */
     EntVersion nextVersion() const { return EntVersion(Val_t(value + 1)); }
 };
 
@@ -32,6 +38,8 @@ struct Entity {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+/// A vector-like freelist for entities data
 class EntityList {
 public:
     class Cell {
@@ -54,7 +62,17 @@ public:
         };
 
     public:
+        /// Assumes that Cell will be used as an occupied one
+        /**
+         * @param cell Values that the cell will take as occupied
+         */
         explicit Cell(Occupied cell) : cellData(cell) {}
+
+
+        /// Assumes that Cell will be used as a free one
+        /**
+         * @param cell Values that the cell will take as free
+         */
         explicit Cell(Free cell) : cellData(cell) {}
 
         Cell() = delete;
@@ -63,13 +81,47 @@ public:
         Cell& operator=(Cell&&) = default;
         Cell& operator=(Cell const&) = default;
 
-        ListIdx nextFreeListIdx() const { return cellData.idx; } // free
+        /// Assumes that Cell is now used as Free and returns an index to the next free cell
+        /**
+         * @returns Index to the next free cell
+         */
+        ListIdx nextFreeListIdx() const { return cellData.idx; }
 
-        PoolIdx poolIdx() const { return cellData.idx; }           // occupied
-        SpawnerId spawnerId() const { return cellData.spawnerId; } // occupied
-        EntVersion entVersion() const { return cellData.version; } // occupied & free
 
+        /// Assumes that Cell is now used as Occupied and returns the PoolIndex of the entity
+        /**
+         * @returns PoolIdx of the entity
+         */
+        PoolIdx poolIdx() const { return cellData.idx; }
+
+        /// Assumes that Cell is now used as Occupied and returns the SpawnerId of the EntitySpawner that entity is currently in
+        /**
+         * @returns PoolIdx of the entity
+         */
+        SpawnerId spawnerId() const { return cellData.spawnerId; }
+
+
+        /// Returns the version of the entity
+        /**
+         * Used both in free and occupied cell
+         * @returns Version of the entity
+         */
+        EntVersion entVersion() const { return cellData.version; }
+
+
+        /// Represent the current data as an Occupied cell
+        /**
+         * Universal cellData.idx becomes Occupied::poolIdx
+         * @returns Occupied representation of this cell
+         */
         Occupied asOccupied() const { return { cellData.idx, cellData.version, cellData.spawnerId }; }
+
+
+        /// Represent the current data as a free cell
+        /**
+         * Universal cellData.idx becomes Free::listIdx, cellData.spawnerId is discarded
+         * @returns Free representation of this cell
+         */
         Free asFree() const { return { cellData.idx, cellData.version }; }
 
     private:
@@ -77,27 +129,86 @@ public:
     };
 
 public:
+    /// Default constructor
+    /** By default EntityList reserves memory for 32 elements */
     EntityList() { reserve(32); }; // init size
+
     EntityList(EntityList&& rhs) = delete;
     EntityList& operator=(EntityList&& rhs) = delete;
     EntityList(const EntityList&) = delete;
     EntityList& operator=(const EntityList&) = delete;
+
+
+    /// Destructor
+    /** Releases resources */
     ~EntityList();
 
-    Entity allocEntity(PoolIdx privIndex, SpawnerId spawnerId);
-    void changeEntity(Entity ent, PoolIdx privIndex, SpawnerId spawnerId);
+
+    /// Allocates a unique entity
+    /**
+     * Entitylist may use a new entity, or a used one with changed version.
+     * @param poolIdx Spawner's pool index of the entity
+     * @param spawnerId Spawner's id
+     * @returns A uniue entity 
+     */
+    Entity allocEntity(PoolIdx poolIdx, SpawnerId spawnerId);
+
+
+    /// Changes the values that describe the location of the given entity
+    /**
+     * Ent stays valid
+     * @param ent A valid entity which data will be changed
+     * @param poolIdx A new Spawner's pool index of the entity
+     * @param spawnerId A new Spawner's id
+     * @returns A uniue entity 
+     * @throws (Debug only) Throws the AssertionFailed exception if ent is invalid
+     */
+    void changeEntity(Entity ent, PoolIdx poolIdx, SpawnerId spawnerId);
+
+
+    /// Frees the given entity
+    /**
+     * Increases the version of the entity and sets its cell's universal idx to the freeIndex 
+     * and freeIndex is set to the value of ent.listIdx
+     * @param ent A valid entity whose data will be changed
+     * @throws (Debug only) Throws the AssertionFailed exception if ent is invalid
+     */
     void freeEntity(Entity ent);
 
-    // increments versions of all currently reserved cells
+    /// Frees every entity
+    /**
+     * Increments version of every reserved cell (even the unused ones)
+     */
     void freeAll();
 
-    // makes sure, to fit n more elements without realloc
+    /// The next n allocEntity(...) calls will not require reallocation
+    /** 
+     * @param n Number of entities to reserve the additional memory for
+     */
     void fitNextN(std::size_t n);
 
+
+    /// Check whether the given entity is valid
+    /**
+     * @param ent Any entity
+     * @returns True if the entity is valid, false otherwise
+     */
     bool isValid(Entity ent) const { return ent.listIdx.value < reserved && ent.version.value == data[ent.listIdx.value].entVersion().value; }
 
+
+    /// Returns the values that describe the location of the given entity
+    /**
+     * @param ent A valid entity
+     * @returns Occupied version of the entity's cell
+     * @throws (Debug only) Throws the AssertionFailed exception if ent is invalid
+     */
     Cell::Occupied get(Entity ent) const;
 
+
+    /// Returns the number of valid entities
+    /**
+     * @returns Number of valid entities
+     */
     std::size_t size() const { return reserved - freeLeft; }
 
 private:
@@ -137,12 +248,12 @@ inline Entity EntityList::allocEntity(PoolIdx poolIdx, SpawnerId spawnerId)
     return Entity{ idx, version };
 }
 
-inline void EntityList::changeEntity(Entity ent, PoolIdx index, SpawnerId spawnerId)
+inline void EntityList::changeEntity(Entity ent, PoolIdx poolIdx, SpawnerId spawnerId)
 {
-    EPP_ASSERT(index.value != PoolIdx::BadValue && spawnerId.value != SpawnerId::BadValue);
+    EPP_ASSERT(poolIdx.value != PoolIdx::BadValue && spawnerId.value != SpawnerId::BadValue);
     EPP_ASSERT(isValid(ent));
 
-    data[ent.listIdx.value] = Cell(Cell::Occupied{ index, ent.version, spawnerId });
+    data[ent.listIdx.value] = Cell(Cell::Occupied{ poolIdx, ent.version, spawnerId });
 }
 
 inline void EntityList::freeEntity(Entity ent)

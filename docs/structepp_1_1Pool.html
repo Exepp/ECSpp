@@ -75,6 +75,8 @@ $(function() {
 <div class="title">epp::Pool&lt; T &gt; Struct Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="Pool_8h_source.html">Pool.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
@@ -84,15 +86,15 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>Container_t</b> = st
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ab3509b5f5006704a60d988f792588a19"><td class="memTemplParams" colspan="2"><a id="ab3509b5f5006704a60d988f792588a19"></a>
-template&lt;typename... U&gt; </td></tr>
-<tr class="memitem:ab3509b5f5006704a60d988f792588a19"><td class="memTemplItemLeft" align="right" valign="top">T &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>create</b> (U &amp;&amp;... arg)</td></tr>
-<tr class="separator:ab3509b5f5006704a60d988f792588a19"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a36b0b4b8159428cd101984871becaafa"><td class="memItemLeft" align="right" valign="top"><a id="a36b0b4b8159428cd101984871becaafa"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>destroy</b> (std::size_t i)</td></tr>
-<tr class="separator:a36b0b4b8159428cd101984871becaafa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4d46ca3b79090e2f6452835b381fce40"><td class="memItemLeft" align="right" valign="top"><a id="a4d46ca3b79090e2f6452835b381fce40"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>fitNextN</b> (std::size_t n)</td></tr>
+<tr class="memitem:a94fc1393714f77c741801fff34a25806"><td class="memTemplParams" colspan="2">template&lt;typename... U&gt; </td></tr>
+<tr class="memitem:a94fc1393714f77c741801fff34a25806"><td class="memTemplItemLeft" align="right" valign="top">T &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structepp_1_1Pool.html#a94fc1393714f77c741801fff34a25806">create</a> (U &amp;&amp;... arg)</td></tr>
+<tr class="memdesc:a94fc1393714f77c741801fff34a25806"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new element with emplace_back.  <a href="structepp_1_1Pool.html#a94fc1393714f77c741801fff34a25806">More...</a><br /></td></tr>
+<tr class="separator:a94fc1393714f77c741801fff34a25806"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b97757a57f41df06b560d34a690fd48"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structepp_1_1Pool.html#a8b97757a57f41df06b560d34a690fd48">destroy</a> (std::size_t idx)</td></tr>
+<tr class="memdesc:a8b97757a57f41df06b560d34a690fd48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes the object located at the given index.  <a href="structepp_1_1Pool.html#a8b97757a57f41df06b560d34a690fd48">More...</a><br /></td></tr>
+<tr class="separator:a8b97757a57f41df06b560d34a690fd48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d46ca3b79090e2f6452835b381fce40"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structepp_1_1Pool.html#a4d46ca3b79090e2f6452835b381fce40">fitNextN</a> (std::size_t n)</td></tr>
+<tr class="memdesc:a4d46ca3b79090e2f6452835b381fce40"><td class="mdescLeft">&#160;</td><td class="mdescRight">The next n create(...) calls will not require reallocation.  <a href="structepp_1_1Pool.html#a4d46ca3b79090e2f6452835b381fce40">More...</a><br /></td></tr>
 <tr class="separator:a4d46ca3b79090e2f6452835b381fce40"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
@@ -101,8 +103,126 @@ Public Attributes</h2></td></tr>
 Container_t&#160;</td><td class="memItemRight" valign="bottom"><b>data</b></td></tr>
 <tr class="separator:a320f5ea49d60c15108c90d8f6b88228b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;typename T&gt;<br />
+struct epp::Pool&lt; T &gt;</h3>
+
+<p>A Vector that does not maintain order - the last component is always moved in the place of a removed one </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a94fc1393714f77c741801fff34a25806"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a94fc1393714f77c741801fff34a25806">&#9670;&nbsp;</a></span>create()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<div class="memtemplate">
+template&lt;typename... U&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T&amp; <a class="el" href="structepp_1_1Pool.html">epp::Pool</a>&lt; T &gt;::create </td>
+          <td>(</td>
+          <td class="paramtype">U &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>arg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates a new element with emplace_back. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">arg</td><td>Arguments forwarded to the emplace_back </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A reference to the created object </dd></dl>
+
+</div>
+</div>
+<a id="a8b97757a57f41df06b560d34a690fd48"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b97757a57f41df06b560d34a690fd48">&#9670;&nbsp;</a></span>destroy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="structepp_1_1Pool.html">epp::Pool</a>&lt; T &gt;::destroy </td>
+          <td>(</td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>idx</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Removes the object located at the given index. </p>
+<p>Moves the last element in place of the removed one </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">idx</td><td>index of the element to be deleted </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>False if idx was the last element, True otherwise </dd></dl>
+
+</div>
+</div>
+<a id="a4d46ca3b79090e2f6452835b381fce40"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d46ca3b79090e2f6452835b381fce40">&#9670;&nbsp;</a></span>fitNextN()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="structepp_1_1Pool.html">epp::Pool</a>&lt; T &gt;::fitNextN </td>
+          <td>(</td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The next n create(...) calls will not require reallocation. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>Number of elements to reserve the additional memory for </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li>include/ECSpp/Utility/<a class="el" href="Pool_8h_source.html">Pool.h</a></li>
+<li>include/ECSpp/internal/utility/<a class="el" href="Pool_8h_source.html">Pool.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

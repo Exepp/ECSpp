@@ -6,6 +6,12 @@
 
 namespace epp {
 
+/// A Bitset wrapper
+/**
+ * In a CMask, every bit represents a unique registered type.
+ * Each type has a unique id, counting sequentially from 0. 
+ * Each id corresponds to exacly one bit in a CMask.
+ */
 class CMask {
 public:
     using IdxList_t = decltype(IdOfL<>());
@@ -13,31 +19,144 @@ public:
     using Bitset_t = std::bitset<CMetadata::MaxRegisteredComponents>;
 
 public:
+    /// Sets the bits corresponding to the ComponentIds from the given list
+    /**
+     * By default list is empty
+     * @param list A List of ComponentIds returned from CMetadata::Id (or IdOf) function
+     */
     CMask(IdxList_t list = {});
+
+
+    /// Move Constructor
+    /**
+     * Takes the state of rval
+     * rval is cleared
+     */
     CMask(CMask&& rval);
-    CMask(CMask const& rval) = default;
+
+
+    /// Default Copy Constructor
+    CMask(CMask const&) = default;
+
+
+    /// Move Assignment
+    /**
+     * Takes the state of rval
+     * rval is cleared
+     */
     CMask& operator=(CMask&& rval);
+
+
+    /// Default Copy Assignment
     CMask& operator=(CMask const&) = default;
 
+
+    /// Sets the bit corresponding to the given ComponentId
+    /**
+     * @param bitIndex A ComponentId returned from CMetadata::Id (or IdOf) function
+     */
     void set(Idx_t bitIndex);
+
+
+    /// Sets the bits corresponding to the ComponentIds from the given list
+    /**
+     * @param list A List of ComponentIds returned from CMetadata::Id (or IdOf) function
+     */
     void set(IdxList_t list);
+
+
+    /// Unsets the bit corresponding to the given ComponentId
+    /**
+     * @param bitIndex A ComponentId returned from CMetadata::Id (or IdOf) function
+     */
     void unset(Idx_t bitIndex);
+
+
+    /// Unsets the bits corresponding to the ComponentIds from the given list
+    /**
+     * @param list A List of ComponentIds returned from CMetadata::Id (or IdOf) function
+     */
     void unset(IdxList_t list);
 
+
+    /// Unsets the bits that are set both in this CMask and in the other one
+    /**
+     * @param other Any CMask
+     * @returns A reference to this object
+     */
     CMask& removeCommon(CMask const& other);
 
+
+    /// Unsets all bits
     void clear();
 
+
+    /// Returns the value of the bit corresponding to the given ComponentId
+    /**
+     * @param bitIndex A ComponentId returned from CMetadata::Id (or IdOf) function
+     * @returns The value of the bit
+     */
     bool get(Idx_t bitIndex) const;
+
+
+    /// Returns the number of set bits
+    /**
+     * @returns The number of set bits
+     */
     std::size_t getSetCount() const;
+
+
+    /// Returns the number of bits that are set both in this CMask and in the other one
+    /**
+     * @param other Any CMask
+     * @returns The number of set bits
+     */
     std::size_t numberOfCommon(CMask const& other) const;
+
+
+    /// Returns whether there is at least one bit that is set both in this CMask and in the other one
+    /**
+     * @param other Any CMask
+     * @returns True when there is at least one common bit, false otherwise
+     */
     bool hasCommon(CMask const& other) const;
+
+
+    /// Returns whether every set bit from the given CMask is also set in this one
+    /**
+     * @param other Any CMask
+     * @returns True when other is a subset of this CMask, false otherewise
+     */
     bool contains(CMask const& other) const;
 
+
+    /// Returns the underlying bitset
+    /**
+     * @returns Bitset used by this class
+     */
     Bitset_t& getBitset();
+
+
+    /// Returns the underlying bitset
+    /**
+     * @returns Bitset used by this class
+     */
     Bitset_t const& getBitset() const;
 
+
+    /// Returns whether all the set bits and the unset ones are the same in both CMasks
+    /**
+     * @param other Any CMask
+     * @returns True if both are equal, false otherwise 
+     */
     bool operator==(CMask const& rhs) const;
+
+
+    /// Returns whether at least one bit is different in both CMasks
+    /**
+     * @param other Any CMask
+     * @returns True if both are different, false otherwise
+     */
     bool operator!=(CMask const& rhs) const;
 
 private:

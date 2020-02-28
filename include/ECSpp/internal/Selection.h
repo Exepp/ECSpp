@@ -3,7 +3,7 @@
 
 #include <ECSpp/internal/EntityList.h>
 #include <ECSpp/internal/EntitySpawner.h>
-#include <ECSpp/utility/TuplePP.h>
+#include <ECSpp/internal/utility/TuplePP.h>
 
 namespace epp {
 

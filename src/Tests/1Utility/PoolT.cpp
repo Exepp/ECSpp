@@ -1,4 +1,4 @@
-#include <ECSpp/utility/Pool.h>
+#include <ECSpp/internal/utility/Pool.h>
 #include <gtest/gtest.h>
 
 using namespace epp;

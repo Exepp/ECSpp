@@ -17,7 +17,7 @@
 #ifndef LLVM_ADT_SMALLVECTOR_H
 #define LLVM_ADT_SMALLVECTOR_H
 
-#include <ECSpp/utility/Assert.h>
+#include <ECSpp/internal/utility/Assert.h>
 #include <algorithm>
 #include <cassert>
 #include <cstddef>
@@ -802,7 +802,8 @@ public:
 
     bool operator==(const SmallVectorImpl& RHS) const
     {
-        if (this->size() != RHS.size()) return false;
+        if (this->size() != RHS.size())
+            return false;
         return std::equal(this->begin(), this->end(), RHS.begin());
     }
     bool operator!=(const SmallVectorImpl& RHS) const
@@ -820,7 +821,8 @@ public:
 template <typename T>
 void SmallVectorImpl<T>::swap(SmallVectorImpl<T>& RHS)
 {
-    if (this == &RHS) return;
+    if (this == &RHS)
+        return;
 
     // We can only avoid copying elements if neither vector is small.
     if (!this->isSmall() && !RHS.isSmall()) {
@@ -836,7 +838,8 @@ void SmallVectorImpl<T>::swap(SmallVectorImpl<T>& RHS)
 
     // Swap the shared elements.
     size_t NumShared = this->size();
-    if (NumShared > RHS.size()) NumShared = RHS.size();
+    if (NumShared > RHS.size())
+        NumShared = RHS.size();
     for (size_type i = 0; i != NumShared; ++i)
         std::swap((*this)[i], RHS[i]);
 
@@ -862,7 +865,8 @@ SmallVectorImpl<T>& SmallVectorImpl<T>::
 operator=(const SmallVectorImpl<T>& RHS)
 {
     // Avoid self-assignment.
-    if (this == &RHS) return *this;
+    if (this == &RHS)
+        return *this;
 
     // If we already have sufficient space, assign the common elements, then
     // destroy any excess.
@@ -912,12 +916,14 @@ template <typename T>
 SmallVectorImpl<T>& SmallVectorImpl<T>::operator=(SmallVectorImpl<T>&& RHS)
 {
     // Avoid self-assignment.
-    if (this == &RHS) return *this;
+    if (this == &RHS)
+        return *this;
 
     // If the RHS isn't small, clear this vector and then steal its buffer.
     if (!RHS.isSmall()) {
         this->destroy_range(this->begin(), this->end());
-        if (!this->isSmall()) free(this->begin());
+        if (!this->isSmall())
+            free(this->begin());
         this->BeginX = RHS.BeginX;
         this->Size = RHS.Size;
         this->Capacity = RHS.Capacity;

@@ -14,7 +14,7 @@ workspace "ECSpp"
 		staticruntime "on"
 
 	filter {"system:linux"}
-		toolset "gcc"
+		toolset "clang"
 		buildoptions{"-fPIC",
 					"-Wno-dangling-else",
 					-- "-Weverything",

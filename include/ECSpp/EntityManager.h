@@ -5,11 +5,10 @@
 #include <ECSpp/internal/EntitySpawner.h>
 #include <ECSpp/internal/Selection.h>
 #include <deque>
-#include <unordered_map>
 
 namespace epp {
 
-// TODO: redo the tests
+
 class EntityManager {
     using Spawners_t = std::deque<EntitySpawner>; // deque, to keep selections' references valid
     using EntityPool_t = EntitySpawner::EntityPool_t;
@@ -23,36 +22,50 @@ class EntityManager {
     using DefCreationFn_t = decltype(DefCreationFn);
 
 public:
+    /// Spawns a new entity with the given archetype
+    /**
+     * @param arch Any archetype. The archetype of the spawned entity
+     * @param fn A callable object that can use the Creator instance to construct the components of the spawned entity
+     * @returns An entity
+     */
     template <typename FnType = DefCreationFn_t>
     std::enable_if_t<std::is_invocable_v<FnType, EntityCreator&&>, Entity> // disable for spawn(arche, n)
     spawn(Archetype const& arch, FnType fn = DefCreationFn);
 
 
-    // first - iterator to the first of spawned entities
-    // second - end iterator
+    /// Spawns n new entities with the given archetype
+    /**
+     * @param arch Any archetype. The archetype of spawned entities
+     * @param fn A callable object that can use the Creator instance to construct the components of the spawned entities
+     * @returns A (begin, end) iterators pair to the spawned entities
+     */
     template <typename FnType = DefCreationFn_t>
     std::pair<EPoolCIter_t, EPoolCIter_t>
     spawn(Archetype const& arch, std::size_t n, FnType fn = DefCreationFn);
 
 
-    // ent - valid entity
-    // newArchetype - any archetype
+    /// Changes the archetype of the given entity
+    /**
+     * @param ent A valid entity
+     * @param newArchetype Any archetype. A new archetype of ent
+     * @param fn A callable object that can use the Creator instance to construct new components
+     * @returns True when changed the archetype, false otherwise (newArchetype was the same as ent's current archetype) 
+     */
     template <typename FnType = DefCreationFn_t>
-    bool
-    changeArchetype(Entity ent, Archetype const& newArchetype, FnType fn = DefCreationFn);
+    bool changeArchetype(Entity ent, Archetype const& newArchetype, FnType fn = DefCreationFn);
 
 
     /// Changes the archetype of ent, removing components from toRemove list and adding the ones from toAdd list
     /**
-     * There are no overloaded versions of this function (for iterators) on purpose - it is more optimal to create a separate archetype for those situations
+     * There are intentionally no overloaded versions of this function (for iterators) - it is more optimal to create a separate archetype for those situations
      * @param ent A valid entity
      * @param toAdd Components that will be added to ent (or kept it these are already there). toAdd has a priority over toRemove
      * @param toRemove Components that will be removed from ent (except for the ones specified in toAdd)
      * @param fn A callable object that can use the Creator instance to construct the added components
+     * @returns True when changed the archetype, false otherwise (resulting archetype was the same as ent's current archetype) 
      */
     template <typename FnType = DefCreationFn_t>
-    bool
-    changeArchetype(Entity ent, IdList_t toRemove, IdList_t toAdd, FnType fn = DefCreationFn);
+    bool changeArchetype(Entity ent, IdList_t toRemove, IdList_t toAdd, FnType fn = DefCreationFn);
 
 
     /// Changes the archetype of the entity associated with the iterator and returns the next valid one
@@ -61,84 +74,142 @@ public:
      * @param it A valid and non-end iterator
      * @param newArchetype Any archetype - a new archetype of the entity associated with the iterator  
      * @param fn A callable object that can use the Creator instance to construct the added components
+     * @returns A valid iterator to the next entity or end
      */
     template <typename Iter, typename FnType = DefCreationFn_t>
-    Iter
-    changeArchetype(Iter const& it, Archetype const& newArchetype, FnType fn = DefCreationFn);
+    Iter changeArchetype(Iter const& it, Archetype const& newArchetype, FnType fn = DefCreationFn);
 
 
-    // ent - valid entity
+    /// Destroys a valid entity and makes it invalid
+    /**
+     * @param ent A valid entity
+     * @throws (Debug only) Throws the AssertionFailed exception if ent is invalid
+     */
     void destroy(Entity ent);
 
 
-    // destroys the entity associated with the iterator and returns the next valid one
-    // iterator - valid and non-end iterator
-    template <typename Iterator>
-    Iterator
-    destroy(Iterator it);
+    /// Destroys the entity associated with the iterator and returns the next valid one
+    /**
+     * @param it A valid and non-end iterator
+     * @returns A valid iterator to the next entity or end
+     * @throws (Debug only) Throws the AssertionFailed exception if "it" is invalid
+     */
+    template <typename Iter>
+    Iter destroy(Iter const& it);
 
 
-    EPoolCIter_t destroy(EPoolCIter_t const& it);
-
-
-    // destroys every entity
+    /// Destroys every entity, keeps resereved memory
+    /** 
+     * Faster than calling destroy on each entity individually
+     */
     void clear();
 
 
-    // destroys every entity of the given archetype
-    // arch - any archetype
+    /// Destroys every entity with the given archetype
+    /** 
+     * Faster than calling destroy on each entity individually
+     * @param arch Any archetype
+     */
     void clear(Archetype const& arch);
 
 
-    // the next n spawn(arche, ...) calls will not require reallocation in any of the internal structures
+    /// The next n spawn(arch, ...) calls will not require reallocation in any of the internal structures
+    /** 
+     * This function can be used to "register" an archetype
+     * @param arch Any archetype
+     * @param n Number of entities to reserve the additional memory for
+     */
     void prepareToSpawn(Archetype const& arch, std::size_t n);
 
 
-    // TODO: tests
+    /// Removes the excess of the reserved memory in the internal structures for the given archetype
+    /** 
+     * @param arch Any archetype
+     */
     void shrinkToFit(Archetype const& arch);
 
 
-    // TODO: tests
+    /// Removes the excess of the reserved memory in the internal structures for every used archetype
     void shrinkToFit();
 
 
+    /// Updates selection so that its iterators can reach entities of the archetypes that were not present in last update
+    /** 
+     * It is a O(n) operation, where n is a number of new unique (for that selection) archetypes used. 
+     * @param selection Any Selection to be updated
+     */
     template <typename... CTypes>
     void updateSelection(Selection<CTypes...>& selection);
 
 
-    // ent - valid entity
-    // returns default-constructed cell for invalid
-    // this data can be used with selections' iterators
+    /// Returns an internal data that describes the location of the given entity
+    /** 
+     * This data can be used with selections' iterators
+     * @param ent Valid entity
+     * @returns Default-constructed cell for invalid
+     * @throws (Debug only) Throws the AssertionFailed exception if ent is invalid
+     */
     EntityList::Cell::Occupied cellOf(Entity ent) const;
 
 
-    // ent - valid entity that owns given component (to be sure that an entity owns a component, use maskOf(ent).get(Component::Id().value))
-    // returns a reference to the component associated with ent
+    /// Returns a reference to the component of type TComp owned by the given entity
+    /** 
+     * @param TComp A type of the component
+     * @param ent A valid entity that owns the component (to be sure that an entity owns a component, use maskOf(ent).get(Component::Id().value))
+     * @returns A reference to the component associated with ent
+     * @throws (Debug only) Throws the AssertionFailed exception if ent is invalid
+     */
     template <typename TComp>
     TComp& componentOf(Entity ent);
 
 
-    // ent - valid entity
-    // returns the CMask of the spawner that ent is currently in
-    CMask const& maskOf(Entity ent) const;
+    /// Returns a mask that describes which of the components are owned by the given entity
+    /** 
+     * @param ent A valid entity
+     * @returns The CMask of the spawner that ent is currently in
+     * @throws (Debug only) Throws the AssertionFailed exception if ent is invalid
+     */
+    CMask maskOf(Entity ent) const;
 
 
-    // ent - valid entity
-    // returns the archetype of ent
+    /// Returns a mask that describes which of the components are owned by the given entity
+    /** 
+     * @param ent A valid entity
+     * @returns The archetype of ent
+     * @throws (Debug only) Throws the AssertionFailed exception if ent is invalid
+     */
     Archetype archetypeOf(Entity ent) const;
 
 
-    // arch - one of archetypes that were already used to spawn entities during this application (throws for other archetypes)
+    /// Returns an internal pool used by the spawner of entities with the given archetype
+    /** 
+     * @param arch One of archetypes that were already used to spawn entities during this application
+     * @returns Pool of entities with the arch archetype
+     * @throws (Debug only) Throws the AssertionFailed exception if arch was never used before in this EntityManager
+     */
     EntityPool_t const& entitiesOf(Archetype const& arch) const;
 
 
+    /// Checks whether the given entity is valid or not
+    /** 
+     * @param ent Any entity
+     * @returns True for valid entity, false for invalid one
+     */
     bool isValid(Entity ent) const { return entList.isValid(ent); }
 
 
+    /// Returns the number of alive entities
+    /** 
+     * @returns The number of alive entities
+     */
     std::size_t size() const { return entList.size(); }
 
 
-    // arch - any archetype
+    /// Returns the number of alive entities with the given archetype
+    /** 
+     * @param arch Any archetype
+     * @returns The number of alive entities with the given archetype
+     */
     std::size_t size(Archetype const& arch) const;
 
 private:
@@ -172,7 +243,7 @@ EntityManager::spawn(Archetype const& arch, std::size_t n, FnType fn)
 {
     EntitySpawner& spawner = _prepareToSpawn(arch, n);
     for (std::size_t i = 0; i < n; ++i)
-        spawner.spawn(entList, std::move(fn));
+        spawner.spawn(entList, fn);
     return { spawner.getEntities().data.end() - std::ptrdiff_t(n), spawner.getEntities().data.end() };
 }
 
@@ -220,20 +291,14 @@ inline void EntityManager::destroy(Entity ent)
     getSpawner(ent).destroy(ent, entList);
 }
 
-template <typename Iterator>
-inline Iterator EntityManager::destroy(Iterator it)
+template <typename Iter>
+inline Iter EntityManager::destroy(Iter const& it)
 {
-    EPP_ASSERT(it.isValid());
     destroy(*it);
-    if (!it.isValid())
-        return ++it;
+    if constexpr (!std::is_same_v<Iter, EPoolIter_t> && !std::is_same_v<Iter, EPoolCIter_t>)
+        if (!it.isValid())
+            return ++Iter(it);
     return it;
-}
-
-inline EntityManager::EPoolCIter_t EntityManager::destroy(EPoolCIter_t const& it)
-{
-    destroy(*it);
-    return it; // same iterator (valid for vector - last element was removed)
 }
 
 inline void EntityManager::clear()
@@ -286,7 +351,7 @@ inline TComp& EntityManager::componentOf(Entity ent)
     return *static_cast<TComp*>(getSpawner(ent).getPool(IdOf<TComp>())[entList.get(ent).poolIdx.value]);
 }
 
-inline CMask const& EntityManager::maskOf(Entity ent) const
+inline CMask EntityManager::maskOf(Entity ent) const
 {
     EPP_ASSERT(entList.isValid(ent));
     return getSpawner(ent).mask;

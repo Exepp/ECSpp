@@ -1,0 +1,44 @@
+==== Building Benchmarks (release) ====
+
+---------------------------------------------------------------------------------------------------------------------------
+Benchmark                                                                                 Time             CPU   Iterations
+---------------------------------------------------------------------------------------------------------------------------
+BM_EntitiesSequentialCreation<2>/1000000/iterations:1/repeats:100_mean             46570801 ns     46569883 ns          100
+BM_EntitiesSequentialCreation<2>/1000000/iterations:1/repeats:100_median           45432889 ns     45429731 ns          100
+BM_EntitiesSequentialCreation<2>/1000000/iterations:1/repeats:100_stddev            3056585 ns      3054214 ns          100
+
+BM_EntitiesSequentialCreationReserved<2>/1000000/iterations:1/repeats:100_mean     28280491 ns     28280168 ns          100
+BM_EntitiesSequentialCreationReserved<2>/1000000/iterations:1/repeats:100_median   28058434 ns     28058897 ns          100
+BM_EntitiesSequentialCreationReserved<2>/1000000/iterations:1/repeats:100_stddev    1010194 ns      1009544 ns          100
+
+BM_EntitiesAtOnceCreation<2>/1000000/iterations:1/repeats:100_mean                 22566700 ns     22566824 ns          100
+BM_EntitiesAtOnceCreation<2>/1000000/iterations:1/repeats:100_median               22481379 ns     22482141 ns          100
+BM_EntitiesAtOnceCreation<2>/1000000/iterations:1/repeats:100_stddev                 405566 ns       405046 ns          100
+
+BM_EntitiesSequentialDestroy<2>/1000000/iterations:1/repeats:100_mean              16118202 ns     16117029 ns          100
+BM_EntitiesSequentialDestroy<2>/1000000/iterations:1/repeats:100_median            16097809 ns     16097126 ns          100
+BM_EntitiesSequentialDestroy<2>/1000000/iterations:1/repeats:100_stddev              362094 ns       359578 ns          100
+
+BM_EntitiesAtOnceDestroy<2>/1000000/iterations:1/repeats:100_mean                   5267996 ns      5266878 ns          100
+BM_EntitiesAtOnceDestroy<2>/1000000/iterations:1/repeats:100_median                 5243363 ns      5242508 ns          100
+BM_EntitiesAtOnceDestroy<2>/1000000/iterations:1/repeats:100_stddev                  126712 ns       125785 ns          100
+
+BM_EntitiesIteration<2>/1000000/iterations:100/repeats:10_mean                      2289040 ns      2288975 ns           10
+BM_EntitiesIteration<2>/1000000/iterations:100/repeats:10_median                    2289366 ns      2289351 ns           10
+BM_EntitiesIteration<2>/1000000/iterations:100/repeats:10_stddev                      30913 ns        30881 ns           10
+
+BM_EntitiesIterationHalf<2>/1000000/iterations:100/repeats:10_mean                  1060257 ns      1060255 ns           10
+BM_EntitiesIterationHalf<2>/1000000/iterations:100/repeats:10_median                1019834 ns      1019841 ns           10
+BM_EntitiesIterationHalf<2>/1000000/iterations:100/repeats:10_stddev                 130478 ns       130478 ns           10
+
+BM_EntitiesIterationOneOfMany<2>/1000000/iterations:100/repeats:10_mean                39.1 ns         23.5 ns           10
+BM_EntitiesIterationOneOfMany<2>/1000000/iterations:100/repeats:10_median              29.5 ns         19.8 ns           10
+BM_EntitiesIterationOneOfMany<2>/1000000/iterations:100/repeats:10_stddev              21.3 ns         10.4 ns           10
+
+BM_EntitiesIterationReal<2>/1000000/iterations:100/repeats:10_mean                  2363373 ns      2363334 ns           10
+BM_EntitiesIterationReal<2>/1000000/iterations:100/repeats:10_median                2372635 ns      2372580 ns           10
+BM_EntitiesIterationReal<2>/1000000/iterations:100/repeats:10_stddev                  20750 ns        20768 ns           10
+
+BM_AddComponents<2>/1000000/iterations:1/repeats:100_mean                          80991595 ns     80989707 ns          100
+BM_AddComponents<2>/1000000/iterations:1/repeats:100_median                        81225424 ns     81225525 ns          100
+BM_AddComponents<2>/1000000/iterations:1/repeats:100_stddev                         1877528 ns      1876100 ns          100

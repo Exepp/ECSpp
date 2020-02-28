@@ -71,6 +71,7 @@ $(function() {
 <a href="#pri-types">Private Types</a> &#124;
 <a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="#pri-static-attribs">Static Private Attributes</a> &#124;
 <a href="classepp_1_1EntityManager-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">epp::EntityManager Class Reference</div>  </div>
@@ -79,72 +80,77 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ac1e10c9b5175fbfc1bf9637a92bfd7c3"><td class="memItemLeft" align="right" valign="top"><a id="ac1e10c9b5175fbfc1bf9637a92bfd7c3"></a>
-<a class="el" href="structepp_1_1Entity.html">Entity</a>&#160;</td><td class="memItemRight" valign="bottom"><b>spawn</b> (<a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;arch, EntitySpawner::UserCreationFn_t const &amp;fn=([](<a class="el" href="classepp_1_1EntitySpawner_1_1Creator.html">EntityCreator</a> &amp;&amp;) {}))</td></tr>
-<tr class="separator:ac1e10c9b5175fbfc1bf9637a92bfd7c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad79cf4ac3763d6454f75314d59db5225"><td class="memItemLeft" align="right" valign="top"><a id="ad79cf4ac3763d6454f75314d59db5225"></a>
-std::pair&lt; EPoolCIter_t, EPoolCIter_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>spawn</b> (<a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;arch, std::size_t n, EntitySpawner::UserCreationFn_t const &amp;fn=([](<a class="el" href="classepp_1_1EntitySpawner_1_1Creator.html">EntityCreator</a> &amp;&amp;) {}))</td></tr>
-<tr class="separator:ad79cf4ac3763d6454f75314d59db5225"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a023b179e8998015494c5a2addc4a607c"><td class="memItemLeft" align="right" valign="top"><a id="a023b179e8998015494c5a2addc4a607c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>changeArchetype</b> (<a class="el" href="structepp_1_1Entity.html">Entity</a> ent, <a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;newArchetype, EntitySpawner::UserCreationFn_t const &amp;fn=([](<a class="el" href="classepp_1_1EntitySpawner_1_1Creator.html">EntityCreator</a> &amp;&amp;) {}))</td></tr>
-<tr class="separator:a023b179e8998015494c5a2addc4a607c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a71c8030b6d2f8cdc64ea16565fa2a1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1EntityManager.html#a5a71c8030b6d2f8cdc64ea16565fa2a1">changeArchetype</a> (<a class="el" href="structepp_1_1Entity.html">Entity</a> ent, IdList_t toAdd, IdList_t toRemove=IdOfL&lt;&gt;(), EntitySpawner::UserCreationFn_t const &amp;fn=([](<a class="el" href="classepp_1_1EntitySpawner_1_1Creator.html">EntityCreator</a> &amp;&amp;) {}))</td></tr>
-<tr class="memdesc:a5a71c8030b6d2f8cdc64ea16565fa2a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes the archetype of ent, removing components from toRemove list and adding the ones from toAdd list.  <a href="classepp_1_1EntityManager.html#a5a71c8030b6d2f8cdc64ea16565fa2a1">More...</a><br /></td></tr>
-<tr class="separator:a5a71c8030b6d2f8cdc64ea16565fa2a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3293cd21b4b75a047991b619f21c1af5"><td class="memTemplParams" colspan="2">template&lt;typename Iterator &gt; </td></tr>
-<tr class="memitem:a3293cd21b4b75a047991b619f21c1af5"><td class="memTemplItemLeft" align="right" valign="top">Iterator&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classepp_1_1EntityManager.html#a3293cd21b4b75a047991b619f21c1af5">changeArchetype</a> (Iterator it, <a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;newArchetype, EntitySpawner::UserCreationFn_t const &amp;fn=([](<a class="el" href="classepp_1_1EntitySpawner_1_1Creator.html">EntityCreator</a> &amp;&amp;) {}))</td></tr>
-<tr class="memdesc:a3293cd21b4b75a047991b619f21c1af5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes the archetype of the entity associated with the iterator and returns the next valid one.  <a href="classepp_1_1EntityManager.html#a3293cd21b4b75a047991b619f21c1af5">More...</a><br /></td></tr>
-<tr class="separator:a3293cd21b4b75a047991b619f21c1af5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae4d7803534ef6c5676260fde65bacd55"><td class="memItemLeft" align="right" valign="top">EPoolCIter_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1EntityManager.html#ae4d7803534ef6c5676260fde65bacd55">changeArchetype</a> (EPoolCIter_t const &amp;it, <a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;newArchetype, EntitySpawner::UserCreationFn_t const &amp;fn=([](<a class="el" href="classepp_1_1EntitySpawner_1_1Creator.html">EntityCreator</a> &amp;&amp;) {}))</td></tr>
-<tr class="memdesc:ae4d7803534ef6c5676260fde65bacd55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes the archetype of the entity associated with the iterator and returns the next valid one.  <a href="classepp_1_1EntityManager.html#ae4d7803534ef6c5676260fde65bacd55">More...</a><br /></td></tr>
-<tr class="separator:ae4d7803534ef6c5676260fde65bacd55"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a19eb669aa9b1047945f1022afa77568f"><td class="memItemLeft" align="right" valign="top">std::pair&lt; EPoolCIter_t, EPoolCIter_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1EntityManager.html#a19eb669aa9b1047945f1022afa77568f">changeArchetype</a> (<a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;oldArchetype, <a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;newArchetype, bool resetOldReserved=true, EntitySpawner::UserCreationFn_t const &amp;fn=([](<a class="el" href="classepp_1_1EntitySpawner_1_1Creator.html">EntityCreator</a> &amp;&amp;) {}))</td></tr>
-<tr class="memdesc:a19eb669aa9b1047945f1022afa77568f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes the archetype of entities of oldArchetype to newArchetype.  <a href="classepp_1_1EntityManager.html#a19eb669aa9b1047945f1022afa77568f">More...</a><br /></td></tr>
-<tr class="separator:a19eb669aa9b1047945f1022afa77568f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1c967e0dfdd36039e965f3d8c4a71642"><td class="memItemLeft" align="right" valign="top"><a id="a1c967e0dfdd36039e965f3d8c4a71642"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>destroy</b> (<a class="el" href="structepp_1_1Entity.html">Entity</a> ent)</td></tr>
+<tr class="memitem:aaa136414c20de11cf4517c82df65d9fb"><td class="memTemplParams" colspan="2">template&lt;typename FnType  = DefCreationFn_t&gt; </td></tr>
+<tr class="memitem:aaa136414c20de11cf4517c82df65d9fb"><td class="memTemplItemLeft" align="right" valign="top">std::enable_if_t&lt; std::is_invocable_v&lt; FnType, <a class="el" href="classepp_1_1EntitySpawner_1_1Creator.html">EntityCreator</a> &amp;&amp; &gt;, <a class="el" href="structepp_1_1Entity.html">Entity</a> &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classepp_1_1EntityManager.html#aaa136414c20de11cf4517c82df65d9fb">spawn</a> (<a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;arch, FnType fn=DefCreationFn)</td></tr>
+<tr class="memdesc:aaa136414c20de11cf4517c82df65d9fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Spawns a new entity with the given archetype.  <a href="classepp_1_1EntityManager.html#aaa136414c20de11cf4517c82df65d9fb">More...</a><br /></td></tr>
+<tr class="separator:aaa136414c20de11cf4517c82df65d9fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52362ca43aadcc02d12a2b83161af304"><td class="memTemplParams" colspan="2">template&lt;typename FnType  = DefCreationFn_t&gt; </td></tr>
+<tr class="memitem:a52362ca43aadcc02d12a2b83161af304"><td class="memTemplItemLeft" align="right" valign="top">std::pair&lt; EPoolCIter_t, EPoolCIter_t &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classepp_1_1EntityManager.html#a52362ca43aadcc02d12a2b83161af304">spawn</a> (<a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;arch, std::size_t n, FnType fn=DefCreationFn)</td></tr>
+<tr class="memdesc:a52362ca43aadcc02d12a2b83161af304"><td class="mdescLeft">&#160;</td><td class="mdescRight">Spawns n new entities with the given archetype.  <a href="classepp_1_1EntityManager.html#a52362ca43aadcc02d12a2b83161af304">More...</a><br /></td></tr>
+<tr class="separator:a52362ca43aadcc02d12a2b83161af304"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70fec1863aedcb3e9bba95a523d3b0c6"><td class="memTemplParams" colspan="2">template&lt;typename FnType  = DefCreationFn_t&gt; </td></tr>
+<tr class="memitem:a70fec1863aedcb3e9bba95a523d3b0c6"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classepp_1_1EntityManager.html#a70fec1863aedcb3e9bba95a523d3b0c6">changeArchetype</a> (<a class="el" href="structepp_1_1Entity.html">Entity</a> ent, <a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;newArchetype, FnType fn=DefCreationFn)</td></tr>
+<tr class="memdesc:a70fec1863aedcb3e9bba95a523d3b0c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes the archetype of the given entity.  <a href="classepp_1_1EntityManager.html#a70fec1863aedcb3e9bba95a523d3b0c6">More...</a><br /></td></tr>
+<tr class="separator:a70fec1863aedcb3e9bba95a523d3b0c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca4d2e50960ce9e4f8dae93c2c1c1f6a"><td class="memTemplParams" colspan="2">template&lt;typename FnType  = DefCreationFn_t&gt; </td></tr>
+<tr class="memitem:aca4d2e50960ce9e4f8dae93c2c1c1f6a"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classepp_1_1EntityManager.html#aca4d2e50960ce9e4f8dae93c2c1c1f6a">changeArchetype</a> (<a class="el" href="structepp_1_1Entity.html">Entity</a> ent, IdList_t toRemove, IdList_t toAdd, FnType fn=DefCreationFn)</td></tr>
+<tr class="memdesc:aca4d2e50960ce9e4f8dae93c2c1c1f6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes the archetype of ent, removing components from toRemove list and adding the ones from toAdd list.  <a href="classepp_1_1EntityManager.html#aca4d2e50960ce9e4f8dae93c2c1c1f6a">More...</a><br /></td></tr>
+<tr class="separator:aca4d2e50960ce9e4f8dae93c2c1c1f6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae051b6037d328c3fb8a0542ee5a128ff"><td class="memTemplParams" colspan="2">template&lt;typename Iter , typename FnType  = DefCreationFn_t&gt; </td></tr>
+<tr class="memitem:ae051b6037d328c3fb8a0542ee5a128ff"><td class="memTemplItemLeft" align="right" valign="top">Iter&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classepp_1_1EntityManager.html#ae051b6037d328c3fb8a0542ee5a128ff">changeArchetype</a> (Iter const &amp;it, <a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;newArchetype, FnType fn=DefCreationFn)</td></tr>
+<tr class="memdesc:ae051b6037d328c3fb8a0542ee5a128ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes the archetype of the entity associated with the iterator and returns the next valid one.  <a href="classepp_1_1EntityManager.html#ae051b6037d328c3fb8a0542ee5a128ff">More...</a><br /></td></tr>
+<tr class="separator:ae051b6037d328c3fb8a0542ee5a128ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c967e0dfdd36039e965f3d8c4a71642"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1EntityManager.html#a1c967e0dfdd36039e965f3d8c4a71642">destroy</a> (<a class="el" href="structepp_1_1Entity.html">Entity</a> ent)</td></tr>
+<tr class="memdesc:a1c967e0dfdd36039e965f3d8c4a71642"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys a valid entity and makes it invalid.  <a href="classepp_1_1EntityManager.html#a1c967e0dfdd36039e965f3d8c4a71642">More...</a><br /></td></tr>
 <tr class="separator:a1c967e0dfdd36039e965f3d8c4a71642"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6e5950facbfc74fa589cbc7d6d5045f9"><td class="memTemplParams" colspan="2"><a id="a6e5950facbfc74fa589cbc7d6d5045f9"></a>
-template&lt;typename Iterator &gt; </td></tr>
-<tr class="memitem:a6e5950facbfc74fa589cbc7d6d5045f9"><td class="memTemplItemLeft" align="right" valign="top">Iterator&#160;</td><td class="memTemplItemRight" valign="bottom"><b>destroy</b> (Iterator it)</td></tr>
-<tr class="separator:a6e5950facbfc74fa589cbc7d6d5045f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac5ade395a1a7561b93ec5886c12932bc"><td class="memItemLeft" align="right" valign="top"><a id="ac5ade395a1a7561b93ec5886c12932bc"></a>
-EPoolCIter_t&#160;</td><td class="memItemRight" valign="bottom"><b>destroy</b> (EPoolCIter_t const &amp;it)</td></tr>
-<tr class="separator:ac5ade395a1a7561b93ec5886c12932bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad28ffa045d1c2adc4c730e6bc1c6c43c"><td class="memItemLeft" align="right" valign="top"><a id="ad28ffa045d1c2adc4c730e6bc1c6c43c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> ()</td></tr>
+<tr class="memitem:a634557d04c86acd8b42184ff21e1c5c7"><td class="memTemplParams" colspan="2">template&lt;typename Iter &gt; </td></tr>
+<tr class="memitem:a634557d04c86acd8b42184ff21e1c5c7"><td class="memTemplItemLeft" align="right" valign="top">Iter&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classepp_1_1EntityManager.html#a634557d04c86acd8b42184ff21e1c5c7">destroy</a> (Iter const &amp;it)</td></tr>
+<tr class="memdesc:a634557d04c86acd8b42184ff21e1c5c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys the entity associated with the iterator and returns the next valid one.  <a href="classepp_1_1EntityManager.html#a634557d04c86acd8b42184ff21e1c5c7">More...</a><br /></td></tr>
+<tr class="separator:a634557d04c86acd8b42184ff21e1c5c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad28ffa045d1c2adc4c730e6bc1c6c43c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1EntityManager.html#ad28ffa045d1c2adc4c730e6bc1c6c43c">clear</a> ()</td></tr>
+<tr class="memdesc:ad28ffa045d1c2adc4c730e6bc1c6c43c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys every entity, keeps resereved memory.  <a href="classepp_1_1EntityManager.html#ad28ffa045d1c2adc4c730e6bc1c6c43c">More...</a><br /></td></tr>
 <tr class="separator:ad28ffa045d1c2adc4c730e6bc1c6c43c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acd18d37f4a71d468ce96af9452f3bd91"><td class="memItemLeft" align="right" valign="top"><a id="acd18d37f4a71d468ce96af9452f3bd91"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> (<a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;arch)</td></tr>
+<tr class="memitem:acd18d37f4a71d468ce96af9452f3bd91"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1EntityManager.html#acd18d37f4a71d468ce96af9452f3bd91">clear</a> (<a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;arch)</td></tr>
+<tr class="memdesc:acd18d37f4a71d468ce96af9452f3bd91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys every entity with the given archetype.  <a href="classepp_1_1EntityManager.html#acd18d37f4a71d468ce96af9452f3bd91">More...</a><br /></td></tr>
 <tr class="separator:acd18d37f4a71d468ce96af9452f3bd91"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a22bcca7da714d912c4a0fa835d5197be"><td class="memItemLeft" align="right" valign="top"><a id="a22bcca7da714d912c4a0fa835d5197be"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>prepareToSpawn</b> (<a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;arch, std::size_t n)</td></tr>
+<tr class="memitem:a22bcca7da714d912c4a0fa835d5197be"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1EntityManager.html#a22bcca7da714d912c4a0fa835d5197be">prepareToSpawn</a> (<a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;arch, std::size_t n)</td></tr>
+<tr class="memdesc:a22bcca7da714d912c4a0fa835d5197be"><td class="mdescLeft">&#160;</td><td class="mdescRight">The next n spawn(arch, ...) calls will not require reallocation in any of the internal structures.  <a href="classepp_1_1EntityManager.html#a22bcca7da714d912c4a0fa835d5197be">More...</a><br /></td></tr>
 <tr class="separator:a22bcca7da714d912c4a0fa835d5197be"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae2305ba9c7e6421d1df6e3403b1e571d"><td class="memTemplParams" colspan="2"><a id="ae2305ba9c7e6421d1df6e3403b1e571d"></a>
-template&lt;typename... CTypes&gt; </td></tr>
-<tr class="memitem:ae2305ba9c7e6421d1df6e3403b1e571d"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>updateCollection</b> (<a class="el" href="classepp_1_1EntityCollection.html">EntityCollection</a>&lt; CTypes... &gt; &amp;collection)</td></tr>
-<tr class="separator:ae2305ba9c7e6421d1df6e3403b1e571d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acbab88f171867e1b3cd0d04e0692e418"><td class="memTemplParams" colspan="2"><a id="acbab88f171867e1b3cd0d04e0692e418"></a>
-template&lt;typename TComp &gt; </td></tr>
-<tr class="memitem:acbab88f171867e1b3cd0d04e0692e418"><td class="memTemplItemLeft" align="right" valign="top">TComp &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>componentOf</b> (<a class="el" href="structepp_1_1Entity.html">Entity</a> ent)</td></tr>
-<tr class="separator:acbab88f171867e1b3cd0d04e0692e418"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab721f5a43adbdf3170b510094b3780c2"><td class="memItemLeft" align="right" valign="top"><a id="ab721f5a43adbdf3170b510094b3780c2"></a>
-<a class="el" href="classepp_1_1CMask.html">CMask</a> const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>maskOf</b> (<a class="el" href="structepp_1_1Entity.html">Entity</a> ent) const</td></tr>
-<tr class="separator:ab721f5a43adbdf3170b510094b3780c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a89a1bb839ae41f16150289c361157024"><td class="memItemLeft" align="right" valign="top"><a id="a89a1bb839ae41f16150289c361157024"></a>
-<a class="el" href="classepp_1_1Archetype.html">Archetype</a>&#160;</td><td class="memItemRight" valign="bottom"><b>archetypeOf</b> (<a class="el" href="structepp_1_1Entity.html">Entity</a> ent) const</td></tr>
+<tr class="memitem:a32026e9847eea0e245de049c542ceb7a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1EntityManager.html#a32026e9847eea0e245de049c542ceb7a">shrinkToFit</a> (<a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;arch)</td></tr>
+<tr class="memdesc:a32026e9847eea0e245de049c542ceb7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes the excess of the reserved memory in the internal structures for the given archetype.  <a href="classepp_1_1EntityManager.html#a32026e9847eea0e245de049c542ceb7a">More...</a><br /></td></tr>
+<tr class="separator:a32026e9847eea0e245de049c542ceb7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abab1ecfe886db174d399739f6b9f5341"><td class="memItemLeft" align="right" valign="top"><a id="abab1ecfe886db174d399739f6b9f5341"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1EntityManager.html#abab1ecfe886db174d399739f6b9f5341">shrinkToFit</a> ()</td></tr>
+<tr class="memdesc:abab1ecfe886db174d399739f6b9f5341"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes the excess of the reserved memory in the internal structures for every used archetype. <br /></td></tr>
+<tr class="separator:abab1ecfe886db174d399739f6b9f5341"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3bae854150aece1c1f3677372febe0fc"><td class="memTemplParams" colspan="2">template&lt;typename... CTypes&gt; </td></tr>
+<tr class="memitem:a3bae854150aece1c1f3677372febe0fc"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classepp_1_1EntityManager.html#a3bae854150aece1c1f3677372febe0fc">updateSelection</a> (<a class="el" href="classepp_1_1Selection.html">Selection</a>&lt; CTypes... &gt; &amp;selection)</td></tr>
+<tr class="memdesc:a3bae854150aece1c1f3677372febe0fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates selection so that its iterators can reach entities of the archetypes that were not present in last update.  <a href="classepp_1_1EntityManager.html#a3bae854150aece1c1f3677372febe0fc">More...</a><br /></td></tr>
+<tr class="separator:a3bae854150aece1c1f3677372febe0fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa69eb832ee3fc2f2149db5d98d8bf4d9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structepp_1_1EntityList_1_1Cell_1_1Occupied.html">EntityList::Cell::Occupied</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1EntityManager.html#aa69eb832ee3fc2f2149db5d98d8bf4d9">cellOf</a> (<a class="el" href="structepp_1_1Entity.html">Entity</a> ent) const</td></tr>
+<tr class="memdesc:aa69eb832ee3fc2f2149db5d98d8bf4d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns an internal data that describes the location of the given entity.  <a href="classepp_1_1EntityManager.html#aa69eb832ee3fc2f2149db5d98d8bf4d9">More...</a><br /></td></tr>
+<tr class="separator:aa69eb832ee3fc2f2149db5d98d8bf4d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7191262c96e0e2c12cb422b5100fee95"><td class="memTemplParams" colspan="2">template&lt;typename TComp &gt; </td></tr>
+<tr class="memitem:a7191262c96e0e2c12cb422b5100fee95"><td class="memTemplItemLeft" align="right" valign="top">TComp &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classepp_1_1EntityManager.html#a7191262c96e0e2c12cb422b5100fee95">componentOf</a> (<a class="el" href="structepp_1_1Entity.html">Entity</a> ent)</td></tr>
+<tr class="memdesc:a7191262c96e0e2c12cb422b5100fee95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a reference to the component of type TComp owned by the given entity.  <a href="classepp_1_1EntityManager.html#a7191262c96e0e2c12cb422b5100fee95">More...</a><br /></td></tr>
+<tr class="separator:a7191262c96e0e2c12cb422b5100fee95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa053c779716e5b5a1083a6aab2f89b2b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classepp_1_1CMask.html">CMask</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1EntityManager.html#aa053c779716e5b5a1083a6aab2f89b2b">maskOf</a> (<a class="el" href="structepp_1_1Entity.html">Entity</a> ent) const</td></tr>
+<tr class="memdesc:aa053c779716e5b5a1083a6aab2f89b2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a mask that describes which of the components are owned by the given entity.  <a href="classepp_1_1EntityManager.html#aa053c779716e5b5a1083a6aab2f89b2b">More...</a><br /></td></tr>
+<tr class="separator:aa053c779716e5b5a1083a6aab2f89b2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89a1bb839ae41f16150289c361157024"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classepp_1_1Archetype.html">Archetype</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1EntityManager.html#a89a1bb839ae41f16150289c361157024">archetypeOf</a> (<a class="el" href="structepp_1_1Entity.html">Entity</a> ent) const</td></tr>
+<tr class="memdesc:a89a1bb839ae41f16150289c361157024"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a mask that describes which of the components are owned by the given entity.  <a href="classepp_1_1EntityManager.html#a89a1bb839ae41f16150289c361157024">More...</a><br /></td></tr>
 <tr class="separator:a89a1bb839ae41f16150289c361157024"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a432612cc916ba56e7b2419af28a106d9"><td class="memItemLeft" align="right" valign="top"><a id="a432612cc916ba56e7b2419af28a106d9"></a>
-<a class="el" href="structepp_1_1Pool.html">EntityPool_t</a> const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>entitiesOf</b> (<a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;arch) const</td></tr>
-<tr class="separator:a432612cc916ba56e7b2419af28a106d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae920a08435a9c74c9d81dd6c5ce7ac83"><td class="memItemLeft" align="right" valign="top"><a id="ae920a08435a9c74c9d81dd6c5ce7ac83"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>isValid</b> (<a class="el" href="structepp_1_1Entity.html">Entity</a> ent) const</td></tr>
+<tr class="memitem:a9d2909ef76779afa99e6be3ca41e7f31"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structepp_1_1Pool.html">EntityPool_t</a> const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1EntityManager.html#a9d2909ef76779afa99e6be3ca41e7f31">entitiesOf</a> (<a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;arch) const</td></tr>
+<tr class="memdesc:a9d2909ef76779afa99e6be3ca41e7f31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns an internal pool used by the spawner of entities with the given archetype.  <a href="classepp_1_1EntityManager.html#a9d2909ef76779afa99e6be3ca41e7f31">More...</a><br /></td></tr>
+<tr class="separator:a9d2909ef76779afa99e6be3ca41e7f31"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae920a08435a9c74c9d81dd6c5ce7ac83"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1EntityManager.html#ae920a08435a9c74c9d81dd6c5ce7ac83">isValid</a> (<a class="el" href="structepp_1_1Entity.html">Entity</a> ent) const</td></tr>
+<tr class="memdesc:ae920a08435a9c74c9d81dd6c5ce7ac83"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether the given entity is valid or not.  <a href="classepp_1_1EntityManager.html#ae920a08435a9c74c9d81dd6c5ce7ac83">More...</a><br /></td></tr>
 <tr class="separator:ae920a08435a9c74c9d81dd6c5ce7ac83"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a585b02a93e9e8e7023c41b8f207d637b"><td class="memItemLeft" align="right" valign="top"><a id="a585b02a93e9e8e7023c41b8f207d637b"></a>
-std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>size</b> () const</td></tr>
+<tr class="memitem:a585b02a93e9e8e7023c41b8f207d637b"><td class="memItemLeft" align="right" valign="top">std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1EntityManager.html#a585b02a93e9e8e7023c41b8f207d637b">size</a> () const</td></tr>
+<tr class="memdesc:a585b02a93e9e8e7023c41b8f207d637b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of alive entities.  <a href="classepp_1_1EntityManager.html#a585b02a93e9e8e7023c41b8f207d637b">More...</a><br /></td></tr>
 <tr class="separator:a585b02a93e9e8e7023c41b8f207d637b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2ad8d3dc26823d236320d7fe0097467d"><td class="memItemLeft" align="right" valign="top"><a id="a2ad8d3dc26823d236320d7fe0097467d"></a>
-std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>size</b> (<a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;arch) const</td></tr>
+<tr class="memitem:a2ad8d3dc26823d236320d7fe0097467d"><td class="memItemLeft" align="right" valign="top">std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1EntityManager.html#a2ad8d3dc26823d236320d7fe0097467d">size</a> (<a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;arch) const</td></tr>
+<tr class="memdesc:a2ad8d3dc26823d236320d7fe0097467d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of alive entities with the given archetype.  <a href="classepp_1_1EntityManager.html#a2ad8d3dc26823d236320d7fe0097467d">More...</a><br /></td></tr>
 <tr class="separator:a2ad8d3dc26823d236320d7fe0097467d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-types"></a>
@@ -155,33 +161,39 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>Spawners_t</b> = std
 <tr class="memitem:adb21a688409fa17a14b08eeaec253615"><td class="memItemLeft" align="right" valign="top"><a id="adb21a688409fa17a14b08eeaec253615"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>EntityPool_t</b> = <a class="el" href="structepp_1_1Pool.html">EntitySpawner::EntityPool_t</a></td></tr>
 <tr class="separator:adb21a688409fa17a14b08eeaec253615"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e97f63a17d0b21827f1282fccda01d1"><td class="memItemLeft" align="right" valign="top"><a id="a8e97f63a17d0b21827f1282fccda01d1"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>EPoolIter_t</b> = EntitySpawner::EntityPool_t::Container_t::iterator</td></tr>
+<tr class="separator:a8e97f63a17d0b21827f1282fccda01d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a906e0948c83df7b95c1a3f6a10bd2d86"><td class="memItemLeft" align="right" valign="top"><a id="a906e0948c83df7b95c1a3f6a10bd2d86"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>EPoolCIter_t</b> = EntitySpawner::EntityPool_t::Container_t::const_iterator</td></tr>
 <tr class="separator:a906e0948c83df7b95c1a3f6a10bd2d86"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad1d44f96e0e7b25e2b986268c77d239d"><td class="memItemLeft" align="right" valign="top"><a id="ad1d44f96e0e7b25e2b986268c77d239d"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>IdList_t</b> = decltype(IdOfL&lt;&gt;())</td></tr>
 <tr class="separator:ad1d44f96e0e7b25e2b986268c77d239d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c2610705dc7f95f329783b66c010551"><td class="memItemLeft" align="right" valign="top"><a id="a0c2610705dc7f95f329783b66c010551"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>DefCreationFn_t</b> = decltype(DefCreationFn)</td></tr>
+<tr class="separator:a0c2610705dc7f95f329783b66c010551"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
-<tr class="memitem:a0bd1cadee4d955996b54cac47e2b7f6c"><td class="memItemLeft" align="right" valign="top"><a id="a0bd1cadee4d955996b54cac47e2b7f6c"></a>
+<tr class="memitem:a22e7a003d1a3fa5a43a39a9ce6103ac7"><td class="memItemLeft" align="right" valign="top"><a id="a22e7a003d1a3fa5a43a39a9ce6103ac7"></a>
 <a class="el" href="classepp_1_1EntitySpawner.html">EntitySpawner</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>_prepareToSpawn</b> (<a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;arch, std::size_t n)</td></tr>
-<tr class="separator:a0bd1cadee4d955996b54cac47e2b7f6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af8a882602c183ee85090317a14ec7257"><td class="memItemLeft" align="right" valign="top"><a id="af8a882602c183ee85090317a14ec7257"></a>
+<tr class="separator:a22e7a003d1a3fa5a43a39a9ce6103ac7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8508fee8e1eee014da205a4f70a3fe9"><td class="memItemLeft" align="right" valign="top"><a id="ab8508fee8e1eee014da205a4f70a3fe9"></a>
 <a class="el" href="classepp_1_1EntitySpawner.html">EntitySpawner</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getSpawner</b> (<a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;arch)</td></tr>
-<tr class="separator:af8a882602c183ee85090317a14ec7257"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:ab8508fee8e1eee014da205a4f70a3fe9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a86f037aa34f333d964666255e8116a7c"><td class="memItemLeft" align="right" valign="top"><a id="a86f037aa34f333d964666255e8116a7c"></a>
 <a class="el" href="classepp_1_1EntitySpawner.html">EntitySpawner</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getSpawner</b> (<a class="el" href="structepp_1_1Entity.html">Entity</a> ent)</td></tr>
 <tr class="separator:a86f037aa34f333d964666255e8116a7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abe4508619ee16c47304325abbad1c114"><td class="memItemLeft" align="right" valign="top"><a id="abe4508619ee16c47304325abbad1c114"></a>
 <a class="el" href="classepp_1_1EntitySpawner.html">EntitySpawner</a> const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getSpawner</b> (<a class="el" href="structepp_1_1Entity.html">Entity</a> ent) const</td></tr>
 <tr class="separator:abe4508619ee16c47304325abbad1c114"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6c64d31ccf090406b660b394b83aa3f2"><td class="memItemLeft" align="right" valign="top"><a id="a6c64d31ccf090406b660b394b83aa3f2"></a>
+<tr class="memitem:abb20d4b2c2ce727f9420310d63f62a40"><td class="memItemLeft" align="right" valign="top"><a id="abb20d4b2c2ce727f9420310d63f62a40"></a>
 Spawners_t::iterator&#160;</td><td class="memItemRight" valign="bottom"><b>findSpawner</b> (<a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;arch)</td></tr>
-<tr class="separator:a6c64d31ccf090406b660b394b83aa3f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ada4c26c73659bb7ed505fbfc1b0f7732"><td class="memItemLeft" align="right" valign="top"><a id="ada4c26c73659bb7ed505fbfc1b0f7732"></a>
+<tr class="separator:abb20d4b2c2ce727f9420310d63f62a40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a216f860222784980b2700ee39c9a4db3"><td class="memItemLeft" align="right" valign="top"><a id="a216f860222784980b2700ee39c9a4db3"></a>
 Spawners_t::const_iterator&#160;</td><td class="memItemRight" valign="bottom"><b>findSpawner</b> (<a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;arch) const</td></tr>
-<tr class="separator:ada4c26c73659bb7ed505fbfc1b0f7732"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a216f860222784980b2700ee39c9a4db3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -191,19 +203,112 @@ Spawners_t&#160;</td><td class="memItemRight" valign="bottom"><b>spawners</b></t
 <tr class="memitem:aed0b1bee18f1d193af3b9fd1294b113b"><td class="memItemLeft" align="right" valign="top"><a id="aed0b1bee18f1d193af3b9fd1294b113b"></a>
 <a class="el" href="classepp_1_1EntityList.html">EntityList</a>&#160;</td><td class="memItemRight" valign="bottom"><b>entList</b></td></tr>
 <tr class="separator:aed0b1bee18f1d193af3b9fd1294b113b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
+Static Private Attributes</h2></td></tr>
+<tr class="memitem:ab6f76889fd6e17a097f08675516c4249"><td class="memItemLeft" align="right" valign="top"><a id="ab6f76889fd6e17a097f08675516c4249"></a>
+static auto&#160;</td><td class="memItemRight" valign="bottom"><b>DefCreationFn</b> = [](<a class="el" href="classepp_1_1EntitySpawner_1_1Creator.html">EntityCreator</a>&amp;&amp;) {}</td></tr>
+<tr class="separator:ab6f76889fd6e17a097f08675516c4249"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a19eb669aa9b1047945f1022afa77568f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a19eb669aa9b1047945f1022afa77568f">&#9670;&nbsp;</a></span>changeArchetype() <span class="overload">[1/4]</span></h2>
+<a id="a89a1bb839ae41f16150289c361157024"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89a1bb839ae41f16150289c361157024">&#9670;&nbsp;</a></span>archetypeOf()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::pair&lt;EPoolCIter_t, EPoolCIter_t&gt; epp::EntityManager::changeArchetype </td>
+          <td class="memname"><a class="el" href="classepp_1_1Archetype.html">Archetype</a> epp::EntityManager::archetypeOf </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;&#160;</td>
-          <td class="paramname"><em>oldArchetype</em>, </td>
+          <td class="paramtype"><a class="el" href="structepp_1_1Entity.html">Entity</a>&#160;</td>
+          <td class="paramname"><em>ent</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns a mask that describes which of the components are owned by the given entity. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ent</td><td>A valid entity </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The archetype of ent </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">(Debug</td><td>only) Throws the AssertionFailed exception if ent is invalid </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aa69eb832ee3fc2f2149db5d98d8bf4d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa69eb832ee3fc2f2149db5d98d8bf4d9">&#9670;&nbsp;</a></span>cellOf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structepp_1_1EntityList_1_1Cell_1_1Occupied.html">EntityList::Cell::Occupied</a> epp::EntityManager::cellOf </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structepp_1_1Entity.html">Entity</a>&#160;</td>
+          <td class="paramname"><em>ent</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns an internal data that describes the location of the given entity. </p>
+<p>This data can be used with selections' iterators </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ent</td><td>Valid entity </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Default-constructed cell for invalid </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">(Debug</td><td>only) Throws the AssertionFailed exception if ent is invalid </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a70fec1863aedcb3e9bba95a523d3b0c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70fec1863aedcb3e9bba95a523d3b0c6">&#9670;&nbsp;</a></span>changeArchetype() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename FnType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool epp::EntityManager::changeArchetype </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structepp_1_1Entity.html">Entity</a>&#160;</td>
+          <td class="paramname"><em>ent</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -214,14 +319,8 @@ Spawners_t&#160;</td><td class="memItemRight" valign="bottom"><b>spawners</b></t
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>resetOldReserved</em> = <code>true</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">EntitySpawner::UserCreationFn_t const &amp;&#160;</td>
-          <td class="paramname"><em>fn</em> = <code>([](<a class="el" href="classepp_1_1EntitySpawner_1_1Creator.html">EntityCreator</a>&#160;&amp;&amp;)&#160;{})</code>&#160;</td>
+          <td class="paramtype">FnType&#160;</td>
+          <td class="paramname"><em>fn</em> = <code>DefCreationFn</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -229,32 +328,48 @@ Spawners_t&#160;</td><td class="memItemRight" valign="bottom"><b>spawners</b></t
           <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>Changes the archetype of entities of oldArchetype to newArchetype. </p>
+<p>Changes the archetype of the given entity. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">oldArchetype</td><td>One of archetypes that were used to spawn entities during this application (throws for other archetypes) </td></tr>
-    <tr><td class="paramname">newArchetype</td><td>Any archetype </td></tr>
-    <tr><td class="paramname">fn</td><td>A callable object that can use the Creator instance to construct the added components </td></tr>
-    <tr><td class="paramname">resetOldReserved</td><td>Specifies whether memory reserved in the spawner of oldArchetype will be reset (only if that spawner is not empty) </td></tr>
+    <tr><td class="paramname">ent</td><td>A valid entity </td></tr>
+    <tr><td class="paramname">newArchetype</td><td>Any archetype. A new archetype of ent </td></tr>
+    <tr><td class="paramname">fn</td><td>A callable object that can use the Creator instance to construct new components </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>True when changed the archetype, false otherwise (newArchetype was the same as ent's current archetype) </dd></dl>
 
 </div>
 </div>
-<a id="a5a71c8030b6d2f8cdc64ea16565fa2a1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5a71c8030b6d2f8cdc64ea16565fa2a1">&#9670;&nbsp;</a></span>changeArchetype() <span class="overload">[2/4]</span></h2>
+<a id="aca4d2e50960ce9e4f8dae93c2c1c1f6a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca4d2e50960ce9e4f8dae93c2c1c1f6a">&#9670;&nbsp;</a></span>changeArchetype() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename FnType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void epp::EntityManager::changeArchetype </td>
+          <td class="memname">bool epp::EntityManager::changeArchetype </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structepp_1_1Entity.html">Entity</a>&#160;</td>
           <td class="paramname"><em>ent</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">IdList_t&#160;</td>
+          <td class="paramname"><em>toRemove</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -265,14 +380,8 @@ Spawners_t&#160;</td><td class="memItemRight" valign="bottom"><b>spawners</b></t
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">IdList_t&#160;</td>
-          <td class="paramname"><em>toRemove</em> = <code>IdOfL&lt;&gt;()</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">EntitySpawner::UserCreationFn_t const &amp;&#160;</td>
-          <td class="paramname"><em>fn</em> = <code>([](<a class="el" href="classepp_1_1EntitySpawner_1_1Creator.html">EntityCreator</a>&#160;&amp;&amp;)&#160;{})</code>&#160;</td>
+          <td class="paramtype">FnType&#160;</td>
+          <td class="paramname"><em>fn</em> = <code>DefCreationFn</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -280,10 +389,15 @@ Spawners_t&#160;</td><td class="memItemRight" valign="bottom"><b>spawners</b></t
           <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Changes the archetype of ent, removing components from toRemove list and adding the ones from toAdd list. </p>
-<p>There are no overloaded versions of this function (for iterators) on purpose - it is more optimal to create a separate archetype for those situations </p><dl class="params"><dt>Parameters</dt><dd>
+<p>There are intentionally no overloaded versions of this function (for iterators) - it is more optimal to create a separate archetype for those situations </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ent</td><td>A valid entity </td></tr>
     <tr><td class="paramname">toAdd</td><td>Components that will be added to ent (or kept it these are already there). toAdd has a priority over toRemove </td></tr>
@@ -292,22 +406,25 @@ Spawners_t&#160;</td><td class="memItemRight" valign="bottom"><b>spawners</b></t
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>True when changed the archetype, false otherwise (resulting archetype was the same as ent's current archetype) </dd></dl>
 
 </div>
 </div>
-<a id="ae4d7803534ef6c5676260fde65bacd55"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae4d7803534ef6c5676260fde65bacd55">&#9670;&nbsp;</a></span>changeArchetype() <span class="overload">[3/4]</span></h2>
+<a id="ae051b6037d328c3fb8a0542ee5a128ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae051b6037d328c3fb8a0542ee5a128ff">&#9670;&nbsp;</a></span>changeArchetype() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iter , typename FnType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">EPoolCIter_t epp::EntityManager::changeArchetype </td>
+          <td class="memname">Iter epp::EntityManager::changeArchetype </td>
           <td>(</td>
-          <td class="paramtype">EPoolCIter_t const &amp;&#160;</td>
+          <td class="paramtype">Iter const &amp;&#160;</td>
           <td class="paramname"><em>it</em>, </td>
         </tr>
         <tr>
@@ -319,8 +436,8 @@ Spawners_t&#160;</td><td class="memItemRight" valign="bottom"><b>spawners</b></t
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">EntitySpawner::UserCreationFn_t const &amp;&#160;</td>
-          <td class="paramname"><em>fn</em> = <code>([](<a class="el" href="classepp_1_1EntitySpawner_1_1Creator.html">EntityCreator</a>&amp;&amp;)&#160;{})</code>&#160;</td>
+          <td class="paramtype">FnType&#160;</td>
+          <td class="paramname"><em>fn</em> = <code>DefCreationFn</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -345,37 +462,336 @@ Spawners_t&#160;</td><td class="memItemRight" valign="bottom"><b>spawners</b></t
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>A valid iterator to the next entity or end </dd></dl>
 
 </div>
 </div>
-<a id="a3293cd21b4b75a047991b619f21c1af5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3293cd21b4b75a047991b619f21c1af5">&#9670;&nbsp;</a></span>changeArchetype() <span class="overload">[4/4]</span></h2>
+<a id="ad28ffa045d1c2adc4c730e6bc1c6c43c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad28ffa045d1c2adc4c730e6bc1c6c43c">&#9670;&nbsp;</a></span>clear() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename Iterator &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">Iterator epp::EntityManager::changeArchetype </td>
+          <td class="memname">void epp::EntityManager::clear </td>
           <td>(</td>
-          <td class="paramtype">Iterator&#160;</td>
-          <td class="paramname"><em>it</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destroys every entity, keeps resereved memory. </p>
+<p>Faster than calling destroy on each entity individually </p>
+
+</div>
+</div>
+<a id="acd18d37f4a71d468ce96af9452f3bd91"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd18d37f4a71d468ce96af9452f3bd91">&#9670;&nbsp;</a></span>clear() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void epp::EntityManager::clear </td>
+          <td>(</td>
           <td class="paramtype"><a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;&#160;</td>
-          <td class="paramname"><em>newArchetype</em>, </td>
+          <td class="paramname"><em>arch</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destroys every entity with the given archetype. </p>
+<p>Faster than calling destroy on each entity individually </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">arch</td><td>Any archetype </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a7191262c96e0e2c12cb422b5100fee95"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7191262c96e0e2c12cb422b5100fee95">&#9670;&nbsp;</a></span>componentOf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TComp &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">TComp &amp; epp::EntityManager::componentOf </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structepp_1_1Entity.html">Entity</a>&#160;</td>
+          <td class="paramname"><em>ent</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns a reference to the component of type TComp owned by the given entity. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">TComp</td><td>A type of the component </td></tr>
+    <tr><td class="paramname">ent</td><td>A valid entity that owns the component (to be sure that an entity owns a component, use maskOf(ent).get(Component::Id().value)) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A reference to the component associated with ent </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">(Debug</td><td>only) Throws the AssertionFailed exception if ent is invalid </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a1c967e0dfdd36039e965f3d8c4a71642"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c967e0dfdd36039e965f3d8c4a71642">&#9670;&nbsp;</a></span>destroy() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void epp::EntityManager::destroy </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structepp_1_1Entity.html">Entity</a>&#160;</td>
+          <td class="paramname"><em>ent</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destroys a valid entity and makes it invalid. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ent</td><td>A valid entity </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">(Debug</td><td>only) Throws the AssertionFailed exception if ent is invalid </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a634557d04c86acd8b42184ff21e1c5c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a634557d04c86acd8b42184ff21e1c5c7">&#9670;&nbsp;</a></span>destroy() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iter &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Iter epp::EntityManager::destroy </td>
+          <td>(</td>
+          <td class="paramtype">Iter const &amp;&#160;</td>
+          <td class="paramname"><em>it</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destroys the entity associated with the iterator and returns the next valid one. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">it</td><td>A valid and non-end iterator </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A valid iterator to the next entity or end </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">(Debug</td><td>only) Throws the AssertionFailed exception if "it" is invalid </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a9d2909ef76779afa99e6be3ca41e7f31"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d2909ef76779afa99e6be3ca41e7f31">&#9670;&nbsp;</a></span>entitiesOf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structepp_1_1Pool.html">EntityManager::EntityPool_t</a> const  &amp; epp::EntityManager::entitiesOf </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;&#160;</td>
+          <td class="paramname"><em>arch</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns an internal pool used by the spawner of entities with the given archetype. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">arch</td><td>One of archetypes that were already used to spawn entities during this application </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="structepp_1_1Pool.html">Pool</a> of entities with the arch archetype </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">(Debug</td><td>only) Throws the AssertionFailed exception if arch was never used before in this <a class="el" href="classepp_1_1EntityManager.html">EntityManager</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ae920a08435a9c74c9d81dd6c5ce7ac83"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae920a08435a9c74c9d81dd6c5ce7ac83">&#9670;&nbsp;</a></span>isValid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool epp::EntityManager::isValid </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structepp_1_1Entity.html">Entity</a>&#160;</td>
+          <td class="paramname"><em>ent</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks whether the given entity is valid or not. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ent</td><td>Any entity </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True for valid entity, false for invalid one </dd></dl>
+
+</div>
+</div>
+<a id="aa053c779716e5b5a1083a6aab2f89b2b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa053c779716e5b5a1083a6aab2f89b2b">&#9670;&nbsp;</a></span>maskOf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classepp_1_1CMask.html">CMask</a> epp::EntityManager::maskOf </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structepp_1_1Entity.html">Entity</a>&#160;</td>
+          <td class="paramname"><em>ent</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns a mask that describes which of the components are owned by the given entity. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ent</td><td>A valid entity </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The <a class="el" href="classepp_1_1CMask.html" title="A Bitset wrapper.">CMask</a> of the spawner that ent is currently in </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">(Debug</td><td>only) Throws the AssertionFailed exception if ent is invalid </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a22bcca7da714d912c4a0fa835d5197be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22bcca7da714d912c4a0fa835d5197be">&#9670;&nbsp;</a></span>prepareToSpawn()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void epp::EntityManager::prepareToSpawn </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;&#160;</td>
+          <td class="paramname"><em>arch</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">EntitySpawner::UserCreationFn_t const &amp;&#160;</td>
-          <td class="paramname"><em>fn</em> = <code>([](<a class="el" href="classepp_1_1EntitySpawner_1_1Creator.html">EntityCreator</a>&amp;&amp;)&#160;{})</code>&#160;</td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>n</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -390,13 +806,246 @@ template&lt;typename Iterator &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Changes the archetype of the entity associated with the iterator and returns the next valid one. </p>
-<p>There are no overloaded versions of this function (for iterators) on purpose - it is more optimal to create a separate archetype for those situations </p><dl class="params"><dt>Parameters</dt><dd>
+<p>The next n spawn(arch, ...) calls will not require reallocation in any of the internal structures. </p>
+<p>This function can be used to "register" an archetype </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">it</td><td>A valid and non-end iterator </td></tr>
-    <tr><td class="paramname">newArchetype</td><td>Any archetype - a new archetype of the entity associated with the iterator <br  />
- </td></tr>
-    <tr><td class="paramname">fn</td><td>A callable object that can use the Creator instance to construct the added components </td></tr>
+    <tr><td class="paramname">arch</td><td>Any archetype </td></tr>
+    <tr><td class="paramname">n</td><td>Number of entities to reserve the additional memory for </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a32026e9847eea0e245de049c542ceb7a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32026e9847eea0e245de049c542ceb7a">&#9670;&nbsp;</a></span>shrinkToFit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void epp::EntityManager::shrinkToFit </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;&#160;</td>
+          <td class="paramname"><em>arch</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Removes the excess of the reserved memory in the internal structures for the given archetype. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">arch</td><td>Any archetype </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a585b02a93e9e8e7023c41b8f207d637b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a585b02a93e9e8e7023c41b8f207d637b">&#9670;&nbsp;</a></span>size() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::size_t epp::EntityManager::size </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the number of alive entities. </p>
+<dl class="section return"><dt>Returns</dt><dd>The number of alive entities </dd></dl>
+
+</div>
+</div>
+<a id="a2ad8d3dc26823d236320d7fe0097467d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ad8d3dc26823d236320d7fe0097467d">&#9670;&nbsp;</a></span>size() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::size_t epp::EntityManager::size </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;&#160;</td>
+          <td class="paramname"><em>arch</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the number of alive entities with the given archetype. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">arch</td><td>Any archetype </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The number of alive entities with the given archetype </dd></dl>
+
+</div>
+</div>
+<a id="aaa136414c20de11cf4517c82df65d9fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa136414c20de11cf4517c82df65d9fb">&#9670;&nbsp;</a></span>spawn() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename FnType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::enable_if_t&lt; std::is_invocable_v&lt; FnType, <a class="el" href="classepp_1_1EntitySpawner_1_1Creator.html">EntityCreator</a> &amp;&amp; &gt;, <a class="el" href="structepp_1_1Entity.html">Entity</a> &gt; epp::EntityManager::spawn </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;&#160;</td>
+          <td class="paramname"><em>arch</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">FnType&#160;</td>
+          <td class="paramname"><em>fn</em> = <code>DefCreationFn</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Spawns a new entity with the given archetype. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">arch</td><td>Any archetype. The archetype of the spawned entity </td></tr>
+    <tr><td class="paramname">fn</td><td>A callable object that can use the Creator instance to construct the components of the spawned entity </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>An entity </dd></dl>
+
+</div>
+</div>
+<a id="a52362ca43aadcc02d12a2b83161af304"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52362ca43aadcc02d12a2b83161af304">&#9670;&nbsp;</a></span>spawn() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename FnType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::pair&lt; EntityManager::EPoolCIter_t, EntityManager::EPoolCIter_t &gt; epp::EntityManager::spawn </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;&#160;</td>
+          <td class="paramname"><em>arch</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">FnType&#160;</td>
+          <td class="paramname"><em>fn</em> = <code>DefCreationFn</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Spawns n new entities with the given archetype. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">arch</td><td>Any archetype. The archetype of spawned entities </td></tr>
+    <tr><td class="paramname">fn</td><td>A callable object that can use the Creator instance to construct the components of the spawned entities </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A (begin, end) iterators pair to the spawned entities </dd></dl>
+
+</div>
+</div>
+<a id="a3bae854150aece1c1f3677372febe0fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3bae854150aece1c1f3677372febe0fc">&#9670;&nbsp;</a></span>updateSelection()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... CTypes&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void epp::EntityManager::updateSelection </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classepp_1_1Selection.html">Selection</a>&lt; CTypes... &gt; &amp;&#160;</td>
+          <td class="paramname"><em>selection</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Updates selection so that its iterators can reach entities of the archetypes that were not present in last update. </p>
+<p>It is a O(n) operation, where n is a number of new unique (for that selection) archetypes used. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">selection</td><td>Any <a class="el" href="classepp_1_1Selection.html">Selection</a> to be updated </td></tr>
   </table>
   </dd>
 </dl>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ECSpp: include/ECSpp/Internal/Archetype.h Source File</title>
+<title>ECSpp: include/ECSpp/internal/Archetype.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,7 +62,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_29c3ea05a964de139daa9bae0d0920cb.html">ECSpp</a></li><li class="navelem"><a class="el" href="dir_bebb87c101dc5a0e822d1a09f9879cdf.html">Internal</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_29c3ea05a964de139daa9bae0d0920cb.html">ECSpp</a></li><li class="navelem"><a class="el" href="dir_a8ab0a98fb5f94ce0ef96e796e084518.html">internal</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -70,89 +70,151 @@ $(function() {
 <div class="title">Archetype.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef ARCHETYPE_H</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define ARCHETYPE_H</span></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef EPP_ARCHETYPE_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define EPP_ARCHETYPE_H</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;ECSpp/Internal/CFilter.h&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;algorithm&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">namespace </span>epp {</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;ECSpp/external/llvm/SmallVector.h&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;ECSpp/internal/CMask.h&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">namespace </span>epp {</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
 <div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="classepp_1_1Archetype.html">   10</a></span>&#160;<span class="keyword">class </span><a class="code" href="classepp_1_1Archetype.html">Archetype</a> {</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="keyword">using</span> IdList_t = decltype(IdOfL&lt;&gt;());</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="keyword">using</span> CId_t = IdList_t::value_type;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="keyword">using</span> CId_t = IdList_t::value_type;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="keyword">using</span> <a class="code" href="classepp_1_1llvm_1_1SmallVector.html">IdVec_t</a> = <a class="code" href="classepp_1_1llvm_1_1SmallVector.html">llvm::SmallVector&lt;CId_t, 8&gt;</a>;</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keyword">using</span> IdVec_t = std::vector&lt;CId_t&gt;;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <a class="code" href="classepp_1_1Archetype.html">Archetype</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <a class="code" href="classepp_1_1Archetype.html#a991ba87024683a84a52f9b60a0ebe815">Archetype</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classepp_1_1Archetype.html">Archetype</a>(IdList_t initList) { addComponent(initList); }</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span>... CTypes&gt;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <a class="code" href="classepp_1_1Archetype.html">Archetype</a>&amp; addComponent() { <span class="keywordflow">return</span> addComponent(IdOfL&lt;CTypes...&gt;()); }</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="classepp_1_1Archetype.html">Archetype</a>&amp; addComponent(IdList_t ids)</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    {</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span> <span class="keywordtype">id</span> : ids)</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            addComponent(<span class="keywordtype">id</span>);</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    }</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="classepp_1_1Archetype.html">Archetype</a>&amp; addComponent(CId_t <span class="keywordtype">id</span>)</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    {</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <span class="keywordflow">if</span> (!cMask.get(<span class="keywordtype">id</span>)) {</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            cMask.set(<span class="keywordtype">id</span>);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            cIds.push_back(<span class="keywordtype">id</span>);</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        }</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    }</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span>... CTypes&gt;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <a class="code" href="classepp_1_1Archetype.html">Archetype</a>&amp; removeComponent() { <span class="keywordflow">return</span> removeComponent(IdOfL&lt;CTypes...&gt;()); }</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <a class="code" href="classepp_1_1Archetype.html">Archetype</a>&amp; removeComponent(IdList_t ids)</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    {</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span> <span class="keywordtype">id</span> : ids)</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            removeComponent(<span class="keywordtype">id</span>);</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    }</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classepp_1_1Archetype.html#a991ba87024683a84a52f9b60a0ebe815">Archetype</a>(IdList_t initList);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span>... CTypes&gt;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <a class="code" href="classepp_1_1Archetype.html">Archetype</a>&amp; <a class="code" href="classepp_1_1Archetype.html#a16f3af25238d1e3b6bbef2fb70e78e81">addComponent</a>();</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <a class="code" href="classepp_1_1Archetype.html">Archetype</a>&amp; <a class="code" href="classepp_1_1Archetype.html#a16f3af25238d1e3b6bbef2fb70e78e81">addComponent</a>(IdList_t ids);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <a class="code" href="classepp_1_1Archetype.html">Archetype</a>&amp; <a class="code" href="classepp_1_1Archetype.html#a16f3af25238d1e3b6bbef2fb70e78e81">addComponent</a>(CId_t <span class="keywordtype">id</span>);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <a class="code" href="classepp_1_1Archetype.html">Archetype</a>&amp; removeComponent(CId_t <span class="keywordtype">id</span>)</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    {</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="keywordflow">if</span> (has(<span class="keywordtype">id</span>)) {</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            cMask.unset(<span class="keywordtype">id</span>);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            cIds.erase(std::find_if(cIds.begin(), cIds.end(), [<span class="keywordtype">id</span>](<span class="keyword">auto</span> <span class="keyword">const</span>&amp; cId) { return cId == id; }));</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        }</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    }</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span>... CTypes&gt;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <a class="code" href="classepp_1_1Archetype.html">Archetype</a>&amp; <a class="code" href="classepp_1_1Archetype.html#a2f8ca84c53e39859a8de2ddaa5d25f2c">removeComponent</a>();</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordtype">bool</span> hasAllOf(IdList_t ids)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> cMask.contains(ids); }</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordtype">bool</span> hasAnyOf(IdList_t ids)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> cMask.hasCommon(ids); }</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordtype">bool</span> has(CId_t <span class="keywordtype">id</span>)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> cMask.get(<span class="keywordtype">id</span>); }</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <a class="code" href="classepp_1_1Archetype.html">Archetype</a>&amp; <a class="code" href="classepp_1_1Archetype.html#a2f8ca84c53e39859a8de2ddaa5d25f2c">removeComponent</a>(IdList_t ids);</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    IdVec_t <span class="keyword">const</span>&amp; getCIds()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> cIds; }</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <a class="code" href="classepp_1_1CMask.html">CMask</a> <span class="keyword">const</span>&amp; getMask()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> cMask; }</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <a class="code" href="classepp_1_1CMask.html">CMask</a> cMask;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    IdVec_t cIds;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;};</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;} <span class="comment">// namespace epp</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="preprocessor">#endif // ARCHETYPE_H</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <a class="code" href="classepp_1_1Archetype.html">Archetype</a>&amp; <a class="code" href="classepp_1_1Archetype.html#a2f8ca84c53e39859a8de2ddaa5d25f2c">removeComponent</a>(CId_t <span class="keywordtype">id</span>);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classepp_1_1Archetype.html#a1cb6085a860a591224273327c2d71f5a">hasAllOf</a>(IdList_t ids) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classepp_1_1Archetype.html#adaa5883e0e380eaccfce49e155bb0400">hasAnyOf</a>(IdList_t ids) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classepp_1_1Archetype.html#a2a95a2ae80db64d9307e09ab5bbf14c3">has</a>(CId_t <span class="keywordtype">id</span>) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <a class="code" href="classepp_1_1CMask.html">CMask</a> <span class="keyword">const</span>&amp; <a class="code" href="classepp_1_1Archetype.html#a72d2a6d9bf1cce6fcd87ead6d5bd662a">getMask</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <a class="code" href="classepp_1_1llvm_1_1SmallVector.html">IdVec_t</a> <span class="keyword">const</span>&amp; <a class="code" href="classepp_1_1Archetype.html#a9b002729addc769deee0d2977d8cfb49">getCIds</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <a class="code" href="classepp_1_1CMask.html">CMask</a> cMask;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <a class="code" href="classepp_1_1llvm_1_1SmallVector.html">IdVec_t</a> cIds;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;};</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
+<div class="line"><a name="l00123"></a><span class="lineno"><a class="line" href="classepp_1_1Archetype.html#a70e734ba88b9aec14640e7de6e58ac0f">  123</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="classepp_1_1Archetype.html#a991ba87024683a84a52f9b60a0ebe815">Archetype::Archetype</a>(IdList_t initList) { <a class="code" href="classepp_1_1Archetype.html#a16f3af25238d1e3b6bbef2fb70e78e81">addComponent</a>(initList); }</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span>... CTypes&gt;</div>
+<div class="line"><a name="l00126"></a><span class="lineno"><a class="line" href="classepp_1_1Archetype.html#a16f3af25238d1e3b6bbef2fb70e78e81">  126</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="classepp_1_1Archetype.html">Archetype</a>&amp; <a class="code" href="classepp_1_1Archetype.html#a16f3af25238d1e3b6bbef2fb70e78e81">Archetype::addComponent</a>() { <span class="keywordflow">return</span> <a class="code" href="classepp_1_1Archetype.html#a16f3af25238d1e3b6bbef2fb70e78e81">addComponent</a>(IdOfL&lt;CTypes...&gt;()); }</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
+<div class="line"><a name="l00128"></a><span class="lineno"><a class="line" href="classepp_1_1Archetype.html#a56ec52b73f77565d1f368b2788c515be">  128</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="classepp_1_1Archetype.html">Archetype</a>&amp; <a class="code" href="classepp_1_1Archetype.html#a16f3af25238d1e3b6bbef2fb70e78e81">Archetype::addComponent</a>(IdList_t ids)</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;{</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">auto</span> <span class="keywordtype">id</span> : ids)</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        <a class="code" href="classepp_1_1Archetype.html#a16f3af25238d1e3b6bbef2fb70e78e81">addComponent</a>(<span class="keywordtype">id</span>);</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;}</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
+<div class="line"><a name="l00135"></a><span class="lineno"><a class="line" href="classepp_1_1Archetype.html#a5775364f6d9dcc37f379cf7011b1a7b7">  135</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="classepp_1_1Archetype.html">Archetype</a>&amp; <a class="code" href="classepp_1_1Archetype.html#a16f3af25238d1e3b6bbef2fb70e78e81">Archetype::addComponent</a>(CId_t <span class="keywordtype">id</span>)</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;{</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    <span class="keywordflow">if</span> (!cMask.<a class="code" href="classepp_1_1CMask.html#adbdf15fdd83d649f650e5801ad00ce1f">get</a>(<span class="keywordtype">id</span>)) {</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;        cMask.<a class="code" href="classepp_1_1CMask.html#aff8b0bd8d29885040e65d16986c90b0c">set</a>(<span class="keywordtype">id</span>);</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;        cIds.push_back(<span class="keywordtype">id</span>);</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    }</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;}</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160; </div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span>... CTypes&gt;</div>
+<div class="line"><a name="l00145"></a><span class="lineno"><a class="line" href="classepp_1_1Archetype.html#a2f8ca84c53e39859a8de2ddaa5d25f2c">  145</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="classepp_1_1Archetype.html">Archetype</a>&amp; <a class="code" href="classepp_1_1Archetype.html#a2f8ca84c53e39859a8de2ddaa5d25f2c">Archetype::removeComponent</a>() { <span class="keywordflow">return</span> <a class="code" href="classepp_1_1Archetype.html#a2f8ca84c53e39859a8de2ddaa5d25f2c">removeComponent</a>(IdOfL&lt;CTypes...&gt;()); }</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; </div>
+<div class="line"><a name="l00147"></a><span class="lineno"><a class="line" href="classepp_1_1Archetype.html#adf34c086f624071d62adb1d9c1219b26">  147</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="classepp_1_1Archetype.html">Archetype</a>&amp; <a class="code" href="classepp_1_1Archetype.html#a2f8ca84c53e39859a8de2ddaa5d25f2c">Archetype::removeComponent</a>(IdList_t ids)</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;{</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">auto</span> <span class="keywordtype">id</span> : ids)</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        <a class="code" href="classepp_1_1Archetype.html#a2f8ca84c53e39859a8de2ddaa5d25f2c">removeComponent</a>(<span class="keywordtype">id</span>);</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;}</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160; </div>
+<div class="line"><a name="l00154"></a><span class="lineno"><a class="line" href="classepp_1_1Archetype.html#a22bfc7494e7df35592294aa729ef69e1">  154</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="classepp_1_1Archetype.html">Archetype</a>&amp; <a class="code" href="classepp_1_1Archetype.html#a2f8ca84c53e39859a8de2ddaa5d25f2c">Archetype::removeComponent</a>(CId_t <span class="keywordtype">id</span>)</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;{</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="classepp_1_1Archetype.html#a2a95a2ae80db64d9307e09ab5bbf14c3">has</a>(<span class="keywordtype">id</span>)) {</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;        cMask.<a class="code" href="classepp_1_1CMask.html#a958f33824898c5dd13fdf82054a42c25">unset</a>(<span class="keywordtype">id</span>);</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        cIds.erase(std::find_if(cIds.begin(), cIds.end(), [<span class="keywordtype">id</span>](<span class="keyword">auto</span> <span class="keyword">const</span>&amp; cId) { return cId == id; }));</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    }</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;}</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160; </div>
+<div class="line"><a name="l00163"></a><span class="lineno"><a class="line" href="classepp_1_1Archetype.html#a1cb6085a860a591224273327c2d71f5a">  163</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="classepp_1_1Archetype.html#a1cb6085a860a591224273327c2d71f5a">Archetype::hasAllOf</a>(IdList_t ids)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> cMask.<a class="code" href="classepp_1_1CMask.html#af9913a5600f55a6ae444dc4b6c1d28dd">contains</a>(ids); }</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160; </div>
+<div class="line"><a name="l00165"></a><span class="lineno"><a class="line" href="classepp_1_1Archetype.html#adaa5883e0e380eaccfce49e155bb0400">  165</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="classepp_1_1Archetype.html#adaa5883e0e380eaccfce49e155bb0400">Archetype::hasAnyOf</a>(IdList_t ids)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> cMask.<a class="code" href="classepp_1_1CMask.html#a026a0f8dd36ff88d16a276e06e54dfe8">hasCommon</a>(ids); }</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160; </div>
+<div class="line"><a name="l00167"></a><span class="lineno"><a class="line" href="classepp_1_1Archetype.html#a2a95a2ae80db64d9307e09ab5bbf14c3">  167</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="classepp_1_1Archetype.html#a2a95a2ae80db64d9307e09ab5bbf14c3">Archetype::has</a>(CId_t <span class="keywordtype">id</span>)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> cMask.<a class="code" href="classepp_1_1CMask.html#adbdf15fdd83d649f650e5801ad00ce1f">get</a>(<span class="keywordtype">id</span>); }</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160; </div>
+<div class="line"><a name="l00169"></a><span class="lineno"><a class="line" href="classepp_1_1Archetype.html#a9b002729addc769deee0d2977d8cfb49">  169</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="classepp_1_1llvm_1_1SmallVector.html">Archetype::IdVec_t</a> <span class="keyword">const</span>&amp; <a class="code" href="classepp_1_1Archetype.html#a9b002729addc769deee0d2977d8cfb49">Archetype::getCIds</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> cIds; }</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160; </div>
+<div class="line"><a name="l00171"></a><span class="lineno"><a class="line" href="classepp_1_1Archetype.html#a72d2a6d9bf1cce6fcd87ead6d5bd662a">  171</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="classepp_1_1CMask.html">CMask</a> <span class="keyword">const</span>&amp; <a class="code" href="classepp_1_1Archetype.html#a72d2a6d9bf1cce6fcd87ead6d5bd662a">Archetype::getMask</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> cMask; }</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160; </div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;} <span class="comment">// namespace epp</span></div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160; </div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<span class="preprocessor">#endif // EPP_ARCHETYPE_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclassepp_1_1CMask_html"><div class="ttname"><a href="classepp_1_1CMask.html">epp::CMask</a></div><div class="ttdef"><b>Definition:</b> CMask.h:11</div></div>
+<div class="ttc" id="aclassepp_1_1Archetype_html_a72d2a6d9bf1cce6fcd87ead6d5bd662a"><div class="ttname"><a href="classepp_1_1Archetype.html#a72d2a6d9bf1cce6fcd87ead6d5bd662a">epp::Archetype::getMask</a></div><div class="ttdeci">CMask const  &amp; getMask() const</div><div class="ttdoc">Returns the CMask representation of the archetype.</div><div class="ttdef"><b>Definition:</b> Archetype.h:171</div></div>
+<div class="ttc" id="aclassepp_1_1Archetype_html_adaa5883e0e380eaccfce49e155bb0400"><div class="ttname"><a href="classepp_1_1Archetype.html#adaa5883e0e380eaccfce49e155bb0400">epp::Archetype::hasAnyOf</a></div><div class="ttdeci">bool hasAnyOf(IdList_t ids) const</div><div class="ttdoc">Returns whether the archetype contains any of the given components.</div><div class="ttdef"><b>Definition:</b> Archetype.h:165</div></div>
+<div class="ttc" id="aclassepp_1_1llvm_1_1SmallVector_html"><div class="ttname"><a href="classepp_1_1llvm_1_1SmallVector.html">epp::llvm::SmallVector&lt; CId_t, 8 &gt;</a></div></div>
+<div class="ttc" id="aclassepp_1_1Archetype_html_a1cb6085a860a591224273327c2d71f5a"><div class="ttname"><a href="classepp_1_1Archetype.html#a1cb6085a860a591224273327c2d71f5a">epp::Archetype::hasAllOf</a></div><div class="ttdeci">bool hasAllOf(IdList_t ids) const</div><div class="ttdoc">Returns whether the archetype contains all of the given components.</div><div class="ttdef"><b>Definition:</b> Archetype.h:163</div></div>
+<div class="ttc" id="aclassepp_1_1CMask_html_a026a0f8dd36ff88d16a276e06e54dfe8"><div class="ttname"><a href="classepp_1_1CMask.html#a026a0f8dd36ff88d16a276e06e54dfe8">epp::CMask::hasCommon</a></div><div class="ttdeci">bool hasCommon(CMask const &amp;other) const</div><div class="ttdoc">Returns whether there is at least one bit that is set both in this CMask and in the other one.</div><div class="ttdef"><b>Definition:</b> CMask.h:211</div></div>
+<div class="ttc" id="aclassepp_1_1Archetype_html_a2a95a2ae80db64d9307e09ab5bbf14c3"><div class="ttname"><a href="classepp_1_1Archetype.html#a2a95a2ae80db64d9307e09ab5bbf14c3">epp::Archetype::has</a></div><div class="ttdeci">bool has(CId_t id) const</div><div class="ttdoc">Returns whether the archetype contains a given component.</div><div class="ttdef"><b>Definition:</b> Archetype.h:167</div></div>
+<div class="ttc" id="aclassepp_1_1CMask_html_af9913a5600f55a6ae444dc4b6c1d28dd"><div class="ttname"><a href="classepp_1_1CMask.html#af9913a5600f55a6ae444dc4b6c1d28dd">epp::CMask::contains</a></div><div class="ttdeci">bool contains(CMask const &amp;other) const</div><div class="ttdoc">Returns whether every set bit from the given CMask is also set in this one.</div><div class="ttdef"><b>Definition:</b> CMask.h:213</div></div>
+<div class="ttc" id="aclassepp_1_1Archetype_html_a2f8ca84c53e39859a8de2ddaa5d25f2c"><div class="ttname"><a href="classepp_1_1Archetype.html#a2f8ca84c53e39859a8de2ddaa5d25f2c">epp::Archetype::removeComponent</a></div><div class="ttdeci">Archetype &amp; removeComponent()</div><div class="ttdoc">Removes the given components from the archetype.</div><div class="ttdef"><b>Definition:</b> Archetype.h:145</div></div>
+<div class="ttc" id="aclassepp_1_1Archetype_html_a16f3af25238d1e3b6bbef2fb70e78e81"><div class="ttname"><a href="classepp_1_1Archetype.html#a16f3af25238d1e3b6bbef2fb70e78e81">epp::Archetype::addComponent</a></div><div class="ttdeci">Archetype &amp; addComponent()</div><div class="ttdoc">Adds the given components to the archetype.</div><div class="ttdef"><b>Definition:</b> Archetype.h:126</div></div>
+<div class="ttc" id="aclassepp_1_1CMask_html"><div class="ttname"><a href="classepp_1_1CMask.html">epp::CMask</a></div><div class="ttdoc">A Bitset wrapper.</div><div class="ttdef"><b>Definition:</b> CMask.h:15</div></div>
 <div class="ttc" id="aclassepp_1_1Archetype_html"><div class="ttname"><a href="classepp_1_1Archetype.html">epp::Archetype</a></div><div class="ttdef"><b>Definition:</b> Archetype.h:10</div></div>
+<div class="ttc" id="aclassepp_1_1CMask_html_aff8b0bd8d29885040e65d16986c90b0c"><div class="ttname"><a href="classepp_1_1CMask.html#aff8b0bd8d29885040e65d16986c90b0c">epp::CMask::set</a></div><div class="ttdeci">void set(Idx_t bitIndex)</div><div class="ttdoc">Sets the bit corresponding to the given ComponentId.</div><div class="ttdef"><b>Definition:</b> CMask.h:181</div></div>
+<div class="ttc" id="aclassepp_1_1CMask_html_a958f33824898c5dd13fdf82054a42c25"><div class="ttname"><a href="classepp_1_1CMask.html#a958f33824898c5dd13fdf82054a42c25">epp::CMask::unset</a></div><div class="ttdeci">void unset(Idx_t bitIndex)</div><div class="ttdoc">Unsets the bit corresponding to the given ComponentId.</div><div class="ttdef"><b>Definition:</b> CMask.h:189</div></div>
+<div class="ttc" id="aclassepp_1_1Archetype_html_a9b002729addc769deee0d2977d8cfb49"><div class="ttname"><a href="classepp_1_1Archetype.html#a9b002729addc769deee0d2977d8cfb49">epp::Archetype::getCIds</a></div><div class="ttdeci">IdVec_t const  &amp; getCIds() const</div><div class="ttdoc">Returns the vector of components that the archetype containts.</div><div class="ttdef"><b>Definition:</b> Archetype.h:169</div></div>
+<div class="ttc" id="aclassepp_1_1Archetype_html_a991ba87024683a84a52f9b60a0ebe815"><div class="ttname"><a href="classepp_1_1Archetype.html#a991ba87024683a84a52f9b60a0ebe815">epp::Archetype::Archetype</a></div><div class="ttdeci">Archetype()=default</div><div class="ttdoc">Creates a default (empty) archetype.</div></div>
+<div class="ttc" id="aclassepp_1_1CMask_html_adbdf15fdd83d649f650e5801ad00ce1f"><div class="ttname"><a href="classepp_1_1CMask.html#adbdf15fdd83d649f650e5801ad00ce1f">epp::CMask::get</a></div><div class="ttdeci">bool get(Idx_t bitIndex) const</div><div class="ttdoc">Returns the value of the bit corresponding to the given ComponentId.</div><div class="ttdef"><b>Definition:</b> CMask.h:205</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

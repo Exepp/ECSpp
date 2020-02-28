@@ -2,68 +2,169 @@
 #define EPP_CPOOL_H
 
 #include <ECSpp/Component.h>
-#include <ECSpp/utility/Pool.h>
+#include <ECSpp/internal/utility/Pool.h>
 
 namespace epp {
 
-// TODO: redo the tests
+/**
+ * A Vector that uses CMetadata to manage the data without a type information
+ * Does not maintain order - the last component is always moved in the place of a removed one
+ */
 class CPool final {
     using Idx_t = std::size_t;
 
 public:
+    /// Constructs a pool of the given component
+    /**
+     * CPool uses the cId to get metadata from the CMetadata::GetData static function
+     * @param cId A ComponentId returned from CMetadata::Id (or IdOf) function
+     */
     explicit CPool(ComponentId cId);
+
+
+    /// Move constructor
+    /**
+     * Moves the ovnership of the rval's data to this CPool
+     * Clears rval, leaves metadata intact
+     * @param CPool Any CPool to be moved
+     */
     CPool(CPool&& rval);
+
+
+    /// Move assignment
+    /**
+     * Clears this CPool
+     * Moves the ovnership of the rval's data to this CPool
+     * Clears rval, leaves metadata intact
+     * @param CPool Any CPool to be moved
+     */
     CPool& operator=(CPool&& rval);
+
+
+    /// Deleted copy constructor
     CPool(CPool const&) = delete;
+
+
+    /// Deleted copy assignment
     CPool& operator=(CPool const&) = delete;
+
+
+    /// Destructor
+    /**
+     * Frees owned resources
+     */
     ~CPool() { reserve(0); }
 
 
-    // raw (no constructor call)
-    // !! EVERY ALLOCATED COMPONENT MUST BE CONSTRUCTED BEFORE NEXT ALLOC CALL !!
-    // if there are 2 consecutive calls, the second one may lead to reallocation of the internal storage
-    // which will move and destroy all components (even the uninitialized ones)
-    // so move constructor and destructor will be called on the uninitialized component from the first call
+    /// Allocates memory for one component
+    /**
+     * @details Allocated component is always located at size() index (after allocation size() - 1) - just as vector's push_back
+     * @details Warning;
+     * @details EVERY ALLOCATED COMPONENT MUST BE CONSTRUCTED BEFORE NEXT ALLOC CALL.
+     * If there are 2 consecutive calls, the second one may lead to reallocation of the internal storage
+     * which will move and destroy all the components (even the uninitialized ones).
+     * This way the destructor and move constructor will be called on the uninitialized component from the first call
+     * @returns The address of the allocated component. This addres is not permanent, every component may be moved freely by the CPool
+     */
     void* alloc();
 
-    // TODO: tests
-    // same as above
-    // allocates at once n components
-    // returns nullptr for n == 0
+
+    /// Allocates memory for n components
+    /**
+     * The same warning as above 
+     * @returns The address to the first of the allocated components. The components are stored contiguously
+     */
     void* alloc(Idx_t n);
 
-    // calls constructor on the object located at given index
-    // it is up to the caller to make sure this function is called only on components
-    // that are not yet constructed (that is, created with alloc)
-    void* construct(Idx_t idx);
 
-    // TODO: tests
-    // calls move constructor on the object located at given index
-    // it is up to the caller to make sure this function is called only on components
-    // that are not yet constructed (that is, created with alloc) and that rValComp is of the same type as components of this pool
-    void* construct(Idx_t idx, void* rValComp);
+    /// Calls the constructor on the component located at the given index
+    /**
+     * @details Warning:
+     * @details It is up to the caller to make sure this function is called only on components
+     * that are not yet constructed (that is, created with alloc)
+     * 
+     * @param idx Index of the component in this pool to call the constructor on
+     * @returns The address to the first of the allocated components. The components are stored contiguously
+     * @throws (Debug only) Throws the AssertionFailed exception if idx is greater or equal to the size()
+     */
+    void construct(Idx_t idx);
 
-    // expects an index to a constructed component (calls destructor)
-    // returns true if deleted object was replaced with the last element (false only for the last element)
-    bool destroy(Idx_t i);
 
-    // makes sure, to fit n more elements without realloc
+    /// Calls the move constructor on the component located at the given index
+    /**
+     * The same warning as above 
+     * @param idx Index of the component in this pool to call the move constructor on
+     * @returns The address of the component located at the given location
+     * @throws (Debug only) Throws the AssertionFailed exception if idx is greater or equal to the size()
+     */
+    void construct(Idx_t idx, void* rValComp);
+
+
+    /// Calls the destructor on the component located at the given index
+    /**
+     * The last components is moved in place of the removed one
+     * The same warning as above 
+     * @param idx Index of the component in this pool to call the destructor on
+     * @returns True if deleted object was replaced with the last element (false only for the last element)
+     * @throws (Debug only) Throws the AssertionFailed exception if idx is greater or equal to the size()
+     */
+    bool destroy(Idx_t idx);
+
+
+    /// The next alloc(n) call or n alloc() calls will not require reallocation
+    /** 
+     * CPool will grow its capacity to the next power of 2 that will fit size() + n components 
+     * @param n Number of components to reserve the additional space for
+     */
     void fitNextN(std::size_t n);
+
+
+    /// Removes the excess of the reserved memory
     void shrinkToFit() { reserve(dataUsed); }
+
+
+    /// Destroys every component
     void clear();
+
+
+    /// Changes the capacity to exactly newReserved
+    /**
+     * @details If newReserved < size() then components that don't fit get destroyed
+     * @details If newReserved == capacity() nothing happens
+     * @details If newReserved != capacity() reallocates to set capacity to newReserved
+     * @param newReserved New capacity
+     */
     void reserve(std::size_t newReserved);
 
-    void* operator[](Idx_t i);
-    void const* operator[](Idx_t i) const;
 
+    /// Returns pointer to the component located at the given index
+    /**
+     * @param idx Index of the component in this pool
+     * @returns A Pointer to the component located at the given index
+     * @throws (Debug only) Throws the AssertionFailed exception if idx is greater or equal to the size()
+     */
+    void* operator[](Idx_t idx);
+
+
+    /** @copydoc CPool::operator[](Idx_t idx) */
+    void const* operator[](Idx_t idx) const;
+
+
+    /// Returns the ComponentId of this pool
     ComponentId getCId() const { return metadata.cId; }
+
+
+    /// Returns the number of "used" components
     std::size_t size() const { return dataUsed; }
+
+
+    /// Returns the capacity of the pool (how many components can it fit without reallocation)
     std::size_t capacity() const { return reserved; }
 
 private:
-    void* addressAtIdx(Idx_t i) const { return addressAtIdx(data, i); }
+    void* addressAtIdx(Idx_t idx) const { return addressAtIdx(data, idx); }
 
-    void* addressAtIdx(void* base, Idx_t i) const { return reinterpret_cast<void*>(static_cast<std::uint8_t*>(base) + metadata.size * std::uint64_t(i)); }
+    void* addressAtIdx(void* base, Idx_t idx) const { return reinterpret_cast<void*>(static_cast<std::uint8_t*>(base) + metadata.size * std::uint64_t(idx)); }
 
 private:
     void* data = nullptr;
@@ -95,8 +196,8 @@ inline CPool& CPool::operator=(CPool&& rval)
 inline void* CPool::alloc()
 {
     if (dataUsed >= reserved)
-        reserve(reserved ? 2 * reserved : 4); // 4 as first size
-    return addressAtIdx(dataUsed++);          // post-inc here
+        fitNextN(reserved ? reserved : 4); // 4 as first size
+    return addressAtIdx(dataUsed++);       // post-inc here
 }
 
 inline void* CPool::alloc(Idx_t n)
@@ -109,26 +210,26 @@ inline void* CPool::alloc(Idx_t n)
     return ptr;
 }
 
-inline void* CPool::construct(Idx_t idx)
+inline void CPool::construct(Idx_t idx)
 {
     EPP_ASSERT(idx < dataUsed);
-    return metadata.defaultConstructor(addressAtIdx(idx));
+    metadata.defaultConstructor(addressAtIdx(idx));
 }
 
-inline void* CPool::construct(Idx_t idx, void* rValComp)
+inline void CPool::construct(Idx_t idx, void* rValComp)
 {
     EPP_ASSERT(idx < dataUsed);
-    return metadata.moveConstructor(addressAtIdx(idx), rValComp);
+    metadata.moveConstructor(addressAtIdx(idx), rValComp);
 }
 
-inline bool CPool::destroy(Idx_t i)
+inline bool CPool::destroy(Idx_t idx)
 {
-    EPP_ASSERT(i < dataUsed);
+    EPP_ASSERT(idx < dataUsed);
 
-    bool notLast = (i + 1) < dataUsed;
+    bool notLast = (idx + 1) < dataUsed;
     if (notLast) {
-        metadata.destructor(addressAtIdx(i));
-        construct(i, addressAtIdx(dataUsed - 1));
+        metadata.destructor(addressAtIdx(idx));
+        construct(idx, addressAtIdx(dataUsed - 1));
     }
     metadata.destructor(addressAtIdx(--dataUsed)); // pre-dec here
     return notLast;
@@ -165,16 +266,16 @@ inline void CPool::clear()
     dataUsed = 0;
 }
 
-inline void* CPool::operator[](Idx_t i)
+inline void* CPool::operator[](Idx_t idx)
 {
-    EPP_ASSERT(i < dataUsed)
-    return addressAtIdx(i);
+    EPP_ASSERT(idx < dataUsed)
+    return addressAtIdx(idx);
 }
 
-inline void const* CPool::operator[](Idx_t i) const
+inline void const* CPool::operator[](Idx_t idx) const
 {
-    EPP_ASSERT(i < dataUsed)
-    return addressAtIdx(i);
+    EPP_ASSERT(idx < dataUsed)
+    return addressAtIdx(idx);
 }
 
 } // namespace epp

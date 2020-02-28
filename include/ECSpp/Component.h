@@ -1,8 +1,8 @@
 #ifndef EPP_COMPONENT_H
 #define EPP_COMPONENT_H
 
-#include <ECSpp/utility/Assert.h>
-#include <ECSpp/utility/IndexType.h>
+#include <ECSpp/internal/utility/Assert.h>
+#include <ECSpp/internal/utility/IndexType.h>
 #include <cstdint>
 #include <vector>
 
@@ -10,10 +10,11 @@ namespace epp {
 
 using ComponentId = IndexType<0, std::uint16_t>;
 
-
+/// A class responsible for gathering components' metadata used in CPools to construct,
+/// move and destroy components without the type information
 class CMetadata {
-    using DefCstrFnPtr_t = void* (*)(void*);
-    using MoveCstrFnPtr_t = void* (*)(void* dest, void* src);
+    using DefCstrFnPtr_t = void (*)(void*);
+    using MoveCstrFnPtr_t = void (*)(void* dest, void* src);
     using DestrFnPtr_t = void (*)(void*);
     using MetadataVec_t = std::vector<CMetadata>;
 
@@ -26,6 +27,11 @@ public:
     ComponentId cId;
 
 public:
+    /// Registers a component type on first call and returns a unique id for that type
+    /**
+     * @param CType Type of component
+     * @returns A unique id for that type
+    */
     template <typename CType>
     static ComponentId Id()
     {
@@ -33,6 +39,12 @@ public:
         return id;
     }
 
+    /// Registers components in a consistent and specific order and locks registering
+    /// (following attempts to register a component will throw in debug and release)
+    /**
+     * @param Comps A pack of types to register
+     * @throws An AssertFailed exception if CMetadata::Register was already called once before or if any of the types was already registered with wrong id 
+    */
     template <typename... Comps>
     static void Register()
     {
@@ -43,6 +55,10 @@ public:
         Registered = i;
     }
 
+    /// Returns a copy of metadata associated with the given id
+    /**
+     * @param id Any id returned from the Metadata::Id function
+    */
     static CMetadata GetData(ComponentId id)
     {
         return MetadataVec[id.value];
@@ -60,8 +76,8 @@ private:
         EPP_ASSERTA(!CMetadata::Registered); // if CMetadata::Register was used
                                              // further registration is not allowed
         CMetadata data;
-        data.defaultConstructor = [](void* mem) -> void* { return new (mem) CType(); };
-        data.moveConstructor = [](void* dest, void* src) -> void* { return new (dest) CType(std::move(*static_cast<CType*>(src))); };
+        data.defaultConstructor = [](void* mem) { new (mem) CType(); };
+        data.moveConstructor = [](void* dest, void* src) { new (dest) CType(std::move(*static_cast<CType*>(src))); };
         data.destructor = [](void* mem) { static_cast<CType*>(mem)->~CType(); };
         data.size = sizeof(CType);
         data.alignment = alignof(CType);
@@ -71,8 +87,12 @@ private:
     }
 
 public:
-    static constexpr std::size_t const MaxRegisteredComponents = 64; // 8 * sizeof(std::vector<uint64_t>);
-    static_assert(MaxRegisteredComponents > 0);
+    /// The maximum number of registered components
+    /**
+     * This value should be a multiple of 64 as it describes the number of bits in a CMask's bitset 
+    */
+    static constexpr std::size_t const MaxRegisteredComponents = 128;
+    static_assert(MaxRegisteredComponents > 0 && (MaxRegisteredComponents & (64 - 1)) == 0);
 
 private:
     inline static bool Registered = false;
@@ -83,12 +103,23 @@ private:
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+/// A convenient function returning the ComponentId of the given type
+/**
+ * @param T Any type
+ * @returns A unique Id of the type T
+*/
 template <typename T>
 inline ComponentId IdOf()
 {
     return CMetadata::Id<T>();
 }
 
+/// A convenient function returning the ComponentId list of the given types
+/**
+ * Use this function if you always need a list as a return value (for example passing a single ComponentId to the constructor of the Archetype class)
+ * @param Comps A pack of any types
+ * @returns A list of unique Ids for each of the types
+*/
 template <typename... Comps>
 inline std::initializer_list<ComponentId> IdOfL()
 {
@@ -96,6 +127,11 @@ inline std::initializer_list<ComponentId> IdOfL()
     return list;
 }
 
+/// A convenient function returning the ComponentId list of the given types
+/**
+ * @param Comps A pack of any types
+ * @returns A list of unique Ids for each of the types
+*/
 template <typename C1, typename C2, typename... CRest>
 inline std::initializer_list<ComponentId> IdOf()
 {

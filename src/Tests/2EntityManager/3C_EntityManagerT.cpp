@@ -365,8 +365,9 @@ TEST(EntityManager, DestroyEntityPoolIterator)
 TEST(EntityManager, PrepareToSpawn)
 {
     Archetype arch(IdOfL<TComp1>());
-    { // now with prepare
+    {
         EntityManager mgr;
+        mgr.prepareToSpawn(arch, 0);
         mgr.prepareToSpawn(arch, 17);
         auto ent = mgr.spawn(arch);
         void* ptr = &mgr.componentOf<TComp1>(ent);

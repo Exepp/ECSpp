@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['tuplepp_29',['TuplePP',['../structepp_1_1TuplePP.html',1,'epp']]],
-  ['tuplepp_3c_20poolsptrs_5ft_3c_20ctypes_20_3e_2e_2e_2e_20_3e_30',['TuplePP&lt; PoolsPtrs_t&lt; CTypes &gt;... &gt;',['../structepp_1_1TuplePP.html',1,'epp']]]
+  ['nextfreelistidx_73',['nextFreeListIdx',['../classepp_1_1EntityList_1_1Cell.html#ae6e8c6e0b753b488bf97e7839d420443',1,'epp::EntityList::Cell']]],
+  ['nextversion_74',['nextVersion',['../structepp_1_1EntVersion.html#a4c98561f5d03305c325a49a104eb6378',1,'epp::EntVersion']]],
+  ['numberofcommon_75',['numberOfCommon',['../classepp_1_1CMask.html#a21e9fd8acadfff32cd88752b3e821b66',1,'epp::CMask']]]
 ];

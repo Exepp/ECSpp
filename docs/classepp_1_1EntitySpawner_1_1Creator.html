@@ -68,7 +68,6 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="#friends">Friends</a> &#124;
@@ -77,24 +76,24 @@ $(function() {
 <div class="title">epp::EntitySpawner::Creator Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><a class="el" href="classepp_1_1EntitySpawner_1_1Creator.html" title="Creator is responsible for easy components initialization owned by some entity.">Creator</a> is responsible for easy components initialization owned by some entity.  
+ <a href="classepp_1_1EntitySpawner_1_1Creator.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="EntitySpawner_8h_source.html">EntitySpawner.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a1f8bb53cbcb8ba21685e329a8f52895d"><td class="memTemplParams" colspan="2">template&lt;typename CType , typename... Args&gt; </td></tr>
-<tr class="memitem:a1f8bb53cbcb8ba21685e329a8f52895d"><td class="memTemplItemLeft" align="right" valign="top">CType &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classepp_1_1EntitySpawner_1_1Creator.html#a1f8bb53cbcb8ba21685e329a8f52895d">construct</a> (Args &amp;&amp;... args)</td></tr>
-<tr class="separator:a1f8bb53cbcb8ba21685e329a8f52895d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:ad7677c19be374a63a397c341ff6db31f"><td class="memItemLeft" align="right" valign="top"><a id="ad7677c19be374a63a397c341ff6db31f"></a>
-const <a class="el" href="structepp_1_1PoolIdx.html">PoolIdx</a>&#160;</td><td class="memItemRight" valign="bottom"><b>idx</b></td></tr>
-<tr class="separator:ad7677c19be374a63a397c341ff6db31f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28e87d7a21b76e51280f8abf9448c4dc"><td class="memTemplParams" colspan="2">template&lt;typename CType , typename... Args&gt; </td></tr>
+<tr class="memitem:a28e87d7a21b76e51280f8abf9448c4dc"><td class="memTemplItemLeft" align="right" valign="top">CType &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classepp_1_1EntitySpawner_1_1Creator.html#a28e87d7a21b76e51280f8abf9448c4dc">constructed</a> (Args &amp;&amp;... args)</td></tr>
+<tr class="memdesc:a28e87d7a21b76e51280f8abf9448c4dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ensures that the returned component is constructed.  <a href="classepp_1_1EntitySpawner_1_1Creator.html#a28e87d7a21b76e51280f8abf9448c4dc">More...</a><br /></td></tr>
+<tr class="separator:a28e87d7a21b76e51280f8abf9448c4dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
-<tr class="memitem:a2a5009e9e3afaccd4ab123d2554f234a"><td class="memItemLeft" align="right" valign="top"><a id="a2a5009e9e3afaccd4ab123d2554f234a"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Creator</b> (<a class="el" href="classepp_1_1EntitySpawner.html">EntitySpawner</a> &amp;sp, <a class="el" href="structepp_1_1PoolIdx.html">PoolIdx</a> index, <a class="el" href="classepp_1_1CMask.html">CMask</a> const &amp;cstred=<a class="el" href="classepp_1_1CMask.html">CMask</a>())</td></tr>
-<tr class="separator:a2a5009e9e3afaccd4ab123d2554f234a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ee9487ccedd727264057efff15c2c2b"><td class="memItemLeft" align="right" valign="top"><a id="a0ee9487ccedd727264057efff15c2c2b"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Creator</b> (<a class="el" href="classepp_1_1EntitySpawner.html">EntitySpawner</a> &amp;sp, <a class="el" href="structepp_1_1IndexType.html">PoolIdx</a> index, <a class="el" href="classepp_1_1CMask.html">CMask</a> const &amp;cstred=<a class="el" href="classepp_1_1CMask.html">CMask</a>())</td></tr>
+<tr class="separator:a0ee9487ccedd727264057efff15c2c2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aac328824886ad0c0f3693bb5fb16061a"><td class="memItemLeft" align="right" valign="top"><a id="aac328824886ad0c0f3693bb5fb16061a"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>Creator</b> (<a class="el" href="classepp_1_1EntitySpawner_1_1Creator.html">Creator</a> &amp;&amp;rVal)=delete</td></tr>
 <tr class="separator:aac328824886ad0c0f3693bb5fb16061a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -107,16 +106,17 @@ Private Member Functions</h2></td></tr>
 <tr class="memitem:a9124c19fed2b07ba2c2f7818adee6e8e"><td class="memItemLeft" align="right" valign="top"><a id="a9124c19fed2b07ba2c2f7818adee6e8e"></a>
 <a class="el" href="classepp_1_1EntitySpawner_1_1Creator.html">Creator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classepp_1_1EntitySpawner_1_1Creator.html">Creator</a> &amp;&amp;)=delete</td></tr>
 <tr class="separator:a9124c19fed2b07ba2c2f7818adee6e8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac34dd537444547900b038b6261137bab"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1EntitySpawner_1_1Creator.html#ac34dd537444547900b038b6261137bab">~Creator</a> ()</td></tr>
-<tr class="separator:ac34dd537444547900b038b6261137bab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
 <tr class="memitem:a873cf9d64c04664f2a8a92a15158033c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classepp_1_1EntitySpawner.html">EntitySpawner</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1EntitySpawner_1_1Creator.html#a873cf9d64c04664f2a8a92a15158033c">spawner</a></td></tr>
 <tr class="separator:a873cf9d64c04664f2a8a92a15158033c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8f1e2ccaf7cb2733d34977bd5bd67ea8"><td class="memItemLeft" align="right" valign="top"><a id="a8f1e2ccaf7cb2733d34977bd5bd67ea8"></a>
-<a class="el" href="classepp_1_1CMask.html">CMask</a>&#160;</td><td class="memItemRight" valign="bottom"><b>constructed</b></td></tr>
-<tr class="separator:a8f1e2ccaf7cb2733d34977bd5bd67ea8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af68fa171ea70ee3ea0e516deafd990ae"><td class="memItemLeft" align="right" valign="top"><a id="af68fa171ea70ee3ea0e516deafd990ae"></a>
+<a class="el" href="classepp_1_1CMask.html">CMask</a>&#160;</td><td class="memItemRight" valign="bottom"><b>constrMask</b></td></tr>
+<tr class="separator:af68fa171ea70ee3ea0e516deafd990ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7677c19be374a63a397c341ff6db31f"><td class="memItemLeft" align="right" valign="top"><a id="ad7677c19be374a63a397c341ff6db31f"></a>
+const <a class="el" href="structepp_1_1IndexType.html">PoolIdx</a>&#160;</td><td class="memItemRight" valign="bottom"><b>idx</b></td></tr>
+<tr class="separator:ad7677c19be374a63a397c341ff6db31f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>
@@ -124,36 +124,12 @@ Friends</h2></td></tr>
 class&#160;</td><td class="memItemRight" valign="bottom"><b>EntitySpawner</b></td></tr>
 <tr class="separator:afe0b921eecfe1d8c5f8d55d75f0555c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="ac34dd537444547900b038b6261137bab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac34dd537444547900b038b6261137bab">&#9670;&nbsp;</a></span>~Creator()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">epp::EntitySpawner::Creator::~Creator </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>constructs components that the user didnt construct himself </p>
-
-</div>
-</div>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a id="a1f8bb53cbcb8ba21685e329a8f52895d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1f8bb53cbcb8ba21685e329a8f52895d">&#9670;&nbsp;</a></span>construct()</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p><a class="el" href="classepp_1_1EntitySpawner_1_1Creator.html" title="Creator is responsible for easy components initialization owned by some entity.">Creator</a> is responsible for easy components initialization owned by some entity. </p>
+<p>Instances of this class can only be created and destroyed in <a class="el" href="classepp_1_1EntitySpawner.html">EntitySpawner</a> functions, because they construct unconstructed components in their destructor. So to ensure that every component will be constructed after leaving the scope of EntitySpanwer::spawn function, <a class="el" href="classepp_1_1EntitySpawner_1_1Creator.html" title="Creator is responsible for easy components initialization owned by some entity.">Creator</a> has no public constructors or assignment operators (to prevent moving the instance out of the function's scope) </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a28e87d7a21b76e51280f8abf9448c4dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28e87d7a21b76e51280f8abf9448c4dc">&#9670;&nbsp;</a></span>constructed()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -164,7 +140,7 @@ template&lt;typename CType , typename... Args&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">CType&amp; epp::EntitySpawner::Creator::construct </td>
+          <td class="memname">CType &amp; epp::EntityCreator::constructed </td>
           <td>(</td>
           <td class="paramtype">Args &amp;&amp;...&#160;</td>
           <td class="paramname"><em>args</em></td><td>)</td>
@@ -177,7 +153,21 @@ template&lt;typename CType , typename... Args&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Consecutive calls to construct already constructed components will result in their reconstruction (destruction -&gt; construction) </p>
+
+<p>Ensures that the returned component is constructed. </p>
+<p>Consecutive calls to "constructed" on already constructed components will only return the reference </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">args</td><td>Arguments forwarded to construct an unconstructed component </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A reference to the constructed component of type CType </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">(Debug</td><td>only) Throws the AssertionFailed exception if the entity that the creator is pointing to does not own component of CType type </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -201,12 +191,12 @@ template&lt;typename CType , typename... Args&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Current index in pools </p>
+<p>constructs components that the user didnt construct himself </p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>include/ECSpp/Internal/<a class="el" href="EntitySpawner_8h_source.html">EntitySpawner.h</a></li>
+<li>include/ECSpp/internal/<a class="el" href="EntitySpawner_8h_source.html">EntitySpawner.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

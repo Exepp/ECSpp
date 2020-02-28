@@ -2,7 +2,7 @@
 #define EPP_PIPELINE_H
 
 #include <ECSpp/EntityManager.h>
-#include <ECSpp/utility/TuplePP.h>
+#include <ECSpp/internal/utility/TuplePP.h>
 #include <condition_variable>
 #include <thread>
 
@@ -33,6 +33,13 @@ public:
     std::unique_ptr<TaskBase> subtask;
 };
 
+
+/// A simple tool for creating basic concurrent code
+/**
+ * This class eliminates race conditions by ensuring a one order of iteration for every task
+ * and keeping subtask always behind the uptasks. This way there are no concurrent reads or writes
+ * as long as EntityManager or other external object(pointer) is not used.
+ */
 template <typename FnType, typename StepFnType, typename... CTypes>
 class Task : public TaskBase {
     struct JoinGuard {
@@ -58,6 +65,11 @@ public:
             subtask = std::make_unique<Task<OtherFnType, StepFnType, OtherCTypes...>>(std::move(fn), stepFn, this)));
     }
 
+    /// Runs main task and subtasks
+    /**
+     * This function returns only if every task completed its execution
+     * @param mgr manager to update internal selection
+     */
     virtual void run(EntityManager& mgr) override
     {
         std::thread subThread;
@@ -119,6 +131,7 @@ private:
 };
 
 
+/** @copydoc Task */
 class Pipeline {
     inline static auto const DefRunFn = [](auto&) {};
     using DefaultRunFn_t = decltype(DefRunFn);
@@ -133,12 +146,24 @@ public:
     using TaskIterator_t = typename Task<DefaultRunFn_t, DefaultStepFn_t, CTypes...>::Iterator_t;
 
 public:
+    /// Runs main task and subtasks
+    /**
+     * This function returns only if every task completed its execution
+     * @param mgr manager to update internal selection
+     */
     void run(EntityManager& mgr)
     {
         if (mainTask)
             mainTask->run(mgr);
     }
 
+    /// Sets the main task
+    /**
+     * @param fn tasks's function, that takes an iterator
+     * @param stepFn Function for calculating how often should the main task let the 
+     * subtask know to which point can it iterate to (for example every 500 entities)
+     * @returns Reference to the created task, which can be used to create more subtasks
+     */
     template <typename... CTypes, typename FnType, typename StepFnType = DefaultStepFn_t>
     Task<FnType, StepFnType, CTypes...>& setTask(FnType fn, StepFnType stepFn = DefStepFn)
     {
