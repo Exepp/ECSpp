@@ -91,7 +91,7 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a0fcac1424c39979b8ace806ebacb1066"><td class="memTemplItemLeft" align="right" valign="top">static void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classepp_1_1CMetadata.html#a0fcac1424c39979b8ace806ebacb1066">Register</a> ()</td></tr>
 <tr class="separator:a0fcac1424c39979b8ace806ebacb1066"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a43f3c16a156e3e444754a5f327dbf67b"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classepp_1_1CMetadata.html">CMetadata</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1CMetadata.html#a43f3c16a156e3e444754a5f327dbf67b">GetData</a> (<a class="el" href="structepp_1_1IndexType.html">ComponentId</a> id)</td></tr>
-<tr class="memdesc:a43f3c16a156e3e444754a5f327dbf67b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a copy of metadata associated with the given id.  <a href="classepp_1_1CMetadata.html#a43f3c16a156e3e444754a5f327dbf67b">More...</a><br /></td></tr>
+<tr class="memdesc:a43f3c16a156e3e444754a5f327dbf67b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a copy of metadata associated with a given id.  <a href="classepp_1_1CMetadata.html#a43f3c16a156e3e444754a5f327dbf67b">More...</a><br /></td></tr>
 <tr class="separator:a43f3c16a156e3e444754a5f327dbf67b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
@@ -117,7 +117,7 @@ std::uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>alignment</b
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
-<tr class="memitem:a5956e9e02615d4ed133a193dfc545c86"><td class="memItemLeft" align="right" valign="top">static constexpr const std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1CMetadata.html#a5956e9e02615d4ed133a193dfc545c86">MaxRegisteredComponents</a> = 128</td></tr>
+<tr class="memitem:a5956e9e02615d4ed133a193dfc545c86"><td class="memItemLeft" align="right" valign="top">static constexpr const std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1CMetadata.html#a5956e9e02615d4ed133a193dfc545c86">MaxRegisteredComponents</a> = 64</td></tr>
 <tr class="memdesc:a5956e9e02615d4ed133a193dfc545c86"><td class="mdescLeft">&#160;</td><td class="mdescRight">The maximum number of registered components.  <a href="classepp_1_1CMetadata.html#a5956e9e02615d4ed133a193dfc545c86">More...</a><br /></td></tr>
 <tr class="separator:a5956e9e02615d4ed133a193dfc545c86"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -179,7 +179,7 @@ static MetadataVec_t&#160;</td><td class="memItemRight" valign="bottom"><b>Metad
 </table>
 </div><div class="memdoc">
 
-<p>Returns a copy of metadata associated with the given id. </p>
+<p>Returns a copy of metadata associated with a given id. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">id</td><td>Any id returned from the Metadata::Id function </td></tr>
@@ -215,8 +215,8 @@ template&lt;typename CType &gt; </div>
 </div><div class="memdoc">
 
 <p>Registers a component type on first call and returns a unique id for that type. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
     <tr><td class="paramname">CType</td><td>Type of component </td></tr>
   </table>
   </dd>
@@ -249,8 +249,8 @@ template&lt;typename... Comps&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Registers components in a consistent and specific order and locks registering (following attempts to register a component will throw in debug and release) </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
+<p>Registers components in a consistent and specific order and locks registering (following attempts to register a component will throw in debug and release) </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
     <tr><td class="paramname">Comps</td><td>A pack of types to register </td></tr>
   </table>
   </dd>
@@ -275,7 +275,7 @@ template&lt;typename... Comps&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr const std::size_t epp::CMetadata::MaxRegisteredComponents = 128</td>
+          <td class="memname">constexpr const std::size_t epp::CMetadata::MaxRegisteredComponents = 64</td>
         </tr>
       </table>
   </td>

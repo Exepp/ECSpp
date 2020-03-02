@@ -14,7 +14,7 @@ class CPool final {
     using Idx_t = std::size_t;
 
 public:
-    /// Constructs a pool of the given component
+    /// Constructs a pool of components with ComponentIds equal to cId
     /**
      * CPool uses the cId to get metadata from the CMetadata::GetData static function
      * @param cId A ComponentId returned from CMetadata::Id (or IdOf) function
@@ -59,8 +59,7 @@ public:
     /// Allocates memory for one component
     /**
      * @details Allocated component is always located at size() index (after allocation size() - 1) - just as vector's push_back
-     * @details Warning;
-     * @details EVERY ALLOCATED COMPONENT MUST BE CONSTRUCTED BEFORE NEXT ALLOC CALL.
+     * @warning EVERY ALLOCATED COMPONENT MUST BE CONSTRUCTED BEFORE NEXT ALLOC CALL.
      * If there are 2 consecutive calls, the second one may lead to reallocation of the internal storage
      * which will move and destroy all the components (even the uninitialized ones).
      * This way the destructor and move constructor will be called on the uninitialized component from the first call
@@ -77,11 +76,10 @@ public:
     void* alloc(Idx_t n);
 
 
-    /// Calls the constructor on the component located at the given index
+    /// Calls the constructor on the component located at a given index
     /**
-     * @details Warning:
-     * @details It is up to the caller to make sure this function is called only on components
-     * that are not yet constructed (that is, created with alloc)
+     * @note It is up to the caller to make sure this function is called only on components
+     * that are not yet constructed
      * 
      * @param idx Index of the component in this pool to call the constructor on
      * @returns The address to the first of the allocated components. The components are stored contiguously
@@ -90,17 +88,17 @@ public:
     void construct(Idx_t idx);
 
 
-    /// Calls the move constructor on the component located at the given index
+    /// Calls the move constructor on the component located at a given index
     /**
      * The same warning as above 
      * @param idx Index of the component in this pool to call the move constructor on
-     * @returns The address of the component located at the given location
+     * @returns The address of the component located at a given location
      * @throws (Debug only) Throws the AssertionFailed exception if idx is greater or equal to the size()
      */
     void construct(Idx_t idx, void* rValComp);
 
 
-    /// Calls the destructor on the component located at the given index
+    /// Calls the destructor on the component located at a given index
     /**
      * The last components is moved in place of the removed one
      * The same warning as above 
@@ -137,10 +135,10 @@ public:
     void reserve(std::size_t newReserved);
 
 
-    /// Returns pointer to the component located at the given index
+    /// Returns pointer to the component located at a given index
     /**
      * @param idx Index of the component in this pool
-     * @returns A Pointer to the component located at the given index
+     * @returns A Pointer to the component located at a given index
      * @throws (Debug only) Throws the AssertionFailed exception if idx is greater or equal to the size()
      */
     void* operator[](Idx_t idx);
@@ -164,7 +162,7 @@ public:
 private:
     void* addressAtIdx(Idx_t idx) const { return addressAtIdx(data, idx); }
 
-    void* addressAtIdx(void* base, Idx_t idx) const { return reinterpret_cast<void*>(static_cast<std::uint8_t*>(base) + metadata.size * std::uint64_t(idx)); }
+    void* addressAtIdx(void* base, Idx_t idx) const { return reinterpret_cast<void*>(static_cast<std::uint8_t*>(base) + metadata.size * std::uintptr_t(idx)); }
 
 private:
     void* data = nullptr;

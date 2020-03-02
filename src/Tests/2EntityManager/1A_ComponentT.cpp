@@ -11,7 +11,14 @@ TEST(Component, Register_Id)
 {
     CMetadata::Register<TComp1, TComp2, TComp3, TComp4>();
     ASSERT_THROW((CMetadata::Register<TComp1, TComp2, TComp3, TComp4>()), AssertFailed);
-    ASSERT_THROW(auto x = IdOf<int>();, AssertFailed); // usage of unregistered component
+    ASSERT_THROW(
+        try {
+            auto x = IdOf<int>();
+        } catch (AssertFailed& exc) {
+            ASSERT_NE(exc.what(), nullptr);
+            throw exc;
+        },
+        AssertFailed); // usage of unregistered component
 
     // reverse order
     ASSERT_EQ(IdOf<TComp4>().value, 3);

@@ -8,7 +8,7 @@ TEST(Pipeline, Constructor)
 {
     EntityManager mgr;
     Pipeline pipline;
-    ASSERT_NO_THROW(pipline.run(mgr));
+    ASSERT_NO_THROW(pipline.run());
 }
 
 TEST(Pipeline, AddSubtask_Run)
@@ -39,19 +39,22 @@ TEST(Pipeline, AddSubtask_Run)
     auto subTaskFn1 = [](TaskIterator<TComp1, TComp3> const& it) { it.getComponent<TComp1>().data[0] *= 7;  ++it.getComponent<TComp1>().data[1]; };
     auto subTaskFn2 = [](TaskIterator<TComp1, TComp3> const& it) { it.getComponent<TComp1>().data[0] -= 3;  ++it.getComponent<TComp1>().data[1]; };
     auto subTaskFn3 = [](TaskIterator<TComp1, TComp3> const& it) { it.getComponent<TComp1>().data[0] *= 13;  ++it.getComponent<TComp1>().data[1]; };
-    pipeline.setTask<TComp1, TComp3>(mainTaskFn)
-        .setSubtask<TComp1, TComp3>(subTaskFn1)
-        .setSubtask<TComp1, TComp3>(subTaskFn2)
-        .setSubtask<TComp1, TComp3>(subTaskFn3);
-    pipeline.run(mgr);
+    auto& mainTask = pipeline.setTask<TComp1, TComp3>(mgr, mainTaskFn);
+
+    pipeline.run();
+
+    mainTask.setSubtask(subTaskFn1)
+        .setSubtask(subTaskFn2)
+        .setSubtask(subTaskFn3);
+    pipeline.run();
 
     Selection<TComp1, TComp3> sel;
     mgr.updateSelection(sel);
 
     int i = 0;
     for (auto it = sel.begin(), end = sel.end(); it != end; ++it, ++i) {
-        ASSERT_EQ(it.getComponent<TComp1>().data[0], (((i + 10) * 7) - 3) * 13);
-        ASSERT_EQ(it.getComponent<TComp1>().data[1], 4);
+        ASSERT_EQ(it.getComponent<TComp1>().data[0], (((i + 10 + 10) * 7) - 3) * 13);
+        ASSERT_EQ(it.getComponent<TComp1>().data[1], 1 + 4);
         ASSERT_EQ(it.getComponent<TComp3>().data, TComp3::Arr_t({ -i, -i, -i }));
     }
 }

@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['nextfreelistidx_73',['nextFreeListIdx',['../classepp_1_1EntityList_1_1Cell.html#ae6e8c6e0b753b488bf97e7839d420443',1,'epp::EntityList::Cell']]],
-  ['nextversion_74',['nextVersion',['../structepp_1_1EntVersion.html#a4c98561f5d03305c325a49a104eb6378',1,'epp::EntVersion']]],
-  ['numberofcommon_75',['numberOfCommon',['../classepp_1_1CMask.html#a21e9fd8acadfff32cd88752b3e821b66',1,'epp::CMask']]]
+  ['makearchetype_79',['makeArchetype',['../classepp_1_1EntitySpawner.html#a478fba120df1000cbb1ecfd4a65ac67b',1,'epp::EntitySpawner']]],
+  ['maskof_80',['maskOf',['../classepp_1_1EntityManager.html#aa053c779716e5b5a1083a6aab2f89b2b',1,'epp::EntityManager']]],
+  ['maxregisteredcomponents_81',['MaxRegisteredComponents',['../classepp_1_1CMetadata.html#a5956e9e02615d4ed133a193dfc545c86',1,'epp::CMetadata']]],
+  ['moveentityhere_82',['moveEntityHere',['../classepp_1_1EntitySpawner.html#a764d210a351a1ba16bbf6d18c14d7761',1,'epp::EntitySpawner']]]
 ];

@@ -1,7 +1,9 @@
 var searchData=
 [
-  ['uninitialized_5fcopy_268',['uninitialized_copy',['../classepp_1_1llvm_1_1SmallVectorTemplateBase.html#ab90216789c22f8f5c44df13b5fa61110',1,'epp::llvm::SmallVectorTemplateBase::uninitialized_copy()'],['../classepp_1_1llvm_1_1SmallVectorTemplateBase_3_01T_00_01true_01_4.html#ac09830ddb176b4a20b87532a63421b03',1,'epp::llvm::SmallVectorTemplateBase&lt; T, true &gt;::uninitialized_copy(It1 I, It1 E, It2 Dest)'],['../classepp_1_1llvm_1_1SmallVectorTemplateBase_3_01T_00_01true_01_4.html#a719002d9986d3277f828789227c5417e',1,'epp::llvm::SmallVectorTemplateBase&lt; T, true &gt;::uninitialized_copy(T1 *I, T1 *E, T2 *Dest, typename std::enable_if&lt; std::is_same&lt; typename std::remove_const&lt; T1 &gt;::type, T2 &gt;::value &gt;::type *=nullptr)']]],
-  ['uninitialized_5fmove_269',['uninitialized_move',['../classepp_1_1llvm_1_1SmallVectorTemplateBase.html#ac6e35b6e0b9234be7de4eabac303795e',1,'epp::llvm::SmallVectorTemplateBase::uninitialized_move()'],['../classepp_1_1llvm_1_1SmallVectorTemplateBase_3_01T_00_01true_01_4.html#a45ba6939b95884308d0a8ec17711b0ac',1,'epp::llvm::SmallVectorTemplateBase&lt; T, true &gt;::uninitialized_move()']]],
-  ['unset_270',['unset',['../classepp_1_1CMask.html#a958f33824898c5dd13fdf82054a42c25',1,'epp::CMask::unset(Idx_t bitIndex)'],['../classepp_1_1CMask.html#aa5c50bbccd1ab04bda0900146a86c349',1,'epp::CMask::unset(IdxList_t list)']]],
-  ['updateselection_271',['updateSelection',['../classepp_1_1EntityManager.html#a3bae854150aece1c1f3677372febe0fc',1,'epp::EntityManager']]]
+  ['register_283',['Register',['../classepp_1_1CMetadata.html#a0fcac1424c39979b8ace806ebacb1066',1,'epp::CMetadata']]],
+  ['removecommon_284',['removeCommon',['../classepp_1_1CMask.html#aeae82d2224f4376cffa1c97fa72dc30e',1,'epp::CMask']]],
+  ['removecomponent_285',['removeComponent',['../classepp_1_1Archetype.html#a2f8ca84c53e39859a8de2ddaa5d25f2c',1,'epp::Archetype::removeComponent()'],['../classepp_1_1Archetype.html#adf34c086f624071d62adb1d9c1219b26',1,'epp::Archetype::removeComponent(IdList_t ids)'],['../classepp_1_1Archetype.html#a22bfc7494e7df35592294aa729ef69e1',1,'epp::Archetype::removeComponent(CId_t id)']]],
+  ['reserve_286',['reserve',['../classepp_1_1CPool.html#a4075ebdecfdf17cfbf73bbc0c1157b05',1,'epp::CPool']]],
+  ['resettosmall_287',['resetToSmall',['../classepp_1_1llvm_1_1SmallVectorTemplateCommon.html#a827798459e1ecfc23532cda111dab97a',1,'epp::llvm::SmallVectorTemplateCommon']]],
+  ['run_288',['run',['../classepp_1_1Task.html#aef683c7341741480b7fae7b7e3b647a9',1,'epp::Task::run()'],['../classepp_1_1Pipeline.html#ab48cd66373ea0bb7c68e83a492da9c12',1,'epp::Pipeline::run()']]]
 ];

@@ -172,9 +172,11 @@ TEST(EntityManager, ChangeArchetypeEntityDifference)
     mgr.changeArchetype(ent, compsRemoved, compsRemoved); // remove and add the same one
     TestEntityManager<TComp3, TComp1>(mgr, 1, archFrom, { ent }, ent, { 444, 44, 4 });
 
-    mgr.changeArchetype(ent, compsRemoved, compsAdded);
+    // use already constructed component
+    mgr.changeArchetype(ent, compsRemoved, compsAdded, [](EntityCreator&& cr) { cr.constructed<TComp2>(cr.constructed<TComp3>().data); });
     TestEntityManager<TComp3, TComp1>(mgr, 1, archFrom, {});
     TestEntityManager<TComp3, TComp1>(mgr, 1, archTo, { ent }, ent, { 444, 44, 4 });
+    TestEntityManager<TComp2, TComp1>(mgr, 1, archTo, { ent }, ent, { 444, 44, 4 });
 
     int cnt = 0;
     auto [begin, end] = mgr.spawn(archTo, 1e4, [&cnt](EntityCreator&& cr) { if(cnt++ == 1e3) cr.constructed<TComp3>(TComp3::Arr_t{ 222, 22, 2 }); });

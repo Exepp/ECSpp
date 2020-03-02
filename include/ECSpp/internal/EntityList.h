@@ -147,26 +147,26 @@ public:
     /// Allocates a unique entity
     /**
      * Entitylist may use a new entity, or a used one with changed version.
-     * @param poolIdx Spawner's pool index of the entity
+     * @param poolIdx Index of the entity in a spawner with "spawnerId" Id 
      * @param spawnerId Spawner's id
-     * @returns A uniue entity 
+     * @returns A unique entity 
      */
     Entity allocEntity(PoolIdx poolIdx, SpawnerId spawnerId);
 
 
-    /// Changes the values that describe the location of the given entity
+    /// Changes the values that describe the location of a given entity
     /**
      * Ent stays valid
      * @param ent A valid entity which data will be changed
-     * @param poolIdx A new Spawner's pool index of the entity
+     * @param poolIdx Index of the entity in a spawner with "spawnerId" Id 
      * @param spawnerId A new Spawner's id
-     * @returns A uniue entity 
+     * @returns A unique entity 
      * @throws (Debug only) Throws the AssertionFailed exception if ent is invalid
      */
     void changeEntity(Entity ent, PoolIdx poolIdx, SpawnerId spawnerId);
 
 
-    /// Frees the given entity
+    /// Frees a given entity
     /**
      * Increases the version of the entity and sets its cell's universal idx to the freeIndex 
      * and freeIndex is set to the value of ent.listIdx
@@ -188,7 +188,7 @@ public:
     void fitNextN(std::size_t n);
 
 
-    /// Check whether the given entity is valid
+    /// Check whether a given entity is valid
     /**
      * @param ent Any entity
      * @returns True if the entity is valid, false otherwise
@@ -196,7 +196,7 @@ public:
     bool isValid(Entity ent) const { return ent.listIdx.value < reserved && ent.version.value == data[ent.listIdx.value].entVersion().value; }
 
 
-    /// Returns the values that describe the location of the given entity
+    /// Returns the values that describe the location of a given entity
     /**
      * @param ent A valid entity
      * @returns Occupied version of the entity's cell
@@ -286,7 +286,7 @@ inline void EntityList::fitNextN(std::size_t n)
 inline void EntityList::reserve(std::size_t newReserved)
 {
     EPP_ASSERT(newReserved > reserved);
-    Cell* newMemory = reinterpret_cast<Cell*>(operator new[](sizeof(Cell) * std::uint64_t(newReserved)));
+    Cell* newMemory = reinterpret_cast<Cell*>(operator new[](sizeof(Cell) * std::uintptr_t(newReserved)));
     if (data) {
         std::memcpy(newMemory, data, reserved * sizeof(Cell));
         operator delete[](data);

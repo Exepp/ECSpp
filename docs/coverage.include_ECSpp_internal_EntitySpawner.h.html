@@ -1,0 +1,2624 @@
+
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <title>Head</title>
+  <style media="screen" type="text/css">
+  
+    body
+    {
+      color: #000000;
+      background-color: #FFFFFF;
+    }
+
+    /* Link formats: use maroon w/underlines */
+    a:link
+    {
+      color: navy;
+      text-decoration: underline;
+    }
+    a:visited
+    {
+      color: maroon;
+      text-decoration: underline;
+    }
+    a:active
+    {
+      color: navy;
+      text-decoration: underline;
+    }
+
+    /*** TD formats ***/
+    td
+    {
+      font-family: sans-serif;
+    }
+    td.title
+    {
+      text-align: center;
+      padding-bottom: 10px;
+      font-size: 20pt;
+      font-weight: bold;
+    }
+
+    /* TD Header Information */
+    td.headerName
+    {
+      text-align: right;
+      color: black;
+      padding-right: 6px;
+      font-weight: bold;
+      vertical-align: top;
+      white-space: nowrap;
+    }
+    td.headerValue
+    {
+      text-align: left;
+      color: blue;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+    td.headerTableEntry
+    {
+      text-align: right;
+      color: black;
+      font-weight: bold;
+      white-space: nowrap;
+      padding-left: 12px;
+      padding-right: 4px;
+      background-color: LightBlue;
+    }
+    td.headerValueLeg
+    {
+      text-align: left;
+      color: black;
+      font-size: 80%;
+      white-space: nowrap;
+      padding-left: 10px;
+      padding-right: 10px;
+      padding-top: 2px;
+    }
+
+    /* Color of horizontal ruler */
+    td.hr
+    {
+      background-color: navy;
+      height:3px;
+    }
+    /* Footer format */
+    td.footer
+    {
+      text-align: center;
+      padding-top: 3px;
+      font-family: sans-serif;
+    }
+
+    /* Coverage Table */
+
+    td.coverTableHead
+    {
+      text-align: center;
+      color: white;
+      background-color: SteelBlue;
+      font-family: sans-serif;
+      font-size: 120%;
+      white-space: nowrap;
+      padding-left: 4px;
+      padding-right: 4px;
+    }
+    td.coverFile
+    {
+      text-align: left;
+      padding-left: 10px;
+      padding-right: 20px;
+      color: black;
+      background-color: LightBlue;
+      font-family: monospace;
+      font-weight: bold;
+      font-size: 110%;
+    }
+    td.coverBar
+    {
+      padding-left: 10px;
+      padding-right: 10px;
+      background-color: LightBlue;
+    }
+    td.coverBarOutline
+    {
+      background-color: white;
+    }
+    td.coverValue
+    {
+      padding-top: 2px;
+      text-align: right;
+      padding-left: 10px;
+      padding-right: 10px;
+      font-family: sans-serif;
+      white-space: nowrap;
+      font-weight: bold;
+    }
+
+    /* Link Details */
+    a.detail:link
+    {
+      color: #B8D0FF;
+      font-size:80%;
+    }
+    a.detail:visited
+    {
+      color: #B8D0FF;
+      font-size:80%;
+    }
+    a.detail:active
+    {
+      color: #FFFFFF;
+      font-size:80%;
+    }
+
+    .graphcont{
+        color:#000;
+        font-weight:700;
+        float:left
+    }
+
+    .graph{
+        float:left;
+        background-color: white;
+        position:relative;
+        width:280px;
+        padding:0
+    }
+
+    .graph .bar{
+        display:block;
+        position:relative;
+        border:black 1px solid;
+        text-align:center;
+        color:#fff;
+        height:10px;
+        font-family:Arial,Helvetica,sans-serif;
+        font-size:12px;
+        line-height:1.9em
+    }
+
+    .graph .bar span{
+        position:absolute;
+        left:1em
+    }
+
+    td.coveredLine,
+    span.coveredLine
+    {
+        background-color: LightGreen!important;
+    }
+
+    td.uncoveredLine,
+    span.uncoveredLine
+    {
+        background-color: LightPink!important;
+    }
+
+    .linebranch, .linecount
+    {
+        border-right: 1px gray solid;
+        background-color: lightgray;
+    }
+
+    span.takenBranch
+    {
+        color: Green!important;
+        cursor: help;
+    }
+
+    span.notTakenBranch
+    {
+        color: Red!important;
+        cursor: help;
+    }
+
+    .src
+    {
+        padding-left: 12px;
+    }
+
+    .srcHeader,
+    span.takenBranch,
+    span.notTakenBranch
+    {
+        font-family: monospace;
+        font-weight: bold;
+    }
+
+    pre
+    {
+        height : 15px;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .lineno
+    {
+        background-color: #EFE383;
+        border-right: 1px solid #BBB15F;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr><td class="title">GCC Code Coverage Report</td></tr>
+    <tr><td class="hr"></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding="1" border="0" width="100%">
+          <tr>
+            <td width="10%" class="headerName">Directory:</td>
+            <td width="35%" class="headerValue">include/ECSpp/</td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerValue" style="text-align:right;">Exec</td>
+            <td width="10%" class="headerValue" style="text-align:right;">Total</td>
+            <td width="15%" class="headerValue" style="text-align:right;">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerName">File:</td>
+            <td class="headerValue">include/ECSpp/internal/EntitySpawner.h</td>
+            <td></td>
+            <td class="headerName">Lines:</td>
+            <td class="headerTableEntry">94</td>
+            <td class="headerTableEntry">94</td>
+            <td class="headerTableEntry" style="background-color:LightGreen">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerName">Date:</td>
+            <td class="headerValue">2020-03-02 04:01:59</td>
+            <td></td>
+            <td class="headerName">Branches:</td>
+            <td class="headerTableEntry">398</td>
+            <td class="headerTableEntry">890</td>
+            <td class="headerTableEntry" style="background-color:LightPink">44.7 %</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="hr"></td></tr>
+  </table>
+
+  <br>
+  <table cellspacing="0" cellpadding="1">
+    <tr>
+      <td width="5%" align="right" class="srcHeader">Line</td>
+      <td width="5%" align="right" class="srcHeader">Branch</td>
+      <td width="5%" align="right" class="srcHeader">Exec</td>
+      <td width="75%" align="left" class="srcHeader src">Source</td>
+    </tr>
+
+    
+    <tr>
+    <td align="right" class="lineno"><pre>1</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>#ifndef EPP_ENTITYSPAWNER_H</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>2</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>#define EPP_ENTITYSPAWNER_H</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>3</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>4</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>#include &lt;ECSpp/internal/Archetype.h&gt;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>5</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>#include &lt;ECSpp/internal/CPool.h&gt;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>6</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>#include &lt;ECSpp/internal/EntityList.h&gt;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>7</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>8</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>namespace epp {</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>9</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>10</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>56</pre></td>
+    <td align="left" class="src coveredLine"><pre>class EntitySpawner {</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>11</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>public:</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>12</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    /// Creator is responsible for easy components initialization owned by some entity</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>13</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    /**</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>14</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>     * Instances of this class can only be created and destroyed in EntitySpawner functions,</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>15</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>     * because they construct unconstructed components in their destructor. So to ensure</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>16</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>     * that every component will be constructed after leaving the scope of EntitySpanwer::spawn function,</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>17</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>     * Creator has no public constructors or assignment operators (to prevent moving the instance out of the function's scope)</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>18</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>     */</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>19</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    class Creator {</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>20</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    public:</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>21</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>        /// Ensures that the returned component is constructed</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>22</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>        /**</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>23</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>         * Consecutive calls to "constructed" on already constructed components will only return the reference</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>24</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>         * @tparam CType Component type owned by the entity that is being constructed</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>25</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>         * @tparam Args Types of arguments that will be forwarded</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>26</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>         * @param args Arguments forwarded to construct an unconstructed component</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>27</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>         * @returns A reference to the constructed component of type CType</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>28</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>         * @throws (Debug only) Throws the AssertionFailed exception if the entity that</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>29</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>         * the creator is pointing to does not own component of CType type</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>30</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>        */</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>31</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>        template &lt;typename CType, typename... Args&gt;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>32</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>        CType&amp; constructed(Args&amp;&amp;... args);</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>33</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>34</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    private:</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>35</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>        Creator(EntitySpawner&amp; sp, PoolIdx index, CMask const&amp; cstred = CMask());</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>36</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>        Creator(Creator&amp;&amp; rVal) = delete;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>37</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>        Creator(Creator const&amp;) = delete;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>38</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>        Creator&amp; operator=(Creator const&amp;) = delete;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>39</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>        Creator&amp; operator=(Creator&amp;&amp;) = delete;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>40</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>        ~Creator(); /** constructs components that the user didnt construct himself */</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>41</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>42</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>43</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    private:</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>44</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>        EntitySpawner&amp; spawner;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>45</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>        CMask constrMask;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>46</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>        PoolIdx const idx;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>47</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>48</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>        friend class EntitySpawner;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>49</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    };</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>50</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>51</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    using EntityPool_t = Pool&lt;Entity&gt;;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>52</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>53</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>private:</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>54</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    using CPools_t = std::vector&lt;CPool&gt;;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>55</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>56</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>public:</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>57</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    /// Constructs the spawner to spawn entities of a given archetype</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>58</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    /**</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>59</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>     * @param id A unique id to identify this spawner</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>60</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>     * @param arch Archetype of entities that will be spawned in this spawner</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>61</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    */</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>62</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    EntitySpawner(SpawnerId id, Archetype const&amp; arch);</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>63</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>64</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    EntitySpawner(EntitySpawner&amp;&amp;) = delete;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>65</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    EntitySpawner&amp; operator=(EntitySpawner&amp;&amp;) = delete;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>66</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    EntitySpawner&amp; operator=(EntitySpawner const&amp;) = delete;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>67</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    EntitySpawner(EntitySpawner const&amp;) = delete;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>68</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>69</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>70</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    /// Spawns a new entity with the archetype specified in the Spawner's constructor</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>71</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    /**</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>72</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>     * @tparam FnType Callable type that takes r-value reference to the EntityCreator</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>73</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>     * @param entList List of entities to get a unique Entity instance from</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>74</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>     * @param fn A Callable type that can use the Creator instance to construct the components of the spawned entity</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>75</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>     * @returns An entity</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>76</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>     */</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>77</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    template &lt;typename FnType&gt;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>78</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    Entity spawn(EntityList&amp; entList, FnType fn);</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>79</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>80</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>81</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    /// Destroys a valid entity and makes it invalid</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>82</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    /**</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>83</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>     * @param ent A valid entity</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>84</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>     * @param entList List of entities to free ent for future use</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>85</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>     * @throws (Debug only) Throws the AssertionFailed exception if ent is invalid</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>86</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>     */</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>87</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    void destroy(Entity ent, EntityList&amp; entList);</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>88</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>89</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>90</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    /// Changes the archetype of a given entity</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>91</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    /**</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>92</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>     * @details Components that are not present in this spawner's archetype are destroyed</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>93</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>     * @details Components that are not present in originSpawner's archetype but are present in this spawner's archetype</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>94</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>     *          are allocated and can be constructed for the first time with Creator</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>95</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>     * @tparam FnType Callable type that takes r-value reference to the EntityCreator</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>96</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>     * @param ent A valid entity</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>97</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>     * @param entList List of entities to change the location data of ent</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>98</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>     * @param originSpawner any OTHER spawner that owns entity</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>99</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>     * @param fn A Callable type that can use the Creator instance to construct new components</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>100</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>     * @returns True when changed the archetype, false otherwise (newArchetype was the same as ent's current archetype)</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>101</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>     * @throws (Debug only) Throws the AssertionFailed exception if ent is invalid or &amp;originSpawner == this or if originSpawner</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>102</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>     *          is not the origin spawner of ent</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>103</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>     */</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>104</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    template &lt;typename FnType&gt;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>105</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    void moveEntityHere(Entity ent, EntityList&amp; entList, EntitySpawner&amp; originSpawner, FnType fn);</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>106</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>107</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>108</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    /// Destroys every entity in this spawner, keeps resereved memory</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>109</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    /**</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>110</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>     * Frees each entity individually in entList, to ensure that no entity cell will be lost</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>111</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>     * (that every destroyed entity will be reused)</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>112</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>     */</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>113</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    void clear(EntityList&amp; entList);</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>114</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>115</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    /// Destroys every entity, keeps resereved memory</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>116</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    /**</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>117</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>     * Faster than clear(entList) but if used without calling entList's clear before/after this function,</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>118</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>     * then every cell of destroyed here entity will be lost until next entList's clear</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>119</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>     */</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>120</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    void clear();</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>121</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>122</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>123</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    /// The next n spawn(...) calls will not require reallocation in any of the internal structures</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>124</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    /**</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>125</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>     * @param n Number of entities to reserve the additional memory for</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>126</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>     */</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>127</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    void fitNextN(std::size_t n);</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>128</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>129</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>130</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    /// Removes the excess of the reserved memory in the internal structures</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>131</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    void shrinkToFit();</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>132</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>133</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>134</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    /// Returns CPool of components with cId id</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>135</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    /**</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>136</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>     * @param cId ComponentId that is present in the archetype of this spawner</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>137</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>     * @returns A reference to the pool</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>138</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>     * @throws (Debug only) Throws the AssertionFailed exception if cId is not present in this spawner's archetype</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>139</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>     */</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>140</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    CPool&amp; getPool(ComponentId cId);</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>141</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>142</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>143</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    /** @copydoc EntitySpawner::getPool(ComponentId cId) */</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>144</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    CPool const&amp; getPool(ComponentId cId) const;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>145</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>146</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>147</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    /// Returns a pool of entities used by this spawner</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>148</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    /**</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>149</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>     * @returns A reference to the pool of entities</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>150</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>     */</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>151</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>13326</pre></td>
+    <td align="left" class="src coveredLine"><pre>    EntityPool_t const&amp; getEntities() const { return entityPool; }</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>152</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>153</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>154</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    /// Returns archetype of this spawner</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>155</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    /**</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>156</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>     * Creartes the same archetype that this spawner was constructed with</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>157</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>     * @returns Archetype of this spawner</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>158</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>     */</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>159</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    Archetype makeArchetype() const;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>160</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>161</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>private:</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>162</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    void removeFromEntityPool(PoolIdx idx, EntityList&amp; entList);</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>163</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>164</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>public:</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>165</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    SpawnerId const spawnerId;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>166</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    CMask const mask;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>167</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>168</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>private:</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>169</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    EntityPool_t entityPool;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>170</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>171</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    CPools_t cPools;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>172</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>};</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>173</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>174</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>175</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>using EntityCreator = EntitySpawner::Creator;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>176</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>177</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>178</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>179</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>180</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>302955</pre></td>
+    <td align="left" class="src coveredLine"><pre>inline EntityCreator::Creator(EntitySpawner&amp; sp, PoolIdx index, CMask const&amp; cstred)</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>181</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>302955</pre></td>
+    <td align="left" class="src coveredLine"><pre>    : spawner(sp), constrMask(cstred), idx(index) {}</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>182</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>183</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>184</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>template &lt;typename CType, typename... Args&gt;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>185</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>128937</pre></td>
+    <td align="left" class="src coveredLine"><pre>inline CType&amp; EntityCreator::constructed(Args&amp;&amp;... args)</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>186</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>{</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>187</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 1026 times">&check;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span><span class="takenBranch" title="Branch 4 taken 1026 times">&check;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 6 not taken">&cross;</span><span class="takenBranch" title="Branch 7 taken 1026 times">&check;</span><span class="notTakenBranch" title="Branch 10 not taken">&cross;</span><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 14 not taken">&cross;</span><span class="notTakenBranch" title="Branch 15 not taken">&cross;</span><span class="notTakenBranch" title="Branch 17 not taken">&cross;</span><span class="notTakenBranch" title="Branch 18 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 20 not taken">&cross;</span><span class="notTakenBranch" title="Branch 21 not taken">&cross;</span><span class="notTakenBranch" title="Branch 23 not taken">&cross;</span><span class="notTakenBranch" title="Branch 24 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 26 not taken">&cross;</span><span class="notTakenBranch" title="Branch 27 not taken">&cross;</span><span class="notTakenBranch" title="Branch 29 not taken">&cross;</span><span class="notTakenBranch" title="Branch 30 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 32 not taken">&cross;</span><span class="notTakenBranch" title="Branch 33 not taken">&cross;</span><span class="takenBranch" title="Branch 55 taken 2051 times">&check;</span><span class="notTakenBranch" title="Branch 56 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 58 taken 2051 times">&check;</span><span class="notTakenBranch" title="Branch 59 not taken">&cross;</span><span class="notTakenBranch" title="Branch 60 not taken">&cross;</span><span class="takenBranch" title="Branch 61 taken 2051 times">&check;</span><br/><span class="notTakenBranch" title="Branch 64 not taken">&cross;</span><span class="notTakenBranch" title="Branch 65 not taken">&cross;</span><span class="notTakenBranch" title="Branch 68 not taken">&cross;</span><span class="notTakenBranch" title="Branch 69 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 71 not taken">&cross;</span><span class="notTakenBranch" title="Branch 72 not taken">&cross;</span><span class="notTakenBranch" title="Branch 74 not taken">&cross;</span><span class="notTakenBranch" title="Branch 75 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 77 not taken">&cross;</span><span class="notTakenBranch" title="Branch 78 not taken">&cross;</span><span class="notTakenBranch" title="Branch 80 not taken">&cross;</span><span class="notTakenBranch" title="Branch 81 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 83 not taken">&cross;</span><span class="notTakenBranch" title="Branch 84 not taken">&cross;</span><span class="notTakenBranch" title="Branch 86 not taken">&cross;</span><span class="notTakenBranch" title="Branch 87 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 109 taken 1027 times">&check;</span><span class="notTakenBranch" title="Branch 110 not taken">&cross;</span><span class="takenBranch" title="Branch 112 taken 1027 times">&check;</span><span class="notTakenBranch" title="Branch 113 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 114 taken 1026 times">&check;</span><span class="takenBranch" title="Branch 115 taken 1 times">&check;</span><span class="takenBranch" title="Branch 118 taken 1026 times">&check;</span><span class="notTakenBranch" title="Branch 119 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 122 taken 1026 times">&check;</span><span class="notTakenBranch" title="Branch 123 not taken">&cross;</span><span class="takenBranch" title="Branch 125 taken 1026 times">&check;</span><span class="notTakenBranch" title="Branch 126 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 128 taken 1026 times">&check;</span><span class="notTakenBranch" title="Branch 129 not taken">&cross;</span><span class="takenBranch" title="Branch 131 taken 1026 times">&check;</span><span class="notTakenBranch" title="Branch 132 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 134 taken 1026 times">&check;</span><span class="notTakenBranch" title="Branch 135 not taken">&cross;</span><span class="takenBranch" title="Branch 137 taken 1026 times">&check;</span><span class="notTakenBranch" title="Branch 138 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 140 taken 1026 times">&check;</span><span class="notTakenBranch" title="Branch 141 not taken">&cross;</span><span class="takenBranch" title="Branch 163 taken 12541 times">&check;</span><span class="notTakenBranch" title="Branch 164 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 166 taken 12541 times">&check;</span><span class="notTakenBranch" title="Branch 167 not taken">&cross;</span><span class="notTakenBranch" title="Branch 168 not taken">&cross;</span><span class="takenBranch" title="Branch 169 taken 12541 times">&check;</span><br/><span class="notTakenBranch" title="Branch 172 not taken">&cross;</span><span class="notTakenBranch" title="Branch 173 not taken">&cross;</span><span class="notTakenBranch" title="Branch 176 not taken">&cross;</span><span class="notTakenBranch" title="Branch 177 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 179 not taken">&cross;</span><span class="notTakenBranch" title="Branch 180 not taken">&cross;</span><span class="notTakenBranch" title="Branch 182 not taken">&cross;</span><span class="notTakenBranch" title="Branch 183 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 185 not taken">&cross;</span><span class="notTakenBranch" title="Branch 186 not taken">&cross;</span><span class="notTakenBranch" title="Branch 188 not taken">&cross;</span><span class="notTakenBranch" title="Branch 189 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 191 not taken">&cross;</span><span class="notTakenBranch" title="Branch 192 not taken">&cross;</span><span class="notTakenBranch" title="Branch 194 not taken">&cross;</span><span class="notTakenBranch" title="Branch 195 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 217 taken 2 times">&check;</span><span class="notTakenBranch" title="Branch 218 not taken">&cross;</span><span class="takenBranch" title="Branch 220 taken 2 times">&check;</span><span class="notTakenBranch" title="Branch 221 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 222 not taken">&cross;</span><span class="takenBranch" title="Branch 223 taken 2 times">&check;</span><span class="notTakenBranch" title="Branch 226 not taken">&cross;</span><span class="notTakenBranch" title="Branch 227 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 230 not taken">&cross;</span><span class="notTakenBranch" title="Branch 231 not taken">&cross;</span><span class="notTakenBranch" title="Branch 233 not taken">&cross;</span><span class="notTakenBranch" title="Branch 234 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 236 not taken">&cross;</span><span class="notTakenBranch" title="Branch 237 not taken">&cross;</span><span class="notTakenBranch" title="Branch 239 not taken">&cross;</span><span class="notTakenBranch" title="Branch 240 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 242 not taken">&cross;</span><span class="notTakenBranch" title="Branch 243 not taken">&cross;</span><span class="notTakenBranch" title="Branch 245 not taken">&cross;</span><span class="notTakenBranch" title="Branch 246 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 248 not taken">&cross;</span><span class="notTakenBranch" title="Branch 249 not taken">&cross;</span><span class="takenBranch" title="Branch 271 taken 112290 times">&check;</span><span class="notTakenBranch" title="Branch 272 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 274 taken 112290 times">&check;</span><span class="notTakenBranch" title="Branch 275 not taken">&cross;</span><span class="notTakenBranch" title="Branch 276 not taken">&cross;</span><span class="takenBranch" title="Branch 277 taken 112290 times">&check;</span><br/><span class="notTakenBranch" title="Branch 280 not taken">&cross;</span><span class="notTakenBranch" title="Branch 281 not taken">&cross;</span><span class="notTakenBranch" title="Branch 284 not taken">&cross;</span><span class="notTakenBranch" title="Branch 285 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 287 not taken">&cross;</span><span class="notTakenBranch" title="Branch 288 not taken">&cross;</span><span class="notTakenBranch" title="Branch 290 not taken">&cross;</span><span class="notTakenBranch" title="Branch 291 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 293 not taken">&cross;</span><span class="notTakenBranch" title="Branch 294 not taken">&cross;</span><span class="notTakenBranch" title="Branch 296 not taken">&cross;</span><span class="notTakenBranch" title="Branch 297 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 299 not taken">&cross;</span><span class="notTakenBranch" title="Branch 300 not taken">&cross;</span><span class="notTakenBranch" title="Branch 302 not taken">&cross;</span><span class="notTakenBranch" title="Branch 303 not taken">&cross;</span><br/></td>
+    <td align="right" class="linecount coveredLine"><pre>128937</pre></td>
+    <td align="left" class="src coveredLine"><pre>    EPP_ASSERT(spawner.mask.get(IdOf&lt;CType&gt;()));</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>188</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 1026 times">&check;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span><span class="takenBranch" title="Branch 4 taken 2051 times">&check;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 7 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 8 not taken">&cross;</span><span class="takenBranch" title="Branch 10 taken 12541 times">&check;</span><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 13 taken 2 times">&check;</span><span class="notTakenBranch" title="Branch 14 not taken">&cross;</span><span class="takenBranch" title="Branch 16 taken 112290 times">&check;</span><span class="notTakenBranch" title="Branch 17 not taken">&cross;</span><br/></td>
+    <td align="right" class="linecount coveredLine"><pre>127911</pre></td>
+    <td align="left" class="src coveredLine"><pre>    auto cId = IdOf&lt;CType&gt;();</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>189</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 1026 times">&check;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span><span class="takenBranch" title="Branch 4 taken 1026 times">&check;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 7 taken 2051 times">&check;</span><span class="notTakenBranch" title="Branch 8 not taken">&cross;</span><span class="takenBranch" title="Branch 10 taken 2051 times">&check;</span><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 13 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 14 not taken">&cross;</span><span class="takenBranch" title="Branch 16 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 17 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 19 taken 12541 times">&check;</span><span class="notTakenBranch" title="Branch 20 not taken">&cross;</span><span class="takenBranch" title="Branch 22 taken 12541 times">&check;</span><span class="notTakenBranch" title="Branch 23 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 25 taken 2 times">&check;</span><span class="notTakenBranch" title="Branch 26 not taken">&cross;</span><span class="takenBranch" title="Branch 28 taken 2 times">&check;</span><span class="notTakenBranch" title="Branch 29 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 31 taken 112290 times">&check;</span><span class="notTakenBranch" title="Branch 32 not taken">&cross;</span><span class="takenBranch" title="Branch 34 taken 112290 times">&check;</span><span class="notTakenBranch" title="Branch 35 not taken">&cross;</span><br/></td>
+    <td align="right" class="linecount coveredLine"><pre>127911</pre></td>
+    <td align="left" class="src coveredLine"><pre>    CType* component = static_cast&lt;CType*&gt;(spawner.getPool(cId)[idx.value]);</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>190</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 1026 times">&check;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span><span class="notTakenBranch" title="Branch 3 not taken">&cross;</span><span class="takenBranch" title="Branch 4 taken 1026 times">&check;</span><br/><span class="takenBranch" title="Branch 6 taken 2051 times">&check;</span><span class="notTakenBranch" title="Branch 7 not taken">&cross;</span><span class="takenBranch" title="Branch 8 taken 1 times">&check;</span><span class="takenBranch" title="Branch 9 taken 2050 times">&check;</span><br/><span class="takenBranch" title="Branch 11 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 12 not taken">&cross;</span><span class="notTakenBranch" title="Branch 13 not taken">&cross;</span><span class="takenBranch" title="Branch 14 taken 1 times">&check;</span><br/><span class="takenBranch" title="Branch 16 taken 12541 times">&check;</span><span class="notTakenBranch" title="Branch 17 not taken">&cross;</span><span class="notTakenBranch" title="Branch 18 not taken">&cross;</span><span class="takenBranch" title="Branch 19 taken 12541 times">&check;</span><br/><span class="takenBranch" title="Branch 21 taken 2 times">&check;</span><span class="notTakenBranch" title="Branch 22 not taken">&cross;</span><span class="notTakenBranch" title="Branch 23 not taken">&cross;</span><span class="takenBranch" title="Branch 24 taken 2 times">&check;</span><br/><span class="takenBranch" title="Branch 26 taken 112290 times">&check;</span><span class="notTakenBranch" title="Branch 27 not taken">&cross;</span><span class="notTakenBranch" title="Branch 28 not taken">&cross;</span><span class="takenBranch" title="Branch 29 taken 112290 times">&check;</span><br/></td>
+    <td align="right" class="linecount coveredLine"><pre>127911</pre></td>
+    <td align="left" class="src coveredLine"><pre>    if (constrMask.get(cId))</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>191</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>1</pre></td>
+    <td align="left" class="src coveredLine"><pre>        return *component;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>192</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 1026 times">&check;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span><span class="takenBranch" title="Branch 4 taken 2050 times">&check;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 7 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 8 not taken">&cross;</span><span class="takenBranch" title="Branch 10 taken 12541 times">&check;</span><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 13 taken 2 times">&check;</span><span class="notTakenBranch" title="Branch 14 not taken">&cross;</span><span class="takenBranch" title="Branch 16 taken 112290 times">&check;</span><span class="notTakenBranch" title="Branch 17 not taken">&cross;</span><br/></td>
+    <td align="right" class="linecount coveredLine"><pre>127910</pre></td>
+    <td align="left" class="src coveredLine"><pre>    constrMask.set(cId);</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>193</pre></td>
+    <td align="right" class="linebranch"><span class="notTakenBranch" title="Branch 32 not taken">&cross;</span><span class="takenBranch" title="Branch 2 taken 1025 times">&check;</span><span class="takenBranch" title="Branch 3 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 4 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 7 taken 2050 times">&check;</span><span class="notTakenBranch" title="Branch 8 not taken">&cross;</span><span class="notTakenBranch" title="Branch 9 not taken">&cross;</span><span class="notTakenBranch" title="Branch 10 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 12 not taken">&cross;</span><span class="notTakenBranch" title="Branch 13 not taken">&cross;</span><span class="takenBranch" title="Branch 14 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 15 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 20 taken 12541 times">&check;</span><span class="notTakenBranch" title="Branch 21 not taken">&cross;</span><span class="takenBranch" title="Branch 25 taken 2 times">&check;</span><span class="notTakenBranch" title="Branch 26 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 31 taken 112290 times">&check;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>127910</pre></td>
+    <td align="left" class="src coveredLine"><pre>    return *(new (component) CType(std::forward&lt;Args&gt;(args)...));</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>194</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>}</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>195</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>196</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>605910</pre></td>
+    <td align="left" class="src coveredLine"><pre>inline EntityCreator::~Creator()</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>197</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>{</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>198</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 3 taken 581029 times">&check;</span><span class="takenBranch" title="Branch 4 taken 302955 times">&check;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>883984</pre></td>
+    <td align="left" class="src coveredLine"><pre>    for (auto&amp; pool : spawner.cPools)</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>199</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 2 taken 400452 times">&check;</span><span class="takenBranch" title="Branch 3 taken 180577 times">&check;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>581029</pre></td>
+    <td align="left" class="src coveredLine"><pre>        if (constrMask.get(pool.getCId()) == false)</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>200</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>400452</pre></td>
+    <td align="left" class="src coveredLine"><pre>            pool.construct(idx.value);</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>201</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>302955</pre></td>
+    <td align="left" class="src coveredLine"><pre>}</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>202</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>203</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>204</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>205</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>206</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>207</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>56</pre></td>
+    <td align="left" class="src coveredLine"><pre>inline EntitySpawner::EntitySpawner(SpawnerId id, Archetype const&amp; arch)</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>208</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>56</pre></td>
+    <td align="left" class="src coveredLine"><pre>    : spawnerId(id), mask(arch.getMask())</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>209</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>{</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>210</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 3 taken 56 times">&check;</span><span class="notTakenBranch" title="Branch 4 not taken">&cross;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>56</pre></td>
+    <td align="left" class="src coveredLine"><pre>    cPools.reserve(arch.getCIds().size());</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>211</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 3 taken 113 times">&check;</span><span class="takenBranch" title="Branch 4 taken 56 times">&check;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>169</pre></td>
+    <td align="left" class="src coveredLine"><pre>    for (auto cId : arch.getCIds())</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>212</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 113 times">&check;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>113</pre></td>
+    <td align="left" class="src coveredLine"><pre>        cPools.emplace_back(cId);</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>213</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 6 taken 56 times">&check;</span><span class="notTakenBranch" title="Branch 7 not taken">&cross;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>180</pre></td>
+    <td align="left" class="src coveredLine"><pre>    std::sort(cPools.begin(), cPools.end(), [](auto const&amp; lhs, auto const&amp; rhs) { return lhs.getCId() &lt; rhs.getCId(); });</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>214</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>56</pre></td>
+    <td align="left" class="src coveredLine"><pre>}</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>215</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>216</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>template &lt;typename FnType&gt;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>217</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>251312</pre></td>
+    <td align="left" class="src coveredLine"><pre>inline Entity EntitySpawner::spawn(EntityList&amp; entList, FnType fn)</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>218</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>{</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>219</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    static_assert(std::is_invocable_v&lt;FnType, Creator&amp;&amp;&gt;);</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>220</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>221</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 2 taken 16145 times">&check;</span><span class="notTakenBranch" title="Branch 3 not taken">&cross;</span><span class="takenBranch" title="Branch 6 taken 3707 times">&check;</span><span class="notTakenBranch" title="Branch 7 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 10 taken 13073 times">&check;</span><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><span class="takenBranch" title="Branch 14 taken 141 times">&check;</span><span class="notTakenBranch" title="Branch 15 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 18 taken 11023 times">&check;</span><span class="notTakenBranch" title="Branch 19 not taken">&cross;</span><span class="takenBranch" title="Branch 22 taken 2 times">&check;</span><span class="notTakenBranch" title="Branch 23 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 26 taken 10001 times">&check;</span><span class="notTakenBranch" title="Branch 27 not taken">&cross;</span><span class="takenBranch" title="Branch 30 taken 2 times">&check;</span><span class="notTakenBranch" title="Branch 31 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 34 taken 100001 times">&check;</span><span class="notTakenBranch" title="Branch 35 not taken">&cross;</span><span class="takenBranch" title="Branch 38 taken 2 times">&check;</span><span class="notTakenBranch" title="Branch 39 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 42 taken 2 times">&check;</span><span class="notTakenBranch" title="Branch 43 not taken">&cross;</span><span class="takenBranch" title="Branch 46 taken 2 times">&check;</span><span class="notTakenBranch" title="Branch 47 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 50 taken 1025 times">&check;</span><span class="notTakenBranch" title="Branch 51 not taken">&cross;</span><span class="takenBranch" title="Branch 54 taken 91062 times">&check;</span><span class="notTakenBranch" title="Branch 55 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 58 taken 1024 times">&check;</span><span class="notTakenBranch" title="Branch 59 not taken">&cross;</span><span class="takenBranch" title="Branch 62 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 63 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 66 taken 1024 times">&check;</span><span class="notTakenBranch" title="Branch 67 not taken">&cross;</span><span class="takenBranch" title="Branch 70 taken 1024 times">&check;</span><span class="notTakenBranch" title="Branch 71 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 74 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 75 not taken">&cross;</span><span class="takenBranch" title="Branch 78 taken 1024 times">&check;</span><span class="notTakenBranch" title="Branch 79 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 82 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 83 not taken">&cross;</span><span class="takenBranch" title="Branch 86 taken 1024 times">&check;</span><span class="notTakenBranch" title="Branch 87 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 90 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 91 not taken">&cross;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>251312</pre></td>
+    <td align="left" class="src coveredLine"><pre>    PoolIdx idx(entityPool.data.size());</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>222</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 16145 times">&check;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span><span class="takenBranch" title="Branch 4 taken 3707 times">&check;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 7 taken 13073 times">&check;</span><span class="notTakenBranch" title="Branch 8 not taken">&cross;</span><span class="takenBranch" title="Branch 10 taken 141 times">&check;</span><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 13 taken 11023 times">&check;</span><span class="notTakenBranch" title="Branch 14 not taken">&cross;</span><span class="takenBranch" title="Branch 16 taken 2 times">&check;</span><span class="notTakenBranch" title="Branch 17 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 19 taken 10001 times">&check;</span><span class="notTakenBranch" title="Branch 20 not taken">&cross;</span><span class="takenBranch" title="Branch 22 taken 2 times">&check;</span><span class="notTakenBranch" title="Branch 23 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 25 taken 100001 times">&check;</span><span class="notTakenBranch" title="Branch 26 not taken">&cross;</span><span class="takenBranch" title="Branch 28 taken 2 times">&check;</span><span class="notTakenBranch" title="Branch 29 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 31 taken 2 times">&check;</span><span class="notTakenBranch" title="Branch 32 not taken">&cross;</span><span class="takenBranch" title="Branch 34 taken 2 times">&check;</span><span class="notTakenBranch" title="Branch 35 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 37 taken 1025 times">&check;</span><span class="notTakenBranch" title="Branch 38 not taken">&cross;</span><span class="takenBranch" title="Branch 40 taken 91062 times">&check;</span><span class="notTakenBranch" title="Branch 41 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 43 taken 1024 times">&check;</span><span class="notTakenBranch" title="Branch 44 not taken">&cross;</span><span class="takenBranch" title="Branch 46 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 47 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 49 taken 1024 times">&check;</span><span class="notTakenBranch" title="Branch 50 not taken">&cross;</span><span class="takenBranch" title="Branch 52 taken 1024 times">&check;</span><span class="notTakenBranch" title="Branch 53 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 55 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 56 not taken">&cross;</span><span class="takenBranch" title="Branch 58 taken 1024 times">&check;</span><span class="notTakenBranch" title="Branch 59 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 61 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 62 not taken">&cross;</span><span class="takenBranch" title="Branch 64 taken 1024 times">&check;</span><span class="notTakenBranch" title="Branch 65 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 67 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 68 not taken">&cross;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>251312</pre></td>
+    <td align="left" class="src coveredLine"><pre>    Entity ent = entList.allocEntity(idx, spawnerId);</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>223</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 16145 times">&check;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span><span class="takenBranch" title="Branch 4 taken 3707 times">&check;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 7 taken 13073 times">&check;</span><span class="notTakenBranch" title="Branch 8 not taken">&cross;</span><span class="takenBranch" title="Branch 10 taken 141 times">&check;</span><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 13 taken 11023 times">&check;</span><span class="notTakenBranch" title="Branch 14 not taken">&cross;</span><span class="takenBranch" title="Branch 16 taken 2 times">&check;</span><span class="notTakenBranch" title="Branch 17 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 19 taken 10001 times">&check;</span><span class="notTakenBranch" title="Branch 20 not taken">&cross;</span><span class="takenBranch" title="Branch 22 taken 2 times">&check;</span><span class="notTakenBranch" title="Branch 23 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 25 taken 100001 times">&check;</span><span class="notTakenBranch" title="Branch 26 not taken">&cross;</span><span class="takenBranch" title="Branch 28 taken 2 times">&check;</span><span class="notTakenBranch" title="Branch 29 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 31 taken 2 times">&check;</span><span class="notTakenBranch" title="Branch 32 not taken">&cross;</span><span class="takenBranch" title="Branch 34 taken 2 times">&check;</span><span class="notTakenBranch" title="Branch 35 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 37 taken 1025 times">&check;</span><span class="notTakenBranch" title="Branch 38 not taken">&cross;</span><span class="takenBranch" title="Branch 40 taken 91062 times">&check;</span><span class="notTakenBranch" title="Branch 41 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 43 taken 1024 times">&check;</span><span class="notTakenBranch" title="Branch 44 not taken">&cross;</span><span class="takenBranch" title="Branch 46 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 47 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 49 taken 1024 times">&check;</span><span class="notTakenBranch" title="Branch 50 not taken">&cross;</span><span class="takenBranch" title="Branch 52 taken 1024 times">&check;</span><span class="notTakenBranch" title="Branch 53 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 55 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 56 not taken">&cross;</span><span class="takenBranch" title="Branch 58 taken 1024 times">&check;</span><span class="notTakenBranch" title="Branch 59 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 61 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 62 not taken">&cross;</span><span class="takenBranch" title="Branch 64 taken 1024 times">&check;</span><span class="notTakenBranch" title="Branch 65 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 67 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 68 not taken">&cross;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>251312</pre></td>
+    <td align="left" class="src coveredLine"><pre>    entityPool.create(ent);</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>224</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 129 taken 2 times">&check;</span><span class="takenBranch" title="Branch 130 taken 1 times">&check;</span><span class="takenBranch" title="Branch 3 taken 36386 times">&check;</span><span class="takenBranch" title="Branch 4 taken 16145 times">&check;</span><br/><span class="takenBranch" title="Branch 136 taken 1024 times">&check;</span><span class="takenBranch" title="Branch 137 taken 1024 times">&check;</span><span class="takenBranch" title="Branch 10 taken 9462 times">&check;</span><span class="takenBranch" title="Branch 11 taken 3707 times">&check;</span><br/><span class="takenBranch" title="Branch 143 taken 1 times">&check;</span><span class="takenBranch" title="Branch 144 taken 1 times">&check;</span><span class="takenBranch" title="Branch 17 taken 28194 times">&check;</span><span class="takenBranch" title="Branch 18 taken 13073 times">&check;</span><br/><span class="notTakenBranch" title="Branch 150 not taken">&cross;</span><span class="takenBranch" title="Branch 151 taken 1024 times">&check;</span><span class="takenBranch" title="Branch 24 taken 285 times">&check;</span><span class="takenBranch" title="Branch 25 taken 141 times">&check;</span><br/><span class="notTakenBranch" title="Branch 157 not taken">&cross;</span><span class="takenBranch" title="Branch 158 taken 1 times">&check;</span><span class="takenBranch" title="Branch 31 taken 22046 times">&check;</span><span class="takenBranch" title="Branch 32 taken 11023 times">&check;</span><br/><span class="takenBranch" title="Branch 38 taken 4 times">&check;</span><span class="takenBranch" title="Branch 39 taken 2 times">&check;</span><span class="takenBranch" title="Branch 45 taken 20002 times">&check;</span><span class="takenBranch" title="Branch 46 taken 10001 times">&check;</span><br/><span class="takenBranch" title="Branch 52 taken 4 times">&check;</span><span class="takenBranch" title="Branch 53 taken 2 times">&check;</span><span class="takenBranch" title="Branch 59 taken 200002 times">&check;</span><span class="takenBranch" title="Branch 60 taken 100001 times">&check;</span><br/><span class="takenBranch" title="Branch 66 taken 4 times">&check;</span><span class="takenBranch" title="Branch 67 taken 2 times">&check;</span><span class="takenBranch" title="Branch 73 taken 3 times">&check;</span><span class="takenBranch" title="Branch 74 taken 2 times">&check;</span><br/><span class="takenBranch" title="Branch 80 taken 4 times">&check;</span><span class="takenBranch" title="Branch 81 taken 2 times">&check;</span><span class="takenBranch" title="Branch 87 taken 2050 times">&check;</span><span class="takenBranch" title="Branch 88 taken 1025 times">&check;</span><br/><span class="takenBranch" title="Branch 94 taken 152124 times">&check;</span><span class="takenBranch" title="Branch 95 taken 91062 times">&check;</span><span class="takenBranch" title="Branch 101 taken 2048 times">&check;</span><span class="takenBranch" title="Branch 102 taken 1024 times">&check;</span><br/><span class="takenBranch" title="Branch 108 taken 2 times">&check;</span><span class="takenBranch" title="Branch 109 taken 1 times">&check;</span><span class="takenBranch" title="Branch 115 taken 2048 times">&check;</span><span class="takenBranch" title="Branch 116 taken 1024 times">&check;</span><br/><span class="takenBranch" title="Branch 122 taken 2048 times">&check;</span><span class="takenBranch" title="Branch 123 taken 1024 times">&check;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>729055</pre></td>
+    <td align="left" class="src coveredLine"><pre>    for (auto&amp; pool : cPools)</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>225</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 36386 times">&check;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span><span class="takenBranch" title="Branch 4 taken 9462 times">&check;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 7 taken 28194 times">&check;</span><span class="notTakenBranch" title="Branch 8 not taken">&cross;</span><span class="takenBranch" title="Branch 10 taken 285 times">&check;</span><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 13 taken 22046 times">&check;</span><span class="notTakenBranch" title="Branch 14 not taken">&cross;</span><span class="takenBranch" title="Branch 16 taken 4 times">&check;</span><span class="notTakenBranch" title="Branch 17 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 19 taken 20002 times">&check;</span><span class="notTakenBranch" title="Branch 20 not taken">&cross;</span><span class="takenBranch" title="Branch 22 taken 4 times">&check;</span><span class="notTakenBranch" title="Branch 23 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 25 taken 200002 times">&check;</span><span class="notTakenBranch" title="Branch 26 not taken">&cross;</span><span class="takenBranch" title="Branch 28 taken 4 times">&check;</span><span class="notTakenBranch" title="Branch 29 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 31 taken 3 times">&check;</span><span class="notTakenBranch" title="Branch 32 not taken">&cross;</span><span class="takenBranch" title="Branch 34 taken 4 times">&check;</span><span class="notTakenBranch" title="Branch 35 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 37 taken 2050 times">&check;</span><span class="notTakenBranch" title="Branch 38 not taken">&cross;</span><span class="takenBranch" title="Branch 40 taken 152124 times">&check;</span><span class="notTakenBranch" title="Branch 41 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 43 taken 2048 times">&check;</span><span class="notTakenBranch" title="Branch 44 not taken">&cross;</span><span class="takenBranch" title="Branch 46 taken 2 times">&check;</span><span class="notTakenBranch" title="Branch 47 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 49 taken 2048 times">&check;</span><span class="notTakenBranch" title="Branch 50 not taken">&cross;</span><span class="takenBranch" title="Branch 52 taken 2048 times">&check;</span><span class="notTakenBranch" title="Branch 53 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 55 taken 2 times">&check;</span><span class="notTakenBranch" title="Branch 56 not taken">&cross;</span><span class="takenBranch" title="Branch 58 taken 1024 times">&check;</span><span class="notTakenBranch" title="Branch 59 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 61 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 62 not taken">&cross;</span><span class="notTakenBranch" title="Branch 64 not taken">&cross;</span><span class="notTakenBranch" title="Branch 65 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 67 not taken">&cross;</span><span class="notTakenBranch" title="Branch 68 not taken">&cross;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>477743</pre></td>
+    <td align="left" class="src coveredLine"><pre>        pool.alloc(); // only allocates memory (constructor is not called yet)</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>226</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 16145 times">&check;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span><span class="takenBranch" title="Branch 5 taken 16144 times">&check;</span><span class="notTakenBranch" title="Branch 6 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 7 taken 512 times">&check;</span><span class="notTakenBranch" title="Branch 8 not taken">&cross;</span><span class="takenBranch" title="Branch 10 taken 3195 times">&check;</span><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 13 taken 1 times">&check;</span><span class="takenBranch" title="Branch 14 taken 3195 times">&check;</span><span class="notTakenBranch" title="Branch 15 not taken">&cross;</span><span class="takenBranch" title="Branch 19 taken 13073 times">&check;</span><br/><span class="notTakenBranch" title="Branch 20 not taken">&cross;</span><span class="takenBranch" title="Branch 23 taken 13072 times">&check;</span><span class="notTakenBranch" title="Branch 24 not taken">&cross;</span><span class="takenBranch" title="Branch 25 taken 1023 times">&check;</span><br/><span class="notTakenBranch" title="Branch 26 not taken">&cross;</span><span class="takenBranch" title="Branch 28 taken 140 times">&check;</span><span class="notTakenBranch" title="Branch 29 not taken">&cross;</span><span class="takenBranch" title="Branch 31 taken 1 times">&check;</span><br/><span class="takenBranch" title="Branch 32 taken 123 times">&check;</span><span class="notTakenBranch" title="Branch 33 not taken">&cross;</span><span class="takenBranch" title="Branch 37 taken 10001 times">&check;</span><span class="notTakenBranch" title="Branch 38 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 41 taken 10000 times">&check;</span><span class="notTakenBranch" title="Branch 42 not taken">&cross;</span><span class="takenBranch" title="Branch 43 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 44 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 46 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 47 not taken">&cross;</span><span class="takenBranch" title="Branch 49 taken 1 times">&check;</span><span class="takenBranch" title="Branch 50 taken 1 times">&check;</span><br/><span class="notTakenBranch" title="Branch 51 not taken">&cross;</span><span class="takenBranch" title="Branch 55 taken 10001 times">&check;</span><span class="notTakenBranch" title="Branch 56 not taken">&cross;</span><span class="takenBranch" title="Branch 59 taken 10000 times">&check;</span><br/><span class="notTakenBranch" title="Branch 60 not taken">&cross;</span><span class="takenBranch" title="Branch 61 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 62 not taken">&cross;</span><span class="takenBranch" title="Branch 64 taken 1 times">&check;</span><br/><span class="notTakenBranch" title="Branch 65 not taken">&cross;</span><span class="takenBranch" title="Branch 67 taken 1 times">&check;</span><span class="takenBranch" title="Branch 68 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 69 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 73 taken 101024 times">&check;</span><span class="notTakenBranch" title="Branch 74 not taken">&cross;</span><span class="takenBranch" title="Branch 77 taken 100000 times">&check;</span><span class="notTakenBranch" title="Branch 78 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 79 taken 1024 times">&check;</span><span class="notTakenBranch" title="Branch 80 not taken">&cross;</span><span class="takenBranch" title="Branch 82 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 83 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 85 taken 1024 times">&check;</span><span class="takenBranch" title="Branch 86 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 87 not taken">&cross;</span><span class="takenBranch" title="Branch 91 taken 2 times">&check;</span><br/><span class="notTakenBranch" title="Branch 92 not taken">&cross;</span><span class="takenBranch" title="Branch 95 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 96 not taken">&cross;</span><span class="takenBranch" title="Branch 97 taken 1024 times">&check;</span><br/><span class="notTakenBranch" title="Branch 98 not taken">&cross;</span><span class="takenBranch" title="Branch 100 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 101 not taken">&cross;</span><span class="takenBranch" title="Branch 103 taken 1024 times">&check;</span><br/><span class="takenBranch" title="Branch 104 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 105 not taken">&cross;</span><span class="takenBranch" title="Branch 107 taken 1024 times">&check;</span><span class="notTakenBranch" title="Branch 108 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 109 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 110 not taken">&cross;</span><span class="takenBranch" title="Branch 112 taken 1 times">&check;</span><span class="takenBranch" title="Branch 113 taken 1 times">&check;</span><br/><span class="notTakenBranch" title="Branch 114 not taken">&cross;</span><span class="takenBranch" title="Branch 116 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 117 not taken">&cross;</span><span class="takenBranch" title="Branch 118 taken 90038 times">&check;</span><br/><span class="notTakenBranch" title="Branch 119 not taken">&cross;</span><span class="takenBranch" title="Branch 121 taken 1024 times">&check;</span><span class="notTakenBranch" title="Branch 122 not taken">&cross;</span><span class="takenBranch" title="Branch 125 taken 1024 times">&check;</span><br/><span class="notTakenBranch" title="Branch 126 not taken">&cross;</span><span class="takenBranch" title="Branch 130 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 131 not taken">&cross;</span><span class="takenBranch" title="Branch 134 taken 1 times">&check;</span><br/><span class="notTakenBranch" title="Branch 135 not taken">&cross;</span><span class="takenBranch" title="Branch 139 taken 1024 times">&check;</span><span class="notTakenBranch" title="Branch 140 not taken">&cross;</span><span class="takenBranch" title="Branch 145 taken 1 times">&check;</span><br/><span class="notTakenBranch" title="Branch 146 not taken">&cross;</span><span class="takenBranch" title="Branch 149 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 150 not taken">&cross;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>251312</pre></td>
+    <td align="left" class="src coveredLine"><pre>    fn(Creator(*this, idx));</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>227</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    // constructors of the components are now already called</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>228</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    // notify({ EntityEvent::Type::Creation, ent });</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>229</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>251312</pre></td>
+    <td align="left" class="src coveredLine"><pre>    return ent;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>230</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>}</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>231</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>232</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>45124</pre></td>
+    <td align="left" class="src coveredLine"><pre>inline void EntitySpawner::destroy(Entity ent, EntityList&amp; entList)</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>233</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>{</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>234</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 1 times">&check;</span><span class="takenBranch" title="Branch 2 taken 45123 times">&check;</span><span class="takenBranch" title="Branch 5 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 6 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 9 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 10 not taken">&cross;</span><span class="takenBranch" title="Branch 12 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 13 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 15 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 16 not taken">&cross;</span><span class="takenBranch" title="Branch 18 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 19 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 21 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 22 not taken">&cross;</span><span class="takenBranch" title="Branch 24 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 25 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 27 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 28 not taken">&cross;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>45124</pre></td>
+    <td align="left" class="src coveredLine"><pre>    EPP_ASSERT(entList.isValid(ent));</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>235</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>236</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    // notify({ EntityEvent::Type::Destruction, ent });</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>237</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>238</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 45123 times">&check;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>45123</pre></td>
+    <td align="left" class="src coveredLine"><pre>    PoolIdx entPoolIdx = entList.get(ent).poolIdx;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>239</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 3 taken 132293 times">&check;</span><span class="takenBranch" title="Branch 4 taken 45123 times">&check;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>177416</pre></td>
+    <td align="left" class="src coveredLine"><pre>    for (auto&amp; pool : cPools)</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>240</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 132293 times">&check;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>132293</pre></td>
+    <td align="left" class="src coveredLine"><pre>        pool.destroy(entPoolIdx.value);</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>241</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 45123 times">&check;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>45123</pre></td>
+    <td align="left" class="src coveredLine"><pre>    removeFromEntityPool(entPoolIdx, entList);</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>242</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 45123 times">&check;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>45123</pre></td>
+    <td align="left" class="src coveredLine"><pre>    entList.freeEntity(ent);</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>243</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>45123</pre></td>
+    <td align="left" class="src coveredLine"><pre>}</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>244</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>245</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>96766</pre></td>
+    <td align="left" class="src coveredLine"><pre>inline void EntitySpawner::removeFromEntityPool(PoolIdx idx, EntityList&amp; entList)</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>246</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>{</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>247</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 65091 times">&check;</span><span class="takenBranch" title="Branch 2 taken 31675 times">&check;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>96766</pre></td>
+    <td align="left" class="src coveredLine"><pre>    if (entityPool.destroy(idx.value)) // if data was relocated in pools, change poolIdx in entList</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>248</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>65091</pre></td>
+    <td align="left" class="src coveredLine"><pre>        entList.changeEntity(entityPool.data[idx.value], idx, spawnerId);</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>249</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>96766</pre></td>
+    <td align="left" class="src coveredLine"><pre>}</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>250</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>251</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>template &lt;typename FnType&gt;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>252</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>51646</pre></td>
+    <td align="left" class="src coveredLine"><pre>inline void EntitySpawner::moveEntityHere(Entity ent, EntityList&amp; entList, EntitySpawner&amp; originSpawner, FnType fn)</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>253</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>{</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>254</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    static_assert(std::is_invocable_v&lt;FnType, Creator&amp;&amp;&gt;);</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>255</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 1025 times">&check;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span><span class="takenBranch" title="Branch 3 taken 1025 times">&check;</span><span class="notTakenBranch" title="Branch 4 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 6 taken 1025 times">&check;</span><span class="notTakenBranch" title="Branch 7 not taken">&cross;</span><span class="notTakenBranch" title="Branch 9 not taken">&cross;</span><span class="takenBranch" title="Branch 10 taken 1025 times">&check;</span><br/><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><span class="takenBranch" title="Branch 12 taken 1025 times">&check;</span><span class="notTakenBranch" title="Branch 15 not taken">&cross;</span><span class="notTakenBranch" title="Branch 16 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 19 not taken">&cross;</span><span class="notTakenBranch" title="Branch 20 not taken">&cross;</span><span class="notTakenBranch" title="Branch 22 not taken">&cross;</span><span class="notTakenBranch" title="Branch 23 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 25 not taken">&cross;</span><span class="notTakenBranch" title="Branch 26 not taken">&cross;</span><span class="notTakenBranch" title="Branch 28 not taken">&cross;</span><span class="notTakenBranch" title="Branch 29 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 31 not taken">&cross;</span><span class="notTakenBranch" title="Branch 32 not taken">&cross;</span><span class="notTakenBranch" title="Branch 34 not taken">&cross;</span><span class="notTakenBranch" title="Branch 35 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 37 not taken">&cross;</span><span class="notTakenBranch" title="Branch 38 not taken">&cross;</span><span class="takenBranch" title="Branch 60 taken 50618 times">&check;</span><span class="takenBranch" title="Branch 61 taken 1 times">&check;</span><br/><span class="takenBranch" title="Branch 62 taken 50618 times">&check;</span><span class="notTakenBranch" title="Branch 63 not taken">&cross;</span><span class="takenBranch" title="Branch 65 taken 50618 times">&check;</span><span class="notTakenBranch" title="Branch 66 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 68 not taken">&cross;</span><span class="takenBranch" title="Branch 69 taken 50618 times">&check;</span><span class="takenBranch" title="Branch 70 taken 1 times">&check;</span><span class="takenBranch" title="Branch 71 taken 50618 times">&check;</span><br/><span class="takenBranch" title="Branch 74 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 75 not taken">&cross;</span><span class="takenBranch" title="Branch 78 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 79 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 81 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 82 not taken">&cross;</span><span class="takenBranch" title="Branch 84 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 85 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 87 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 88 not taken">&cross;</span><span class="takenBranch" title="Branch 90 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 91 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 93 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 94 not taken">&cross;</span><span class="takenBranch" title="Branch 96 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 97 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 119 not taken">&cross;</span><span class="takenBranch" title="Branch 120 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 121 not taken">&cross;</span><span class="notTakenBranch" title="Branch 122 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 124 not taken">&cross;</span><span class="notTakenBranch" title="Branch 125 not taken">&cross;</span><span class="notTakenBranch" title="Branch 127 not taken">&cross;</span><span class="notTakenBranch" title="Branch 128 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 129 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 130 not taken">&cross;</span><span class="takenBranch" title="Branch 133 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 134 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 137 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 138 not taken">&cross;</span><span class="takenBranch" title="Branch 140 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 141 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 143 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 144 not taken">&cross;</span><span class="takenBranch" title="Branch 146 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 147 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 149 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 150 not taken">&cross;</span><span class="takenBranch" title="Branch 152 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 153 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 155 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 156 not taken">&cross;</span><span class="notTakenBranch" title="Branch 178 not taken">&cross;</span><span class="takenBranch" title="Branch 179 taken 1 times">&check;</span><br/><span class="notTakenBranch" title="Branch 180 not taken">&cross;</span><span class="notTakenBranch" title="Branch 181 not taken">&cross;</span><span class="notTakenBranch" title="Branch 183 not taken">&cross;</span><span class="notTakenBranch" title="Branch 184 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 186 not taken">&cross;</span><span class="notTakenBranch" title="Branch 187 not taken">&cross;</span><span class="takenBranch" title="Branch 188 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 189 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 192 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 193 not taken">&cross;</span><span class="takenBranch" title="Branch 196 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 197 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 199 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 200 not taken">&cross;</span><span class="takenBranch" title="Branch 202 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 203 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 205 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 206 not taken">&cross;</span><span class="takenBranch" title="Branch 208 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 209 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 211 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 212 not taken">&cross;</span><span class="takenBranch" title="Branch 214 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 215 not taken">&cross;</span><br/></td>
+    <td align="right" class="linecount coveredLine"><pre>51646</pre></td>
+    <td align="left" class="src coveredLine"><pre>    EPP_ASSERT(entList.isValid(ent) &amp;&amp; &amp;originSpawner != this &amp;&amp; entList.get(ent).spawnerId == originSpawner.spawnerId);</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>256</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>257</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 1025 times">&check;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span><span class="takenBranch" title="Branch 4 taken 50618 times">&check;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 7 not taken">&cross;</span><span class="notTakenBranch" title="Branch 8 not taken">&cross;</span><span class="notTakenBranch" title="Branch 10 not taken">&cross;</span><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><br/></td>
+    <td align="right" class="linecount coveredLine"><pre>51643</pre></td>
+    <td align="left" class="src coveredLine"><pre>    PoolIdx oldIdx = entList.get(ent).poolIdx;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>258</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 2 taken 1025 times">&check;</span><span class="notTakenBranch" title="Branch 3 not taken">&cross;</span><span class="takenBranch" title="Branch 6 taken 50618 times">&check;</span><span class="notTakenBranch" title="Branch 7 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 10 not taken">&cross;</span><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><span class="notTakenBranch" title="Branch 14 not taken">&cross;</span><span class="notTakenBranch" title="Branch 15 not taken">&cross;</span><br/></td>
+    <td align="right" class="linecount coveredLine"><pre>51643</pre></td>
+    <td align="left" class="src coveredLine"><pre>    PoolIdx newIdx(entityPool.data.size());</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>259</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>51643</pre></td>
+    <td align="left" class="src coveredLine"><pre>    auto oriPoolsPtr = originSpawner.cPools.begin();</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>260</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>51643</pre></td>
+    <td align="left" class="src coveredLine"><pre>    auto oriPoolsEnd = originSpawner.cPools.end();</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>261</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>262</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    // moving/creating/destroying components</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>263</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    // this loop takes advantage of the fact, that the pools are sorted by their cIds</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>264</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 3 taken 2050 times">&check;</span><span class="takenBranch" title="Branch 4 taken 1025 times">&check;</span><span class="takenBranch" title="Branch 10 taken 101236 times">&check;</span><span class="takenBranch" title="Branch 11 taken 50618 times">&check;</span><br/><span class="notTakenBranch" title="Branch 17 not taken">&cross;</span><span class="notTakenBranch" title="Branch 18 not taken">&cross;</span><span class="notTakenBranch" title="Branch 24 not taken">&cross;</span><span class="notTakenBranch" title="Branch 25 not taken">&cross;</span><br/></td>
+    <td align="right" class="linecount coveredLine"><pre>154929</pre></td>
+    <td align="left" class="src coveredLine"><pre>    for (auto&amp; pool : cPools) {</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>265</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 3074 times">&check;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span><span class="takenBranch" title="Branch 7 taken 1024 times">&check;</span><span class="takenBranch" title="Branch 8 taken 2050 times">&check;</span><br/><span class="takenBranch" title="Branch 9 taken 1024 times">&check;</span><span class="takenBranch" title="Branch 10 taken 2050 times">&check;</span><span class="takenBranch" title="Branch 12 taken 141484 times">&check;</span><span class="takenBranch" title="Branch 13 taken 40248 times">&check;</span><br/><span class="takenBranch" title="Branch 18 taken 80496 times">&check;</span><span class="takenBranch" title="Branch 19 taken 60988 times">&check;</span><span class="takenBranch" title="Branch 20 taken 80496 times">&check;</span><span class="takenBranch" title="Branch 21 taken 101236 times">&check;</span><br/><span class="notTakenBranch" title="Branch 23 not taken">&cross;</span><span class="notTakenBranch" title="Branch 24 not taken">&cross;</span><span class="notTakenBranch" title="Branch 29 not taken">&cross;</span><span class="notTakenBranch" title="Branch 30 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 31 not taken">&cross;</span><span class="notTakenBranch" title="Branch 32 not taken">&cross;</span><span class="notTakenBranch" title="Branch 34 not taken">&cross;</span><span class="notTakenBranch" title="Branch 35 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 40 not taken">&cross;</span><span class="notTakenBranch" title="Branch 41 not taken">&cross;</span><span class="notTakenBranch" title="Branch 42 not taken">&cross;</span><span class="notTakenBranch" title="Branch 43 not taken">&cross;</span><br/></td>
+    <td align="right" class="linecount coveredLine"><pre>266326</pre></td>
+    <td align="left" class="src coveredLine"><pre>        while (oriPoolsPtr != oriPoolsEnd &amp;&amp; oriPoolsPtr-&gt;getCId() &lt; pool.getCId()) // omit (destroy) components that were not specified (in archetype) to be in this spawner</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>266</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 3 taken 1024 times">&check;</span><span class="notTakenBranch" title="Branch 4 not taken">&cross;</span><span class="takenBranch" title="Branch 8 taken 80496 times">&check;</span><span class="notTakenBranch" title="Branch 9 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 13 not taken">&cross;</span><span class="notTakenBranch" title="Branch 14 not taken">&cross;</span><span class="notTakenBranch" title="Branch 18 not taken">&cross;</span><span class="notTakenBranch" title="Branch 19 not taken">&cross;</span><br/></td>
+    <td align="right" class="linecount coveredLine"><pre>81520</pre></td>
+    <td align="left" class="src coveredLine"><pre>            (oriPoolsPtr++)-&gt;destroy(oldIdx.value);</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>267</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 2050 times">&check;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span><span class="takenBranch" title="Branch 4 taken 101236 times">&check;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 7 not taken">&cross;</span><span class="notTakenBranch" title="Branch 8 not taken">&cross;</span><span class="notTakenBranch" title="Branch 10 not taken">&cross;</span><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><br/></td>
+    <td align="right" class="linecount coveredLine"><pre>103286</pre></td>
+    <td align="left" class="src coveredLine"><pre>        pool.alloc();                                                             // only allocates memory (constructor is not called yet)</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>268</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 2050 times">&check;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span><span class="takenBranch" title="Branch 7 taken 2049 times">&check;</span><span class="takenBranch" title="Branch 8 taken 1 times">&check;</span><br/><span class="takenBranch" title="Branch 9 taken 2049 times">&check;</span><span class="takenBranch" title="Branch 10 taken 1 times">&check;</span><span class="takenBranch" title="Branch 12 taken 60988 times">&check;</span><span class="takenBranch" title="Branch 13 taken 40248 times">&check;</span><br/><span class="takenBranch" title="Branch 18 taken 50618 times">&check;</span><span class="takenBranch" title="Branch 19 taken 10370 times">&check;</span><span class="takenBranch" title="Branch 20 taken 50618 times">&check;</span><span class="takenBranch" title="Branch 21 taken 50618 times">&check;</span><br/><span class="notTakenBranch" title="Branch 23 not taken">&cross;</span><span class="notTakenBranch" title="Branch 24 not taken">&cross;</span><span class="notTakenBranch" title="Branch 29 not taken">&cross;</span><span class="notTakenBranch" title="Branch 30 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 31 not taken">&cross;</span><span class="notTakenBranch" title="Branch 32 not taken">&cross;</span><span class="notTakenBranch" title="Branch 34 not taken">&cross;</span><span class="notTakenBranch" title="Branch 35 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 40 not taken">&cross;</span><span class="notTakenBranch" title="Branch 41 not taken">&cross;</span><span class="notTakenBranch" title="Branch 42 not taken">&cross;</span><span class="notTakenBranch" title="Branch 43 not taken">&cross;</span><br/></td>
+    <td align="right" class="linecount coveredLine"><pre>103286</pre></td>
+    <td align="left" class="src coveredLine"><pre>        if (oriPoolsPtr != oriPoolsEnd &amp;&amp; oriPoolsPtr-&gt;getCId() == pool.getCId()) // this component is in the original spawner, move it</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>269</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 2 taken 2049 times">&check;</span><span class="notTakenBranch" title="Branch 3 not taken">&cross;</span><span class="takenBranch" title="Branch 5 taken 2049 times">&check;</span><span class="notTakenBranch" title="Branch 6 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 9 taken 50618 times">&check;</span><span class="notTakenBranch" title="Branch 10 not taken">&cross;</span><span class="takenBranch" title="Branch 12 taken 50618 times">&check;</span><span class="notTakenBranch" title="Branch 13 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 16 not taken">&cross;</span><span class="notTakenBranch" title="Branch 17 not taken">&cross;</span><span class="notTakenBranch" title="Branch 19 not taken">&cross;</span><span class="notTakenBranch" title="Branch 20 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 23 not taken">&cross;</span><span class="notTakenBranch" title="Branch 24 not taken">&cross;</span><span class="notTakenBranch" title="Branch 26 not taken">&cross;</span><span class="notTakenBranch" title="Branch 27 not taken">&cross;</span><br/></td>
+    <td align="right" class="linecount coveredLine"><pre>52667</pre></td>
+    <td align="left" class="src coveredLine"><pre>            pool.construct(newIdx.value, (*oriPoolsPtr)[oldIdx.value]);           // component from the original will be destroyed either on the next loop or, for the last one, after the whole loop</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>270</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    }</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>271</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 1026 times">&check;</span><span class="takenBranch" title="Branch 2 taken 1025 times">&check;</span><span class="takenBranch" title="Branch 4 taken 20740 times">&check;</span><span class="takenBranch" title="Branch 5 taken 50618 times">&check;</span><br/><span class="notTakenBranch" title="Branch 7 not taken">&cross;</span><span class="notTakenBranch" title="Branch 8 not taken">&cross;</span><span class="notTakenBranch" title="Branch 10 not taken">&cross;</span><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><br/></td>
+    <td align="right" class="linecount coveredLine"><pre>95175</pre></td>
+    <td align="left" class="src coveredLine"><pre>    while (oriPoolsPtr != oriPoolsEnd) // destroy the rest (if there is any)</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>272</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 3 taken 1026 times">&check;</span><span class="notTakenBranch" title="Branch 4 not taken">&cross;</span><span class="takenBranch" title="Branch 8 taken 20740 times">&check;</span><span class="notTakenBranch" title="Branch 9 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 13 not taken">&cross;</span><span class="notTakenBranch" title="Branch 14 not taken">&cross;</span><span class="notTakenBranch" title="Branch 18 not taken">&cross;</span><span class="notTakenBranch" title="Branch 19 not taken">&cross;</span><br/></td>
+    <td align="right" class="linecount coveredLine"><pre>21766</pre></td>
+    <td align="left" class="src coveredLine"><pre>        (oriPoolsPtr++)-&gt;destroy(oldIdx.value);</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>273</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 1025 times">&check;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span><span class="takenBranch" title="Branch 4 taken 50618 times">&check;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 7 not taken">&cross;</span><span class="notTakenBranch" title="Branch 8 not taken">&cross;</span><span class="notTakenBranch" title="Branch 10 not taken">&cross;</span><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><br/></td>
+    <td align="right" class="linecount coveredLine"><pre>51643</pre></td>
+    <td align="left" class="src coveredLine"><pre>    originSpawner.removeFromEntityPool(oldIdx, entList); // remove entity</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>274</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 1025 times">&check;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span><span class="takenBranch" title="Branch 4 taken 50618 times">&check;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 7 not taken">&cross;</span><span class="notTakenBranch" title="Branch 8 not taken">&cross;</span><span class="notTakenBranch" title="Branch 10 not taken">&cross;</span><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><br/></td>
+    <td align="right" class="linecount coveredLine"><pre>51643</pre></td>
+    <td align="left" class="src coveredLine"><pre>    entityPool.create(ent);                              // add entity</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>275</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 1025 times">&check;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span><span class="takenBranch" title="Branch 4 taken 50618 times">&check;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 7 not taken">&cross;</span><span class="notTakenBranch" title="Branch 8 not taken">&cross;</span><span class="notTakenBranch" title="Branch 10 not taken">&cross;</span><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><br/></td>
+    <td align="right" class="linecount coveredLine"><pre>51643</pre></td>
+    <td align="left" class="src coveredLine"><pre>    entList.changeEntity(ent, newIdx, spawnerId);</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>276</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 2 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 3 not taken">&cross;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>51643</pre></td>
+    <td align="left" class="src coveredLine"><pre>    fn(Creator(*this, newIdx, originSpawner.mask)); // originSpawner.mask contains all the components that were moved, no need to delete possible excess</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>277</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>51643</pre></td>
+    <td align="left" class="src coveredLine"><pre>}</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>278</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>279</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>280</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>6</pre></td>
+    <td align="left" class="src coveredLine"><pre>inline void EntitySpawner::clear(EntityList&amp; entList)</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>281</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>{</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>282</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 3 taken 3 times">&check;</span><span class="takenBranch" title="Branch 4 taken 6 times">&check;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>9</pre></td>
+    <td align="left" class="src coveredLine"><pre>    for (auto ent : entityPool.data)</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>283</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 3 times">&check;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>3</pre></td>
+    <td align="left" class="src coveredLine"><pre>        entList.freeEntity(ent);</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>284</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>6</pre></td>
+    <td align="left" class="src coveredLine"><pre>    clear();</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>285</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>6</pre></td>
+    <td align="left" class="src coveredLine"><pre>}</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>286</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>287</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>16</pre></td>
+    <td align="left" class="src coveredLine"><pre>inline void EntitySpawner::clear()</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>288</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>{</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>289</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>16</pre></td>
+    <td align="left" class="src coveredLine"><pre>    entityPool.data.clear();</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>290</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 3 taken 32 times">&check;</span><span class="takenBranch" title="Branch 4 taken 16 times">&check;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>48</pre></td>
+    <td align="left" class="src coveredLine"><pre>    for (auto&amp; pool : cPools)</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>291</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 32 times">&check;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>32</pre></td>
+    <td align="left" class="src coveredLine"><pre>        pool.clear();</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>292</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>16</pre></td>
+    <td align="left" class="src coveredLine"><pre>}</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>293</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>294</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>17</pre></td>
+    <td align="left" class="src coveredLine"><pre>inline void EntitySpawner::fitNextN(std::size_t n)</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>295</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>{</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>296</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>17</pre></td>
+    <td align="left" class="src coveredLine"><pre>    entityPool.fitNextN(n);</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>297</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 3 taken 30 times">&check;</span><span class="takenBranch" title="Branch 4 taken 17 times">&check;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>47</pre></td>
+    <td align="left" class="src coveredLine"><pre>    for (auto&amp; pool : cPools)</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>298</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 30 times">&check;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>30</pre></td>
+    <td align="left" class="src coveredLine"><pre>        pool.fitNextN(n);</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>299</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>17</pre></td>
+    <td align="left" class="src coveredLine"><pre>}</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>300</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>301</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>1</pre></td>
+    <td align="left" class="src coveredLine"><pre>inline void EntitySpawner::shrinkToFit()</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>302</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>{</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>303</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>1</pre></td>
+    <td align="left" class="src coveredLine"><pre>    entityPool.data.shrink_to_fit();</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>304</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 3 taken 2 times">&check;</span><span class="takenBranch" title="Branch 4 taken 1 times">&check;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>3</pre></td>
+    <td align="left" class="src coveredLine"><pre>    for (auto&amp; pool : cPools)</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>305</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 2 times">&check;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>2</pre></td>
+    <td align="left" class="src coveredLine"><pre>        pool.shrinkToFit();</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>306</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>1</pre></td>
+    <td align="left" class="src coveredLine"><pre>}</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>307</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>308</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>582417</pre></td>
+    <td align="left" class="src coveredLine"><pre>inline Archetype EntitySpawner::makeArchetype() const</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>309</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>{</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>310</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>582417</pre></td>
+    <td align="left" class="src coveredLine"><pre>    Archetype arch;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>311</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 3 taken 1104823 times">&check;</span><span class="takenBranch" title="Branch 4 taken 582417 times">&check;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>1687240</pre></td>
+    <td align="left" class="src coveredLine"><pre>    for (auto const&amp; pool : cPools)</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>312</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 2 taken 1104823 times">&check;</span><span class="notTakenBranch" title="Branch 3 not taken">&cross;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>1104823</pre></td>
+    <td align="left" class="src coveredLine"><pre>        arch.addComponent(pool.getCId());</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>313</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>582417</pre></td>
+    <td align="left" class="src coveredLine"><pre>    return arch;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>314</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>}</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>315</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>316</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>680398</pre></td>
+    <td align="left" class="src coveredLine"><pre>inline CPool&amp; EntitySpawner::getPool(ComponentId cId)</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>317</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>{</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>318</pre></td>
+    <td align="right" class="linebranch"><span class="notTakenBranch" title="Branch 1 not taken">&cross;</span><span class="takenBranch" title="Branch 2 taken 680398 times">&check;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><span class="notTakenBranch" title="Branch 6 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 9 not taken">&cross;</span><span class="notTakenBranch" title="Branch 10 not taken">&cross;</span><span class="notTakenBranch" title="Branch 12 not taken">&cross;</span><span class="notTakenBranch" title="Branch 13 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 15 not taken">&cross;</span><span class="notTakenBranch" title="Branch 16 not taken">&cross;</span><span class="notTakenBranch" title="Branch 18 not taken">&cross;</span><span class="notTakenBranch" title="Branch 19 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 21 not taken">&cross;</span><span class="notTakenBranch" title="Branch 22 not taken">&cross;</span><span class="notTakenBranch" title="Branch 24 not taken">&cross;</span><span class="notTakenBranch" title="Branch 25 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 27 not taken">&cross;</span><span class="notTakenBranch" title="Branch 28 not taken">&cross;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>680398</pre></td>
+    <td align="left" class="src coveredLine"><pre>    EPP_ASSERT(mask.get(cId));</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>319</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>1589640</pre></td>
+    <td align="left" class="src coveredLine"><pre>    return *std::find_if(cPools.begin(), cPools.end(), [cId](CPool const&amp; pool) { return pool.getCId() == cId; });</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>320</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>}</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>321</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>322</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>23626</pre></td>
+    <td align="left" class="src coveredLine"><pre>inline CPool const&amp; EntitySpawner::getPool(ComponentId cId) const</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>323</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>{</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>324</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 44 times">&check;</span><span class="takenBranch" title="Branch 2 taken 23582 times">&check;</span><span class="takenBranch" title="Branch 5 taken 44 times">&check;</span><span class="notTakenBranch" title="Branch 6 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 9 taken 44 times">&check;</span><span class="notTakenBranch" title="Branch 10 not taken">&cross;</span><span class="takenBranch" title="Branch 12 taken 44 times">&check;</span><span class="notTakenBranch" title="Branch 13 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 15 taken 44 times">&check;</span><span class="notTakenBranch" title="Branch 16 not taken">&cross;</span><span class="takenBranch" title="Branch 18 taken 44 times">&check;</span><span class="notTakenBranch" title="Branch 19 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 21 taken 44 times">&check;</span><span class="notTakenBranch" title="Branch 22 not taken">&cross;</span><span class="takenBranch" title="Branch 24 taken 44 times">&check;</span><span class="notTakenBranch" title="Branch 25 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 27 taken 44 times">&check;</span><span class="notTakenBranch" title="Branch 28 not taken">&cross;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>23626</pre></td>
+    <td align="left" class="src coveredLine"><pre>    EPP_ASSERT(mask.get(cId));</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>325</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>58442</pre></td>
+    <td align="left" class="src coveredLine"><pre>    return *std::find_if(cPools.begin(), cPools.end(), [cId](CPool const&amp; pool) { return pool.getCId() == cId; });</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>326</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>}</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>327</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>328</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>} // namespace epp</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>329</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>330</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>#endif // EPP_ENTITYSPAWNER_H</pre></td>
+    </tr>
+
+  </table>
+  <br>
+
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr><td class="hr"><td></tr>
+    <tr><td class="footer">Generated by: <a href="http://gcovr.com">GCOVR (Version 3.4)</a></td></tr>
+  </table>
+  <br>
+
+</body>
+
+</html>
+

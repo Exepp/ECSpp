@@ -79,10 +79,16 @@ $(function() {
 <div class="title">epp::Selection&lt; CTypes &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>A query to the <a class="el" href="classepp_1_1EntityManager.html">EntityManager</a> for entites that own a certain set of components.  
+ <a href="classepp_1_1Selection.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="Selection_8h_source.html">Selection.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1Selection_1_1Iterator.html">Iterator</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classepp_1_1Selection_1_1Iterator.html" title="Iterator of the Selection.">Iterator</a> of the <a class="el" href="classepp_1_1Selection.html" title="A query to the EntityManager for entites that own a certain set of components.">Selection</a>.  <a href="classepp_1_1Selection_1_1Iterator.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
@@ -96,33 +102,26 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>ConstIterator_t</b> 
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ae5e7eed455518bebd9965b58a2b94ee5"><td class="memItemLeft" align="right" valign="top"><a id="ae5e7eed455518bebd9965b58a2b94ee5"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Selection</b> (<a class="el" href="classepp_1_1CMask.html">CMask</a> unwanted)</td></tr>
-<tr class="separator:ae5e7eed455518bebd9965b58a2b94ee5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acc47dfa84773bdf0fdb26eead7c32b52"><td class="memTemplParams" colspan="2"><a id="acc47dfa84773bdf0fdb26eead7c32b52"></a>
-template&lt;typename Func &gt; </td></tr>
-<tr class="memitem:acc47dfa84773bdf0fdb26eead7c32b52"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>forEach</b> (Func func)</td></tr>
+<tr class="memitem:a9c8c7f8346ab019f9919f6d3b13c9f26"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1Selection.html#a9c8c7f8346ab019f9919f6d3b13c9f26">Selection</a> (<a class="el" href="classepp_1_1CMask.html">CMask</a> unwanted=<a class="el" href="classepp_1_1CMask.html">CMask</a>())</td></tr>
+<tr class="memdesc:a9c8c7f8346ab019f9919f6d3b13c9f26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a selection with a specified requirements.  <a href="classepp_1_1Selection.html#a9c8c7f8346ab019f9919f6d3b13c9f26">More...</a><br /></td></tr>
+<tr class="separator:a9c8c7f8346ab019f9919f6d3b13c9f26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc47dfa84773bdf0fdb26eead7c32b52"><td class="memTemplParams" colspan="2">template&lt;typename Func &gt; </td></tr>
+<tr class="memitem:acc47dfa84773bdf0fdb26eead7c32b52"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classepp_1_1Selection.html#acc47dfa84773bdf0fdb26eead7c32b52">forEach</a> (Func func)</td></tr>
+<tr class="memdesc:acc47dfa84773bdf0fdb26eead7c32b52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calls func on each entity that this selection covers.  <a href="classepp_1_1Selection.html#acc47dfa84773bdf0fdb26eead7c32b52">More...</a><br /></td></tr>
 <tr class="separator:acc47dfa84773bdf0fdb26eead7c32b52"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b6f85cf44e2cba4c7567d32b5c9f33d"><td class="memItemLeft" align="right" valign="top"><a id="a6b6f85cf44e2cba4c7567d32b5c9f33d"></a>
-<a class="el" href="classepp_1_1Selection_1_1Iterator.html">Iterator_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> ()</td></tr>
+<tr class="memitem:a6b6f85cf44e2cba4c7567d32b5c9f33d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classepp_1_1Selection_1_1Iterator.html">Iterator_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1Selection.html#a6b6f85cf44e2cba4c7567d32b5c9f33d">begin</a> ()</td></tr>
 <tr class="separator:a6b6f85cf44e2cba4c7567d32b5c9f33d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a93c065dec3b4340b6965ff81d15e8a49"><td class="memItemLeft" align="right" valign="top"><a id="a93c065dec3b4340b6965ff81d15e8a49"></a>
-<a class="el" href="classepp_1_1Selection_1_1Iterator.html">Iterator_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> ()</td></tr>
+<tr class="memitem:a93c065dec3b4340b6965ff81d15e8a49"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classepp_1_1Selection_1_1Iterator.html">Iterator_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1Selection.html#a93c065dec3b4340b6965ff81d15e8a49">end</a> ()</td></tr>
 <tr class="separator:a93c065dec3b4340b6965ff81d15e8a49"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afb75c30efc1aaa02d8a950e9075f40ed"><td class="memItemLeft" align="right" valign="top"><a id="afb75c30efc1aaa02d8a950e9075f40ed"></a>
-<a class="el" href="classepp_1_1Selection_1_1Iterator.html">ConstIterator_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> () const</td></tr>
+<tr class="memitem:afb75c30efc1aaa02d8a950e9075f40ed"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classepp_1_1Selection_1_1Iterator.html">ConstIterator_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1Selection.html#afb75c30efc1aaa02d8a950e9075f40ed">begin</a> () const</td></tr>
 <tr class="separator:afb75c30efc1aaa02d8a950e9075f40ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af983e423a44bff7ca7c531e3f60d9bdd"><td class="memItemLeft" align="right" valign="top"><a id="af983e423a44bff7ca7c531e3f60d9bdd"></a>
-<a class="el" href="classepp_1_1Selection_1_1Iterator.html">ConstIterator_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> () const</td></tr>
+<tr class="memitem:af983e423a44bff7ca7c531e3f60d9bdd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classepp_1_1Selection_1_1Iterator.html">ConstIterator_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1Selection.html#af983e423a44bff7ca7c531e3f60d9bdd">end</a> () const</td></tr>
 <tr class="separator:af983e423a44bff7ca7c531e3f60d9bdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a619f06155a19facffe31bb826cfeb543"><td class="memItemLeft" align="right" valign="top"><a id="a619f06155a19facffe31bb826cfeb543"></a>
-<a class="el" href="classepp_1_1CMask.html">CMask</a> const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getWanted</b> () const</td></tr>
+<tr class="memitem:a619f06155a19facffe31bb826cfeb543"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classepp_1_1CMask.html">CMask</a> const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1Selection.html#a619f06155a19facffe31bb826cfeb543">getWanted</a> () const</td></tr>
 <tr class="separator:a619f06155a19facffe31bb826cfeb543"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa5cd43d7452b228a5cc889dfc7e0f81d"><td class="memItemLeft" align="right" valign="top"><a id="aa5cd43d7452b228a5cc889dfc7e0f81d"></a>
-<a class="el" href="classepp_1_1CMask.html">CMask</a> const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getUnwanted</b> () const</td></tr>
+<tr class="memitem:aa5cd43d7452b228a5cc889dfc7e0f81d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classepp_1_1CMask.html">CMask</a> const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1Selection.html#aa5cd43d7452b228a5cc889dfc7e0f81d">getUnwanted</a> () const</td></tr>
 <tr class="separator:aa5cd43d7452b228a5cc889dfc7e0f81d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a288f9d08dd0e6bd1494833ebae4c0d8a"><td class="memItemLeft" align="right" valign="top"><a id="a288f9d08dd0e6bd1494833ebae4c0d8a"></a>
-std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>countEntities</b> () const</td></tr>
+<tr class="memitem:a288f9d08dd0e6bd1494833ebae4c0d8a"><td class="memItemLeft" align="right" valign="top">std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1Selection.html#a288f9d08dd0e6bd1494833ebae4c0d8a">countEntities</a> () const</td></tr>
 <tr class="separator:a288f9d08dd0e6bd1494833ebae4c0d8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-types"></a>
@@ -170,6 +169,248 @@ Friends</h2></td></tr>
 class&#160;</td><td class="memItemRight" valign="bottom"><b>EntityManager</b></td></tr>
 <tr class="separator:a6f579cda6059d102e9074e11a27e0282"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;typename... CTypes&gt;<br />
+class epp::Selection&lt; CTypes &gt;</h3>
+
+<p>A query to the <a class="el" href="classepp_1_1EntityManager.html">EntityManager</a> for entites that own a certain set of components. </p>
+<p>Using iterators of this class you can iterate over every entity that ows at least all of the components of CTypes... types. This class stores pointers to CPools and EntityPools of the EntitySpawners with archetypes that matches the specified requirements (CTypes and unwanted mask) </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">CTypes</td><td>A pack of component types used to select wanted entities </td></tr>
+  </table>
+  </dd>
+</dl>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a9c8c7f8346ab019f9919f6d3b13c9f26"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c8c7f8346ab019f9919f6d3b13c9f26">&#9670;&nbsp;</a></span>Selection()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... CTypes&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classepp_1_1Selection.html">epp::Selection</a>&lt; CTypes &gt;::<a class="el" href="classepp_1_1Selection.html">Selection</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classepp_1_1CMask.html">CMask</a>&#160;</td>
+          <td class="paramname"><em>unwanted</em> = <code><a class="el" href="classepp_1_1CMask.html">CMask</a>()</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructs a selection with a specified requirements. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unwanted</td><td>Mask of components the entities mustn't have. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a6b6f85cf44e2cba4c7567d32b5c9f33d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b6f85cf44e2cba4c7567d32b5c9f33d">&#9670;&nbsp;</a></span>begin() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... CTypes&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classepp_1_1Selection.html">Selection</a>&lt; CTypes... &gt;::<a class="el" href="classepp_1_1Selection_1_1Iterator.html">ConstIterator_t</a> <a class="el" href="classepp_1_1Selection.html">epp::Selection</a>&lt; CTypes &gt;::begin</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>An iterator to the first entity covered by this selection </dd></dl>
+
+</div>
+</div>
+<a id="afb75c30efc1aaa02d8a950e9075f40ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb75c30efc1aaa02d8a950e9075f40ed">&#9670;&nbsp;</a></span>begin() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... CTypes&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classepp_1_1Selection_1_1Iterator.html">ConstIterator_t</a> <a class="el" href="classepp_1_1Selection.html">epp::Selection</a>&lt; CTypes &gt;::begin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p></p>
+<dl class="section return"><dt>Returns</dt><dd>An iterator to the first entity covered by this selection <br  />
+ </dd></dl>
+
+</div>
+</div>
+<a id="a288f9d08dd0e6bd1494833ebae4c0d8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a288f9d08dd0e6bd1494833ebae4c0d8a">&#9670;&nbsp;</a></span>countEntities()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... CTypes&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::size_t <a class="el" href="classepp_1_1Selection.html">epp::Selection</a>&lt; CTypes &gt;::countEntities</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Number of entites that this selection covers </dd></dl>
+
+</div>
+</div>
+<a id="a93c065dec3b4340b6965ff81d15e8a49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93c065dec3b4340b6965ff81d15e8a49">&#9670;&nbsp;</a></span>end() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... CTypes&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classepp_1_1Selection.html">Selection</a>&lt; CTypes... &gt;::<a class="el" href="classepp_1_1Selection_1_1Iterator.html">ConstIterator_t</a> <a class="el" href="classepp_1_1Selection.html">epp::Selection</a>&lt; CTypes &gt;::end</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>An iterator pointing to the end (always valid) <br  />
+ </dd></dl>
+
+</div>
+</div>
+<a id="af983e423a44bff7ca7c531e3f60d9bdd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af983e423a44bff7ca7c531e3f60d9bdd">&#9670;&nbsp;</a></span>end() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... CTypes&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classepp_1_1Selection_1_1Iterator.html">ConstIterator_t</a> <a class="el" href="classepp_1_1Selection.html">epp::Selection</a>&lt; CTypes &gt;::end </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p></p>
+<dl class="section return"><dt>Returns</dt><dd>An iterator pointing to the end (always valid) <br  />
+ <br  />
+ </dd></dl>
+
+</div>
+</div>
+<a id="acc47dfa84773bdf0fdb26eead7c32b52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc47dfa84773bdf0fdb26eead7c32b52">&#9670;&nbsp;</a></span>forEach()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... CTypes&gt; </div>
+<div class="memtemplate">
+template&lt;typename Func &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classepp_1_1Selection.html">epp::Selection</a>&lt; CTypes &gt;::forEach </td>
+          <td>(</td>
+          <td class="paramtype">Func&#160;</td>
+          <td class="paramname"><em>func</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calls func on each entity that this selection covers. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Func</td><td>A callable type that accepts Iterator_t const&amp; </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">func</td><td>A callable object that accepts Iterator_t const&amp; </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aa5cd43d7452b228a5cc889dfc7e0f81d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5cd43d7452b228a5cc889dfc7e0f81d">&#9670;&nbsp;</a></span>getUnwanted()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... CTypes&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classepp_1_1CMask.html">CMask</a> const  &amp; <a class="el" href="classepp_1_1Selection.html">epp::Selection</a>&lt; CTypes &gt;::getUnwanted</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Mask with unwanted types of components passed in the selection's constructor </dd></dl>
+
+</div>
+</div>
+<a id="a619f06155a19facffe31bb826cfeb543"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a619f06155a19facffe31bb826cfeb543">&#9670;&nbsp;</a></span>getWanted()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... CTypes&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classepp_1_1CMask.html">CMask</a> const  &amp; <a class="el" href="classepp_1_1Selection.html">epp::Selection</a>&lt; CTypes &gt;::getWanted</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Mask with wanted types of components (CTypes...) </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>include/ECSpp/internal/<a class="el" href="Selection_8h_source.html">Selection.h</a></li>
 </ul>

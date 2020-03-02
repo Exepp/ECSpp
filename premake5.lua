@@ -14,9 +14,12 @@ workspace "ECSpp"
 		staticruntime "on"
 
 	filter {"system:linux"}
-		toolset "clang"
-		buildoptions{"-fPIC",
-					"-Wno-dangling-else",
+		if os.getenv("EPP_COVERAGE") == "1" then
+			toolset "gcc" -- do not change
+		else
+			toolset "clang"
+		end
+		buildoptions{"-Wno-dangling-else",
 					-- "-Weverything",
 					-- "-Wno-c++98-compat",
 					-- "-Wno-unused-template",
@@ -55,28 +58,8 @@ workspace "ECSpp"
 	}
 
 outDir = "%{cfg.system}_%{cfg.architecture}/%{cfg.buildcfg}/"
-
 	targetdir ("bin/" .. outDir .. "%{prj.name}")
-
 	objdir ("bin_inter/" .. outDir .. "%{prj.name}")
-
-
--- project "ECSpp"
-
--- 	filter "configurations:Debug"
--- 		targetsuffix "d"
--- 	filter {}
-
--- 	kind "StaticLib"
-
--- 	location "./"
-
--- 	files
--- 	{
--- 		"%{prj.location}/src/%{prj.name}/**",
--- 		"%{prj.location}/external/src/%{prj.name}/**",
--- 	}
-
 
 project "Tests"
 
@@ -90,10 +73,11 @@ project "Tests"
 		links {"gtest_maind", "gtestd"}
 	filter "configurations:Release"
 		links {"gtest_main", "gtest"}
-	filter{}
-
+	filter "toolset:gcc"
+		buildoptions {"--coverage"}
+		links {"gcov"}
 	filter {"system:linux"}
-		links {"pthread", "atomic"}
+		links {"pthread"}
 	filter{}
 
 project "Benchmarks"

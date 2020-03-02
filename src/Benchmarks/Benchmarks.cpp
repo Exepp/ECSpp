@@ -5,8 +5,8 @@
 
 template <std::size_t n>
 struct comp {
-    std::uint64_t x;
-    std::uint64_t y;
+    std::size_t x;
+    std::size_t y;
 };
 
 
@@ -15,48 +15,31 @@ struct NewLine {
 };
 
 
-template <std::size_t... ids>
-inline epp::Archetype makeArchetype(std::index_sequence<ids...>)
+template <int id, int... ids>
+epp::Archetype makeArchetype()
 {
-    return epp::Archetype(epp::IdOfL<comp<ids>...>());
-}
-template <int id>
-inline epp::Archetype makeArchetype()
-{
-    return makeArchetype(std::make_index_sequence<id>());
+    if constexpr (id != 0)
+        return makeArchetype<id - 1, id, ids...>();
+    else
+        return epp::Archetype(epp::IdOfL<comp<ids>...>());
 }
 
-template <std::size_t... ids>
-inline decltype(auto) makeSelection(std::index_sequence<ids...>)
+template <int id, int... ids>
+decltype(auto) makeSelection()
 {
-    return epp::Selection<comp<ids>...>();
-}
-template <int id>
-inline decltype(auto) makeSelection()
-{
-    return makeSelection(std::make_index_sequence<id>());
+    if constexpr (id != 0)
+        return makeSelection<id - 1, id, ids...>();
+    else
+        return epp::Selection<comp<ids>...>();
 }
 
-template <typename It, std::size_t... ids>
-inline void assignComponents(It& it, std::index_sequence<ids...>)
-{
-    ((it.template getComponent<comp<ids>>().x = {}), ...);
-}
-template <int id, typename It>
+template <int id, int... ids, typename It>
 inline void assignComponents(It& it)
 {
-    assignComponents(it, std::make_index_sequence<id>());
-}
-
-template <std::size_t... ids>
-inline void assignComponents(epp::EntityManager& mgr, epp::Entity ent, std::index_sequence<ids...>)
-{
-    ((mgr.componentOf<comp<ids>>(ent).x = {}), ...);
-}
-template <int id>
-inline void assignComponents(epp::EntityManager& mgr, epp::Entity ent)
-{
-    assignComponents(mgr, ent, std::make_index_sequence<id>());
+    if constexpr (id != 0)
+        assignComponents<id - 1, id, ids...>(it);
+    else
+        ((it.template getComponent<comp<ids>>().x = {}), ...);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -93,6 +76,7 @@ static void BM_EntitiesAtOnceCreation(benchmark::State& state)
 
     epp::EntityManager mgr;
     epp::Archetype arch = makeArchetype<cNum>();
+    mgr.prepareToSpawn(arch, state.range(0));
     for (auto _ : state)
         mgr.spawn(arch, state.range(0));
 }
@@ -262,18 +246,21 @@ static void BM_RemoveComponents(benchmark::State& state)
                                                                       ->Repetitions(reps)               \
                                                                       ->ReportAggregatesOnly(shortReport);
 
-#define MYBENCHMARK_TEMPLATE_N(name, iters, reps, shortReport) MYBENCHMARK_TEMPLATE(name, iters, reps, shortReport, 3)
+#define MYBENCHMARK_TEMPLATE_N(name, iters, reps) MYBENCHMARK_TEMPLATE(name, iters, reps, true, 1)
 
-MYBENCHMARK_TEMPLATE_N(BM_EntitiesSequentialCreation, 1, 100, true)
-MYBENCHMARK_TEMPLATE_N(BM_EntitiesSequentialCreationReserved, 1, 100, true)
-MYBENCHMARK_TEMPLATE_N(BM_EntitiesAtOnceCreation, 1, 100, true)
-MYBENCHMARK_TEMPLATE_N(BM_EntitiesSequentialDestroy, 1, 100, true)
-MYBENCHMARK_TEMPLATE_N(BM_EntitiesAtOnceDestroy, 1, 100, true)
-MYBENCHMARK_TEMPLATE_N(BM_EntitiesIteration, 100, 10, true)
-MYBENCHMARK_TEMPLATE_N(BM_EntitiesIterationHalf, 100, 10, true)
-MYBENCHMARK_TEMPLATE_N(BM_EntitiesIterationOneOfMany, 100, 10, true)
-MYBENCHMARK_TEMPLATE_N(BM_EntitiesIterationReal, 100, 10, true)
-MYBENCHMARK_TEMPLATE_N(BM_AddComponents, 1, 100, true)
-// MYBENCHMARK_TEMPLATE_N(BM_RemoveComponents, 1, 100, true)
+constexpr static std::size_t const ITERS = 100;
+constexpr static std::size_t const REPS = 10;
+
+MYBENCHMARK_TEMPLATE_N(BM_EntitiesSequentialCreation, 1, ITERS)
+MYBENCHMARK_TEMPLATE_N(BM_EntitiesSequentialCreationReserved, 1, ITERS)
+MYBENCHMARK_TEMPLATE_N(BM_EntitiesAtOnceCreation, 1, ITERS)
+MYBENCHMARK_TEMPLATE_N(BM_EntitiesSequentialDestroy, 1, ITERS)
+MYBENCHMARK_TEMPLATE_N(BM_EntitiesAtOnceDestroy, 1, ITERS)
+MYBENCHMARK_TEMPLATE_N(BM_AddComponents, 1, ITERS)
+MYBENCHMARK_TEMPLATE_N(BM_RemoveComponents, 1, ITERS)
+MYBENCHMARK_TEMPLATE_N(BM_EntitiesIteration, ITERS, REPS)
+MYBENCHMARK_TEMPLATE_N(BM_EntitiesIterationHalf, ITERS, REPS)
+MYBENCHMARK_TEMPLATE_N(BM_EntitiesIterationOneOfMany, ITERS, REPS)
+MYBENCHMARK_TEMPLATE_N(BM_EntitiesIterationReal, ITERS, REPS)
 
 BENCHMARK_MAIN();

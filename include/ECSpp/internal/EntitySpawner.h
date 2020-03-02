@@ -21,6 +21,8 @@ public:
         /// Ensures that the returned component is constructed
         /** 
          * Consecutive calls to "constructed" on already constructed components will only return the reference
+         * @tparam CType Component type owned by the entity that is being constructed
+         * @tparam Args Types of arguments that will be forwarded
          * @param args Arguments forwarded to construct an unconstructed component
          * @returns A reference to the constructed component of type CType
          * @throws (Debug only) Throws the AssertionFailed exception if the entity that 
@@ -52,7 +54,7 @@ private:
     using CPools_t = std::vector<CPool>;
 
 public:
-    /// Constructs the spawner to spawn entities of the given archetype
+    /// Constructs the spawner to spawn entities of a given archetype
     /** 
      * @param id A unique id to identify this spawner
      * @param arch Archetype of entities that will be spawned in this spawner
@@ -67,8 +69,9 @@ public:
 
     /// Spawns a new entity with the archetype specified in the Spawner's constructor
     /**
+     * @tparam FnType Callable type that takes r-value reference to the EntityCreator
      * @param entList List of entities to get a unique Entity instance from
-     * @param fn A callable object that can use the Creator instance to construct the components of the spawned entity
+     * @param fn A Callable type that can use the Creator instance to construct the components of the spawned entity
      * @returns An entity
      */
     template <typename FnType>
@@ -84,15 +87,16 @@ public:
     void destroy(Entity ent, EntityList& entList);
 
 
-    /// Changes the archetype of the given entity
+    /// Changes the archetype of a given entity
     /**
      * @details Components that are not present in this spawner's archetype are destroyed
      * @details Components that are not present in originSpawner's archetype but are present in this spawner's archetype 
      *          are allocated and can be constructed for the first time with Creator  
+     * @tparam FnType Callable type that takes r-value reference to the EntityCreator
      * @param ent A valid entity
      * @param entList List of entities to change the location data of ent
      * @param originSpawner any OTHER spawner that owns entity
-     * @param fn A callable object that can use the Creator instance to construct new components
+     * @param fn A Callable type that can use the Creator instance to construct new components
      * @returns True when changed the archetype, false otherwise (newArchetype was the same as ent's current archetype) 
      * @throws (Debug only) Throws the AssertionFailed exception if ent is invalid or &originSpawner == this or if originSpawner
      *          is not the origin spawner of ent

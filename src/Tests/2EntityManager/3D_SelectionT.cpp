@@ -234,7 +234,7 @@ TEST(Selection, Iterator)
     auto it5 = sel.end();
 
     int cn = 0;
-    for (; it1 != it2; ++it1, ++cn) {
+    for (; it1 != it2; it1++, ++cn) { // use post inc
         ASSERT_EQ(it1.getComponent<TComp1>(), TComp1({ cn, cn, cn }));
         ASSERT_EQ(it1.getComponent<TComp3>(), TComp3({ -cn, -cn, -cn }));
     }

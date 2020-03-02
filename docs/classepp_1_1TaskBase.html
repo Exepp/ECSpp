@@ -81,7 +81,7 @@ Inheritance diagram for epp::TaskBase:</div>
  <div class="center">
   <img src="classepp_1_1TaskBase.png" usemap="#epp::TaskBase_map" alt=""/>
   <map id="epp::TaskBase_map" name="epp::TaskBase_map">
-<area href="classepp_1_1Task.html" title="A simple tool for creating basic concurrent code." alt="epp::Task&lt; FnType, StepFnType, CTypes &gt;" shape="rect" coords="0,56,261,80"/>
+<area href="classepp_1_1Task.html" title="A simple tool for creating basic concurrent code." alt="epp::Task&lt; FnType, BatchSizeFnType, CTypes &gt;" shape="rect" coords="0,56,292,80"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -92,15 +92,15 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ab5ae64d1cfc58476641ef2fa14d06dea"><td class="memItemLeft" align="right" valign="top"><a id="ab5ae64d1cfc58476641ef2fa14d06dea"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>TaskBase</b> (<a class="el" href="classepp_1_1TaskBase.html">TaskBase</a> *upt=nullptr)</td></tr>
-<tr class="separator:ab5ae64d1cfc58476641ef2fa14d06dea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4235a37de90fea1be2708b67337d8abb"><td class="memItemLeft" align="right" valign="top"><a id="a4235a37de90fea1be2708b67337d8abb"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>run</b> (<a class="el" href="classepp_1_1EntityManager.html">EntityManager</a> &amp;mgr)=0</td></tr>
-<tr class="separator:a4235a37de90fea1be2708b67337d8abb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a505e78b28e7993b3e8d49df8279639d4"><td class="memItemLeft" align="right" valign="top"><a id="a505e78b28e7993b3e8d49df8279639d4"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>updateAndCheckIfHasEntities</b> (<a class="el" href="classepp_1_1EntityManager.html">EntityManager</a> &amp;mgr)=0</td></tr>
-<tr class="separator:a505e78b28e7993b3e8d49df8279639d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50971c005f544f785e1e4795e57e29c3"><td class="memItemLeft" align="right" valign="top"><a id="a50971c005f544f785e1e4795e57e29c3"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>TaskBase</b> (<a class="el" href="classepp_1_1EntityManager.html">EntityManager</a> &amp;mgrRef, <a class="el" href="classepp_1_1TaskBase.html">TaskBase</a> *upt=nullptr)</td></tr>
+<tr class="separator:a50971c005f544f785e1e4795e57e29c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a94aad15d9bdd5e2724cf81bf2072c3"><td class="memItemLeft" align="right" valign="top"><a id="a2a94aad15d9bdd5e2724cf81bf2072c3"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>run</b> ()=0</td></tr>
+<tr class="separator:a2a94aad15d9bdd5e2724cf81bf2072c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f182a7457a80c02722a58357d836d6d"><td class="memItemLeft" align="right" valign="top"><a id="a0f182a7457a80c02722a58357d836d6d"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>updateAndCheckIfHasEntities</b> ()=0</td></tr>
+<tr class="separator:a0f182a7457a80c02722a58357d836d6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -119,6 +119,9 @@ std::condition_variable&#160;</td><td class="memItemRight" valign="bottom"><b>co
 <tr class="memitem:ad69203742ebc9572f11368f2a8c96ae8"><td class="memItemLeft" align="right" valign="top"><a id="ad69203742ebc9572f11368f2a8c96ae8"></a>
 std::unique_ptr&lt; <a class="el" href="classepp_1_1TaskBase.html">TaskBase</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>subtask</b></td></tr>
 <tr class="separator:ad69203742ebc9572f11368f2a8c96ae8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6fb1a51937ab00c318f293d2ddb75036"><td class="memItemLeft" align="right" valign="top"><a id="a6fb1a51937ab00c318f293d2ddb75036"></a>
+<a class="el" href="classepp_1_1EntityManager.html">EntityManager</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>mgr</b></td></tr>
+<tr class="separator:a6fb1a51937ab00c318f293d2ddb75036"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>include/ECSpp/internal/<a class="el" href="Pipeline_8h_source.html">Pipeline.h</a></li>

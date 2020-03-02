@@ -21,27 +21,36 @@ protected:
     };
 
 public:
-    TaskBase(TaskBase* upt = nullptr) : fence(Fence()), uptask(upt) {}
+    TaskBase(EntityManager& mgrRef, TaskBase* upt = nullptr) : fence(Fence()), uptask(upt), mgr(mgrRef) {}
     virtual ~TaskBase() = default;
-    virtual void run(EntityManager& mgr) = 0;
-    virtual bool updateAndCheckIfHasEntities(EntityManager& mgr) = 0;
+    virtual void run() = 0;
+    virtual bool updateAndCheckIfHasEntities() = 0;
 
     Fence fence;
     std::mutex mutex;
     std::condition_variable condVar;
     TaskBase* uptask = nullptr;
     std::unique_ptr<TaskBase> subtask;
+    EntityManager& mgr;
 };
 
 
 /// A simple tool for creating basic concurrent code
 /**
- * This class eliminates race conditions by ensuring a one order of iteration for every task
- * and keeping subtask always behind the uptasks. This way there are no concurrent reads or writes
- * as long as EntityManager or other external object(pointer) is not used.
+ * This class eliminates race conditions by ensuring a single order of iteration for every task
+ * and keeping subtask always behind the uptasks. The execution of tasks is divided into batches. 
+ * The task will notify the subtask (if there is one) after completing every batch, so the subtask 
+ * can reach entities of that batch aswell. This way there are no concurrent reads or writes
+ * as long as EntityManager or any other external objects (pointers) are not used.
+ * @tparam FnType Callable type that takes Selection<CTypes...>::Iterator_t const& as the argument
+ * @tparam BatchSizeFnType A Callable type that takes the number of entities as the argument 
+ *         and returns the size of a batch.
+ * @tparam CTypes Types of the components used to select wanted entites
  */
-template <typename FnType, typename StepFnType, typename... CTypes>
+template <typename FnType, typename BatchSizeFnType, typename... CTypes>
 class Task : public TaskBase {
+
+    /// A small join guard for a thread
     struct JoinGuard {
         JoinGuard(std::thread& thread) : thr(thread){};
         ~JoinGuard() { thr.joinable() ? thr.join() : void(); }
@@ -51,33 +60,58 @@ class Task : public TaskBase {
 public:
     using Select_t = Selection<CTypes...>;
     using Iterator_t = typename Select_t::Iterator_t;
-    static_assert(std::is_invocable_v<FnType, Iterator_t const&>);
+    static_assert(std::is_invocable_v<FnType, Iterator_t const&>, "Function of the task must take TaskIterator<CTypes...> const& as the argument");
 
 public:
-    Task(FnType fn, StepFnType sFn, TaskBase* upt = nullptr)
-        : TaskBase(upt), runFn(std::move(fn)), stepFn(std::move(sFn)) {}
+    /**
+     * @param mgr EntityManager that will be used to select the entities from
+     * @param fn A callable object that takes Selection<CTypes...>::Iterator_t const& as the argument and that will be invoked 
+     *           for each entity that owns at least all of the components of CTypes... types
+     * @param bFn A Callable object that takes the number of entities as the argument and returns the size of a batch.
+     *            This object will be used for this task and its subtasks
+     * @param upt A parent task, that will notify this task when new b
+     * atch of entities will be ready to  
+     */
+    Task(EntityManager& mgr, FnType fn, BatchSizeFnType bFn, TaskBase* upt = nullptr)
+        : TaskBase(mgr, upt), runFn(std::move(fn)), batchSizeFn(std::move(bFn)) {}
 
+
+    /// Sets the subtask that will (always) run on a new thread next to this task
+    /**
+     * @note This function compiles only if the subtask will cover a subset of entities that this task covers
+     * @tparam OtherCTypes Types of the components used to select wanted entites for this subtask. For this function to compile, 
+     *         OtherCTypes must contain at least all of the CTypes of this task. If OtherCTypes is empty, CTypes of this task are used.
+     * @tparam OtherFnType A callable type that takes Selection<OtherCTypes...>::Iterator_t const& as the argument
+     * @param fn A callable object that takes Selection<OtherCTypes...>::Iterator_t const& as the argument and that will be invoked 
+     *           for each entity that owns at least all of the components of CTypes... types
+     * @returns Reference to the created subtask, which can be used to create even more subtasks
+     */
     template <typename... OtherCTypes, typename OtherFnType>
-    Task<OtherFnType, StepFnType, OtherCTypes...>& setSubtask(OtherFnType fn)
+    decltype(auto)
+    setSubtask(OtherFnType fn)
     {
-        static_assert(TuplePP<OtherCTypes...>::template containsType<CTypes...>());
-        return static_cast<Task<OtherFnType, StepFnType, OtherCTypes...>&>(*(
-            subtask = std::make_unique<Task<OtherFnType, StepFnType, OtherCTypes...>>(std::move(fn), stepFn, this)));
+        if constexpr (sizeof...(OtherCTypes)) {
+            static_assert(TuplePP<OtherCTypes...>::template containsType<CTypes...>());
+            return static_cast<Task<OtherFnType, BatchSizeFnType, OtherCTypes...>&>(*(
+                subtask = std::make_unique<Task<OtherFnType, BatchSizeFnType, OtherCTypes...>>(mgr, std::move(fn), batchSizeFn, this)));
+        }
+        else
+            return static_cast<Task<OtherFnType, BatchSizeFnType, CTypes...>&>(*(
+                subtask = std::make_unique<Task<OtherFnType, BatchSizeFnType, CTypes...>>(mgr, std::move(fn), batchSizeFn, this)));
     }
 
-    /// Runs main task and subtasks
+    /// Runs the main task and the subtask (if set)
     /**
      * This function returns only if every task completed its execution
-     * @param mgr manager to update internal selection
      */
-    virtual void run(EntityManager& mgr) override
+    virtual void run() override
     {
         std::thread subThread;
         JoinGuard jGuard(subThread);
         fence = Fence();
         mgr.updateSelection(select);
-        if (subtask && subtask->updateAndCheckIfHasEntities(mgr))
-            subThread = std::thread(&TaskBase::run, subtask.get(), std::ref(mgr));
+        if (subtask && subtask->updateAndCheckIfHasEntities())
+            subThread = std::thread(&TaskBase::run, subtask.get());
 
         if (uptask) // is subtask
             if (subThread.joinable())
@@ -96,7 +130,7 @@ private:
     void _run()
     {
         Iterator_t it = select.begin(), end = select.end(), tempEnd = it;
-        std::size_t const step = isSub ? 0 : stepFn(select.countEntities());
+        std::size_t const batchSize = isSub ? 0 : batchSizeFn(select.countEntities());
         while (it != end) {
             if constexpr (isSub) {
                 std::unique_lock guard(uptask->mutex); // no need to lock this->mutex - only this thread can modify its fence
@@ -104,7 +138,7 @@ private:
                 tempEnd.jumpToOrBeyond(uptask->fence.sId, uptask->fence.pIdx);
             }
             else if constexpr (hasSub) // is main
-                tempEnd += step;
+                tempEnd += batchSize;
             else
                 tempEnd = end;
 
@@ -118,7 +152,7 @@ private:
         }
     }
 
-    virtual bool updateAndCheckIfHasEntities(EntityManager& mgr) override
+    virtual bool updateAndCheckIfHasEntities() override
     {
         mgr.updateSelection(select);
         return select.countEntities() != 0;
@@ -126,55 +160,66 @@ private:
 
 private:
     FnType runFn;
-    StepFnType stepFn;
+    BatchSizeFnType batchSizeFn;
     Select_t select;
 };
 
 
-/** @copydoc Task */
+/// A simple tool for creating basic concurrent code
 class Pipeline {
     inline static auto const DefRunFn = [](auto&) {};
     using DefaultRunFn_t = decltype(DefRunFn);
 
-    inline static auto const DefStepFn = [](std::size_t n) -> std::size_t {
+    inline static auto const DefBatchSizeFn = [](std::size_t n) -> std::size_t {
         return std::max(std::size_t(32), std::min(std::size_t(512), n / 10));
     };
-    using DefaultStepFn_t = decltype(DefStepFn);
+    using DefaultBatchSizeFn_t = decltype(DefBatchSizeFn);
 
 public:
     template <typename... CTypes>
-    using TaskIterator_t = typename Task<DefaultRunFn_t, DefaultStepFn_t, CTypes...>::Iterator_t;
+    using TaskIterator_t = typename Task<DefaultRunFn_t, DefaultBatchSizeFn_t, CTypes...>::Iterator_t;
 
 public:
-    /// Runs main task and subtasks
+    /// Runs the main task with its subtasks
     /**
      * This function returns only if every task completed its execution
-     * @param mgr manager to update internal selection
+     * @param mgr Manager with entities that sh to update internal selection
      */
-    void run(EntityManager& mgr)
+    void run()
     {
         if (mainTask)
-            mainTask->run(mgr);
+            mainTask->run();
     }
 
     /// Sets the main task
     /**
-     * @param fn tasks's function, that takes an iterator
-     * @param stepFn Function for calculating how often should the main task let the 
-     * subtask know to which point can it iterate to (for example every 500 entities)
-     * @returns Reference to the created task, which can be used to create more subtasks
+     * @tparam CTypes Types of the components used to select wanted entites for this subtask. For this function to compile, 
+     *         CTypes must contain at least all of the CTypes of this task.
+     * @tparam FnType A callable type that takes Selection<CTypes...>::Iterator_t const& as the argument
+     * @tparam BatchSizeFnType A Callable type that takes the number of entities as the argument and returns the size of a batch.
+     * @param mgr EntityManager that will be used to select the entities from
+     * @param fn A callable object that takes Selection<CTypes...>::Iterator_t const& as the argument and that will be invoked 
+     *           for each entity that owns at least all of the components of CTypes... types
+     * @param bFn A Callable object that takes the number of entities as the argument and returns the size of a batch.
+     *            Copies of this object will be used for this task and its subtasks
+     * @returns Reference to the created task, which can be used to create subtasks
      */
-    template <typename... CTypes, typename FnType, typename StepFnType = DefaultStepFn_t>
-    Task<FnType, StepFnType, CTypes...>& setTask(FnType fn, StepFnType stepFn = DefStepFn)
+    template <typename... CTypes, typename FnType, typename BatchSizeFnType = DefaultBatchSizeFn_t>
+    Task<FnType, BatchSizeFnType, CTypes...>& setTask(EntityManager& mgr, FnType fn, BatchSizeFnType batchSizeFn = DefBatchSizeFn)
     {
-        return static_cast<Task<FnType, StepFnType, CTypes...>&>(*(
-            mainTask = std::make_unique<Task<FnType, StepFnType, CTypes...>>(std::move(fn), std::move(stepFn))));
+        return static_cast<Task<FnType, BatchSizeFnType, CTypes...>&>(*(
+            mainTask = std::make_unique<Task<FnType, BatchSizeFnType, CTypes...>>(mgr, std::move(fn), std::move(batchSizeFn))));
     }
 
 private:
     std::unique_ptr<TaskBase> mainTask;
 };
 
+
+/// A convenient typedef usefull to figure out what is the type that the task expects
+/**
+ * @tparam CTypes A pack of types specified in the Task 
+ */
 template <typename... CTypes>
 using TaskIterator = Pipeline::TaskIterator_t<CTypes...>;
 

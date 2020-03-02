@@ -80,7 +80,7 @@ $(function() {
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span>epp {</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">using</span> ComponentId = IndexType&lt;0, std::uint16_t&gt;;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">using</span> ComponentId = IndexType&lt;0, std::uint8_t&gt;;</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
 <div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="classepp_1_1CMetadata.html">   15</a></span>&#160;<span class="keyword">class </span><a class="code" href="classepp_1_1CMetadata.html">CMetadata</a> {</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keyword">using</span> DefCstrFnPtr_t = void (*)(<span class="keywordtype">void</span>*);</div>
@@ -146,7 +146,7 @@ $(function() {
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno"><a class="line" href="classepp_1_1CMetadata.html#a5956e9e02615d4ed133a193dfc545c86">   94</a></span>&#160;    <span class="keyword">static</span> constexpr std::size_t <span class="keyword">const</span> <a class="code" href="classepp_1_1CMetadata.html#a5956e9e02615d4ed133a193dfc545c86">MaxRegisteredComponents</a> = 128;</div>
+<div class="line"><a name="l00094"></a><span class="lineno"><a class="line" href="classepp_1_1CMetadata.html#a5956e9e02615d4ed133a193dfc545c86">   94</a></span>&#160;    <span class="keyword">static</span> constexpr std::size_t <span class="keyword">const</span> <a class="code" href="classepp_1_1CMetadata.html#a5956e9e02615d4ed133a193dfc545c86">MaxRegisteredComponents</a> = 64;</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    static_assert(<a class="code" href="classepp_1_1CMetadata.html#a5956e9e02615d4ed133a193dfc545c86">MaxRegisteredComponents</a> &gt; 0 &amp;&amp; (<a class="code" href="classepp_1_1CMetadata.html#a5956e9e02615d4ed133a193dfc545c86">MaxRegisteredComponents</a> &amp; (64 - 1)) == 0);</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="keyword">private</span>:</div>
@@ -183,8 +183,8 @@ $(function() {
 <div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160; </div>
 <div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="preprocessor">#endif // EPP_COMPONENT_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="astructepp_1_1IndexType_html"><div class="ttname"><a href="structepp_1_1IndexType.html">epp::IndexType&lt; 0, std::uint16_t &gt;</a></div></div>
-<div class="ttc" id="aclassepp_1_1CMetadata_html_a43f3c16a156e3e444754a5f327dbf67b"><div class="ttname"><a href="classepp_1_1CMetadata.html#a43f3c16a156e3e444754a5f327dbf67b">epp::CMetadata::GetData</a></div><div class="ttdeci">static CMetadata GetData(ComponentId id)</div><div class="ttdoc">Returns a copy of metadata associated with the given id.</div><div class="ttdef"><b>Definition:</b> Component.h:62</div></div>
+<div class="ttc" id="astructepp_1_1IndexType_html"><div class="ttname"><a href="structepp_1_1IndexType.html">epp::IndexType&lt; 0, std::uint8_t &gt;</a></div></div>
+<div class="ttc" id="aclassepp_1_1CMetadata_html_a43f3c16a156e3e444754a5f327dbf67b"><div class="ttname"><a href="classepp_1_1CMetadata.html#a43f3c16a156e3e444754a5f327dbf67b">epp::CMetadata::GetData</a></div><div class="ttdeci">static CMetadata GetData(ComponentId id)</div><div class="ttdoc">Returns a copy of metadata associated with a given id.</div><div class="ttdef"><b>Definition:</b> Component.h:62</div></div>
 <div class="ttc" id="aclassepp_1_1CMetadata_html_a5956e9e02615d4ed133a193dfc545c86"><div class="ttname"><a href="classepp_1_1CMetadata.html#a5956e9e02615d4ed133a193dfc545c86">epp::CMetadata::MaxRegisteredComponents</a></div><div class="ttdeci">static constexpr const std::size_t MaxRegisteredComponents</div><div class="ttdoc">The maximum number of registered components.</div><div class="ttdef"><b>Definition:</b> Component.h:94</div></div>
 <div class="ttc" id="aclassepp_1_1CMetadata_html"><div class="ttname"><a href="classepp_1_1CMetadata.html">epp::CMetadata</a></div><div class="ttdef"><b>Definition:</b> Component.h:15</div></div>
 <div class="ttc" id="aclassepp_1_1CMetadata_html_af34faf04e87f0d6248bdf61fb9cbef1f"><div class="ttname"><a href="classepp_1_1CMetadata.html#af34faf04e87f0d6248bdf61fb9cbef1f">epp::CMetadata::Id</a></div><div class="ttdeci">static ComponentId Id()</div><div class="ttdoc">Registers a component type on first call and returns a unique id for that type.</div><div class="ttdef"><b>Definition:</b> Component.h:36</div></div>

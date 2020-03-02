@@ -155,7 +155,14 @@ template&lt;typename CType , typename... Args&gt; </div>
 </div><div class="memdoc">
 
 <p>Ensures that the returned component is constructed. </p>
-<p>Consecutive calls to "constructed" on already constructed components will only return the reference </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Consecutive calls to "constructed" on already constructed components will only return the reference </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">CType</td><td>Component type owned by the entity that is being constructed </td></tr>
+    <tr><td class="paramname">Args</td><td>Types of arguments that will be forwarded </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">args</td><td>Arguments forwarded to construct an unconstructed component </td></tr>
   </table>

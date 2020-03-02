@@ -85,29 +85,29 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a23d5aebb8a29a814519772e5209fcb97"><td class="memTemplParams" colspan="2"><a id="a23d5aebb8a29a814519772e5209fcb97"></a>
+<tr class="memitem:a2c6b3a7d193f46b9d985dbc6d5b83383"><td class="memTemplParams" colspan="2"><a id="a2c6b3a7d193f46b9d985dbc6d5b83383"></a>
 template&lt;typename... CTypes&gt; </td></tr>
-<tr class="memitem:a23d5aebb8a29a814519772e5209fcb97"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>TaskIterator_t</b> = typename <a class="el" href="classepp_1_1Task.html">Task</a>&lt; DefaultRunFn_t, DefaultStepFn_t, CTypes... &gt;::Iterator_t</td></tr>
-<tr class="separator:a23d5aebb8a29a814519772e5209fcb97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c6b3a7d193f46b9d985dbc6d5b83383"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>TaskIterator_t</b> = typename <a class="el" href="classepp_1_1Task.html">Task</a>&lt; DefaultRunFn_t, DefaultBatchSizeFn_t, CTypes... &gt;::Iterator_t</td></tr>
+<tr class="separator:a2c6b3a7d193f46b9d985dbc6d5b83383"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aba337c93aa3dc0b2ddfbe6b7a5446c64"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1Pipeline.html#aba337c93aa3dc0b2ddfbe6b7a5446c64">run</a> (<a class="el" href="classepp_1_1EntityManager.html">EntityManager</a> &amp;mgr)</td></tr>
-<tr class="memdesc:aba337c93aa3dc0b2ddfbe6b7a5446c64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs main task and subtasks.  <a href="classepp_1_1Pipeline.html#aba337c93aa3dc0b2ddfbe6b7a5446c64">More...</a><br /></td></tr>
-<tr class="separator:aba337c93aa3dc0b2ddfbe6b7a5446c64"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a22d38b9f41e4b3722a813ea38b4c2ab3"><td class="memTemplParams" colspan="2">template&lt;typename... CTypes, typename FnType , typename StepFnType  = DefaultStepFn_t&gt; </td></tr>
-<tr class="memitem:a22d38b9f41e4b3722a813ea38b4c2ab3"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classepp_1_1Task.html">Task</a>&lt; FnType, StepFnType, CTypes... &gt; &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classepp_1_1Pipeline.html#a22d38b9f41e4b3722a813ea38b4c2ab3">setTask</a> (FnType fn, StepFnType stepFn=DefStepFn)</td></tr>
-<tr class="memdesc:a22d38b9f41e4b3722a813ea38b4c2ab3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the main task.  <a href="classepp_1_1Pipeline.html#a22d38b9f41e4b3722a813ea38b4c2ab3">More...</a><br /></td></tr>
-<tr class="separator:a22d38b9f41e4b3722a813ea38b4c2ab3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab48cd66373ea0bb7c68e83a492da9c12"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1Pipeline.html#ab48cd66373ea0bb7c68e83a492da9c12">run</a> ()</td></tr>
+<tr class="memdesc:ab48cd66373ea0bb7c68e83a492da9c12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs the main task with its subtasks.  <a href="classepp_1_1Pipeline.html#ab48cd66373ea0bb7c68e83a492da9c12">More...</a><br /></td></tr>
+<tr class="separator:ab48cd66373ea0bb7c68e83a492da9c12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cae79d37ad6a04c36db4d2c268e6778"><td class="memTemplParams" colspan="2">template&lt;typename... CTypes, typename FnType , typename BatchSizeFnType  = DefaultBatchSizeFn_t&gt; </td></tr>
+<tr class="memitem:a4cae79d37ad6a04c36db4d2c268e6778"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classepp_1_1Task.html">Task</a>&lt; FnType, BatchSizeFnType, CTypes... &gt; &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classepp_1_1Pipeline.html#a4cae79d37ad6a04c36db4d2c268e6778">setTask</a> (<a class="el" href="classepp_1_1EntityManager.html">EntityManager</a> &amp;mgr, FnType fn, BatchSizeFnType batchSizeFn=DefBatchSizeFn)</td></tr>
+<tr class="memdesc:a4cae79d37ad6a04c36db4d2c268e6778"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the main task.  <a href="classepp_1_1Pipeline.html#a4cae79d37ad6a04c36db4d2c268e6778">More...</a><br /></td></tr>
+<tr class="separator:a4cae79d37ad6a04c36db4d2c268e6778"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-types"></a>
 Private Types</h2></td></tr>
 <tr class="memitem:a1762ecc077b1fa19db405deedb584a0d"><td class="memItemLeft" align="right" valign="top"><a id="a1762ecc077b1fa19db405deedb584a0d"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>DefaultRunFn_t</b> = decltype(DefRunFn)</td></tr>
 <tr class="separator:a1762ecc077b1fa19db405deedb584a0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8c9879dddb20dc974c47ca41ae96d6e4"><td class="memItemLeft" align="right" valign="top"><a id="a8c9879dddb20dc974c47ca41ae96d6e4"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>DefaultStepFn_t</b> = decltype(DefStepFn)</td></tr>
-<tr class="separator:a8c9879dddb20dc974c47ca41ae96d6e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58e5014e66db0ed2b8a8d8a288056db8"><td class="memItemLeft" align="right" valign="top"><a id="a58e5014e66db0ed2b8a8d8a288056db8"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>DefaultBatchSizeFn_t</b> = decltype(DefBatchSizeFn)</td></tr>
+<tr class="separator:a58e5014e66db0ed2b8a8d8a288056db8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -120,15 +120,14 @@ Static Private Attributes</h2></td></tr>
 <tr class="memitem:a69925145c3b1b1d5defc283b402d9e41"><td class="memItemLeft" align="right" valign="top"><a id="a69925145c3b1b1d5defc283b402d9e41"></a>
 static const auto&#160;</td><td class="memItemRight" valign="bottom"><b>DefRunFn</b> = [](auto&amp;) {}</td></tr>
 <tr class="separator:a69925145c3b1b1d5defc283b402d9e41"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5e5f2d9a919b7691529b03601017c929"><td class="memItemLeft" align="right" valign="top">static const auto&#160;</td><td class="memItemRight" valign="bottom"><b>DefStepFn</b></td></tr>
-<tr class="separator:a5e5f2d9a919b7691529b03601017c929"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcdaa5de1c04506fa7a53ed2fda91663"><td class="memItemLeft" align="right" valign="top">static const auto&#160;</td><td class="memItemRight" valign="bottom"><b>DefBatchSizeFn</b></td></tr>
+<tr class="separator:afcdaa5de1c04506fa7a53ed2fda91663"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A simple tool for creating basic concurrent code. </p>
-<p>This class eliminates race conditions by ensuring a one order of iteration for every task and keeping subtask always behind the uptasks. This way there are no concurrent reads or writes as long as <a class="el" href="classepp_1_1EntityManager.html">EntityManager</a> or other external object(pointer) is not used. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="aba337c93aa3dc0b2ddfbe6b7a5446c64"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aba337c93aa3dc0b2ddfbe6b7a5446c64">&#9670;&nbsp;</a></span>run()</h2>
+<a id="ab48cd66373ea0bb7c68e83a492da9c12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab48cd66373ea0bb7c68e83a492da9c12">&#9670;&nbsp;</a></span>run()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -139,8 +138,7 @@ static const auto&#160;</td><td class="memItemRight" valign="bottom"><b>DefRunFn
         <tr>
           <td class="memname">void epp::Pipeline::run </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classepp_1_1EntityManager.html">EntityManager</a> &amp;&#160;</td>
-          <td class="paramname"><em>mgr</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -151,38 +149,44 @@ static const auto&#160;</td><td class="memItemRight" valign="bottom"><b>DefRunFn
 </table>
 </div><div class="memdoc">
 
-<p>Runs main task and subtasks. </p>
+<p>Runs the main task with its subtasks. </p>
 <p>This function returns only if every task completed its execution </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">mgr</td><td>manager to update internal selection </td></tr>
+    <tr><td class="paramname">mgr</td><td>Manager with entities that sh to update internal selection </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="a22d38b9f41e4b3722a813ea38b4c2ab3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a22d38b9f41e4b3722a813ea38b4c2ab3">&#9670;&nbsp;</a></span>setTask()</h2>
+<a id="a4cae79d37ad6a04c36db4d2c268e6778"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4cae79d37ad6a04c36db4d2c268e6778">&#9670;&nbsp;</a></span>setTask()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename... CTypes, typename FnType , typename StepFnType  = DefaultStepFn_t&gt; </div>
+template&lt;typename... CTypes, typename FnType , typename BatchSizeFnType  = DefaultBatchSizeFn_t&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classepp_1_1Task.html">Task</a>&lt;FnType, StepFnType, CTypes...&gt;&amp; epp::Pipeline::setTask </td>
+          <td class="memname"><a class="el" href="classepp_1_1Task.html">Task</a>&lt;FnType, BatchSizeFnType, CTypes...&gt;&amp; epp::Pipeline::setTask </td>
           <td>(</td>
+          <td class="paramtype"><a class="el" href="classepp_1_1EntityManager.html">EntityManager</a> &amp;&#160;</td>
+          <td class="paramname"><em>mgr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">FnType&#160;</td>
           <td class="paramname"><em>fn</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">StepFnType&#160;</td>
-          <td class="paramname"><em>stepFn</em> = <code>DefStepFn</code>&#160;</td>
+          <td class="paramtype">BatchSizeFnType&#160;</td>
+          <td class="paramname"><em>batchSizeFn</em> = <code>DefBatchSizeFn</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -198,20 +202,29 @@ template&lt;typename... CTypes, typename FnType , typename StepFnType  = Default
 </div><div class="memdoc">
 
 <p>Sets the main task. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">fn</td><td>tasks's function, that takes an iterator </td></tr>
-    <tr><td class="paramname">stepFn</td><td>Function for calculating how often should the main task let the subtask know to which point can it iterate to (for example every 500 entities) </td></tr>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">CTypes</td><td>Types of the components used to select wanted entites for this subtask. For this function to compile, CTypes must contain at least all of the CTypes of this task. </td></tr>
+    <tr><td class="paramname">FnType</td><td>A callable type that takes Selection&lt;CTypes...&gt;::Iterator_t const&amp; as the argument </td></tr>
+    <tr><td class="paramname">BatchSizeFnType</td><td>A Callable type that takes the number of entities as the argument and returns the size of a batch. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Reference to the created task, which can be used to create more subtasks </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mgr</td><td><a class="el" href="classepp_1_1EntityManager.html">EntityManager</a> that will be used to select the entities from </td></tr>
+    <tr><td class="paramname">fn</td><td>A callable object that takes Selection&lt;CTypes...&gt;::Iterator_t const&amp; as the argument and that will be invoked for each entity that owns at least all of the components of CTypes... types </td></tr>
+    <tr><td class="paramname">bFn</td><td>A Callable object that takes the number of entities as the argument and returns the size of a batch. Copies of this object will be used for this task and its subtasks </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to the created task, which can be used to create subtasks </dd></dl>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a5e5f2d9a919b7691529b03601017c929"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5e5f2d9a919b7691529b03601017c929">&#9670;&nbsp;</a></span>DefStepFn</h2>
+<a id="afcdaa5de1c04506fa7a53ed2fda91663"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afcdaa5de1c04506fa7a53ed2fda91663">&#9670;&nbsp;</a></span>DefBatchSizeFn</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -220,7 +233,7 @@ template&lt;typename... CTypes, typename FnType , typename StepFnType  = Default
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const auto epp::Pipeline::DefStepFn</td>
+          <td class="memname">const auto epp::Pipeline::DefBatchSizeFn</td>
         </tr>
       </table>
   </td>

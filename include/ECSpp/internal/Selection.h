@@ -17,9 +17,11 @@ using CondConstType = std::conditional_t<IsConst, std::add_const_t<T>, T>;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+/// A helper class for conditional member variables
+/** No-types version - no additional member variables */
 template <bool _HasTypes, typename... CTypes> // false version
 struct SelectionBase {
-
     template <bool IsConst>
     struct IteratorBase {
         using Selection_t = CondConstType<IsConst, Selection<>>;
@@ -29,6 +31,8 @@ struct SelectionBase {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+/// A specialization of helper class for conditional member variables
+/** Version with types - adding member variables */
 template <typename... CTypes> // true version
 struct SelectionBase<true, CTypes...> {
     template <typename T> // discard T
@@ -49,6 +53,14 @@ struct SelectionBase<true, CTypes...> {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+/// A query to the EntityManager for entites that own a certain set of components
+/**
+ * Using iterators of this class you can iterate over every entity that ows at least all of the components of CTypes... types.
+ * This class stores pointers to CPools and EntityPools of the EntitySpawners with
+ * archetypes that matches the specified requirements (CTypes and unwanted mask)
+ * @tparam CTypes A pack of component types used to select wanted entities
+ */
 template <typename... CTypes>
 class Selection : SelectionBase<(sizeof...(CTypes) > 0), CTypes...> {
     using Base_t = SelectionBase<(sizeof...(CTypes) > 0), CTypes...>;
@@ -57,12 +69,24 @@ class Selection : SelectionBase<(sizeof...(CTypes) > 0), CTypes...> {
 
     //////////////////////// <iterator>
 
+    /// Iterator of the Selection
+    /**
+     * Selection's iterator is invalid if it points to a location that would be impossible to get to with the
+     * current state of an EntityManager and only incrementation, i.e. changing the state of an EntityManager may
+     * invalidate iterators. 
+     * @details Here are the operations that may invalidates the iterators:
+     * - EntityManager::changeArchetype (has the overload for iterators that returns a next valid one)
+     * - EntityManager::destroy (has the overload for iterators that returns a next valid one)
+     * - EntityManager::clear
+     * 
+     * @tparam IsConst A boolean that specifies whether this iterator operates on const Selection, or non-const
+     */
     template <bool IsConst>
     class Iterator : Base_t::template IteratorBase<IsConst> {
         using ItBase_t = typename Base_t::template IteratorBase<IsConst>;
         using Selection_t = typename ItBase_t::Selection_t;
-        using SIdx_t = std::uint64_t;
-        using PIdx_t = SIdx_t; // compiles better (at least on my machine) with 64 bits
+        using SIdx_t = std::size_t;
+        using PIdx_t = SIdx_t; // gcc optimizes better (at least on my machine) with 64 bits
 
         // so user can call getComponent<CType> for const and non-const types
         template <class T>
@@ -71,28 +95,104 @@ class Selection : SelectionBase<(sizeof...(CTypes) > 0), CTypes...> {
         constexpr static SIdx_t const EndValue = std::numeric_limits<SIdx_t>::max();
 
     public:
-        Iterator(Selection_t& sel, bool end = false);
+        /**
+         * @param sel Selection of which needed data about spawners will be extracted
+         * @param end Should this iterator point to the end
+         */
+        Iterator(Selection_t& sel, bool end);
 
+
+        /// Returns a reference to the component of type T that the current entity owns
+        /**
+         * @tparam T Type of the component
+         * @returns A reference to the component
+         * @throws (Debug only) Throws the AssertionFailed exception if the iterator is invalid or points to the end 
+         */
         template <typename T>
         std::enable_if_t<(sizeof...(CTypes) > 0), CondConstComp_t<T>>&
         getComponent() const;
 
-        Iterator& operator++();                   // incrementing an end iterator throws
-        Iterator operator++(int);                 // incrementing an end iterator throws
-        Iterator& operator+=(std::size_t offset); /**  Returns an iterator to the entity that would
-                                                       be reached after "offset" increments, or end */
+
+        /**
+         * @returns A reference to this iterator
+         * @throws (Debug only) Throws the AssertionFailed exception if the iterator points to the end 
+         */
+        Iterator& operator++();
+
+
+        /**
+         * @returns A copy of pre-increment version of this iterator
+         * @throws (Debug only) Throws the AssertionFailed exception if the iterator points to the end 
+         */
+        Iterator operator++(int);
+
+
+        /**
+         * Applies "offset" increments reaching an entity or end
+         * @returns A reference to this iterator
+         */
+        Iterator& operator+=(std::size_t offset);
+
+
+        /**
+         * @returns An iterator pointing to the entity that would be reached after "offset" increments or to the end
+         */
         Iterator operator+(std::size_t offset) const;
+
+
+        /**
+         * @returns Entity that this iterator points to
+         * @throws (Debug only) Throws the AssertionFailed exception if the iterator is invalid or points to the end 
+         */
         Entity operator*() const;
+
+
+        /**
+         * @warning Both iterators must come from the same selection!
+         * @returns True if both iterators points to the same place, false otherwise
+         */
         bool operator==(Iterator const& other) const;
+
+
+        /**
+         * @warning Both iterators must come from the same selection!
+         * @returns True if the iterators points to different places, false otherwise
+         */
         bool operator!=(Iterator const& other) const;
 
-        // Makes this iterator point to the entity located at {sId, pIdx}
-        // If sId is not contained within this selection, iterator will point to the first entity of
-        // a spawner which has id greater than sId or to the end if there is no such spawner
-        // sId ought to be greater or equal to the id of spawner iterator is currently pointing to
+
+        /// Jumps to an entity located at {sId, pIdx} or beyond
+        /** 
+         * Makes this iterator point to an entity located at {sId, pIdx} or if that location is not
+         * covered by the selection that this iterator comes from, to a first entity that lies beyond 
+         * and IS covered by the selection or to the end if there is no such an entity.
+         * @note Iterator can only jump forward. Passing a location lies before this iterator will make it jump to the end
+         * @param sId Id of a spawner
+         * @param pIdx Index of the entity in a spawner with "sId" Id 
+         */
         Iterator& jumpToOrBeyond(SpawnerId sId, PoolIdx pIdx);
+
+
+        /// Jumps to an entity located at {entCell.spawnerId, entCell.poolIdx} or beyond
+        /** 
+         * Makes this iterator point to an entity located at {entCell.spawnerId, entCell.poolIdx} or if that
+         * location is not covered by the selection that this iterator comes from, to a first entity that 
+         * lies beyond and IS covered by the selection or to the end if there is no such an entity.
+         * @note Iterator can only jump forward. Passing a data of an entity that lies before this iterator will make it jump to the end
+         * @param entCell Data of an entity to jump to (or beyond)
+        */
         Iterator& jumpToOrBeyond(EntityList::Cell::Occupied entCell);
+
+
+        /**
+         * @returns Id of the spawner that the iterator points to 
+         */
         SpawnerId getSpawnerId() const;
+
+
+        /**
+         * @returns Index of the entity iterator points to
+         */
         PoolIdx getPoolIdx() const;
 
     private:
@@ -118,21 +218,47 @@ public:
     using ConstIterator_t = Iterator<true>;
 
 public:
-    Selection();
+    /// Constructs a selection with a specified requirements
+    /**
+     * @param unwanted Mask of components the entities mustn't have.
+     */
+    explicit Selection(CMask unwanted = CMask());
 
-    explicit Selection(CMask unwanted);
 
+    /// Calls func on each entity that this selection covers
+    /**
+     * @tparam Func A callable type that accepts Iterator_t const&
+     * @param func A callable object that accepts Iterator_t const&
+     */
     template <typename Func>
     void forEach(Func func);
 
+
+    /** @returns An iterator to the first entity covered by this selection */
     Iterator_t begin();
+
+
+    /** @returns An iterator pointing to the end (always valid)  */
     Iterator_t end();
+
+
+    /** @copydoc Selection::begin()  */
     ConstIterator_t begin() const;
+
+
+    /** @copydoc Selection::end()  */
     ConstIterator_t end() const;
 
+
+    /** @returns Mask with wanted types of components (CTypes...) */
     CMask const& getWanted() const;
+
+
+    /** @returns Mask with unwanted types of components passed in the selection's constructor*/
     CMask const& getUnwanted() const;
 
+
+    /** @returns Number of entites that this selection covers */
     std::size_t countEntities() const;
 
 private:
@@ -345,9 +471,6 @@ Selection<CTypes...>::Iterator<IsConst>::numOfSpawners() const
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 template <typename... CTypes>
-Selection<CTypes...>::Selection() : wantedMask(IdOfL<std::remove_const_t<CTypes>...>()) {}
-
-template <typename... CTypes>
 Selection<CTypes...>::Selection(CMask unwanted) : wantedMask(IdOfL<std::remove_const_t<CTypes>...>()),
                                                   unwantedMask(unwanted.removeCommon(wantedMask)) {}
 template <typename... CTypes>
@@ -363,7 +486,7 @@ template <typename... CTypes>
 inline typename Selection<CTypes...>::Iterator_t
 Selection<CTypes...>::begin()
 {
-    return Iterator_t(*this);
+    return Iterator_t(*this, false);
 }
 
 template <typename... CTypes>
@@ -377,7 +500,7 @@ template <typename... CTypes>
 inline typename Selection<CTypes...>::ConstIterator_t
 Selection<CTypes...>::begin() const
 {
-    return ConstIterator_t(*this);
+    return ConstIterator_t(*this, false);
 }
 
 template <typename... CTypes>

@@ -1,0 +1,1315 @@
+
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <title>Head</title>
+  <style media="screen" type="text/css">
+  
+    body
+    {
+      color: #000000;
+      background-color: #FFFFFF;
+    }
+
+    /* Link formats: use maroon w/underlines */
+    a:link
+    {
+      color: navy;
+      text-decoration: underline;
+    }
+    a:visited
+    {
+      color: maroon;
+      text-decoration: underline;
+    }
+    a:active
+    {
+      color: navy;
+      text-decoration: underline;
+    }
+
+    /*** TD formats ***/
+    td
+    {
+      font-family: sans-serif;
+    }
+    td.title
+    {
+      text-align: center;
+      padding-bottom: 10px;
+      font-size: 20pt;
+      font-weight: bold;
+    }
+
+    /* TD Header Information */
+    td.headerName
+    {
+      text-align: right;
+      color: black;
+      padding-right: 6px;
+      font-weight: bold;
+      vertical-align: top;
+      white-space: nowrap;
+    }
+    td.headerValue
+    {
+      text-align: left;
+      color: blue;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+    td.headerTableEntry
+    {
+      text-align: right;
+      color: black;
+      font-weight: bold;
+      white-space: nowrap;
+      padding-left: 12px;
+      padding-right: 4px;
+      background-color: LightBlue;
+    }
+    td.headerValueLeg
+    {
+      text-align: left;
+      color: black;
+      font-size: 80%;
+      white-space: nowrap;
+      padding-left: 10px;
+      padding-right: 10px;
+      padding-top: 2px;
+    }
+
+    /* Color of horizontal ruler */
+    td.hr
+    {
+      background-color: navy;
+      height:3px;
+    }
+    /* Footer format */
+    td.footer
+    {
+      text-align: center;
+      padding-top: 3px;
+      font-family: sans-serif;
+    }
+
+    /* Coverage Table */
+
+    td.coverTableHead
+    {
+      text-align: center;
+      color: white;
+      background-color: SteelBlue;
+      font-family: sans-serif;
+      font-size: 120%;
+      white-space: nowrap;
+      padding-left: 4px;
+      padding-right: 4px;
+    }
+    td.coverFile
+    {
+      text-align: left;
+      padding-left: 10px;
+      padding-right: 20px;
+      color: black;
+      background-color: LightBlue;
+      font-family: monospace;
+      font-weight: bold;
+      font-size: 110%;
+    }
+    td.coverBar
+    {
+      padding-left: 10px;
+      padding-right: 10px;
+      background-color: LightBlue;
+    }
+    td.coverBarOutline
+    {
+      background-color: white;
+    }
+    td.coverValue
+    {
+      padding-top: 2px;
+      text-align: right;
+      padding-left: 10px;
+      padding-right: 10px;
+      font-family: sans-serif;
+      white-space: nowrap;
+      font-weight: bold;
+    }
+
+    /* Link Details */
+    a.detail:link
+    {
+      color: #B8D0FF;
+      font-size:80%;
+    }
+    a.detail:visited
+    {
+      color: #B8D0FF;
+      font-size:80%;
+    }
+    a.detail:active
+    {
+      color: #FFFFFF;
+      font-size:80%;
+    }
+
+    .graphcont{
+        color:#000;
+        font-weight:700;
+        float:left
+    }
+
+    .graph{
+        float:left;
+        background-color: white;
+        position:relative;
+        width:280px;
+        padding:0
+    }
+
+    .graph .bar{
+        display:block;
+        position:relative;
+        border:black 1px solid;
+        text-align:center;
+        color:#fff;
+        height:10px;
+        font-family:Arial,Helvetica,sans-serif;
+        font-size:12px;
+        line-height:1.9em
+    }
+
+    .graph .bar span{
+        position:absolute;
+        left:1em
+    }
+
+    td.coveredLine,
+    span.coveredLine
+    {
+        background-color: LightGreen!important;
+    }
+
+    td.uncoveredLine,
+    span.uncoveredLine
+    {
+        background-color: LightPink!important;
+    }
+
+    .linebranch, .linecount
+    {
+        border-right: 1px gray solid;
+        background-color: lightgray;
+    }
+
+    span.takenBranch
+    {
+        color: Green!important;
+        cursor: help;
+    }
+
+    span.notTakenBranch
+    {
+        color: Red!important;
+        cursor: help;
+    }
+
+    .src
+    {
+        padding-left: 12px;
+    }
+
+    .srcHeader,
+    span.takenBranch,
+    span.notTakenBranch
+    {
+        font-family: monospace;
+        font-weight: bold;
+    }
+
+    pre
+    {
+        height : 15px;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .lineno
+    {
+        background-color: #EFE383;
+        border-right: 1px solid #BBB15F;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr><td class="title">GCC Code Coverage Report</td></tr>
+    <tr><td class="hr"></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding="1" border="0" width="100%">
+          <tr>
+            <td width="10%" class="headerName">Directory:</td>
+            <td width="35%" class="headerValue">include/ECSpp/</td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerValue" style="text-align:right;">Exec</td>
+            <td width="10%" class="headerValue" style="text-align:right;">Total</td>
+            <td width="15%" class="headerValue" style="text-align:right;">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerName">File:</td>
+            <td class="headerValue">include/ECSpp/Component.h</td>
+            <td></td>
+            <td class="headerName">Lines:</td>
+            <td class="headerTableEntry">32</td>
+            <td class="headerTableEntry">32</td>
+            <td class="headerTableEntry" style="background-color:LightGreen">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerName">Date:</td>
+            <td class="headerValue">2020-03-02 04:01:59</td>
+            <td></td>
+            <td class="headerName">Branches:</td>
+            <td class="headerTableEntry">197</td>
+            <td class="headerTableEntry">572</td>
+            <td class="headerTableEntry" style="background-color:LightPink">34.4 %</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="hr"></td></tr>
+  </table>
+
+  <br>
+  <table cellspacing="0" cellpadding="1">
+    <tr>
+      <td width="5%" align="right" class="srcHeader">Line</td>
+      <td width="5%" align="right" class="srcHeader">Branch</td>
+      <td width="5%" align="right" class="srcHeader">Exec</td>
+      <td width="75%" align="left" class="srcHeader src">Source</td>
+    </tr>
+
+    
+    <tr>
+    <td align="right" class="lineno"><pre>1</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>#ifndef EPP_COMPONENT_H</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>2</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>#define EPP_COMPONENT_H</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>3</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>4</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>#include &lt;ECSpp/internal/utility/Assert.h&gt;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>5</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>#include &lt;ECSpp/internal/utility/IndexType.h&gt;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>6</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>#include &lt;cstdint&gt;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>7</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>#include &lt;vector&gt;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>8</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>9</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>namespace epp {</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>10</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>11</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>using ComponentId = IndexType&lt;0, std::uint8_t&gt;;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>12</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>13</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>/// A class responsible for gathering components' metadata used in CPools to construct,</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>14</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>/// move and destroy components without the type information</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>15</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>4</pre></td>
+    <td align="left" class="src coveredLine"><pre>class CMetadata {</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>16</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    using DefCstrFnPtr_t = void (*)(void*);</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>17</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    using MoveCstrFnPtr_t = void (*)(void* dest, void* src);</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>18</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    using DestrFnPtr_t = void (*)(void*);</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>19</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    using MetadataVec_t = std::vector&lt;CMetadata&gt;;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>20</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>21</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>public:</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>22</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    DefCstrFnPtr_t defaultConstructor;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>23</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    MoveCstrFnPtr_t moveConstructor;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>24</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    DestrFnPtr_t destructor;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>25</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    std::uint32_t size;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>26</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    std::uint32_t alignment;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>27</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    ComponentId cId;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>28</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>29</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>public:</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>30</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    /// Registers a component type on first call and returns a unique id for that type</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>31</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    /**</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>32</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>     * @tparam CType Type of component</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>33</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>     * @returns A unique id for that type</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>34</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    */</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>35</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    template &lt;typename CType&gt;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>36</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>1385916</pre></td>
+    <td align="left" class="src coveredLine"><pre>    static ComponentId Id()</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>37</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    {</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>38</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 1 not taken">&cross;</span><span class="takenBranch" title="Branch 3 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 4 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 6 not taken">&cross;</span><span class="takenBranch" title="Branch 7 taken 1 times">&check;</span><span class="takenBranch" title="Branch 9 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 10 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 12 taken 1 times">&check;</span><span class="takenBranch" title="Branch 13 taken 63188 times">&check;</span><span class="takenBranch" title="Branch 15 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 16 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 18 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 19 not taken">&cross;</span><span class="notTakenBranch" title="Branch 21 not taken">&cross;</span><span class="notTakenBranch" title="Branch 22 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 24 taken 1 times">&check;</span><span class="takenBranch" title="Branch 25 taken 676178 times">&check;</span><span class="takenBranch" title="Branch 27 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 28 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 30 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 31 not taken">&cross;</span><span class="notTakenBranch" title="Branch 33 not taken">&cross;</span><span class="notTakenBranch" title="Branch 34 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 36 taken 1 times">&check;</span><span class="takenBranch" title="Branch 37 taken 10410 times">&check;</span><span class="takenBranch" title="Branch 39 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 40 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 42 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 43 not taken">&cross;</span><span class="notTakenBranch" title="Branch 45 not taken">&cross;</span><span class="notTakenBranch" title="Branch 46 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 48 taken 1 times">&check;</span><span class="takenBranch" title="Branch 49 taken 636135 times">&check;</span><span class="takenBranch" title="Branch 51 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 52 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 54 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 55 not taken">&cross;</span><span class="notTakenBranch" title="Branch 57 not taken">&cross;</span><span class="notTakenBranch" title="Branch 58 not taken">&cross;</span><br/></td>
+    <td align="right" class="linecount coveredLine"><pre>1385917</pre></td>
+    <td align="left" class="src coveredLine"><pre>        static ComponentId id = RegisterComponent&lt;CType&gt;();</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>39</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>1385915</pre></td>
+    <td align="left" class="src coveredLine"><pre>        return id;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>40</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    }</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>41</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>42</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    /// Registers components in a consistent and specific order and locks registering</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>43</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    /// (following attempts to register a component will throw in debug and release)</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>44</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    /**</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>45</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>     * @tparam Comps A pack of types to register</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>46</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>     * @throws An AssertFailed exception if CMetadata::Register was already called once before or if any of the types was already registered with wrong id</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>47</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    */</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>48</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    template &lt;typename... Comps&gt;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>49</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>2</pre></td>
+    <td align="left" class="src coveredLine"><pre>    static void Register()</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>50</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    {</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>51</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>2</pre></td>
+    <td align="left" class="src coveredLine"><pre>        int i = 0;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>52</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>        // this code must be present also for a release version, so assert version A (always)</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>53</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 1 times">&check;</span><span class="takenBranch" title="Branch 1 taken 1 times">&check;</span><span class="takenBranch" title="Branch 4 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 8 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 9 not taken">&cross;</span><span class="takenBranch" title="Branch 11 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 12 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 14 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 15 not taken">&cross;</span><span class="takenBranch" title="Branch 17 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 18 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 20 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 21 not taken">&cross;</span><span class="takenBranch" title="Branch 23 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 24 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 26 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 27 not taken">&cross;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>2</pre></td>
+    <td align="left" class="src coveredLine"><pre>        EPP_ASSERTA(!Registered);</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>54</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span><span class="takenBranch" title="Branch 4 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 7 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 8 not taken">&cross;</span><span class="notTakenBranch" title="Branch 10 not taken">&cross;</span><span class="takenBranch" title="Branch 11 taken 1 times">&check;</span><br/><span class="notTakenBranch" title="Branch 12 not taken">&cross;</span><span class="takenBranch" title="Branch 13 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 16 not taken">&cross;</span><span class="notTakenBranch" title="Branch 17 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 20 not taken">&cross;</span><span class="notTakenBranch" title="Branch 21 not taken">&cross;</span><span class="notTakenBranch" title="Branch 23 not taken">&cross;</span><span class="notTakenBranch" title="Branch 24 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 26 not taken">&cross;</span><span class="notTakenBranch" title="Branch 27 not taken">&cross;</span><span class="notTakenBranch" title="Branch 29 not taken">&cross;</span><span class="notTakenBranch" title="Branch 30 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 32 not taken">&cross;</span><span class="notTakenBranch" title="Branch 33 not taken">&cross;</span><span class="notTakenBranch" title="Branch 35 not taken">&cross;</span><span class="notTakenBranch" title="Branch 36 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 38 not taken">&cross;</span><span class="notTakenBranch" title="Branch 39 not taken">&cross;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>1</pre></td>
+    <td align="left" class="src coveredLine"><pre>        EPP_ASSERTA(((Id&lt;Comps&gt;().value == i++) &amp;&amp; ...));</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>55</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>1</pre></td>
+    <td align="left" class="src coveredLine"><pre>        Registered = i;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>56</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>1</pre></td>
+    <td align="left" class="src coveredLine"><pre>    }</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>57</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>58</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    /// Returns a copy of metadata associated with a given id</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>59</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    /**</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>60</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>     * @param id Any id returned from the Metadata::Id function</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>61</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    */</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>62</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>140</pre></td>
+    <td align="left" class="src coveredLine"><pre>    static CMetadata GetData(ComponentId id)</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>63</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    {</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>64</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>140</pre></td>
+    <td align="left" class="src coveredLine"><pre>        return MetadataVec[id.value];</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>65</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    }</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>66</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>67</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>private:</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>68</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    template &lt;typename CType&gt;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>69</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>5</pre></td>
+    <td align="left" class="src coveredLine"><pre>    static ComponentId RegisterComponent()</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>70</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    {</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>71</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>        static_assert(std::is_same_v&lt;std::remove_pointer_t&lt;std::decay_t&lt;CType&gt;&gt;, CType&gt;);</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>72</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>        static_assert(std::is_default_constructible_v&lt;CType&gt;);</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>73</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>        static_assert(std::is_move_constructible_v&lt;CType&gt;);</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>74</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>75</pre></td>
+    <td align="right" class="linebranch"><span class="notTakenBranch" title="Branch 1 not taken">&cross;</span><span class="takenBranch" title="Branch 2 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><span class="notTakenBranch" title="Branch 6 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 9 not taken">&cross;</span><span class="notTakenBranch" title="Branch 10 not taken">&cross;</span><span class="notTakenBranch" title="Branch 12 not taken">&cross;</span><span class="notTakenBranch" title="Branch 13 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 15 not taken">&cross;</span><span class="notTakenBranch" title="Branch 16 not taken">&cross;</span><span class="notTakenBranch" title="Branch 18 not taken">&cross;</span><span class="notTakenBranch" title="Branch 19 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 21 not taken">&cross;</span><span class="notTakenBranch" title="Branch 22 not taken">&cross;</span><span class="notTakenBranch" title="Branch 24 not taken">&cross;</span><span class="notTakenBranch" title="Branch 25 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 27 not taken">&cross;</span><span class="notTakenBranch" title="Branch 28 not taken">&cross;</span><span class="notTakenBranch" title="Branch 50 not taken">&cross;</span><span class="takenBranch" title="Branch 51 taken 1 times">&check;</span><br/><span class="notTakenBranch" title="Branch 54 not taken">&cross;</span><span class="notTakenBranch" title="Branch 55 not taken">&cross;</span><span class="notTakenBranch" title="Branch 58 not taken">&cross;</span><span class="notTakenBranch" title="Branch 59 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 61 not taken">&cross;</span><span class="notTakenBranch" title="Branch 62 not taken">&cross;</span><span class="notTakenBranch" title="Branch 64 not taken">&cross;</span><span class="notTakenBranch" title="Branch 65 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 67 not taken">&cross;</span><span class="notTakenBranch" title="Branch 68 not taken">&cross;</span><span class="notTakenBranch" title="Branch 70 not taken">&cross;</span><span class="notTakenBranch" title="Branch 71 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 73 not taken">&cross;</span><span class="notTakenBranch" title="Branch 74 not taken">&cross;</span><span class="notTakenBranch" title="Branch 76 not taken">&cross;</span><span class="notTakenBranch" title="Branch 77 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 99 not taken">&cross;</span><span class="takenBranch" title="Branch 100 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 103 not taken">&cross;</span><span class="notTakenBranch" title="Branch 104 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 107 not taken">&cross;</span><span class="notTakenBranch" title="Branch 108 not taken">&cross;</span><span class="notTakenBranch" title="Branch 110 not taken">&cross;</span><span class="notTakenBranch" title="Branch 111 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 113 not taken">&cross;</span><span class="notTakenBranch" title="Branch 114 not taken">&cross;</span><span class="notTakenBranch" title="Branch 116 not taken">&cross;</span><span class="notTakenBranch" title="Branch 117 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 119 not taken">&cross;</span><span class="notTakenBranch" title="Branch 120 not taken">&cross;</span><span class="notTakenBranch" title="Branch 122 not taken">&cross;</span><span class="notTakenBranch" title="Branch 123 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 125 not taken">&cross;</span><span class="notTakenBranch" title="Branch 126 not taken">&cross;</span><span class="notTakenBranch" title="Branch 148 not taken">&cross;</span><span class="takenBranch" title="Branch 149 taken 1 times">&check;</span><br/><span class="notTakenBranch" title="Branch 152 not taken">&cross;</span><span class="notTakenBranch" title="Branch 153 not taken">&cross;</span><span class="notTakenBranch" title="Branch 156 not taken">&cross;</span><span class="notTakenBranch" title="Branch 157 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 159 not taken">&cross;</span><span class="notTakenBranch" title="Branch 160 not taken">&cross;</span><span class="notTakenBranch" title="Branch 162 not taken">&cross;</span><span class="notTakenBranch" title="Branch 163 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 165 not taken">&cross;</span><span class="notTakenBranch" title="Branch 166 not taken">&cross;</span><span class="notTakenBranch" title="Branch 168 not taken">&cross;</span><span class="notTakenBranch" title="Branch 169 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 171 not taken">&cross;</span><span class="notTakenBranch" title="Branch 172 not taken">&cross;</span><span class="notTakenBranch" title="Branch 174 not taken">&cross;</span><span class="notTakenBranch" title="Branch 175 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 197 not taken">&cross;</span><span class="takenBranch" title="Branch 198 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 201 not taken">&cross;</span><span class="notTakenBranch" title="Branch 202 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 205 not taken">&cross;</span><span class="notTakenBranch" title="Branch 206 not taken">&cross;</span><span class="notTakenBranch" title="Branch 208 not taken">&cross;</span><span class="notTakenBranch" title="Branch 209 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 211 not taken">&cross;</span><span class="notTakenBranch" title="Branch 212 not taken">&cross;</span><span class="notTakenBranch" title="Branch 214 not taken">&cross;</span><span class="notTakenBranch" title="Branch 215 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 217 not taken">&cross;</span><span class="notTakenBranch" title="Branch 218 not taken">&cross;</span><span class="notTakenBranch" title="Branch 220 not taken">&cross;</span><span class="notTakenBranch" title="Branch 221 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 223 not taken">&cross;</span><span class="notTakenBranch" title="Branch 224 not taken">&cross;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>5</pre></td>
+    <td align="left" class="src coveredLine"><pre>        EPP_ASSERTA(MetadataVec.size() &lt; MaxRegisteredComponents);</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>76</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 1 not taken">&cross;</span><span class="takenBranch" title="Branch 4 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 8 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 9 not taken">&cross;</span><span class="takenBranch" title="Branch 11 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 12 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 14 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 15 not taken">&cross;</span><span class="takenBranch" title="Branch 17 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 18 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 20 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 21 not taken">&cross;</span><span class="takenBranch" title="Branch 23 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 24 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 26 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 27 not taken">&cross;</span><span class="notTakenBranch" title="Branch 48 not taken">&cross;</span><span class="takenBranch" title="Branch 49 taken 1 times">&check;</span><br/><span class="notTakenBranch" title="Branch 52 not taken">&cross;</span><span class="notTakenBranch" title="Branch 53 not taken">&cross;</span><span class="notTakenBranch" title="Branch 56 not taken">&cross;</span><span class="notTakenBranch" title="Branch 57 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 59 not taken">&cross;</span><span class="notTakenBranch" title="Branch 60 not taken">&cross;</span><span class="notTakenBranch" title="Branch 62 not taken">&cross;</span><span class="notTakenBranch" title="Branch 63 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 65 not taken">&cross;</span><span class="notTakenBranch" title="Branch 66 not taken">&cross;</span><span class="notTakenBranch" title="Branch 68 not taken">&cross;</span><span class="notTakenBranch" title="Branch 69 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 71 not taken">&cross;</span><span class="notTakenBranch" title="Branch 72 not taken">&cross;</span><span class="notTakenBranch" title="Branch 74 not taken">&cross;</span><span class="notTakenBranch" title="Branch 75 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 96 not taken">&cross;</span><span class="takenBranch" title="Branch 97 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 100 not taken">&cross;</span><span class="notTakenBranch" title="Branch 101 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 104 not taken">&cross;</span><span class="notTakenBranch" title="Branch 105 not taken">&cross;</span><span class="notTakenBranch" title="Branch 107 not taken">&cross;</span><span class="notTakenBranch" title="Branch 108 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 110 not taken">&cross;</span><span class="notTakenBranch" title="Branch 111 not taken">&cross;</span><span class="notTakenBranch" title="Branch 113 not taken">&cross;</span><span class="notTakenBranch" title="Branch 114 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 116 not taken">&cross;</span><span class="notTakenBranch" title="Branch 117 not taken">&cross;</span><span class="notTakenBranch" title="Branch 119 not taken">&cross;</span><span class="notTakenBranch" title="Branch 120 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 122 not taken">&cross;</span><span class="notTakenBranch" title="Branch 123 not taken">&cross;</span><span class="notTakenBranch" title="Branch 144 not taken">&cross;</span><span class="takenBranch" title="Branch 145 taken 1 times">&check;</span><br/><span class="notTakenBranch" title="Branch 148 not taken">&cross;</span><span class="notTakenBranch" title="Branch 149 not taken">&cross;</span><span class="notTakenBranch" title="Branch 152 not taken">&cross;</span><span class="notTakenBranch" title="Branch 153 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 155 not taken">&cross;</span><span class="notTakenBranch" title="Branch 156 not taken">&cross;</span><span class="notTakenBranch" title="Branch 158 not taken">&cross;</span><span class="notTakenBranch" title="Branch 159 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 161 not taken">&cross;</span><span class="notTakenBranch" title="Branch 162 not taken">&cross;</span><span class="notTakenBranch" title="Branch 164 not taken">&cross;</span><span class="notTakenBranch" title="Branch 165 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 167 not taken">&cross;</span><span class="notTakenBranch" title="Branch 168 not taken">&cross;</span><span class="notTakenBranch" title="Branch 170 not taken">&cross;</span><span class="notTakenBranch" title="Branch 171 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 192 not taken">&cross;</span><span class="takenBranch" title="Branch 193 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 196 not taken">&cross;</span><span class="notTakenBranch" title="Branch 197 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 200 not taken">&cross;</span><span class="notTakenBranch" title="Branch 201 not taken">&cross;</span><span class="notTakenBranch" title="Branch 203 not taken">&cross;</span><span class="notTakenBranch" title="Branch 204 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 206 not taken">&cross;</span><span class="notTakenBranch" title="Branch 207 not taken">&cross;</span><span class="notTakenBranch" title="Branch 209 not taken">&cross;</span><span class="notTakenBranch" title="Branch 210 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 212 not taken">&cross;</span><span class="notTakenBranch" title="Branch 213 not taken">&cross;</span><span class="notTakenBranch" title="Branch 215 not taken">&cross;</span><span class="notTakenBranch" title="Branch 216 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 218 not taken">&cross;</span><span class="notTakenBranch" title="Branch 219 not taken">&cross;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>5</pre></td>
+    <td align="left" class="src coveredLine"><pre>        EPP_ASSERTA(!CMetadata::Registered); // if CMetadata::Register was used</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>77</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>                                             // further registration is not allowed</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>78</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>4</pre></td>
+    <td align="left" class="src coveredLine"><pre>        CMetadata data;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>79</pre></td>
+    <td align="right" class="linebranch"><span class="notTakenBranch" title="Branch 4 not taken">&cross;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><span class="takenBranch" title="Branch 7 taken 84616 times">&check;</span><span class="notTakenBranch" title="Branch 8 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><span class="notTakenBranch" title="Branch 12 not taken">&cross;</span><span class="takenBranch" title="Branch 14 taken 80011 times">&check;</span><span class="notTakenBranch" title="Branch 15 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 18 not taken">&cross;</span><span class="notTakenBranch" title="Branch 19 not taken">&cross;</span><span class="takenBranch" title="Branch 21 taken 201137 times">&check;</span><span class="notTakenBranch" title="Branch 22 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 25 not taken">&cross;</span><span class="notTakenBranch" title="Branch 26 not taken">&cross;</span><span class="takenBranch" title="Branch 28 taken 35806 times">&check;</span><span class="notTakenBranch" title="Branch 29 not taken">&cross;</span><br/></td>
+    <td align="right" class="linecount coveredLine"><pre>803148</pre></td>
+    <td align="left" class="src coveredLine"><pre>        data.defaultConstructor = [](void* mem) { new (mem) CType(); };</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>80</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 33 taken 103796 times">&check;</span><span class="notTakenBranch" title="Branch 34 not taken">&cross;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><span class="notTakenBranch" title="Branch 6 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 9 taken 157378 times">&check;</span><span class="notTakenBranch" title="Branch 10 not taken">&cross;</span><span class="notTakenBranch" title="Branch 13 not taken">&cross;</span><span class="notTakenBranch" title="Branch 14 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 17 taken 205796 times">&check;</span><span class="notTakenBranch" title="Branch 18 not taken">&cross;</span><span class="notTakenBranch" title="Branch 21 not taken">&cross;</span><span class="notTakenBranch" title="Branch 22 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 25 taken 121708 times">&check;</span><span class="notTakenBranch" title="Branch 26 not taken">&cross;</span><span class="notTakenBranch" title="Branch 29 not taken">&cross;</span><span class="notTakenBranch" title="Branch 30 not taken">&cross;</span><br/></td>
+    <td align="right" class="linecount coveredLine"><pre>1177364</pre></td>
+    <td align="left" class="src coveredLine"><pre>        data.moveConstructor = [](void* dest, void* src) { new (dest) CType(std::move(*static_cast&lt;CType*&gt;(src))); };</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>81</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>2236320</pre></td>
+    <td align="left" class="src coveredLine"><pre>        data.destructor = [](void* mem) { static_cast&lt;CType*&gt;(mem)-&gt;~CType(); };</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>82</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>4</pre></td>
+    <td align="left" class="src coveredLine"><pre>        data.size = sizeof(CType);</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>83</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>4</pre></td>
+    <td align="left" class="src coveredLine"><pre>        data.alignment = alignof(CType);</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>84</pre></td>
+    <td align="right" class="linebranch"><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span><span class="notTakenBranch" title="Branch 3 not taken">&cross;</span><span class="takenBranch" title="Branch 6 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 7 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 10 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><span class="takenBranch" title="Branch 14 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 15 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 18 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 19 not taken">&cross;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>4</pre></td>
+    <td align="left" class="src coveredLine"><pre>        data.cId = ComponentId(MetadataVec.size());</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>85</pre></td>
+    <td align="right" class="linebranch"><span class="notTakenBranch" title="Branch 1 not taken">&cross;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span><span class="takenBranch" title="Branch 4 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 7 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 8 not taken">&cross;</span><span class="takenBranch" title="Branch 10 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 13 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 14 not taken">&cross;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>4</pre></td>
+    <td align="left" class="src coveredLine"><pre>        MetadataVec.push_back(data);</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>86</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>4</pre></td>
+    <td align="left" class="src coveredLine"><pre>        return data.cId;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>87</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    }</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>88</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>89</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>public:</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>90</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    /// The maximum number of registered components</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>91</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    /**</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>92</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>     * This value should be a multiple of 64 as it describes the number of bits in a CMask's bitset</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>93</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    */</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>94</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    static constexpr std::size_t const MaxRegisteredComponents = 64;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>95</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    static_assert(MaxRegisteredComponents &gt; 0 &amp;&amp; (MaxRegisteredComponents &amp; (64 - 1)) == 0);</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>96</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>97</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>private:</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>98</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    inline static bool Registered = false;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>99</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 1 times">&check;</span><span class="takenBranch" title="Branch 1 taken 7 times">&check;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>8</pre></td>
+    <td align="left" class="src coveredLine"><pre>    inline static MetadataVec_t MetadataVec;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>100</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>};</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>101</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>102</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>103</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>104</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>105</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>106</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>/// A convenient function returning the ComponentId of a given type</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>107</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>/**</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>108</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre> * @tparam T Any type</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>109</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre> * @returns A unique Id of the type T</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>110</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>*/</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>111</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>template &lt;typename T&gt;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>112</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>1385912</pre></td>
+    <td align="left" class="src coveredLine"><pre>inline ComponentId IdOf()</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>113</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>{</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>114</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>1385912</pre></td>
+    <td align="left" class="src coveredLine"><pre>    return CMetadata::Id&lt;T&gt;();</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>115</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>}</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>116</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>117</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>/// A convenient function returning the ComponentId list of a given types</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>118</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>/**</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>119</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre> * Use this function if you always need a list as a return value (for example passing a single ComponentId to the constructor of the Archetype class)</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>120</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre> * @tparam Comps A pack of any types</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>121</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre> * @returns A list of unique Ids for each of the types</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>122</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>*/</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>123</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>template &lt;typename... Comps&gt;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>124</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>3684</pre></td>
+    <td align="left" class="src coveredLine"><pre>inline std::initializer_list&lt;ComponentId&gt; IdOfL()</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>125</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>{</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>126</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 2 times">&check;</span><span class="takenBranch" title="Branch 1 taken 49 times">&check;</span><span class="takenBranch" title="Branch 3 taken 2 times">&check;</span><span class="notTakenBranch" title="Branch 4 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 6 taken 2 times">&check;</span><span class="notTakenBranch" title="Branch 7 not taken">&cross;</span><span class="takenBranch" title="Branch 9 taken 2 times">&check;</span><span class="notTakenBranch" title="Branch 10 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 12 taken 2 times">&check;</span><span class="notTakenBranch" title="Branch 13 not taken">&cross;</span><span class="takenBranch" title="Branch 15 taken 5 times">&check;</span><span class="takenBranch" title="Branch 16 taken 7 times">&check;</span><br/><span class="takenBranch" title="Branch 18 taken 3 times">&check;</span><span class="notTakenBranch" title="Branch 19 not taken">&cross;</span><span class="takenBranch" title="Branch 21 taken 4 times">&check;</span><span class="notTakenBranch" title="Branch 22 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 24 taken 4 times">&check;</span><span class="notTakenBranch" title="Branch 25 not taken">&cross;</span><span class="takenBranch" title="Branch 27 taken 4 times">&check;</span><span class="notTakenBranch" title="Branch 28 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 30 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 31 not taken">&cross;</span><span class="takenBranch" title="Branch 33 taken 3 times">&check;</span><span class="takenBranch" title="Branch 34 taken 4 times">&check;</span><br/><span class="takenBranch" title="Branch 36 taken 3 times">&check;</span><span class="notTakenBranch" title="Branch 37 not taken">&cross;</span><span class="takenBranch" title="Branch 39 taken 2 times">&check;</span><span class="notTakenBranch" title="Branch 40 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 42 taken 3 times">&check;</span><span class="notTakenBranch" title="Branch 43 not taken">&cross;</span><span class="takenBranch" title="Branch 45 taken 3 times">&check;</span><span class="notTakenBranch" title="Branch 46 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 48 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 49 not taken">&cross;</span><span class="takenBranch" title="Branch 51 taken 2 times">&check;</span><span class="takenBranch" title="Branch 52 taken 11 times">&check;</span><br/><span class="takenBranch" title="Branch 54 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 55 not taken">&cross;</span><span class="takenBranch" title="Branch 57 taken 2 times">&check;</span><span class="takenBranch" title="Branch 58 taken 2 times">&check;</span><br/><span class="takenBranch" title="Branch 60 taken 2 times">&check;</span><span class="notTakenBranch" title="Branch 61 not taken">&cross;</span><span class="takenBranch" title="Branch 63 taken 2 times">&check;</span><span class="notTakenBranch" title="Branch 64 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 66 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 67 not taken">&cross;</span><span class="notTakenBranch" title="Branch 69 not taken">&cross;</span><span class="notTakenBranch" title="Branch 70 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 72 taken 1 times">&check;</span><span class="takenBranch" title="Branch 73 taken 6 times">&check;</span><span class="takenBranch" title="Branch 75 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 76 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 78 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 79 not taken">&cross;</span><span class="takenBranch" title="Branch 81 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 82 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 84 not taken">&cross;</span><span class="notTakenBranch" title="Branch 85 not taken">&cross;</span><span class="takenBranch" title="Branch 87 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 88 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 90 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 91 not taken">&cross;</span><span class="takenBranch" title="Branch 93 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 94 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 96 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 97 not taken">&cross;</span><span class="takenBranch" title="Branch 99 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 100 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 102 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 103 not taken">&cross;</span><span class="notTakenBranch" title="Branch 105 not taken">&cross;</span><span class="notTakenBranch" title="Branch 106 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 108 taken 1 times">&check;</span><span class="takenBranch" title="Branch 109 taken 11 times">&check;</span><span class="takenBranch" title="Branch 111 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 112 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 114 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 115 not taken">&cross;</span><span class="takenBranch" title="Branch 117 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 118 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 120 taken 2 times">&check;</span><span class="takenBranch" title="Branch 121 taken 1 times">&check;</span><span class="takenBranch" title="Branch 123 taken 2 times">&check;</span><span class="notTakenBranch" title="Branch 124 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 126 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 127 not taken">&cross;</span><span class="takenBranch" title="Branch 129 taken 2 times">&check;</span><span class="notTakenBranch" title="Branch 130 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 132 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 133 not taken">&cross;</span><span class="takenBranch" title="Branch 135 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 136 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 138 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 139 not taken">&cross;</span><span class="takenBranch" title="Branch 141 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 142 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 144 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 145 not taken">&cross;</span><span class="notTakenBranch" title="Branch 147 not taken">&cross;</span><span class="notTakenBranch" title="Branch 148 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 150 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 151 not taken">&cross;</span><span class="takenBranch" title="Branch 153 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 154 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 156 taken 2 times">&check;</span><span class="takenBranch" title="Branch 157 taken 2 times">&check;</span><span class="takenBranch" title="Branch 159 taken 2 times">&check;</span><span class="notTakenBranch" title="Branch 160 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 162 taken 2 times">&check;</span><span class="notTakenBranch" title="Branch 163 not taken">&cross;</span><span class="takenBranch" title="Branch 165 taken 2 times">&check;</span><span class="notTakenBranch" title="Branch 166 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 168 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 169 not taken">&cross;</span><span class="takenBranch" title="Branch 171 taken 1 times">&check;</span><span class="takenBranch" title="Branch 172 taken 19 times">&check;</span><br/><span class="takenBranch" title="Branch 174 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 175 not taken">&cross;</span><span class="takenBranch" title="Branch 177 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 178 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 180 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 181 not taken">&cross;</span><span class="notTakenBranch" title="Branch 183 not taken">&cross;</span><span class="notTakenBranch" title="Branch 184 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 186 taken 2 times">&check;</span><span class="takenBranch" title="Branch 187 taken 3 times">&check;</span><span class="takenBranch" title="Branch 189 taken 2 times">&check;</span><span class="notTakenBranch" title="Branch 190 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 192 taken 2 times">&check;</span><span class="notTakenBranch" title="Branch 193 not taken">&cross;</span><span class="takenBranch" title="Branch 195 taken 2 times">&check;</span><span class="notTakenBranch" title="Branch 196 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 198 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 199 not taken">&cross;</span><span class="takenBranch" title="Branch 201 taken 1 times">&check;</span><span class="takenBranch" title="Branch 202 taken 8 times">&check;</span><br/><span class="takenBranch" title="Branch 204 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 205 not taken">&cross;</span><span class="takenBranch" title="Branch 207 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 208 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 210 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 211 not taken">&cross;</span><span class="notTakenBranch" title="Branch 213 not taken">&cross;</span><span class="notTakenBranch" title="Branch 214 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 216 taken 1 times">&check;</span><span class="takenBranch" title="Branch 217 taken 7 times">&check;</span><span class="takenBranch" title="Branch 219 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 220 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 222 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 223 not taken">&cross;</span><span class="takenBranch" title="Branch 225 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 226 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 228 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 229 not taken">&cross;</span><span class="takenBranch" title="Branch 231 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 232 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 234 not taken">&cross;</span><span class="notTakenBranch" title="Branch 235 not taken">&cross;</span><span class="takenBranch" title="Branch 237 taken 1 times">&check;</span><span class="takenBranch" title="Branch 238 taken 24 times">&check;</span><br/><span class="takenBranch" title="Branch 240 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 241 not taken">&cross;</span><span class="takenBranch" title="Branch 243 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 244 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 246 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 247 not taken">&cross;</span><span class="notTakenBranch" title="Branch 249 not taken">&cross;</span><span class="notTakenBranch" title="Branch 250 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 252 taken 1 times">&check;</span><span class="takenBranch" title="Branch 253 taken 124 times">&check;</span><span class="takenBranch" title="Branch 255 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 256 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 258 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 259 not taken">&cross;</span><span class="takenBranch" title="Branch 261 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 262 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 264 not taken">&cross;</span><span class="notTakenBranch" title="Branch 265 not taken">&cross;</span><span class="takenBranch" title="Branch 267 taken 1 times">&check;</span><span class="takenBranch" title="Branch 268 taken 40 times">&check;</span><br/><span class="takenBranch" title="Branch 270 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 271 not taken">&cross;</span><span class="takenBranch" title="Branch 273 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 274 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 276 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 277 not taken">&cross;</span><span class="notTakenBranch" title="Branch 279 not taken">&cross;</span><span class="notTakenBranch" title="Branch 280 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 282 taken 1 times">&check;</span><span class="takenBranch" title="Branch 283 taken 25 times">&check;</span><span class="takenBranch" title="Branch 285 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 286 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 288 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 289 not taken">&cross;</span><span class="takenBranch" title="Branch 291 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 292 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 294 not taken">&cross;</span><span class="notTakenBranch" title="Branch 295 not taken">&cross;</span><span class="takenBranch" title="Branch 297 taken 1 times">&check;</span><span class="takenBranch" title="Branch 298 taken 3111 times">&check;</span><br/><span class="takenBranch" title="Branch 300 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 301 not taken">&cross;</span><span class="takenBranch" title="Branch 303 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 304 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 306 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 307 not taken">&cross;</span><span class="notTakenBranch" title="Branch 309 not taken">&cross;</span><span class="notTakenBranch" title="Branch 310 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 312 not taken">&cross;</span><span class="notTakenBranch" title="Branch 313 not taken">&cross;</span><span class="notTakenBranch" title="Branch 315 not taken">&cross;</span><span class="notTakenBranch" title="Branch 316 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 318 not taken">&cross;</span><span class="notTakenBranch" title="Branch 319 not taken">&cross;</span><span class="notTakenBranch" title="Branch 321 not taken">&cross;</span><span class="notTakenBranch" title="Branch 322 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 324 not taken">&cross;</span><span class="notTakenBranch" title="Branch 325 not taken">&cross;</span><span class="notTakenBranch" title="Branch 327 not taken">&cross;</span><span class="notTakenBranch" title="Branch 328 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 330 not taken">&cross;</span><span class="notTakenBranch" title="Branch 331 not taken">&cross;</span><span class="takenBranch" title="Branch 333 taken 1 times">&check;</span><span class="takenBranch" title="Branch 334 taken 80 times">&check;</span><br/><span class="takenBranch" title="Branch 336 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 337 not taken">&cross;</span><span class="takenBranch" title="Branch 339 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 340 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 342 not taken">&cross;</span><span class="notTakenBranch" title="Branch 343 not taken">&cross;</span><span class="takenBranch" title="Branch 345 taken 1 times">&check;</span><span class="takenBranch" title="Branch 346 taken 17 times">&check;</span><br/><span class="takenBranch" title="Branch 348 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 349 not taken">&cross;</span><span class="takenBranch" title="Branch 351 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 352 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 354 not taken">&cross;</span><span class="notTakenBranch" title="Branch 355 not taken">&cross;</span><span class="takenBranch" title="Branch 357 taken 1 times">&check;</span><span class="takenBranch" title="Branch 358 taken 11 times">&check;</span><br/><span class="takenBranch" title="Branch 360 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 361 not taken">&cross;</span><span class="takenBranch" title="Branch 363 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 364 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 366 not taken">&cross;</span><span class="notTakenBranch" title="Branch 367 not taken">&cross;</span><span class="takenBranch" title="Branch 369 taken 1 times">&check;</span><span class="takenBranch" title="Branch 370 taken 56 times">&check;</span><br/><span class="takenBranch" title="Branch 372 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 373 not taken">&cross;</span><span class="takenBranch" title="Branch 375 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 376 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 378 not taken">&cross;</span><span class="notTakenBranch" title="Branch 379 not taken">&cross;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>3650</pre></td>
+    <td align="left" class="src coveredLine"><pre>    static std::initializer_list&lt;ComponentId&gt; list = { IdOf&lt;Comps&gt;()... };</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>127</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>3684</pre></td>
+    <td align="left" class="src coveredLine"><pre>    return list;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>128</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>}</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>129</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>130</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>/// A convenient function returning the ComponentId list of a given types</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>131</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>/**</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>132</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre> * @tparam Comps A pack of any types</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>133</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre> * @returns A list of unique Ids for each of the types</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>134</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>*/</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>135</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>template &lt;typename C1, typename C2, typename... CRest&gt;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>136</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>3275</pre></td>
+    <td align="left" class="src coveredLine"><pre>inline std::initializer_list&lt;ComponentId&gt; IdOf()</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>137</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>{</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>138</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>3275</pre></td>
+    <td align="left" class="src coveredLine"><pre>    return IdOfL&lt;C1, C2, CRest...&gt;();</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>139</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>}</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>140</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>141</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>} // namespace epp</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>142</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>143</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>#endif // EPP_COMPONENT_H</pre></td>
+    </tr>
+
+  </table>
+  <br>
+
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr><td class="hr"><td></tr>
+    <tr><td class="footer">Generated by: <a href="http://gcovr.com">GCOVR (Version 3.4)</a></td></tr>
+  </table>
+  <br>
+
+</body>
+
+</html>
+

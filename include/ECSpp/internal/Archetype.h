@@ -24,16 +24,16 @@ public:
     explicit Archetype(IdList_t initList);
 
 
-    /// Adds the given components to the archetype
+    /// Adds a given components to the archetype
     /**
-     * @param CTypes A pack of any types
+     * @tparam CTypes A pack of any types
      * @returns A reference to this object
      */
     template <typename... CTypes>
     Archetype& addComponent();
 
 
-    /// Adds the given components to the archetype
+    /// Adds a given components to the archetype
     /**
      * @param ids A List of ComponentIds returned from CMetadata::Id (or IdOf) function
      * @returns A reference to this object
@@ -41,7 +41,7 @@ public:
     Archetype& addComponent(IdList_t ids);
 
 
-    /// Adds the given component to the archetype
+    /// Adds a given component to the archetype
     /**
      * @param id A ComponentId returned from CMetadata::Id (or IdOf) function
      * @returns A reference to this object
@@ -49,16 +49,16 @@ public:
     Archetype& addComponent(CId_t id);
 
 
-    /// Removes the given components from the archetype
+    /// Removes a given components from the archetype
     /**
-     * @param CTypes A pack of any types
+     * @tparam CTypes A pack of any types
      * @returns A reference to this object
      */
     template <typename... CTypes>
     Archetype& removeComponent();
 
 
-    /// Removes the given components from the archetype
+    /// Removes a given components from the archetype
     /**
      * @param ids A List of ComponentIds returned from CMetadata::Id (or IdOf) function
      * @returns A reference to this object
@@ -66,7 +66,7 @@ public:
     Archetype& removeComponent(IdList_t ids);
 
 
-    /// Removes the given component from the archetype
+    /// Removes a given component from the archetype
     /**
      * @param id A ComponentId returned from CMetadata::Id (or IdOf) function
      * @returns A reference to this object
@@ -74,7 +74,7 @@ public:
     Archetype& removeComponent(CId_t id);
 
 
-    /// Returns whether the archetype contains all of the given components
+    /// Returns whether the archetype contains all of a given components
     /**
      * @param ids A List of ComponentIds returned from CMetadata::Id (or IdOf) function
      * @returns True if the archetype contains every component from the list, false otherwise
@@ -82,7 +82,7 @@ public:
     bool hasAllOf(IdList_t ids) const;
 
 
-    /// Returns whether the archetype contains any of the given components
+    /// Returns whether the archetype contains any of a given components
     /**
      * @param ids A List of ComponentIds returned from CMetadata::Id (or IdOf) function
      * @returns True if the archetype contains at least one of the components from the list, false otherwise

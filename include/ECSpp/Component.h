@@ -8,7 +8,7 @@
 
 namespace epp {
 
-using ComponentId = IndexType<0, std::uint16_t>;
+using ComponentId = IndexType<0, std::uint8_t>;
 
 /// A class responsible for gathering components' metadata used in CPools to construct,
 /// move and destroy components without the type information
@@ -29,7 +29,7 @@ public:
 public:
     /// Registers a component type on first call and returns a unique id for that type
     /**
-     * @param CType Type of component
+     * @tparam CType Type of component
      * @returns A unique id for that type
     */
     template <typename CType>
@@ -42,7 +42,7 @@ public:
     /// Registers components in a consistent and specific order and locks registering
     /// (following attempts to register a component will throw in debug and release)
     /**
-     * @param Comps A pack of types to register
+     * @tparam Comps A pack of types to register
      * @throws An AssertFailed exception if CMetadata::Register was already called once before or if any of the types was already registered with wrong id 
     */
     template <typename... Comps>
@@ -55,7 +55,7 @@ public:
         Registered = i;
     }
 
-    /// Returns a copy of metadata associated with the given id
+    /// Returns a copy of metadata associated with a given id
     /**
      * @param id Any id returned from the Metadata::Id function
     */
@@ -91,7 +91,7 @@ public:
     /**
      * This value should be a multiple of 64 as it describes the number of bits in a CMask's bitset 
     */
-    static constexpr std::size_t const MaxRegisteredComponents = 128;
+    static constexpr std::size_t const MaxRegisteredComponents = 64;
     static_assert(MaxRegisteredComponents > 0 && (MaxRegisteredComponents & (64 - 1)) == 0);
 
 private:
@@ -103,9 +103,9 @@ private:
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-/// A convenient function returning the ComponentId of the given type
+/// A convenient function returning the ComponentId of a given type
 /**
- * @param T Any type
+ * @tparam T Any type
  * @returns A unique Id of the type T
 */
 template <typename T>
@@ -114,10 +114,10 @@ inline ComponentId IdOf()
     return CMetadata::Id<T>();
 }
 
-/// A convenient function returning the ComponentId list of the given types
+/// A convenient function returning the ComponentId list of a given types
 /**
  * Use this function if you always need a list as a return value (for example passing a single ComponentId to the constructor of the Archetype class)
- * @param Comps A pack of any types
+ * @tparam Comps A pack of any types
  * @returns A list of unique Ids for each of the types
 */
 template <typename... Comps>
@@ -127,9 +127,9 @@ inline std::initializer_list<ComponentId> IdOfL()
     return list;
 }
 
-/// A convenient function returning the ComponentId list of the given types
+/// A convenient function returning the ComponentId list of a given types
 /**
- * @param Comps A pack of any types
+ * @tparam Comps A pack of any types
  * @returns A list of unique Ids for each of the types
 */
 template <typename C1, typename C2, typename... CRest>

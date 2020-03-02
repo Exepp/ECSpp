@@ -41,12 +41,15 @@ TEST(CPool, AllocN)
 {
     CPool pool(IdOf<TComp2>());
     Pool<TComp2> correct;
+    ASSERT_EQ(pool.alloc(0), nullptr);
+
     for (int n = 0; n < 10; ++n) {
         correct.data.resize(correct.data.size() + 100);
         pool.alloc(100);
         for (int i = 0; i < 100; ++i)
             pool.construct(n * 100 + i);
         TestCPool(pool, correct);
+        ASSERT_EQ(pool.alloc(0), nullptr);
     }
 }
 

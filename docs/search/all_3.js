@@ -1,9 +1,5 @@
 var searchData=
 [
-  ['entitiesof_32',['entitiesOf',['../classepp_1_1EntityManager.html#a9d2909ef76779afa99e6be3ca41e7f31',1,'epp::EntityManager']]],
-  ['entity_33',['Entity',['../structepp_1_1Entity.html',1,'epp']]],
-  ['entitylist_34',['EntityList',['../classepp_1_1EntityList.html',1,'epp::EntityList'],['../classepp_1_1EntityList.html#a67c07d88b68fc3b01e29551b87126bbd',1,'epp::EntityList::EntityList()']]],
-  ['entitymanager_35',['EntityManager',['../classepp_1_1EntityManager.html',1,'epp']]],
-  ['entityspawner_36',['EntitySpawner',['../classepp_1_1EntitySpawner.html',1,'epp::EntitySpawner'],['../classepp_1_1EntitySpawner.html#aa97a2cff03446282f0d49413675c7e75',1,'epp::EntitySpawner::EntitySpawner()']]],
-  ['entversion_37',['EntVersion',['../structepp_1_1EntVersion.html',1,'epp::EntVersion'],['../classepp_1_1EntityList_1_1Cell.html#a342b6cf51e84cfee4b68c0312dd3cad7',1,'epp::EntityList::Cell::entVersion()']]]
+  ['data_32',['Data',['../structepp_1_1EntityList_1_1Cell_1_1Data.html',1,'epp::EntityList::Cell::Data'],['../classepp_1_1llvm_1_1SmallVectorTemplateCommon.html#a92e38f06d021be7205e2b8e61c8c90f9',1,'epp::llvm::SmallVectorTemplateCommon::data()'],['../classepp_1_1llvm_1_1SmallVectorTemplateCommon.html#a5fa9913fac8d2766ca88b7ded865a7a9',1,'epp::llvm::SmallVectorTemplateCommon::data() const']]],
+  ['destroy_33',['destroy',['../classepp_1_1EntityManager.html#a1c967e0dfdd36039e965f3d8c4a71642',1,'epp::EntityManager::destroy(Entity ent)'],['../classepp_1_1EntityManager.html#a634557d04c86acd8b42184ff21e1c5c7',1,'epp::EntityManager::destroy(Iter const &amp;it)'],['../classepp_1_1CPool.html#a388e83315cca53345d7faedce6ee4a7b',1,'epp::CPool::destroy()'],['../classepp_1_1EntitySpawner.html#a4b806f6609382c2ae03ca5bffe13fd34',1,'epp::EntitySpawner::destroy()'],['../structepp_1_1Pool.html#a8b97757a57f41df06b560d34a690fd48',1,'epp::Pool::destroy()']]]
 ];

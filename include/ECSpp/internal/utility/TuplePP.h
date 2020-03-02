@@ -105,7 +105,7 @@ struct TuplePP : public std::tuple<TplTypes...> {
         if constexpr (sizeof...(SearchedTypes) > 0)
             return (isTypeInPack<SearchedTypes, TplTypes...>() && ...);
         else
-            return false;
+            return true;
     }
 };
 

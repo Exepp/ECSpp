@@ -37,7 +37,7 @@ namespace llvm {
 
 /// Returns the next power of two (in 64-bits) that is strictly greater than A.
 /// Returns zero on overflow.
-inline uint64_t NextPowerOf2(uint64_t A)
+inline std::size_t NextPowerOf2(std::size_t A)
 {
     A |= (A >> 1);
     A |= (A >> 2);

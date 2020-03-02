@@ -10,7 +10,7 @@ namespace epp {
 /**
  * In a CMask, every bit represents a unique registered type.
  * Each type has a unique id, counting sequentially from 0. 
- * Each id corresponds to exacly one bit in a CMask.
+ * Each id corresponds to exactly one bit in a CMask.
  */
 class CMask {
 public:
@@ -19,7 +19,7 @@ public:
     using Bitset_t = std::bitset<CMetadata::MaxRegisteredComponents>;
 
 public:
-    /// Sets the bits corresponding to the ComponentIds from the given list
+    /// Sets the bits corresponding to the ComponentIds from a given list
     /**
      * By default list is empty
      * @param list A List of ComponentIds returned from CMetadata::Id (or IdOf) function
@@ -51,28 +51,28 @@ public:
     CMask& operator=(CMask const&) = default;
 
 
-    /// Sets the bit corresponding to the given ComponentId
+    /// Sets the bit corresponding to a given ComponentId
     /**
      * @param bitIndex A ComponentId returned from CMetadata::Id (or IdOf) function
      */
     void set(Idx_t bitIndex);
 
 
-    /// Sets the bits corresponding to the ComponentIds from the given list
+    /// Sets the bits corresponding to the ComponentIds from a given list
     /**
      * @param list A List of ComponentIds returned from CMetadata::Id (or IdOf) function
      */
     void set(IdxList_t list);
 
 
-    /// Unsets the bit corresponding to the given ComponentId
+    /// Unsets the bit corresponding to a given ComponentId
     /**
      * @param bitIndex A ComponentId returned from CMetadata::Id (or IdOf) function
      */
     void unset(Idx_t bitIndex);
 
 
-    /// Unsets the bits corresponding to the ComponentIds from the given list
+    /// Unsets the bits corresponding to the ComponentIds from a given list
     /**
      * @param list A List of ComponentIds returned from CMetadata::Id (or IdOf) function
      */
@@ -91,7 +91,7 @@ public:
     void clear();
 
 
-    /// Returns the value of the bit corresponding to the given ComponentId
+    /// Returns the value of the bit corresponding to a given ComponentId
     /**
      * @param bitIndex A ComponentId returned from CMetadata::Id (or IdOf) function
      * @returns The value of the bit
@@ -122,7 +122,7 @@ public:
     bool hasCommon(CMask const& other) const;
 
 
-    /// Returns whether every set bit from the given CMask is also set in this one
+    /// Returns whether every set bit from a given CMask is also set in this one
     /**
      * @param other Any CMask
      * @returns True when other is a subset of this CMask, false otherewise

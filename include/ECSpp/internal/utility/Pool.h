@@ -36,7 +36,7 @@ struct Pool {
     }
 
 
-    /// Removes the object located at the given index
+    /// Removes the object located at a given index
     /**
      * Moves the last element in place of the removed one
      * @param idx index of the element to be deleted

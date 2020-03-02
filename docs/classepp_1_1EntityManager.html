@@ -82,15 +82,15 @@ $(function() {
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aaa136414c20de11cf4517c82df65d9fb"><td class="memTemplParams" colspan="2">template&lt;typename FnType  = DefCreationFn_t&gt; </td></tr>
 <tr class="memitem:aaa136414c20de11cf4517c82df65d9fb"><td class="memTemplItemLeft" align="right" valign="top">std::enable_if_t&lt; std::is_invocable_v&lt; FnType, <a class="el" href="classepp_1_1EntitySpawner_1_1Creator.html">EntityCreator</a> &amp;&amp; &gt;, <a class="el" href="structepp_1_1Entity.html">Entity</a> &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classepp_1_1EntityManager.html#aaa136414c20de11cf4517c82df65d9fb">spawn</a> (<a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;arch, FnType fn=DefCreationFn)</td></tr>
-<tr class="memdesc:aaa136414c20de11cf4517c82df65d9fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Spawns a new entity with the given archetype.  <a href="classepp_1_1EntityManager.html#aaa136414c20de11cf4517c82df65d9fb">More...</a><br /></td></tr>
+<tr class="memdesc:aaa136414c20de11cf4517c82df65d9fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Spawns a new entity with a given archetype.  <a href="classepp_1_1EntityManager.html#aaa136414c20de11cf4517c82df65d9fb">More...</a><br /></td></tr>
 <tr class="separator:aaa136414c20de11cf4517c82df65d9fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a52362ca43aadcc02d12a2b83161af304"><td class="memTemplParams" colspan="2">template&lt;typename FnType  = DefCreationFn_t&gt; </td></tr>
 <tr class="memitem:a52362ca43aadcc02d12a2b83161af304"><td class="memTemplItemLeft" align="right" valign="top">std::pair&lt; EPoolCIter_t, EPoolCIter_t &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classepp_1_1EntityManager.html#a52362ca43aadcc02d12a2b83161af304">spawn</a> (<a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;arch, std::size_t n, FnType fn=DefCreationFn)</td></tr>
-<tr class="memdesc:a52362ca43aadcc02d12a2b83161af304"><td class="mdescLeft">&#160;</td><td class="mdescRight">Spawns n new entities with the given archetype.  <a href="classepp_1_1EntityManager.html#a52362ca43aadcc02d12a2b83161af304">More...</a><br /></td></tr>
+<tr class="memdesc:a52362ca43aadcc02d12a2b83161af304"><td class="mdescLeft">&#160;</td><td class="mdescRight">Spawns n new entities with a given archetype.  <a href="classepp_1_1EntityManager.html#a52362ca43aadcc02d12a2b83161af304">More...</a><br /></td></tr>
 <tr class="separator:a52362ca43aadcc02d12a2b83161af304"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a70fec1863aedcb3e9bba95a523d3b0c6"><td class="memTemplParams" colspan="2">template&lt;typename FnType  = DefCreationFn_t&gt; </td></tr>
 <tr class="memitem:a70fec1863aedcb3e9bba95a523d3b0c6"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classepp_1_1EntityManager.html#a70fec1863aedcb3e9bba95a523d3b0c6">changeArchetype</a> (<a class="el" href="structepp_1_1Entity.html">Entity</a> ent, <a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;newArchetype, FnType fn=DefCreationFn)</td></tr>
-<tr class="memdesc:a70fec1863aedcb3e9bba95a523d3b0c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes the archetype of the given entity.  <a href="classepp_1_1EntityManager.html#a70fec1863aedcb3e9bba95a523d3b0c6">More...</a><br /></td></tr>
+<tr class="memdesc:a70fec1863aedcb3e9bba95a523d3b0c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes the archetype of a given entity.  <a href="classepp_1_1EntityManager.html#a70fec1863aedcb3e9bba95a523d3b0c6">More...</a><br /></td></tr>
 <tr class="separator:a70fec1863aedcb3e9bba95a523d3b0c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aca4d2e50960ce9e4f8dae93c2c1c1f6a"><td class="memTemplParams" colspan="2">template&lt;typename FnType  = DefCreationFn_t&gt; </td></tr>
 <tr class="memitem:aca4d2e50960ce9e4f8dae93c2c1c1f6a"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classepp_1_1EntityManager.html#aca4d2e50960ce9e4f8dae93c2c1c1f6a">changeArchetype</a> (<a class="el" href="structepp_1_1Entity.html">Entity</a> ent, IdList_t toRemove, IdList_t toAdd, FnType fn=DefCreationFn)</td></tr>
@@ -111,13 +111,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ad28ffa045d1c2adc4c730e6bc1c6c43c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys every entity, keeps resereved memory.  <a href="classepp_1_1EntityManager.html#ad28ffa045d1c2adc4c730e6bc1c6c43c">More...</a><br /></td></tr>
 <tr class="separator:ad28ffa045d1c2adc4c730e6bc1c6c43c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acd18d37f4a71d468ce96af9452f3bd91"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1EntityManager.html#acd18d37f4a71d468ce96af9452f3bd91">clear</a> (<a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;arch)</td></tr>
-<tr class="memdesc:acd18d37f4a71d468ce96af9452f3bd91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys every entity with the given archetype.  <a href="classepp_1_1EntityManager.html#acd18d37f4a71d468ce96af9452f3bd91">More...</a><br /></td></tr>
+<tr class="memdesc:acd18d37f4a71d468ce96af9452f3bd91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys every entity with a given archetype.  <a href="classepp_1_1EntityManager.html#acd18d37f4a71d468ce96af9452f3bd91">More...</a><br /></td></tr>
 <tr class="separator:acd18d37f4a71d468ce96af9452f3bd91"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a22bcca7da714d912c4a0fa835d5197be"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1EntityManager.html#a22bcca7da714d912c4a0fa835d5197be">prepareToSpawn</a> (<a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;arch, std::size_t n)</td></tr>
 <tr class="memdesc:a22bcca7da714d912c4a0fa835d5197be"><td class="mdescLeft">&#160;</td><td class="mdescRight">The next n spawn(arch, ...) calls will not require reallocation in any of the internal structures.  <a href="classepp_1_1EntityManager.html#a22bcca7da714d912c4a0fa835d5197be">More...</a><br /></td></tr>
 <tr class="separator:a22bcca7da714d912c4a0fa835d5197be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a32026e9847eea0e245de049c542ceb7a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1EntityManager.html#a32026e9847eea0e245de049c542ceb7a">shrinkToFit</a> (<a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;arch)</td></tr>
-<tr class="memdesc:a32026e9847eea0e245de049c542ceb7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes the excess of the reserved memory in the internal structures for the given archetype.  <a href="classepp_1_1EntityManager.html#a32026e9847eea0e245de049c542ceb7a">More...</a><br /></td></tr>
+<tr class="memdesc:a32026e9847eea0e245de049c542ceb7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes the excess of the reserved memory in the internal structures for a given archetype.  <a href="classepp_1_1EntityManager.html#a32026e9847eea0e245de049c542ceb7a">More...</a><br /></td></tr>
 <tr class="separator:a32026e9847eea0e245de049c542ceb7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abab1ecfe886db174d399739f6b9f5341"><td class="memItemLeft" align="right" valign="top"><a id="abab1ecfe886db174d399739f6b9f5341"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1EntityManager.html#abab1ecfe886db174d399739f6b9f5341">shrinkToFit</a> ()</td></tr>
@@ -125,32 +125,32 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="separator:abab1ecfe886db174d399739f6b9f5341"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3bae854150aece1c1f3677372febe0fc"><td class="memTemplParams" colspan="2">template&lt;typename... CTypes&gt; </td></tr>
 <tr class="memitem:a3bae854150aece1c1f3677372febe0fc"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classepp_1_1EntityManager.html#a3bae854150aece1c1f3677372febe0fc">updateSelection</a> (<a class="el" href="classepp_1_1Selection.html">Selection</a>&lt; CTypes... &gt; &amp;selection)</td></tr>
-<tr class="memdesc:a3bae854150aece1c1f3677372febe0fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates selection so that its iterators can reach entities of the archetypes that were not present in last update.  <a href="classepp_1_1EntityManager.html#a3bae854150aece1c1f3677372febe0fc">More...</a><br /></td></tr>
+<tr class="memdesc:a3bae854150aece1c1f3677372febe0fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates selection so that its iterators can reach entities of the archetypes that were not present in its last update.  <a href="classepp_1_1EntityManager.html#a3bae854150aece1c1f3677372febe0fc">More...</a><br /></td></tr>
 <tr class="separator:a3bae854150aece1c1f3677372febe0fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa69eb832ee3fc2f2149db5d98d8bf4d9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structepp_1_1EntityList_1_1Cell_1_1Occupied.html">EntityList::Cell::Occupied</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1EntityManager.html#aa69eb832ee3fc2f2149db5d98d8bf4d9">cellOf</a> (<a class="el" href="structepp_1_1Entity.html">Entity</a> ent) const</td></tr>
-<tr class="memdesc:aa69eb832ee3fc2f2149db5d98d8bf4d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns an internal data that describes the location of the given entity.  <a href="classepp_1_1EntityManager.html#aa69eb832ee3fc2f2149db5d98d8bf4d9">More...</a><br /></td></tr>
+<tr class="memdesc:aa69eb832ee3fc2f2149db5d98d8bf4d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns an internal data that describes the location of a given entity.  <a href="classepp_1_1EntityManager.html#aa69eb832ee3fc2f2149db5d98d8bf4d9">More...</a><br /></td></tr>
 <tr class="separator:aa69eb832ee3fc2f2149db5d98d8bf4d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7191262c96e0e2c12cb422b5100fee95"><td class="memTemplParams" colspan="2">template&lt;typename TComp &gt; </td></tr>
 <tr class="memitem:a7191262c96e0e2c12cb422b5100fee95"><td class="memTemplItemLeft" align="right" valign="top">TComp &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classepp_1_1EntityManager.html#a7191262c96e0e2c12cb422b5100fee95">componentOf</a> (<a class="el" href="structepp_1_1Entity.html">Entity</a> ent)</td></tr>
-<tr class="memdesc:a7191262c96e0e2c12cb422b5100fee95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a reference to the component of type TComp owned by the given entity.  <a href="classepp_1_1EntityManager.html#a7191262c96e0e2c12cb422b5100fee95">More...</a><br /></td></tr>
+<tr class="memdesc:a7191262c96e0e2c12cb422b5100fee95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a reference to the component of type TComp owned by a given entity.  <a href="classepp_1_1EntityManager.html#a7191262c96e0e2c12cb422b5100fee95">More...</a><br /></td></tr>
 <tr class="separator:a7191262c96e0e2c12cb422b5100fee95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa053c779716e5b5a1083a6aab2f89b2b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classepp_1_1CMask.html">CMask</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1EntityManager.html#aa053c779716e5b5a1083a6aab2f89b2b">maskOf</a> (<a class="el" href="structepp_1_1Entity.html">Entity</a> ent) const</td></tr>
-<tr class="memdesc:aa053c779716e5b5a1083a6aab2f89b2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a mask that describes which of the components are owned by the given entity.  <a href="classepp_1_1EntityManager.html#aa053c779716e5b5a1083a6aab2f89b2b">More...</a><br /></td></tr>
+<tr class="memdesc:aa053c779716e5b5a1083a6aab2f89b2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a mask that describes which of the components are owned by a given entity.  <a href="classepp_1_1EntityManager.html#aa053c779716e5b5a1083a6aab2f89b2b">More...</a><br /></td></tr>
 <tr class="separator:aa053c779716e5b5a1083a6aab2f89b2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a89a1bb839ae41f16150289c361157024"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classepp_1_1Archetype.html">Archetype</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1EntityManager.html#a89a1bb839ae41f16150289c361157024">archetypeOf</a> (<a class="el" href="structepp_1_1Entity.html">Entity</a> ent) const</td></tr>
-<tr class="memdesc:a89a1bb839ae41f16150289c361157024"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a mask that describes which of the components are owned by the given entity.  <a href="classepp_1_1EntityManager.html#a89a1bb839ae41f16150289c361157024">More...</a><br /></td></tr>
+<tr class="memdesc:a89a1bb839ae41f16150289c361157024"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a mask that describes which of the components are owned by a given entity.  <a href="classepp_1_1EntityManager.html#a89a1bb839ae41f16150289c361157024">More...</a><br /></td></tr>
 <tr class="separator:a89a1bb839ae41f16150289c361157024"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9d2909ef76779afa99e6be3ca41e7f31"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structepp_1_1Pool.html">EntityPool_t</a> const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1EntityManager.html#a9d2909ef76779afa99e6be3ca41e7f31">entitiesOf</a> (<a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;arch) const</td></tr>
-<tr class="memdesc:a9d2909ef76779afa99e6be3ca41e7f31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns an internal pool used by the spawner of entities with the given archetype.  <a href="classepp_1_1EntityManager.html#a9d2909ef76779afa99e6be3ca41e7f31">More...</a><br /></td></tr>
+<tr class="memdesc:a9d2909ef76779afa99e6be3ca41e7f31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns an internal pool used by the spawner of entities with a given archetype.  <a href="classepp_1_1EntityManager.html#a9d2909ef76779afa99e6be3ca41e7f31">More...</a><br /></td></tr>
 <tr class="separator:a9d2909ef76779afa99e6be3ca41e7f31"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae920a08435a9c74c9d81dd6c5ce7ac83"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1EntityManager.html#ae920a08435a9c74c9d81dd6c5ce7ac83">isValid</a> (<a class="el" href="structepp_1_1Entity.html">Entity</a> ent) const</td></tr>
-<tr class="memdesc:ae920a08435a9c74c9d81dd6c5ce7ac83"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether the given entity is valid or not.  <a href="classepp_1_1EntityManager.html#ae920a08435a9c74c9d81dd6c5ce7ac83">More...</a><br /></td></tr>
+<tr class="memdesc:ae920a08435a9c74c9d81dd6c5ce7ac83"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether a given entity is valid or not.  <a href="classepp_1_1EntityManager.html#ae920a08435a9c74c9d81dd6c5ce7ac83">More...</a><br /></td></tr>
 <tr class="separator:ae920a08435a9c74c9d81dd6c5ce7ac83"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a585b02a93e9e8e7023c41b8f207d637b"><td class="memItemLeft" align="right" valign="top">std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1EntityManager.html#a585b02a93e9e8e7023c41b8f207d637b">size</a> () const</td></tr>
 <tr class="memdesc:a585b02a93e9e8e7023c41b8f207d637b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of alive entities.  <a href="classepp_1_1EntityManager.html#a585b02a93e9e8e7023c41b8f207d637b">More...</a><br /></td></tr>
 <tr class="separator:a585b02a93e9e8e7023c41b8f207d637b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2ad8d3dc26823d236320d7fe0097467d"><td class="memItemLeft" align="right" valign="top">std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1EntityManager.html#a2ad8d3dc26823d236320d7fe0097467d">size</a> (<a class="el" href="classepp_1_1Archetype.html">Archetype</a> const &amp;arch) const</td></tr>
-<tr class="memdesc:a2ad8d3dc26823d236320d7fe0097467d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of alive entities with the given archetype.  <a href="classepp_1_1EntityManager.html#a2ad8d3dc26823d236320d7fe0097467d">More...</a><br /></td></tr>
+<tr class="memdesc:a2ad8d3dc26823d236320d7fe0097467d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of alive entities with a given archetype.  <a href="classepp_1_1EntityManager.html#a2ad8d3dc26823d236320d7fe0097467d">More...</a><br /></td></tr>
 <tr class="separator:a2ad8d3dc26823d236320d7fe0097467d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-types"></a>
@@ -235,7 +235,7 @@ static auto&#160;</td><td class="memItemRight" valign="bottom"><b>DefCreationFn<
 </table>
 </div><div class="memdoc">
 
-<p>Returns a mask that describes which of the components are owned by the given entity. </p>
+<p>Returns a mask that describes which of the components are owned by a given entity. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ent</td><td>A valid entity </td></tr>
@@ -276,7 +276,7 @@ static auto&#160;</td><td class="memItemRight" valign="bottom"><b>DefCreationFn<
 </table>
 </div><div class="memdoc">
 
-<p>Returns an internal data that describes the location of the given entity. </p>
+<p>Returns an internal data that describes the location of a given entity. </p>
 <p>This data can be used with selections' iterators </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ent</td><td>Valid entity </td></tr>
@@ -335,12 +335,18 @@ template&lt;typename FnType &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Changes the archetype of the given entity. </p>
+<p>Changes the archetype of a given entity. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">FnType</td><td>Callable type that takes r-value reference to the EntityCreator </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ent</td><td>A valid entity </td></tr>
     <tr><td class="paramname">newArchetype</td><td>Any archetype. A new archetype of ent </td></tr>
-    <tr><td class="paramname">fn</td><td>A callable object that can use the Creator instance to construct new components </td></tr>
+    <tr><td class="paramname">fn</td><td>A Callable type that can use the Creator instance to construct new components </td></tr>
   </table>
   </dd>
 </dl>
@@ -397,12 +403,18 @@ template&lt;typename FnType &gt; </div>
 </div><div class="memdoc">
 
 <p>Changes the archetype of ent, removing components from toRemove list and adding the ones from toAdd list. </p>
-<p>There are intentionally no overloaded versions of this function (for iterators) - it is more optimal to create a separate archetype for those situations </p><dl class="params"><dt>Parameters</dt><dd>
+<p>There are intentionally no overloaded versions of this function (for iterators) - it is more optimal to create a separate archetype for those situations </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">FnType</td><td>Callable type that takes r-value reference to the EntityCreator </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ent</td><td>A valid entity </td></tr>
     <tr><td class="paramname">toAdd</td><td>Components that will be added to ent (or kept it these are already there). toAdd has a priority over toRemove </td></tr>
     <tr><td class="paramname">toRemove</td><td>Components that will be removed from ent (except for the ones specified in toAdd) </td></tr>
-    <tr><td class="paramname">fn</td><td>A callable object that can use the Creator instance to construct the added components </td></tr>
+    <tr><td class="paramname">fn</td><td>A Callable type that can use the Creator instance to construct the added components </td></tr>
   </table>
   </dd>
 </dl>
@@ -453,12 +465,19 @@ template&lt;typename Iter , typename FnType &gt; </div>
 </div><div class="memdoc">
 
 <p>Changes the archetype of the entity associated with the iterator and returns the next valid one. </p>
-<p>There are no overloaded versions of this function (for iterators) on purpose - it is more optimal to create a separate archetype for those situations </p><dl class="params"><dt>Parameters</dt><dd>
+<p>There are no overloaded versions of this function (for iterators) on purpose - it is more optimal to create a separate archetype for those situations </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iter</td><td>EntitySpawner::EntityPool_t::Container_t::iterator or Selection&lt;...&gt;::Iterator_t </td></tr>
+    <tr><td class="paramname">FnType</td><td>Callable type that takes r-value reference to the EntityCreator </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">it</td><td>A valid and non-end iterator </td></tr>
     <tr><td class="paramname">newArchetype</td><td>Any archetype - a new archetype of the entity associated with the iterator <br  />
  </td></tr>
-    <tr><td class="paramname">fn</td><td>A callable object that can use the Creator instance to construct the added components </td></tr>
+    <tr><td class="paramname">fn</td><td>A Callable type that can use the Creator instance to construct the added components </td></tr>
   </table>
   </dd>
 </dl>
@@ -518,7 +537,7 @@ template&lt;typename Iter , typename FnType &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Destroys every entity with the given archetype. </p>
+<p>Destroys every entity with a given archetype. </p>
 <p>Faster than calling destroy on each entity individually </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">arch</td><td>Any archetype </td></tr>
@@ -554,15 +573,20 @@ template&lt;typename TComp &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Returns a reference to the component of type TComp owned by the given entity. </p>
+<p>Returns a reference to the component of type TComp owned by a given entity. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">TComp</td><td>A type of the component to return </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">TComp</td><td>A type of the component </td></tr>
     <tr><td class="paramname">ent</td><td>A valid entity that owns the component (to be sure that an entity owns a component, use maskOf(ent).get(Component::Id().value)) </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A reference to the component associated with ent </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A reference to the component of type TComp associated with ent </dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname">(Debug</td><td>only) Throws the AssertionFailed exception if ent is invalid </td></tr>
@@ -639,6 +663,12 @@ template&lt;typename Iter &gt; </div>
 </div><div class="memdoc">
 
 <p>Destroys the entity associated with the iterator and returns the next valid one. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iter</td><td>EntitySpawner::EntityPool_t::Container_t::iterator or Selection&lt;...&gt;::Iterator_t </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">it</td><td>A valid and non-end iterator </td></tr>
@@ -679,7 +709,7 @@ template&lt;typename Iter &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Returns an internal pool used by the spawner of entities with the given archetype. </p>
+<p>Returns an internal pool used by the spawner of entities with a given archetype. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">arch</td><td>One of archetypes that were already used to spawn entities during this application </td></tr>
@@ -720,7 +750,7 @@ template&lt;typename Iter &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Checks whether the given entity is valid or not. </p>
+<p>Checks whether a given entity is valid or not. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ent</td><td>Any entity </td></tr>
@@ -755,7 +785,7 @@ template&lt;typename Iter &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Returns a mask that describes which of the components are owned by the given entity. </p>
+<p>Returns a mask that describes which of the components are owned by a given entity. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ent</td><td>A valid entity </td></tr>
@@ -841,7 +871,7 @@ template&lt;typename Iter &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Removes the excess of the reserved memory in the internal structures for the given archetype. </p>
+<p>Removes the excess of the reserved memory in the internal structures for a given archetype. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">arch</td><td>Any archetype </td></tr>
@@ -903,14 +933,14 @@ template&lt;typename Iter &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Returns the number of alive entities with the given archetype. </p>
+<p>Returns the number of alive entities with a given archetype. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">arch</td><td>Any archetype </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The number of alive entities with the given archetype </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The number of alive entities with a given archetype </dd></dl>
 
 </div>
 </div>
@@ -950,11 +980,17 @@ template&lt;typename FnType &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Spawns a new entity with the given archetype. </p>
+<p>Spawns a new entity with a given archetype. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">FnType</td><td>Callable type that takes r-value reference to the EntityCreator </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">arch</td><td>Any archetype. The archetype of the spawned entity </td></tr>
-    <tr><td class="paramname">fn</td><td>A callable object that can use the Creator instance to construct the components of the spawned entity </td></tr>
+    <tr><td class="paramname">fn</td><td>A Callable type that can use the Creator instance to construct components of the spawned entity </td></tr>
   </table>
   </dd>
 </dl>
@@ -1004,11 +1040,17 @@ template&lt;typename FnType &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Spawns n new entities with the given archetype. </p>
+<p>Spawns n new entities with a given archetype. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">FnType</td><td>Callable type that takes r-value reference to the EntityCreator </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">arch</td><td>Any archetype. The archetype of spawned entities </td></tr>
-    <tr><td class="paramname">fn</td><td>A callable object that can use the Creator instance to construct the components of the spawned entities </td></tr>
+    <tr><td class="paramname">fn</td><td>A Callable type that can use the Creator instance to construct components of the spawned entities </td></tr>
   </table>
   </dd>
 </dl>
@@ -1042,10 +1084,17 @@ template&lt;typename... CTypes&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Updates selection so that its iterators can reach entities of the archetypes that were not present in last update. </p>
-<p>It is a O(n) operation, where n is a number of new unique (for that selection) archetypes used. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Updates selection so that its iterators can reach entities of the archetypes that were not present in its last update. </p>
+<p>Complexity: O(n), where n is a number of new (for that selection) archetypes used </p><dl class="section warning"><dt>Warning</dt><dd>Once selection has been updated in one <a class="el" href="classepp_1_1EntityManager.html">EntityManager</a> it musn't be updated in any other <a class="el" href="classepp_1_1EntityManager.html">EntityManager</a> </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">CTypes</td><td>Types of components specified in the selection's type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">selection</td><td>Any <a class="el" href="classepp_1_1Selection.html">Selection</a> to be updated </td></tr>
+    <tr><td class="paramname">selection</td><td>Any <a class="el" href="classepp_1_1Selection.html" title="A query to the EntityManager for entites that own a certain set of components.">Selection</a> to be updated </td></tr>
   </table>
   </dd>
 </dl>
