@@ -92,7 +92,7 @@ On windows:
 * Build Benchmarks project
 
 On linux:
-* `$ ./makeSolution_Win.sh` 
+* `$ ./makeSolution_Linux.sh` 
 * `$ ./runBenchmarks.sh` 
 
 ## Results
@@ -118,4 +118,5 @@ For now I am using gcc's gcov to generate the code coverage data of the tests an
 * Make sure that you have gcovr package
     * `$ apt install gcovr`
 * `$ ./makeCoverage.sh`
+
 Coverage will be available at [docs/coverage.html](https://exepp.github.io/ECSpp/coverage.html)
