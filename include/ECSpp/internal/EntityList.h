@@ -28,6 +28,11 @@ struct EntVersion : public IndexType<3> {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+/// A unique key used to distinguish created entities
+/**
+ * listIdxs can be reused by incrementing their versions. Each version then represents a unique entity created with that listIdx.
+ * This way "keys" of deleted entites become invalid. Key is only invalidated on EntityManager::destroy call. 
+ */
 struct Entity {
     ListIdx listIdx;
     EntVersion version;

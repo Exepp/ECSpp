@@ -275,12 +275,12 @@
           </tr>
           <tr>
             <td class="headerName">Date:</td>
-            <td class="headerValue">2020-03-02 04:01:59</td>
+            <td class="headerValue">2020-03-09 02:12:46</td>
             <td></td>
             <td class="headerName">Branches:</td>
-            <td class="headerTableEntry">127</td>
-            <td class="headerTableEntry">494</td>
-            <td class="headerTableEntry" style="background-color:LightPink">25.7 %</td>
+            <td class="headerTableEntry">122</td>
+            <td class="headerTableEntry">486</td>
+            <td class="headerTableEntry" style="background-color:LightPink">25.1 %</td>
           </tr>
         </table>
       </td>
@@ -345,7 +345,7 @@
     <td align="right" class="lineno"><pre>7</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>#include &lt;thread&gt;</pre></td>
+    <td align="left" class="src "><pre>#include &lt;future&gt;</pre></td>
     </tr>
 
     <tr>
@@ -413,8 +413,8 @@
 
     <tr>
     <td align="right" class="lineno"><pre>17</pre></td>
-    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 137 times">&check;</span><span class="takenBranch" title="Branch 2 taken 46 times">&check;</span><span class="takenBranch" title="Branch 4 taken 137 times">&check;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 7 taken 130 times">&check;</span><span class="takenBranch" title="Branch 8 taken 7 times">&check;</span></td>
-    <td align="right" class="linecount coveredLine"><pre>183</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 321 times">&check;</span><span class="takenBranch" title="Branch 2 taken 438 times">&check;</span><span class="takenBranch" title="Branch 4 taken 321 times">&check;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 7 taken 314 times">&check;</span><span class="takenBranch" title="Branch 8 taken 6 times">&check;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>759</pre></td>
     <td align="left" class="src coveredLine"><pre>        bool operator&lt;(Fence const&amp; rhs) const { return sId &lt; rhs.sId || (sId == rhs.sId &amp;&amp; pIdx &lt; rhs.pIdx); }</pre></td>
     </tr>
 
@@ -464,371 +464,371 @@
     <td align="right" class="lineno"><pre>24</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount coveredLine"><pre>4</pre></td>
-    <td align="left" class="src coveredLine"><pre>    TaskBase(EntityManager&amp; mgrRef, TaskBase* upt = nullptr) : fence(Fence()), uptask(upt), mgr(mgrRef) {}</pre></td>
+    <td align="left" class="src coveredLine"><pre>    TaskBase(EntityManager&amp; mgrRef, std::launch lPolicy, TaskBase* upt)</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>25</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount coveredLine"><pre>4</pre></td>
-    <td align="left" class="src coveredLine"><pre>    virtual ~TaskBase() = default;</pre></td>
+    <td align="left" class="src coveredLine"><pre>        : mgr(mgrRef), launchPolicy(lPolicy), uptask(upt) {}</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>26</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    virtual void run() = 0;</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>4</pre></td>
+    <td align="left" class="src coveredLine"><pre>    virtual ~TaskBase() = default;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>27</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    virtual bool updateAndCheckIfHasEntities() = 0;</pre></td>
+    <td align="left" class="src "><pre>    virtual void run() = 0;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>28</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
+    <td align="left" class="src "><pre>    virtual bool updateAndCheckIfHasEntities() = 0;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>29</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    Fence fence;</pre></td>
+    <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>30</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    std::mutex mutex;</pre></td>
+    <td align="left" class="src "><pre>    EntityManager&amp; mgr;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>31</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    std::condition_variable condVar;</pre></td>
+    <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>32</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    TaskBase* uptask = nullptr;</pre></td>
+    <td align="left" class="src "><pre>    Fence fence;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>33</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    std::unique_ptr&lt;TaskBase&gt; subtask;</pre></td>
+    <td align="left" class="src "><pre>    std::mutex mutex;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>34</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    EntityManager&amp; mgr;</pre></td>
+    <td align="left" class="src "><pre>    std::condition_variable condVar;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>35</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>};</pre></td>
+    <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>36</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
+    <td align="left" class="src "><pre>    std::launch launchPolicy;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>37</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
+    <td align="left" class="src "><pre>    TaskBase* uptask = nullptr;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>38</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>/// A simple tool for creating basic concurrent code</pre></td>
+    <td align="left" class="src "><pre>    std::unique_ptr&lt;TaskBase&gt; subtask;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>39</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>/**</pre></td>
+    <td align="left" class="src "><pre>};</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>40</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre> * This class eliminates race conditions by ensuring a single order of iteration for every task</pre></td>
+    <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>41</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre> * and keeping subtask always behind the uptasks. The execution of tasks is divided into batches.</pre></td>
+    <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>42</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre> * The task will notify the subtask (if there is one) after completing every batch, so the subtask</pre></td>
+    <td align="left" class="src "><pre>/// A simple tool for creating basic concurrent code</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>43</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre> * can reach entities of that batch aswell. This way there are no concurrent reads or writes</pre></td>
+    <td align="left" class="src "><pre>/**</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>44</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre> * as long as EntityManager or any other external objects (pointers) are not used.</pre></td>
+    <td align="left" class="src "><pre> * This class eliminates race conditions by ensuring a single order of iteration for every task</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>45</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre> * @tparam FnType Callable type that takes Selection&lt;CTypes...&gt;::Iterator_t const&amp; as the argument</pre></td>
+    <td align="left" class="src "><pre> * and keeping subtask always behind the uptasks. The execution of tasks is divided into batches.</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>46</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre> * @tparam BatchSizeFnType A Callable type that takes the number of entities as the argument</pre></td>
+    <td align="left" class="src "><pre> * The task will notify the subtask (if there is one) after completing every batch, so the subtask</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>47</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre> *         and returns the size of a batch.</pre></td>
+    <td align="left" class="src "><pre> * can reach entities of that batch aswell. This way there are no concurrent reads or writes</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>48</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre> * @tparam CTypes Types of the components used to select wanted entites</pre></td>
+    <td align="left" class="src "><pre> * as long as EntityManager or any other external objects (pointers) are not used.</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>49</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre> */</pre></td>
+    <td align="left" class="src "><pre> * @tparam FnType Callable type that takes Selection&lt;CTypes...&gt;::Iterator_t const&amp; as the argument</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>50</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>template &lt;typename FnType, typename BatchSizeFnType, typename... CTypes&gt;</pre></td>
+    <td align="left" class="src "><pre> * @tparam BatchSizeFnType A Callable type that takes the number of entities as the argument</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>51</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>8</pre></td>
-    <td align="left" class="src coveredLine"><pre>class Task : public TaskBase {</pre></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre> *         and returns the size of a batch.</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>52</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
+    <td align="left" class="src "><pre> * @tparam CTypes Types of the components used to select wanted entites</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>53</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    /// A small join guard for a thread</pre></td>
+    <td align="left" class="src "><pre> */</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>54</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    struct JoinGuard {</pre></td>
+    <td align="left" class="src "><pre>template &lt;typename FnType, typename BatchSizeFnType, typename... CTypes&gt;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>55</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>5</pre></td>
-    <td align="left" class="src coveredLine"><pre>        JoinGuard(std::thread&amp; thread) : thr(thread){};</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>8</pre></td>
+    <td align="left" class="src coveredLine"><pre>class Task : public TaskBase {</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>56</pre></td>
-    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 1 times">&check;</span><span class="takenBranch" title="Branch 2 taken 1 times">&check;</span><span class="takenBranch" title="Branch 5 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 6 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 9 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 10 not taken">&cross;</span><span class="notTakenBranch" title="Branch 13 not taken">&cross;</span><span class="takenBranch" title="Branch 14 taken 1 times">&check;</span><br/></td>
-    <td align="right" class="linecount coveredLine"><pre>5</pre></td>
-    <td align="left" class="src coveredLine"><pre>        ~JoinGuard() { thr.joinable() ? thr.join() : void(); }</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>public:</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>57</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>        std::thread&amp; thr;</pre></td>
+    <td align="left" class="src "><pre>    using Select_t = Selection&lt;CTypes...&gt;;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>58</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    };</pre></td>
+    <td align="left" class="src "><pre>    using Iterator_t = typename Select_t::Iterator_t;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>59</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
+    <td align="left" class="src "><pre>    static_assert(std::is_invocable_v&lt;FnType, Iterator_t const&amp;&gt;, "Function of the task must take TaskIterator&lt;CTypes...&gt; const&amp; as the argument");</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>60</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>public:</pre></td>
+    <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>61</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    using Select_t = Selection&lt;CTypes...&gt;;</pre></td>
+    <td align="left" class="src "><pre>public:</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>62</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    using Iterator_t = typename Select_t::Iterator_t;</pre></td>
+    <td align="left" class="src "><pre>    /**</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>63</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    static_assert(std::is_invocable_v&lt;FnType, Iterator_t const&amp;&gt;, "Function of the task must take TaskIterator&lt;CTypes...&gt; const&amp; as the argument");</pre></td>
+    <td align="left" class="src "><pre>     * @param mgr EntityManager that will be used to select entities from</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>64</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
+    <td align="left" class="src "><pre>     * @param fn A callable object that takes Selection&lt;CTypes...&gt;::Iterator_t const&amp; as the argument and will be invoked</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>65</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>public:</pre></td>
+    <td align="left" class="src "><pre>     *           for each entity that owns at least all of the components of CTypes... types</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>66</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    /**</pre></td>
+    <td align="left" class="src "><pre>     * @param bFn A Callable object that takes the number of entities as the argument and returns the size of a batch.</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>67</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>     * @param mgr EntityManager that will be used to select the entities from</pre></td>
+    <td align="left" class="src "><pre>     *            This object will be used for this task and its subtasks</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>68</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>     * @param fn A callable object that takes Selection&lt;CTypes...&gt;::Iterator_t const&amp; as the argument and that will be invoked</pre></td>
+    <td align="left" class="src "><pre>     * @param lPolicy How will this task launch (applies only to subtasks)</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>69</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>     *           for each entity that owns at least all of the components of CTypes... types</pre></td>
+    <td align="left" class="src "><pre>     * @param upt A parent task, that will notify this task when new b</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>70</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>     * @param bFn A Callable object that takes the number of entities as the argument and returns the size of a batch.</pre></td>
+    <td align="left" class="src "><pre>     * atch of entities will be ready to</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>71</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>     *            This object will be used for this task and its subtasks</pre></td>
+    <td align="left" class="src "><pre>     */</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>72</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>     * @param upt A parent task, that will notify this task when new b</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>4</pre></td>
+    <td align="left" class="src coveredLine"><pre>    Task(EntityManager&amp; mgr, FnType fn, BatchSizeFnType bFn,</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>73</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>     * atch of entities will be ready to</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>1</pre></td>
+    <td align="left" class="src coveredLine"><pre>         std::launch lPolicy = std::launch::async | std::launch::deferred, TaskBase* upt = nullptr)</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>74</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>     */</pre></td>
+    <td align="left" class="src "><pre>        : TaskBase(mgr, lPolicy, upt),</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>75</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount coveredLine"><pre>4</pre></td>
-    <td align="left" class="src coveredLine"><pre>    Task(EntityManager&amp; mgr, FnType fn, BatchSizeFnType bFn, TaskBase* upt = nullptr)</pre></td>
+    <td align="left" class="src coveredLine"><pre>          runFn(std::move(fn)),</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>76</pre></td>
-    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 34 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 35 not taken">&cross;</span><span class="takenBranch" title="Branch 4 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 38 not taken">&cross;</span><span class="takenBranch" title="Branch 7 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 8 not taken">&cross;</span><span class="takenBranch" title="Branch 14 taken 1 times">&check;</span><br/><span class="notTakenBranch" title="Branch 15 not taken">&cross;</span><span class="takenBranch" title="Branch 17 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 18 not taken">&cross;</span><span class="takenBranch" title="Branch 24 taken 1 times">&check;</span><br/><span class="notTakenBranch" title="Branch 25 not taken">&cross;</span><span class="takenBranch" title="Branch 27 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 28 not taken">&cross;</span><span class="takenBranch" title="Branch 37 taken 1 times">&check;</span><br/></td>
-    <td align="right" class="linecount coveredLine"><pre>4</pre></td>
-    <td align="left" class="src coveredLine"><pre>        : TaskBase(mgr, upt), runFn(std::move(fn)), batchSizeFn(std::move(bFn)) {}</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 33 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 34 not taken">&cross;</span><span class="takenBranch" title="Branch 3 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 4 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 6 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 7 not taken">&cross;</span><span class="takenBranch" title="Branch 12 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 13 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 15 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 16 not taken">&cross;</span><span class="takenBranch" title="Branch 21 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 22 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 24 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 25 not taken">&cross;</span><span class="takenBranch" title="Branch 30 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 31 not taken">&cross;</span><br/></td>
+    <td align="right" class="linecount coveredLine"><pre>8</pre></td>
+    <td align="left" class="src coveredLine"><pre>          batchSizeFn(std::move(bFn)) {}</pre></td>
     </tr>
 
     <tr>
@@ -933,7 +933,7 @@
     <td align="right" class="lineno"><pre>91</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount coveredLine"><pre>3</pre></td>
-    <td align="left" class="src coveredLine"><pre>    setSubtask(OtherFnType fn)</pre></td>
+    <td align="left" class="src coveredLine"><pre>    setSubtask(OtherFnType fn, std::launch lPolicy = std::launch::async | std::launch::deferred)</pre></td>
     </tr>
 
     <tr>
@@ -968,7 +968,7 @@
     <td align="right" class="lineno"><pre>96</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>                subtask = std::make_unique&lt;Task&lt;OtherFnType, BatchSizeFnType, OtherCTypes...&gt;&gt;(mgr, std::move(fn), batchSizeFn, this)));</pre></td>
+    <td align="left" class="src "><pre>                subtask = std::make_unique&lt;Task&lt;OtherFnType, BatchSizeFnType, OtherCTypes...&gt;&gt;(mgr, std::move(fn), batchSizeFn, lPolicy, this)));</pre></td>
     </tr>
 
     <tr>
@@ -996,7 +996,7 @@
     <td align="right" class="lineno"><pre>100</pre></td>
     <td align="right" class="linebranch"><span class="takenBranch" title="Branch 2 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 3 not taken">&cross;</span><span class="takenBranch" title="Branch 9 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 10 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 16 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 17 not taken">&cross;</span></td>
     <td align="right" class="linecount coveredLine"><pre>3</pre></td>
-    <td align="left" class="src coveredLine"><pre>                subtask = std::make_unique&lt;Task&lt;OtherFnType, BatchSizeFnType, CTypes...&gt;&gt;(mgr, std::move(fn), batchSizeFn, this)));</pre></td>
+    <td align="left" class="src coveredLine"><pre>                subtask = std::make_unique&lt;Task&lt;OtherFnType, BatchSizeFnType, CTypes...&gt;&gt;(mgr, std::move(fn), batchSizeFn, lPolicy, this)));</pre></td>
     </tr>
 
     <tr>
@@ -1059,399 +1059,399 @@
     <td align="right" class="lineno"><pre>109</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount coveredLine"><pre>10</pre></td>
-    <td align="left" class="src coveredLine"><pre>        std::thread subThread;</pre></td>
+    <td align="left" class="src coveredLine"><pre>        std::future&lt;void&gt; subFt; // waits in the destructor for task to finish</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>110</pre></td>
-    <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>10</pre></td>
-    <td align="left" class="src coveredLine"><pre>        JoinGuard jGuard(subThread);</pre></td>
-    </tr>
-
-    <tr>
-    <td align="right" class="lineno"><pre>111</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount coveredLine"><pre>5</pre></td>
     <td align="left" class="src coveredLine"><pre>        fence = Fence();</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>112</pre></td>
+    <td align="right" class="lineno"><pre>111</pre></td>
     <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 2 times">&check;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span><span class="takenBranch" title="Branch 4 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 7 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 8 not taken">&cross;</span><span class="takenBranch" title="Branch 10 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><br/></td>
     <td align="right" class="linecount coveredLine"><pre>5</pre></td>
     <td align="left" class="src coveredLine"><pre>        mgr.updateSelection(select);</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>113</pre></td>
+    <td align="right" class="lineno"><pre>112</pre></td>
     <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 1 times">&check;</span><span class="takenBranch" title="Branch 2 taken 1 times">&check;</span><span class="takenBranch" title="Branch 5 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 6 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 7 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 8 not taken">&cross;</span><span class="takenBranch" title="Branch 9 taken 1 times">&check;</span><span class="takenBranch" title="Branch 10 taken 1 times">&check;</span><br/><span class="takenBranch" title="Branch 12 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 13 not taken">&cross;</span><span class="takenBranch" title="Branch 16 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 17 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 18 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 19 not taken">&cross;</span><span class="takenBranch" title="Branch 20 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 21 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 23 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 24 not taken">&cross;</span><span class="takenBranch" title="Branch 27 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 28 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 29 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 30 not taken">&cross;</span><span class="takenBranch" title="Branch 31 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 32 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 34 not taken">&cross;</span><span class="takenBranch" title="Branch 35 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 38 not taken">&cross;</span><span class="notTakenBranch" title="Branch 39 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 40 not taken">&cross;</span><span class="notTakenBranch" title="Branch 41 not taken">&cross;</span><span class="notTakenBranch" title="Branch 42 not taken">&cross;</span><span class="takenBranch" title="Branch 43 taken 1 times">&check;</span><br/></td>
     <td align="right" class="linecount coveredLine"><pre>5</pre></td>
     <td align="left" class="src coveredLine"><pre>        if (subtask &amp;&amp; subtask-&gt;updateAndCheckIfHasEntities())</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>114</pre></td>
-    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 2 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 3 not taken">&cross;</span><span class="takenBranch" title="Branch 8 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 9 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 14 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 15 not taken">&cross;</span><span class="notTakenBranch" title="Branch 20 not taken">&cross;</span><span class="notTakenBranch" title="Branch 21 not taken">&cross;</span><br/></td>
+    <td align="right" class="lineno"><pre>113</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 3 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 4 not taken">&cross;</span><span class="takenBranch" title="Branch 10 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 17 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 18 not taken">&cross;</span><span class="notTakenBranch" title="Branch 24 not taken">&cross;</span><span class="notTakenBranch" title="Branch 25 not taken">&cross;</span><br/></td>
     <td align="right" class="linecount coveredLine"><pre>3</pre></td>
-    <td align="left" class="src coveredLine"><pre>            subThread = std::thread(&amp;TaskBase::run, subtask.get());</pre></td>
+    <td align="left" class="src coveredLine"><pre>            subFt = std::async(subtask-&gt;launchPolicy, &amp;TaskBase::run, subtask.get());</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>115</pre></td>
+    <td align="right" class="lineno"><pre>114</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>116</pre></td>
+    <td align="right" class="lineno"><pre>115</pre></td>
     <td align="right" class="linebranch"><span class="notTakenBranch" title="Branch 0 not taken">&cross;</span><span class="takenBranch" title="Branch 1 taken 2 times">&check;</span><span class="takenBranch" title="Branch 2 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 3 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 4 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><span class="takenBranch" title="Branch 6 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 7 not taken">&cross;</span><br/></td>
     <td align="right" class="linecount coveredLine"><pre>5</pre></td>
     <td align="left" class="src coveredLine"><pre>        if (uptask) // is subtask</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>117</pre></td>
+    <td align="right" class="lineno"><pre>116</pre></td>
     <td align="right" class="linebranch"><span class="notTakenBranch" title="Branch 1 not taken">&cross;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span><span class="takenBranch" title="Branch 4 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 7 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 8 not taken">&cross;</span><span class="notTakenBranch" title="Branch 10 not taken">&cross;</span><span class="takenBranch" title="Branch 11 taken 1 times">&check;</span><br/></td>
     <td align="right" class="linecount coveredLine"><pre>3</pre></td>
-    <td align="left" class="src coveredLine"><pre>            if (subThread.joinable())</pre></td>
+    <td align="left" class="src coveredLine"><pre>            if (subFt.valid())</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>118</pre></td>
+    <td align="right" class="lineno"><pre>117</pre></td>
     <td align="right" class="linebranch"><span class="notTakenBranch" title="Branch 1 not taken">&cross;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span><span class="takenBranch" title="Branch 4 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 7 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 8 not taken">&cross;</span><span class="notTakenBranch" title="Branch 10 not taken">&cross;</span><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><br/></td>
     <td align="right" class="linecount coveredLine"><pre>2</pre></td>
     <td align="left" class="src coveredLine"><pre>                _run&lt;true, true&gt;();</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>119</pre></td>
+    <td align="right" class="lineno"><pre>118</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre>            else</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>120</pre></td>
+    <td align="right" class="lineno"><pre>119</pre></td>
     <td align="right" class="linebranch"><span class="notTakenBranch" title="Branch 1 not taken">&cross;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span><span class="notTakenBranch" title="Branch 4 not taken">&cross;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 7 not taken">&cross;</span><span class="notTakenBranch" title="Branch 8 not taken">&cross;</span><span class="takenBranch" title="Branch 10 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><br/></td>
     <td align="right" class="linecount coveredLine"><pre>1</pre></td>
     <td align="left" class="src coveredLine"><pre>                _run&lt;true, false&gt;();</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>121</pre></td>
+    <td align="right" class="lineno"><pre>120</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre>        else // is main task</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>122</pre></td>
+    <td align="right" class="lineno"><pre>121</pre></td>
     <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 1 times">&check;</span><span class="takenBranch" title="Branch 2 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 4 not taken">&cross;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 7 not taken">&cross;</span><span class="notTakenBranch" title="Branch 8 not taken">&cross;</span><span class="notTakenBranch" title="Branch 10 not taken">&cross;</span><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><br/></td>
     <td align="right" class="linecount coveredLine"><pre>2</pre></td>
-    <td align="left" class="src coveredLine"><pre>            if (subThread.joinable())</pre></td>
+    <td align="left" class="src coveredLine"><pre>            if (subFt.valid())</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>123</pre></td>
+    <td align="right" class="lineno"><pre>122</pre></td>
     <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span><span class="notTakenBranch" title="Branch 4 not taken">&cross;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 7 not taken">&cross;</span><span class="notTakenBranch" title="Branch 8 not taken">&cross;</span><span class="notTakenBranch" title="Branch 10 not taken">&cross;</span><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><br/></td>
     <td align="right" class="linecount coveredLine"><pre>1</pre></td>
     <td align="left" class="src coveredLine"><pre>            _run&lt;false, true&gt;();</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>124</pre></td>
+    <td align="right" class="lineno"><pre>123</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre>        else</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>125</pre></td>
+    <td align="right" class="lineno"><pre>124</pre></td>
     <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span><span class="notTakenBranch" title="Branch 4 not taken">&cross;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 7 not taken">&cross;</span><span class="notTakenBranch" title="Branch 8 not taken">&cross;</span><span class="notTakenBranch" title="Branch 10 not taken">&cross;</span><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><br/></td>
     <td align="right" class="linecount coveredLine"><pre>1</pre></td>
     <td align="left" class="src coveredLine"><pre>            _run&lt;false, false&gt;();</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>126</pre></td>
+    <td align="right" class="lineno"><pre>125</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount coveredLine"><pre>5</pre></td>
     <td align="left" class="src coveredLine"><pre>    }</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>126</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>127</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
+    <td align="left" class="src "><pre>private:</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>128</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>private:</pre></td>
-    </tr>
-
-    <tr>
-    <td align="right" class="lineno"><pre>129</pre></td>
-    <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre>    template &lt;bool isSub, bool hasSub&gt;</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>130</pre></td>
+    <td align="right" class="lineno"><pre>129</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount coveredLine"><pre>5</pre></td>
     <td align="left" class="src coveredLine"><pre>    void _run()</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>131</pre></td>
+    <td align="right" class="lineno"><pre>130</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre>    {</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>132</pre></td>
+    <td align="right" class="lineno"><pre>131</pre></td>
     <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span><span class="takenBranch" title="Branch 4 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 7 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 8 not taken">&cross;</span><span class="takenBranch" title="Branch 10 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 13 not taken">&cross;</span><span class="notTakenBranch" title="Branch 14 not taken">&cross;</span><span class="notTakenBranch" title="Branch 16 not taken">&cross;</span><span class="notTakenBranch" title="Branch 17 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 19 not taken">&cross;</span><span class="notTakenBranch" title="Branch 20 not taken">&cross;</span><span class="notTakenBranch" title="Branch 22 not taken">&cross;</span><span class="notTakenBranch" title="Branch 23 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 25 not taken">&cross;</span><span class="notTakenBranch" title="Branch 26 not taken">&cross;</span><span class="notTakenBranch" title="Branch 28 not taken">&cross;</span><span class="notTakenBranch" title="Branch 29 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 31 not taken">&cross;</span><span class="notTakenBranch" title="Branch 32 not taken">&cross;</span><span class="notTakenBranch" title="Branch 34 not taken">&cross;</span><span class="notTakenBranch" title="Branch 35 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 37 not taken">&cross;</span><span class="notTakenBranch" title="Branch 38 not taken">&cross;</span><span class="notTakenBranch" title="Branch 40 not taken">&cross;</span><span class="notTakenBranch" title="Branch 41 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 43 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 44 not taken">&cross;</span><span class="takenBranch" title="Branch 46 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 47 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 49 not taken">&cross;</span><span class="notTakenBranch" title="Branch 50 not taken">&cross;</span><span class="notTakenBranch" title="Branch 52 not taken">&cross;</span><span class="notTakenBranch" title="Branch 53 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 55 not taken">&cross;</span><span class="notTakenBranch" title="Branch 56 not taken">&cross;</span><span class="notTakenBranch" title="Branch 58 not taken">&cross;</span><span class="notTakenBranch" title="Branch 59 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 61 not taken">&cross;</span><span class="notTakenBranch" title="Branch 62 not taken">&cross;</span><span class="notTakenBranch" title="Branch 64 not taken">&cross;</span><span class="notTakenBranch" title="Branch 65 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 67 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 68 not taken">&cross;</span><span class="takenBranch" title="Branch 70 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 71 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 73 not taken">&cross;</span><span class="notTakenBranch" title="Branch 74 not taken">&cross;</span><span class="notTakenBranch" title="Branch 76 not taken">&cross;</span><span class="notTakenBranch" title="Branch 77 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 79 not taken">&cross;</span><span class="notTakenBranch" title="Branch 80 not taken">&cross;</span><span class="notTakenBranch" title="Branch 82 not taken">&cross;</span><span class="notTakenBranch" title="Branch 83 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 85 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 86 not taken">&cross;</span><span class="takenBranch" title="Branch 88 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 89 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 91 not taken">&cross;</span><span class="notTakenBranch" title="Branch 92 not taken">&cross;</span><span class="notTakenBranch" title="Branch 94 not taken">&cross;</span><span class="notTakenBranch" title="Branch 95 not taken">&cross;</span><br/></td>
     <td align="right" class="linecount coveredLine"><pre>5</pre></td>
     <td align="left" class="src coveredLine"><pre>        Iterator_t it = select.begin(), end = select.end(), tempEnd = it;</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>133</pre></td>
+    <td align="right" class="lineno"><pre>132</pre></td>
     <td align="right" class="linebranch"><span class="takenBranch" title="Branch 2 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 3 not taken">&cross;</span><span class="takenBranch" title="Branch 6 taken 1 times">&check;</span><span class="notTakenBranch" title="Branch 7 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 10 not taken">&cross;</span><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><span class="notTakenBranch" title="Branch 14 not taken">&cross;</span><span class="notTakenBranch" title="Branch 15 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 18 not taken">&cross;</span><span class="notTakenBranch" title="Branch 19 not taken">&cross;</span><span class="notTakenBranch" title="Branch 22 not taken">&cross;</span><span class="notTakenBranch" title="Branch 23 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 26 not taken">&cross;</span><span class="notTakenBranch" title="Branch 27 not taken">&cross;</span><span class="notTakenBranch" title="Branch 30 not taken">&cross;</span><span class="notTakenBranch" title="Branch 31 not taken">&cross;</span><br/></td>
     <td align="right" class="linecount coveredLine"><pre>5</pre></td>
     <td align="left" class="src coveredLine"><pre>        std::size_t const batchSize = isSub ? 0 : batchSizeFn(select.countEntities());</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>134</pre></td>
-    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 2 times">&check;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span><span class="takenBranch" title="Branch 3 taken 1 times">&check;</span><span class="takenBranch" title="Branch 4 taken 1 times">&check;</span><br/><span class="takenBranch" title="Branch 6 taken 12 times">&check;</span><span class="notTakenBranch" title="Branch 7 not taken">&cross;</span><span class="takenBranch" title="Branch 8 taken 11 times">&check;</span><span class="takenBranch" title="Branch 9 taken 1 times">&check;</span><br/><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><span class="notTakenBranch" title="Branch 12 not taken">&cross;</span><span class="notTakenBranch" title="Branch 13 not taken">&cross;</span><span class="notTakenBranch" title="Branch 14 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 16 not taken">&cross;</span><span class="notTakenBranch" title="Branch 17 not taken">&cross;</span><span class="notTakenBranch" title="Branch 18 not taken">&cross;</span><span class="notTakenBranch" title="Branch 19 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 21 not taken">&cross;</span><span class="notTakenBranch" title="Branch 22 not taken">&cross;</span><span class="notTakenBranch" title="Branch 23 not taken">&cross;</span><span class="notTakenBranch" title="Branch 24 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 26 not taken">&cross;</span><span class="notTakenBranch" title="Branch 27 not taken">&cross;</span><span class="notTakenBranch" title="Branch 28 not taken">&cross;</span><span class="notTakenBranch" title="Branch 29 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 31 not taken">&cross;</span><span class="notTakenBranch" title="Branch 32 not taken">&cross;</span><span class="notTakenBranch" title="Branch 33 not taken">&cross;</span><span class="notTakenBranch" title="Branch 34 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 36 taken 11 times">&check;</span><span class="notTakenBranch" title="Branch 37 not taken">&cross;</span><span class="takenBranch" title="Branch 38 taken 10 times">&check;</span><span class="takenBranch" title="Branch 39 taken 1 times">&check;</span><br/><span class="notTakenBranch" title="Branch 41 not taken">&cross;</span><span class="notTakenBranch" title="Branch 42 not taken">&cross;</span><span class="notTakenBranch" title="Branch 43 not taken">&cross;</span><span class="notTakenBranch" title="Branch 44 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 46 not taken">&cross;</span><span class="notTakenBranch" title="Branch 47 not taken">&cross;</span><span class="notTakenBranch" title="Branch 48 not taken">&cross;</span><span class="notTakenBranch" title="Branch 49 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 51 not taken">&cross;</span><span class="notTakenBranch" title="Branch 52 not taken">&cross;</span><span class="notTakenBranch" title="Branch 53 not taken">&cross;</span><span class="notTakenBranch" title="Branch 54 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 56 taken 11 times">&check;</span><span class="notTakenBranch" title="Branch 57 not taken">&cross;</span><span class="takenBranch" title="Branch 58 taken 10 times">&check;</span><span class="takenBranch" title="Branch 59 taken 1 times">&check;</span><br/><span class="notTakenBranch" title="Branch 61 not taken">&cross;</span><span class="notTakenBranch" title="Branch 62 not taken">&cross;</span><span class="notTakenBranch" title="Branch 63 not taken">&cross;</span><span class="notTakenBranch" title="Branch 64 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 66 not taken">&cross;</span><span class="notTakenBranch" title="Branch 67 not taken">&cross;</span><span class="notTakenBranch" title="Branch 68 not taken">&cross;</span><span class="notTakenBranch" title="Branch 69 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 71 taken 157 times">&check;</span><span class="notTakenBranch" title="Branch 72 not taken">&cross;</span><span class="takenBranch" title="Branch 73 taken 156 times">&check;</span><span class="takenBranch" title="Branch 74 taken 1 times">&check;</span><br/><span class="notTakenBranch" title="Branch 76 not taken">&cross;</span><span class="notTakenBranch" title="Branch 77 not taken">&cross;</span><span class="notTakenBranch" title="Branch 78 not taken">&cross;</span><span class="notTakenBranch" title="Branch 79 not taken">&cross;</span><br/></td>
-    <td align="right" class="linecount coveredLine"><pre>381</pre></td>
+    <td align="right" class="lineno"><pre>133</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 2 times">&check;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span><span class="takenBranch" title="Branch 3 taken 1 times">&check;</span><span class="takenBranch" title="Branch 4 taken 1 times">&check;</span><br/><span class="takenBranch" title="Branch 6 taken 12 times">&check;</span><span class="notTakenBranch" title="Branch 7 not taken">&cross;</span><span class="takenBranch" title="Branch 8 taken 11 times">&check;</span><span class="takenBranch" title="Branch 9 taken 1 times">&check;</span><br/><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><span class="notTakenBranch" title="Branch 12 not taken">&cross;</span><span class="notTakenBranch" title="Branch 13 not taken">&cross;</span><span class="notTakenBranch" title="Branch 14 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 16 not taken">&cross;</span><span class="notTakenBranch" title="Branch 17 not taken">&cross;</span><span class="notTakenBranch" title="Branch 18 not taken">&cross;</span><span class="notTakenBranch" title="Branch 19 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 21 not taken">&cross;</span><span class="notTakenBranch" title="Branch 22 not taken">&cross;</span><span class="notTakenBranch" title="Branch 23 not taken">&cross;</span><span class="notTakenBranch" title="Branch 24 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 26 not taken">&cross;</span><span class="notTakenBranch" title="Branch 27 not taken">&cross;</span><span class="notTakenBranch" title="Branch 28 not taken">&cross;</span><span class="notTakenBranch" title="Branch 29 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 31 not taken">&cross;</span><span class="notTakenBranch" title="Branch 32 not taken">&cross;</span><span class="notTakenBranch" title="Branch 33 not taken">&cross;</span><span class="notTakenBranch" title="Branch 34 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 36 taken 11 times">&check;</span><span class="notTakenBranch" title="Branch 37 not taken">&cross;</span><span class="takenBranch" title="Branch 38 taken 10 times">&check;</span><span class="takenBranch" title="Branch 39 taken 1 times">&check;</span><br/><span class="notTakenBranch" title="Branch 41 not taken">&cross;</span><span class="notTakenBranch" title="Branch 42 not taken">&cross;</span><span class="notTakenBranch" title="Branch 43 not taken">&cross;</span><span class="notTakenBranch" title="Branch 44 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 46 not taken">&cross;</span><span class="notTakenBranch" title="Branch 47 not taken">&cross;</span><span class="notTakenBranch" title="Branch 48 not taken">&cross;</span><span class="notTakenBranch" title="Branch 49 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 51 not taken">&cross;</span><span class="notTakenBranch" title="Branch 52 not taken">&cross;</span><span class="notTakenBranch" title="Branch 53 not taken">&cross;</span><span class="notTakenBranch" title="Branch 54 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 56 taken 11 times">&check;</span><span class="notTakenBranch" title="Branch 57 not taken">&cross;</span><span class="takenBranch" title="Branch 58 taken 10 times">&check;</span><span class="takenBranch" title="Branch 59 taken 1 times">&check;</span><br/><span class="notTakenBranch" title="Branch 61 not taken">&cross;</span><span class="notTakenBranch" title="Branch 62 not taken">&cross;</span><span class="notTakenBranch" title="Branch 63 not taken">&cross;</span><span class="notTakenBranch" title="Branch 64 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 66 not taken">&cross;</span><span class="notTakenBranch" title="Branch 67 not taken">&cross;</span><span class="notTakenBranch" title="Branch 68 not taken">&cross;</span><span class="notTakenBranch" title="Branch 69 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 71 taken 734 times">&check;</span><span class="notTakenBranch" title="Branch 72 not taken">&cross;</span><span class="takenBranch" title="Branch 73 taken 733 times">&check;</span><span class="takenBranch" title="Branch 74 taken 1 times">&check;</span><br/><span class="notTakenBranch" title="Branch 76 not taken">&cross;</span><span class="notTakenBranch" title="Branch 77 not taken">&cross;</span><span class="notTakenBranch" title="Branch 78 not taken">&cross;</span><span class="notTakenBranch" title="Branch 79 not taken">&cross;</span><br/></td>
+    <td align="right" class="linecount coveredLine"><pre>1535</pre></td>
     <td align="left" class="src coveredLine"><pre>        while (it != end) {</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>135</pre></td>
+    <td align="right" class="lineno"><pre>134</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre>            if constexpr (isSub) {</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>136</pre></td>
-    <td align="right" class="linebranch"><span class="notTakenBranch" title="Branch 32 not taken">&cross;</span><span class="notTakenBranch" title="Branch 1 not taken">&cross;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span><span class="notTakenBranch" title="Branch 36 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 37 not taken">&cross;</span><span class="notTakenBranch" title="Branch 6 not taken">&cross;</span><span class="notTakenBranch" title="Branch 7 not taken">&cross;</span><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 12 not taken">&cross;</span><span class="takenBranch" title="Branch 16 taken 10 times">&check;</span><span class="notTakenBranch" title="Branch 17 not taken">&cross;</span><span class="notTakenBranch" title="Branch 21 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 22 not taken">&cross;</span><span class="takenBranch" title="Branch 26 taken 10 times">&check;</span><span class="notTakenBranch" title="Branch 27 not taken">&cross;</span><span class="takenBranch" title="Branch 31 taken 156 times">&check;</span><br/></td>
-    <td align="right" class="linecount coveredLine"><pre>352</pre></td>
+    <td align="right" class="lineno"><pre>135</pre></td>
+    <td align="right" class="linebranch"><span class="notTakenBranch" title="Branch 32 not taken">&cross;</span><span class="notTakenBranch" title="Branch 1 not taken">&cross;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span><span class="notTakenBranch" title="Branch 36 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 37 not taken">&cross;</span><span class="notTakenBranch" title="Branch 6 not taken">&cross;</span><span class="notTakenBranch" title="Branch 7 not taken">&cross;</span><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 12 not taken">&cross;</span><span class="takenBranch" title="Branch 16 taken 10 times">&check;</span><span class="notTakenBranch" title="Branch 17 not taken">&cross;</span><span class="notTakenBranch" title="Branch 21 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 22 not taken">&cross;</span><span class="takenBranch" title="Branch 26 taken 10 times">&check;</span><span class="notTakenBranch" title="Branch 27 not taken">&cross;</span><span class="takenBranch" title="Branch 31 taken 733 times">&check;</span><br/></td>
+    <td align="right" class="linecount coveredLine"><pre>1506</pre></td>
     <td align="left" class="src coveredLine"><pre>                std::unique_lock guard(uptask-&gt;mutex); // no need to lock this-&gt;mutex - only this thread can modify its fence</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>137</pre></td>
-    <td align="right" class="linebranch"><span class="notTakenBranch" title="Branch 1 not taken">&cross;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><span class="notTakenBranch" title="Branch 6 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 9 not taken">&cross;</span><span class="notTakenBranch" title="Branch 10 not taken">&cross;</span><span class="takenBranch" title="Branch 13 taken 10 times">&check;</span><span class="notTakenBranch" title="Branch 14 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 17 not taken">&cross;</span><span class="notTakenBranch" title="Branch 18 not taken">&cross;</span><span class="takenBranch" title="Branch 21 taken 10 times">&check;</span><span class="notTakenBranch" title="Branch 22 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 25 taken 156 times">&check;</span><span class="notTakenBranch" title="Branch 26 not taken">&cross;</span><span class="notTakenBranch" title="Branch 29 not taken">&cross;</span><span class="notTakenBranch" title="Branch 30 not taken">&cross;</span><br/></td>
-    <td align="right" class="linecount coveredLine"><pre>359</pre></td>
+    <td align="right" class="lineno"><pre>136</pre></td>
+    <td align="right" class="linebranch"><span class="notTakenBranch" title="Branch 1 not taken">&cross;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><span class="notTakenBranch" title="Branch 6 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 9 not taken">&cross;</span><span class="notTakenBranch" title="Branch 10 not taken">&cross;</span><span class="takenBranch" title="Branch 13 taken 10 times">&check;</span><span class="notTakenBranch" title="Branch 14 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 17 not taken">&cross;</span><span class="notTakenBranch" title="Branch 18 not taken">&cross;</span><span class="takenBranch" title="Branch 21 taken 10 times">&check;</span><span class="notTakenBranch" title="Branch 22 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 25 taken 733 times">&check;</span><span class="notTakenBranch" title="Branch 26 not taken">&cross;</span><span class="notTakenBranch" title="Branch 29 not taken">&cross;</span><span class="notTakenBranch" title="Branch 30 not taken">&cross;</span><br/></td>
+    <td align="right" class="linecount coveredLine"><pre>1512</pre></td>
     <td align="left" class="src coveredLine"><pre>                uptask-&gt;condVar.wait(guard, [&amp;] { return fence &lt; uptask-&gt;fence; });</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>138</pre></td>
-    <td align="right" class="linebranch"><span class="notTakenBranch" title="Branch 1 not taken">&cross;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span><span class="notTakenBranch" title="Branch 4 not taken">&cross;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 7 not taken">&cross;</span><span class="notTakenBranch" title="Branch 8 not taken">&cross;</span><span class="takenBranch" title="Branch 10 taken 10 times">&check;</span><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 13 not taken">&cross;</span><span class="notTakenBranch" title="Branch 14 not taken">&cross;</span><span class="takenBranch" title="Branch 16 taken 10 times">&check;</span><span class="notTakenBranch" title="Branch 17 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 19 taken 156 times">&check;</span><span class="notTakenBranch" title="Branch 20 not taken">&cross;</span><span class="notTakenBranch" title="Branch 22 not taken">&cross;</span><span class="notTakenBranch" title="Branch 23 not taken">&cross;</span><br/></td>
-    <td align="right" class="linecount coveredLine"><pre>176</pre></td>
+    <td align="right" class="lineno"><pre>137</pre></td>
+    <td align="right" class="linebranch"><span class="notTakenBranch" title="Branch 1 not taken">&cross;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span><span class="notTakenBranch" title="Branch 4 not taken">&cross;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 7 not taken">&cross;</span><span class="notTakenBranch" title="Branch 8 not taken">&cross;</span><span class="takenBranch" title="Branch 10 taken 10 times">&check;</span><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 13 not taken">&cross;</span><span class="notTakenBranch" title="Branch 14 not taken">&cross;</span><span class="takenBranch" title="Branch 16 taken 10 times">&check;</span><span class="notTakenBranch" title="Branch 17 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 19 taken 733 times">&check;</span><span class="notTakenBranch" title="Branch 20 not taken">&cross;</span><span class="notTakenBranch" title="Branch 22 not taken">&cross;</span><span class="notTakenBranch" title="Branch 23 not taken">&cross;</span><br/></td>
+    <td align="right" class="linecount coveredLine"><pre>753</pre></td>
     <td align="left" class="src coveredLine"><pre>                tempEnd.jumpToOrBeyond(uptask-&gt;fence.sId, uptask-&gt;fence.pIdx);</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>138</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>            }</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>139</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>            }</pre></td>
-    </tr>
-
-    <tr>
-    <td align="right" class="lineno"><pre>140</pre></td>
-    <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre>            else if constexpr (hasSub) // is main</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>141</pre></td>
+    <td align="right" class="lineno"><pre>140</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount coveredLine"><pre>11</pre></td>
     <td align="left" class="src coveredLine"><pre>                tempEnd += batchSize;</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>142</pre></td>
+    <td align="right" class="lineno"><pre>141</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre>            else</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>143</pre></td>
+    <td align="right" class="lineno"><pre>142</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount coveredLine"><pre>1</pre></td>
     <td align="left" class="src coveredLine"><pre>                tempEnd = end;</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>144</pre></td>
+    <td align="right" class="lineno"><pre>143</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>145</pre></td>
-    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 3073 times">&check;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span><span class="takenBranch" title="Branch 3 taken 3072 times">&check;</span><span class="takenBranch" title="Branch 4 taken 1 times">&check;</span><br/><span class="takenBranch" title="Branch 6 taken 3072 times">&check;</span><span class="notTakenBranch" title="Branch 7 not taken">&cross;</span><span class="takenBranch" title="Branch 9 taken 3083 times">&check;</span><span class="notTakenBranch" title="Branch 10 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 11 taken 3072 times">&check;</span><span class="takenBranch" title="Branch 12 taken 11 times">&check;</span><span class="takenBranch" title="Branch 14 taken 3072 times">&check;</span><span class="notTakenBranch" title="Branch 15 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 17 not taken">&cross;</span><span class="notTakenBranch" title="Branch 18 not taken">&cross;</span><span class="notTakenBranch" title="Branch 19 not taken">&cross;</span><span class="notTakenBranch" title="Branch 20 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 22 not taken">&cross;</span><span class="notTakenBranch" title="Branch 23 not taken">&cross;</span><span class="notTakenBranch" title="Branch 25 not taken">&cross;</span><span class="notTakenBranch" title="Branch 26 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 27 not taken">&cross;</span><span class="notTakenBranch" title="Branch 28 not taken">&cross;</span><span class="notTakenBranch" title="Branch 30 not taken">&cross;</span><span class="notTakenBranch" title="Branch 31 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 33 not taken">&cross;</span><span class="notTakenBranch" title="Branch 34 not taken">&cross;</span><span class="notTakenBranch" title="Branch 35 not taken">&cross;</span><span class="notTakenBranch" title="Branch 36 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 38 not taken">&cross;</span><span class="notTakenBranch" title="Branch 39 not taken">&cross;</span><span class="notTakenBranch" title="Branch 41 not taken">&cross;</span><span class="notTakenBranch" title="Branch 42 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 43 not taken">&cross;</span><span class="notTakenBranch" title="Branch 44 not taken">&cross;</span><span class="notTakenBranch" title="Branch 46 not taken">&cross;</span><span class="notTakenBranch" title="Branch 47 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 49 not taken">&cross;</span><span class="notTakenBranch" title="Branch 50 not taken">&cross;</span><span class="notTakenBranch" title="Branch 51 not taken">&cross;</span><span class="notTakenBranch" title="Branch 52 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 54 not taken">&cross;</span><span class="notTakenBranch" title="Branch 55 not taken">&cross;</span><span class="takenBranch" title="Branch 57 taken 3082 times">&check;</span><span class="notTakenBranch" title="Branch 58 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 59 taken 3072 times">&check;</span><span class="takenBranch" title="Branch 60 taken 10 times">&check;</span><span class="takenBranch" title="Branch 62 taken 3072 times">&check;</span><span class="notTakenBranch" title="Branch 63 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 65 not taken">&cross;</span><span class="notTakenBranch" title="Branch 66 not taken">&cross;</span><span class="notTakenBranch" title="Branch 67 not taken">&cross;</span><span class="notTakenBranch" title="Branch 68 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 70 not taken">&cross;</span><span class="notTakenBranch" title="Branch 71 not taken">&cross;</span><span class="notTakenBranch" title="Branch 73 not taken">&cross;</span><span class="notTakenBranch" title="Branch 74 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 75 not taken">&cross;</span><span class="notTakenBranch" title="Branch 76 not taken">&cross;</span><span class="notTakenBranch" title="Branch 78 not taken">&cross;</span><span class="notTakenBranch" title="Branch 79 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 81 not taken">&cross;</span><span class="notTakenBranch" title="Branch 82 not taken">&cross;</span><span class="notTakenBranch" title="Branch 83 not taken">&cross;</span><span class="notTakenBranch" title="Branch 84 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 86 not taken">&cross;</span><span class="notTakenBranch" title="Branch 87 not taken">&cross;</span><span class="takenBranch" title="Branch 89 taken 3082 times">&check;</span><span class="notTakenBranch" title="Branch 90 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 91 taken 3072 times">&check;</span><span class="takenBranch" title="Branch 92 taken 10 times">&check;</span><span class="takenBranch" title="Branch 94 taken 3072 times">&check;</span><span class="notTakenBranch" title="Branch 95 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 97 not taken">&cross;</span><span class="notTakenBranch" title="Branch 98 not taken">&cross;</span><span class="notTakenBranch" title="Branch 99 not taken">&cross;</span><span class="notTakenBranch" title="Branch 100 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 102 not taken">&cross;</span><span class="notTakenBranch" title="Branch 103 not taken">&cross;</span><span class="notTakenBranch" title="Branch 105 not taken">&cross;</span><span class="notTakenBranch" title="Branch 106 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 107 not taken">&cross;</span><span class="notTakenBranch" title="Branch 108 not taken">&cross;</span><span class="notTakenBranch" title="Branch 110 not taken">&cross;</span><span class="notTakenBranch" title="Branch 111 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 113 taken 3228 times">&check;</span><span class="notTakenBranch" title="Branch 114 not taken">&cross;</span><span class="takenBranch" title="Branch 115 taken 3072 times">&check;</span><span class="takenBranch" title="Branch 116 taken 156 times">&check;</span><br/><span class="takenBranch" title="Branch 118 taken 3072 times">&check;</span><span class="notTakenBranch" title="Branch 119 not taken">&cross;</span><span class="notTakenBranch" title="Branch 121 not taken">&cross;</span><span class="notTakenBranch" title="Branch 122 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 123 not taken">&cross;</span><span class="notTakenBranch" title="Branch 124 not taken">&cross;</span><span class="notTakenBranch" title="Branch 126 not taken">&cross;</span><span class="notTakenBranch" title="Branch 127 not taken">&cross;</span><br/></td>
-    <td align="right" class="linecount coveredLine"><pre>30908</pre></td>
+    <td align="right" class="lineno"><pre>144</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 3073 times">&check;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span><span class="takenBranch" title="Branch 3 taken 3072 times">&check;</span><span class="takenBranch" title="Branch 4 taken 1 times">&check;</span><br/><span class="takenBranch" title="Branch 6 taken 3072 times">&check;</span><span class="notTakenBranch" title="Branch 7 not taken">&cross;</span><span class="takenBranch" title="Branch 9 taken 3083 times">&check;</span><span class="notTakenBranch" title="Branch 10 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 11 taken 3072 times">&check;</span><span class="takenBranch" title="Branch 12 taken 11 times">&check;</span><span class="takenBranch" title="Branch 14 taken 3072 times">&check;</span><span class="notTakenBranch" title="Branch 15 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 17 not taken">&cross;</span><span class="notTakenBranch" title="Branch 18 not taken">&cross;</span><span class="notTakenBranch" title="Branch 19 not taken">&cross;</span><span class="notTakenBranch" title="Branch 20 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 22 not taken">&cross;</span><span class="notTakenBranch" title="Branch 23 not taken">&cross;</span><span class="notTakenBranch" title="Branch 25 not taken">&cross;</span><span class="notTakenBranch" title="Branch 26 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 27 not taken">&cross;</span><span class="notTakenBranch" title="Branch 28 not taken">&cross;</span><span class="notTakenBranch" title="Branch 30 not taken">&cross;</span><span class="notTakenBranch" title="Branch 31 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 33 not taken">&cross;</span><span class="notTakenBranch" title="Branch 34 not taken">&cross;</span><span class="notTakenBranch" title="Branch 35 not taken">&cross;</span><span class="notTakenBranch" title="Branch 36 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 38 not taken">&cross;</span><span class="notTakenBranch" title="Branch 39 not taken">&cross;</span><span class="notTakenBranch" title="Branch 41 not taken">&cross;</span><span class="notTakenBranch" title="Branch 42 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 43 not taken">&cross;</span><span class="notTakenBranch" title="Branch 44 not taken">&cross;</span><span class="notTakenBranch" title="Branch 46 not taken">&cross;</span><span class="notTakenBranch" title="Branch 47 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 49 not taken">&cross;</span><span class="notTakenBranch" title="Branch 50 not taken">&cross;</span><span class="notTakenBranch" title="Branch 51 not taken">&cross;</span><span class="notTakenBranch" title="Branch 52 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 54 not taken">&cross;</span><span class="notTakenBranch" title="Branch 55 not taken">&cross;</span><span class="takenBranch" title="Branch 57 taken 3082 times">&check;</span><span class="notTakenBranch" title="Branch 58 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 59 taken 3072 times">&check;</span><span class="takenBranch" title="Branch 60 taken 10 times">&check;</span><span class="takenBranch" title="Branch 62 taken 3072 times">&check;</span><span class="notTakenBranch" title="Branch 63 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 65 not taken">&cross;</span><span class="notTakenBranch" title="Branch 66 not taken">&cross;</span><span class="notTakenBranch" title="Branch 67 not taken">&cross;</span><span class="notTakenBranch" title="Branch 68 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 70 not taken">&cross;</span><span class="notTakenBranch" title="Branch 71 not taken">&cross;</span><span class="notTakenBranch" title="Branch 73 not taken">&cross;</span><span class="notTakenBranch" title="Branch 74 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 75 not taken">&cross;</span><span class="notTakenBranch" title="Branch 76 not taken">&cross;</span><span class="notTakenBranch" title="Branch 78 not taken">&cross;</span><span class="notTakenBranch" title="Branch 79 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 81 not taken">&cross;</span><span class="notTakenBranch" title="Branch 82 not taken">&cross;</span><span class="notTakenBranch" title="Branch 83 not taken">&cross;</span><span class="notTakenBranch" title="Branch 84 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 86 not taken">&cross;</span><span class="notTakenBranch" title="Branch 87 not taken">&cross;</span><span class="takenBranch" title="Branch 89 taken 3082 times">&check;</span><span class="notTakenBranch" title="Branch 90 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 91 taken 3072 times">&check;</span><span class="takenBranch" title="Branch 92 taken 10 times">&check;</span><span class="takenBranch" title="Branch 94 taken 3072 times">&check;</span><span class="notTakenBranch" title="Branch 95 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 97 not taken">&cross;</span><span class="notTakenBranch" title="Branch 98 not taken">&cross;</span><span class="notTakenBranch" title="Branch 99 not taken">&cross;</span><span class="notTakenBranch" title="Branch 100 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 102 not taken">&cross;</span><span class="notTakenBranch" title="Branch 103 not taken">&cross;</span><span class="notTakenBranch" title="Branch 105 not taken">&cross;</span><span class="notTakenBranch" title="Branch 106 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 107 not taken">&cross;</span><span class="notTakenBranch" title="Branch 108 not taken">&cross;</span><span class="notTakenBranch" title="Branch 110 not taken">&cross;</span><span class="notTakenBranch" title="Branch 111 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 113 taken 3805 times">&check;</span><span class="notTakenBranch" title="Branch 114 not taken">&cross;</span><span class="takenBranch" title="Branch 115 taken 3072 times">&check;</span><span class="takenBranch" title="Branch 116 taken 733 times">&check;</span><br/><span class="takenBranch" title="Branch 118 taken 3072 times">&check;</span><span class="notTakenBranch" title="Branch 119 not taken">&cross;</span><span class="notTakenBranch" title="Branch 121 not taken">&cross;</span><span class="notTakenBranch" title="Branch 122 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 123 not taken">&cross;</span><span class="notTakenBranch" title="Branch 124 not taken">&cross;</span><span class="notTakenBranch" title="Branch 126 not taken">&cross;</span><span class="notTakenBranch" title="Branch 127 not taken">&cross;</span><br/></td>
+    <td align="right" class="linecount coveredLine"><pre>31485</pre></td>
     <td align="left" class="src coveredLine"><pre>            for (; it != tempEnd; ++it)</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>146</pre></td>
+    <td align="right" class="lineno"><pre>145</pre></td>
     <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 3072 times">&check;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span><span class="takenBranch" title="Branch 4 taken 3072 times">&check;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 7 not taken">&cross;</span><span class="notTakenBranch" title="Branch 8 not taken">&cross;</span><span class="notTakenBranch" title="Branch 10 not taken">&cross;</span><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 13 not taken">&cross;</span><span class="notTakenBranch" title="Branch 14 not taken">&cross;</span><span class="notTakenBranch" title="Branch 16 not taken">&cross;</span><span class="notTakenBranch" title="Branch 17 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 19 not taken">&cross;</span><span class="notTakenBranch" title="Branch 20 not taken">&cross;</span><span class="takenBranch" title="Branch 22 taken 3072 times">&check;</span><span class="notTakenBranch" title="Branch 23 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 25 not taken">&cross;</span><span class="notTakenBranch" title="Branch 26 not taken">&cross;</span><span class="notTakenBranch" title="Branch 28 not taken">&cross;</span><span class="notTakenBranch" title="Branch 29 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 31 not taken">&cross;</span><span class="notTakenBranch" title="Branch 32 not taken">&cross;</span><span class="takenBranch" title="Branch 34 taken 3072 times">&check;</span><span class="notTakenBranch" title="Branch 35 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 37 not taken">&cross;</span><span class="notTakenBranch" title="Branch 38 not taken">&cross;</span><span class="notTakenBranch" title="Branch 40 not taken">&cross;</span><span class="notTakenBranch" title="Branch 41 not taken">&cross;</span><br/><span class="takenBranch" title="Branch 43 taken 3072 times">&check;</span><span class="notTakenBranch" title="Branch 44 not taken">&cross;</span><span class="notTakenBranch" title="Branch 46 not taken">&cross;</span><span class="notTakenBranch" title="Branch 47 not taken">&cross;</span><br/></td>
     <td align="right" class="linecount coveredLine"><pre>15360</pre></td>
     <td align="left" class="src coveredLine"><pre>                runFn(it);</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>147</pre></td>
+    <td align="right" class="lineno"><pre>146</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre>            if constexpr (hasSub) {</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>148</pre></td>
+    <td align="right" class="lineno"><pre>147</pre></td>
     <td align="right" class="linebranch"><span class="notTakenBranch" title="Branch 32 not taken">&cross;</span><span class="takenBranch" title="Branch 1 taken 11 times">&check;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span><span class="notTakenBranch" title="Branch 36 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 37 not taken">&cross;</span><span class="notTakenBranch" title="Branch 6 not taken">&cross;</span><span class="notTakenBranch" title="Branch 7 not taken">&cross;</span><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 12 not taken">&cross;</span><span class="takenBranch" title="Branch 16 taken 10 times">&check;</span><span class="notTakenBranch" title="Branch 17 not taken">&cross;</span><span class="notTakenBranch" title="Branch 21 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 22 not taken">&cross;</span><span class="takenBranch" title="Branch 26 taken 10 times">&check;</span><span class="notTakenBranch" title="Branch 27 not taken">&cross;</span><span class="notTakenBranch" title="Branch 31 not taken">&cross;</span><br/></td>
     <td align="right" class="linecount coveredLine"><pre>62</pre></td>
     <td align="left" class="src coveredLine"><pre>                std::lock_guard guard(mutex);</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>149</pre></td>
+    <td align="right" class="lineno"><pre>148</pre></td>
     <td align="right" class="linebranch"><span class="takenBranch" title="Branch 2 taken 11 times">&check;</span><span class="notTakenBranch" title="Branch 3 not taken">&cross;</span><span class="notTakenBranch" title="Branch 6 not taken">&cross;</span><span class="notTakenBranch" title="Branch 7 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 10 not taken">&cross;</span><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><span class="takenBranch" title="Branch 14 taken 10 times">&check;</span><span class="notTakenBranch" title="Branch 15 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 18 not taken">&cross;</span><span class="notTakenBranch" title="Branch 19 not taken">&cross;</span><span class="takenBranch" title="Branch 22 taken 10 times">&check;</span><span class="notTakenBranch" title="Branch 23 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 26 not taken">&cross;</span><span class="notTakenBranch" title="Branch 27 not taken">&cross;</span><span class="notTakenBranch" title="Branch 30 not taken">&cross;</span><span class="notTakenBranch" title="Branch 31 not taken">&cross;</span><br/></td>
     <td align="right" class="linecount coveredLine"><pre>31</pre></td>
     <td align="left" class="src coveredLine"><pre>                fence = { it.getSpawnerId(), it.getPoolIdx() };</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>150</pre></td>
+    <td align="right" class="lineno"><pre>149</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount coveredLine"><pre>31</pre></td>
     <td align="left" class="src coveredLine"><pre>                condVar.notify_one();</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>151</pre></td>
+    <td align="right" class="lineno"><pre>150</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre>            }</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>152</pre></td>
+    <td align="right" class="lineno"><pre>151</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre>        }</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>153</pre></td>
+    <td align="right" class="lineno"><pre>152</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount coveredLine"><pre>5</pre></td>
     <td align="left" class="src coveredLine"><pre>    }</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>154</pre></td>
+    <td align="right" class="lineno"><pre>153</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>155</pre></td>
+    <td align="right" class="lineno"><pre>154</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount coveredLine"><pre>3</pre></td>
     <td align="left" class="src coveredLine"><pre>    virtual bool updateAndCheckIfHasEntities() override</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>156</pre></td>
+    <td align="right" class="lineno"><pre>155</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre>    {</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>157</pre></td>
+    <td align="right" class="lineno"><pre>156</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount coveredLine"><pre>3</pre></td>
     <td align="left" class="src coveredLine"><pre>        mgr.updateSelection(select);</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>158</pre></td>
+    <td align="right" class="lineno"><pre>157</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount coveredLine"><pre>3</pre></td>
     <td align="left" class="src coveredLine"><pre>        return select.countEntities() != 0;</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>159</pre></td>
+    <td align="right" class="lineno"><pre>158</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre>    }</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>160</pre></td>
+    <td align="right" class="lineno"><pre>159</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>161</pre></td>
+    <td align="right" class="lineno"><pre>160</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre>private:</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>162</pre></td>
+    <td align="right" class="lineno"><pre>161</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre>    FnType runFn;</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>163</pre></td>
+    <td align="right" class="lineno"><pre>162</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre>    BatchSizeFnType batchSizeFn;</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>164</pre></td>
+    <td align="right" class="lineno"><pre>163</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre>    Select_t select;</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>165</pre></td>
+    <td align="right" class="lineno"><pre>164</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre>};</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>165</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
@@ -1465,294 +1465,294 @@
     <td align="right" class="lineno"><pre>167</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
-    </tr>
-
-    <tr>
-    <td align="right" class="lineno"><pre>168</pre></td>
-    <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre>/// A simple tool for creating basic concurrent code</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>169</pre></td>
+    <td align="right" class="lineno"><pre>168</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount coveredLine"><pre>2</pre></td>
     <td align="left" class="src coveredLine"><pre>class Pipeline {</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>170</pre></td>
+    <td align="right" class="lineno"><pre>169</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre>    inline static auto const DefRunFn = [](auto&amp;) {};</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>171</pre></td>
+    <td align="right" class="lineno"><pre>170</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre>    using DefaultRunFn_t = decltype(DefRunFn);</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>172</pre></td>
+    <td align="right" class="lineno"><pre>171</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>173</pre></td>
+    <td align="right" class="lineno"><pre>172</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount coveredLine"><pre>2</pre></td>
     <td align="left" class="src coveredLine"><pre>    inline static auto const DefBatchSizeFn = [](std::size_t n) -&gt; std::size_t {</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>174</pre></td>
+    <td align="right" class="lineno"><pre>173</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount coveredLine"><pre>2</pre></td>
     <td align="left" class="src coveredLine"><pre>        return std::max(std::size_t(32), std::min(std::size_t(512), n / 10));</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>175</pre></td>
+    <td align="right" class="lineno"><pre>174</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre>    };</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>176</pre></td>
+    <td align="right" class="lineno"><pre>175</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre>    using DefaultBatchSizeFn_t = decltype(DefBatchSizeFn);</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>177</pre></td>
+    <td align="right" class="lineno"><pre>176</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>177</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>public:</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>178</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>public:</pre></td>
+    <td align="left" class="src "><pre>    template &lt;typename... CTypes&gt;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>179</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    template &lt;typename... CTypes&gt;</pre></td>
+    <td align="left" class="src "><pre>    using TaskIterator_t = typename Task&lt;DefaultRunFn_t, DefaultBatchSizeFn_t, CTypes...&gt;::Iterator_t;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>180</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    using TaskIterator_t = typename Task&lt;DefaultRunFn_t, DefaultBatchSizeFn_t, CTypes...&gt;::Iterator_t;</pre></td>
+    <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>181</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
+    <td align="left" class="src "><pre>public:</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>182</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>public:</pre></td>
+    <td align="left" class="src "><pre>    /// Runs the main task with its subtasks</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>183</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    /// Runs the main task with its subtasks</pre></td>
+    <td align="left" class="src "><pre>    /**</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>184</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    /**</pre></td>
+    <td align="left" class="src "><pre>     * This function returns only if every task completed its execution</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>185</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>     * This function returns only if every task completed its execution</pre></td>
+    <td align="left" class="src "><pre>     * @param mgr Manager with entities that sh to update internal selection</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>186</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>     * @param mgr Manager with entities that sh to update internal selection</pre></td>
-    </tr>
-
-    <tr>
-    <td align="right" class="lineno"><pre>187</pre></td>
-    <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre>     */</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>188</pre></td>
+    <td align="right" class="lineno"><pre>187</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount coveredLine"><pre>3</pre></td>
     <td align="left" class="src coveredLine"><pre>    void run()</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>189</pre></td>
+    <td align="right" class="lineno"><pre>188</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre>    {</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>190</pre></td>
+    <td align="right" class="lineno"><pre>189</pre></td>
     <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 2 times">&check;</span><span class="takenBranch" title="Branch 2 taken 1 times">&check;</span></td>
     <td align="right" class="linecount coveredLine"><pre>3</pre></td>
     <td align="left" class="src coveredLine"><pre>        if (mainTask)</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>191</pre></td>
+    <td align="right" class="lineno"><pre>190</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount coveredLine"><pre>2</pre></td>
     <td align="left" class="src coveredLine"><pre>            mainTask-&gt;run();</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>192</pre></td>
+    <td align="right" class="lineno"><pre>191</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount coveredLine"><pre>3</pre></td>
     <td align="left" class="src coveredLine"><pre>    }</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>193</pre></td>
+    <td align="right" class="lineno"><pre>192</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>194</pre></td>
+    <td align="right" class="lineno"><pre>193</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre>    /// Sets the main task</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>195</pre></td>
+    <td align="right" class="lineno"><pre>194</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre>    /**</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>196</pre></td>
+    <td align="right" class="lineno"><pre>195</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre>     * @tparam CTypes Types of the components used to select wanted entites for this subtask. For this function to compile,</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>197</pre></td>
+    <td align="right" class="lineno"><pre>196</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre>     *         CTypes must contain at least all of the CTypes of this task.</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>198</pre></td>
+    <td align="right" class="lineno"><pre>197</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre>     * @tparam FnType A callable type that takes Selection&lt;CTypes...&gt;::Iterator_t const&amp; as the argument</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>199</pre></td>
+    <td align="right" class="lineno"><pre>198</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre>     * @tparam BatchSizeFnType A Callable type that takes the number of entities as the argument and returns the size of a batch.</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>200</pre></td>
+    <td align="right" class="lineno"><pre>199</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre>     * @param mgr EntityManager that will be used to select the entities from</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>201</pre></td>
+    <td align="right" class="lineno"><pre>200</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre>     * @param fn A callable object that takes Selection&lt;CTypes...&gt;::Iterator_t const&amp; as the argument and that will be invoked</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>202</pre></td>
+    <td align="right" class="lineno"><pre>201</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre>     *           for each entity that owns at least all of the components of CTypes... types</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>203</pre></td>
+    <td align="right" class="lineno"><pre>202</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre>     * @param bFn A Callable object that takes the number of entities as the argument and returns the size of a batch.</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>204</pre></td>
+    <td align="right" class="lineno"><pre>203</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre>     *            Copies of this object will be used for this task and its subtasks</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>205</pre></td>
+    <td align="right" class="lineno"><pre>204</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre>     * @returns Reference to the created task, which can be used to create subtasks</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>206</pre></td>
+    <td align="right" class="lineno"><pre>205</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre>     */</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>207</pre></td>
+    <td align="right" class="lineno"><pre>206</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre>    template &lt;typename... CTypes, typename FnType, typename BatchSizeFnType = DefaultBatchSizeFn_t&gt;</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>208</pre></td>
+    <td align="right" class="lineno"><pre>207</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount coveredLine"><pre>1</pre></td>
-    <td align="left" class="src coveredLine"><pre>    Task&lt;FnType, BatchSizeFnType, CTypes...&gt;&amp; setTask(EntityManager&amp; mgr, FnType fn, BatchSizeFnType batchSizeFn = DefBatchSizeFn)</pre></td>
+    <td align="left" class="src coveredLine"><pre>    Task&lt;FnType, BatchSizeFnType, CTypes...&gt;&amp; setTask(EntityManager&amp; mgr, FnType fn,</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>208</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>                                                      BatchSizeFnType batchSizeFn = DefBatchSizeFn)</pre></td>
     </tr>
 
     <tr>

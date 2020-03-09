@@ -74,7 +74,7 @@ public:
 
     /// Changes the archetype of the entity associated with the iterator and returns the next valid one
     /**
-     * There are no overloaded versions of this function (for iterators) on purpose - it is more optimal to create a separate archetype for those situations
+     * There are no overloaded versions of this function (for iterators) on purpose - it is more optimal to create a separate archetype for those situations.
      * @tparam Iter EntitySpawner::EntityPool_t::Container_t::iterator or Selection<...>::Iterator_t
      * @tparam FnType Callable type that takes r-value reference to the EntityCreator
      * @param it A valid and non-end iterator
@@ -94,8 +94,9 @@ public:
     void destroy(Entity ent);
 
 
-    /// Destroys the entity associated with the iterator and returns the next valid one
+    /// Destroys the entity associated with a given iterator and returns the next valid one
     /**
+     * The entity that the iterator points to becomes invalid
      * @tparam Iter EntitySpawner::EntityPool_t::Container_t::iterator or Selection<...>::Iterator_t
      * @param it A valid and non-end iterator
      * @returns A valid iterator to the next entity or end
@@ -303,7 +304,7 @@ inline void EntityManager::destroy(Entity ent)
 template <typename Iter>
 inline Iter EntityManager::destroy(Iter const& it)
 {
-    destroy(*it);
+    destroy(*it); // throws for invalid or end
     if constexpr (!std::is_same_v<Iter, EPoolIter_t> && !std::is_same_v<Iter, EPoolCIter_t>)
         if (!it.isValid())
             return ++Iter(it);

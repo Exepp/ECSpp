@@ -275,7 +275,7 @@
           </tr>
           <tr>
             <td class="headerName">Date:</td>
-            <td class="headerValue">2020-03-02 04:01:59</td>
+            <td class="headerValue">2020-03-09 02:12:46</td>
             <td></td>
             <td class="headerName">Branches:</td>
             <td class="headerTableEntry">33</td>
@@ -512,729 +512,729 @@
     <tr>
     <td align="right" class="lineno"><pre>31</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>5974</pre></td>
-    <td align="left" class="src coveredLine"><pre>struct Entity {</pre></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>/// A unique key used to distinguish created entities</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>32</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    ListIdx listIdx;</pre></td>
+    <td align="left" class="src "><pre>/**</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>33</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    EntVersion version;</pre></td>
+    <td align="left" class="src "><pre> * listIdxs can be reused by incrementing their versions. Each version then represents a unique entity created with that listIdx.</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>34</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
+    <td align="left" class="src "><pre> * This way "keys" of deleted entites become invalid. Key is only invalidated on EntityManager::destroy call.</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>35</pre></td>
-    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 583776 times">&check;</span><span class="takenBranch" title="Branch 2 taken 45 times">&check;</span><span class="takenBranch" title="Branch 4 taken 583776 times">&check;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><br/></td>
-    <td align="right" class="linecount coveredLine"><pre>583821</pre></td>
-    <td align="left" class="src coveredLine"><pre>    bool operator==(Entity const&amp; rhs) const { return listIdx == rhs.listIdx &amp;&amp; version == rhs.version; }</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre> */</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>36</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>51</pre></td>
-    <td align="left" class="src coveredLine"><pre>    bool operator!=(Entity const&amp; rhs) const { return !(*this == rhs); }</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>5974</pre></td>
+    <td align="left" class="src coveredLine"><pre>struct Entity {</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>37</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>};</pre></td>
+    <td align="left" class="src "><pre>    ListIdx listIdx;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>38</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
+    <td align="left" class="src "><pre>    EntVersion version;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>39</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////</pre></td>
+    <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>40</pre></td>
-    <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 583776 times">&check;</span><span class="takenBranch" title="Branch 2 taken 45 times">&check;</span><span class="takenBranch" title="Branch 4 taken 583776 times">&check;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><br/></td>
+    <td align="right" class="linecount coveredLine"><pre>583821</pre></td>
+    <td align="left" class="src coveredLine"><pre>    bool operator==(Entity const&amp; rhs) const { return listIdx == rhs.listIdx &amp;&amp; version == rhs.version; }</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>41</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
+    <td align="right" class="linecount coveredLine"><pre>51</pre></td>
+    <td align="left" class="src coveredLine"><pre>    bool operator!=(Entity const&amp; rhs) const { return !(*this == rhs); }</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>42</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>/// A vector-like freelist for entities data</pre></td>
+    <td align="left" class="src "><pre>};</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>43</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>class EntityList {</pre></td>
+    <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>44</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>public:</pre></td>
+    <td align="left" class="src "><pre>/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>45</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    class Cell {</pre></td>
+    <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>46</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    public:</pre></td>
+    <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>47</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>        struct Occupied {</pre></td>
+    <td align="left" class="src "><pre>/// A vector-like freelist for entities data</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>48</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>            PoolIdx poolIdx;</pre></td>
+    <td align="left" class="src "><pre>class EntityList {</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>49</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>            EntVersion version;</pre></td>
+    <td align="left" class="src "><pre>public:</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>50</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>            SpawnerId spawnerId;</pre></td>
+    <td align="left" class="src "><pre>    class Cell {</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>51</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>        };</pre></td>
+    <td align="left" class="src "><pre>    public:</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>52</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
+    <td align="left" class="src "><pre>        struct Occupied {</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>53</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>        using Free = Entity;</pre></td>
+    <td align="left" class="src "><pre>            PoolIdx poolIdx;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>54</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
+    <td align="left" class="src "><pre>            EntVersion version;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>55</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    private:</pre></td>
+    <td align="left" class="src "><pre>            SpawnerId spawnerId;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>56</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>        struct Data {</pre></td>
+    <td align="left" class="src "><pre>        };</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>57</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>371241</pre></td>
-    <td align="left" class="src coveredLine"><pre>            explicit Data(Free fCell) : idx(fCell.listIdx), version(fCell.version) {}</pre></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>58</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>380270</pre></td>
-    <td align="left" class="src coveredLine"><pre>            explicit Data(Occupied oCell) : idx(oCell.poolIdx), version(oCell.version), spawnerId(oCell.spawnerId) {}</pre></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>        using Free = Entity;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>59</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>            UniIdx idx; // when free, used as next free ListIdx; when occupied, used as PoolIdx</pre></td>
+    <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>60</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>            EntVersion version;</pre></td>
+    <td align="left" class="src "><pre>    private:</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>61</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>            SpawnerId spawnerId;</pre></td>
+    <td align="left" class="src "><pre>        struct Data {</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>62</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>        };</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>371241</pre></td>
+    <td align="left" class="src coveredLine"><pre>            explicit Data(Free fCell) : idx(fCell.listIdx), version(fCell.version) {}</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>63</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
+    <td align="right" class="linecount coveredLine"><pre>380270</pre></td>
+    <td align="left" class="src coveredLine"><pre>            explicit Data(Occupied oCell) : idx(oCell.poolIdx), version(oCell.version), spawnerId(oCell.spawnerId) {}</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>64</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    public:</pre></td>
+    <td align="left" class="src "><pre>            UniIdx idx; // when free, used as next free ListIdx; when occupied, used as PoolIdx</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>65</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>        /// Assumes that Cell will be used as an occupied one</pre></td>
+    <td align="left" class="src "><pre>            EntVersion version;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>66</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>        /**</pre></td>
+    <td align="left" class="src "><pre>            SpawnerId spawnerId;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>67</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>         * @param cell Values that the cell will take as occupied</pre></td>
+    <td align="left" class="src "><pre>        };</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>68</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>         */</pre></td>
+    <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>69</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>380270</pre></td>
-    <td align="left" class="src coveredLine"><pre>        explicit Cell(Occupied cell) : cellData(cell) {}</pre></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    public:</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>70</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
+    <td align="left" class="src "><pre>        /// Assumes that Cell will be used as an occupied one</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>71</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
+    <td align="left" class="src "><pre>        /**</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>72</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>        /// Assumes that Cell will be used as a free one</pre></td>
+    <td align="left" class="src "><pre>         * @param cell Values that the cell will take as occupied</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>73</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>        /**</pre></td>
+    <td align="left" class="src "><pre>         */</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>74</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>         * @param cell Values that the cell will take as free</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>380270</pre></td>
+    <td align="left" class="src coveredLine"><pre>        explicit Cell(Occupied cell) : cellData(cell) {}</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>75</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>         */</pre></td>
+    <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>76</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>371241</pre></td>
-    <td align="left" class="src coveredLine"><pre>        explicit Cell(Free cell) : cellData(cell) {}</pre></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>77</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
+    <td align="left" class="src "><pre>        /// Assumes that Cell will be used as a free one</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>78</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>        Cell() = delete;</pre></td>
+    <td align="left" class="src "><pre>        /**</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>79</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>        Cell(Cell&amp;&amp;) = default;</pre></td>
+    <td align="left" class="src "><pre>         * @param cell Values that the cell will take as free</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>80</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>        Cell(Cell const&amp;) = default;</pre></td>
+    <td align="left" class="src "><pre>         */</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>81</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>        Cell&amp; operator=(Cell&amp;&amp;) = default;</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>371241</pre></td>
+    <td align="left" class="src coveredLine"><pre>        explicit Cell(Free cell) : cellData(cell) {}</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>82</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>        Cell&amp; operator=(Cell const&amp;) = default;</pre></td>
+    <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>83</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
+    <td align="left" class="src "><pre>        Cell() = delete;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>84</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>        /// Assumes that Cell is now used as Free and returns an index to the next free cell</pre></td>
+    <td align="left" class="src "><pre>        Cell(Cell&amp;&amp;) = default;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>85</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>        /**</pre></td>
+    <td align="left" class="src "><pre>        Cell(Cell const&amp;) = default;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>86</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>         * @returns Index to the next free cell</pre></td>
+    <td align="left" class="src "><pre>        Cell&amp; operator=(Cell&amp;&amp;) = default;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>87</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>         */</pre></td>
+    <td align="left" class="src "><pre>        Cell&amp; operator=(Cell const&amp;) = default;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>88</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>263021</pre></td>
-    <td align="left" class="src coveredLine"><pre>        ListIdx nextFreeListIdx() const { return cellData.idx; }</pre></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>89</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
+    <td align="left" class="src "><pre>        /// Assumes that Cell is now used as Free and returns an index to the next free cell</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>90</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
+    <td align="left" class="src "><pre>        /**</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>91</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>        /// Assumes that Cell is now used as Occupied and returns the PoolIndex of the entity</pre></td>
+    <td align="left" class="src "><pre>         * @returns Index to the next free cell</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>92</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>        /**</pre></td>
+    <td align="left" class="src "><pre>         */</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>93</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>         * @returns PoolIdx of the entity</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>263021</pre></td>
+    <td align="left" class="src coveredLine"><pre>        ListIdx nextFreeListIdx() const { return cellData.idx; }</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>94</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>         */</pre></td>
+    <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>95</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>        PoolIdx poolIdx() const { return cellData.idx; }</pre></td>
+    <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>96</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
+    <td align="left" class="src "><pre>        /// Assumes that Cell is now used as Occupied and returns the PoolIndex of the entity</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>97</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>        /// Assumes that Cell is now used as Occupied and returns the SpawnerId of the EntitySpawner that entity is currently in</pre></td>
+    <td align="left" class="src "><pre>        /**</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>98</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>        /**</pre></td>
+    <td align="left" class="src "><pre>         * @returns PoolIdx of the entity</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>99</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>         * @returns PoolIdx of the entity</pre></td>
+    <td align="left" class="src "><pre>         */</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>100</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>         */</pre></td>
+    <td align="left" class="src "><pre>        PoolIdx poolIdx() const { return cellData.idx; }</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>101</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>        SpawnerId spawnerId() const { return cellData.spawnerId; }</pre></td>
+    <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>102</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
+    <td align="left" class="src "><pre>        /// Assumes that Cell is now used as Occupied and returns the SpawnerId of the EntitySpawner that entity is currently in</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>103</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
+    <td align="left" class="src "><pre>        /**</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>104</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>        /// Returns the version of the entity</pre></td>
+    <td align="left" class="src "><pre>         * @returns PoolIdx of the entity</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>105</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>        /**</pre></td>
+    <td align="left" class="src "><pre>         */</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>106</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>         * Used both in free and occupied cell</pre></td>
+    <td align="left" class="src "><pre>        SpawnerId spawnerId() const { return cellData.spawnerId; }</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>107</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>         * @returns Version of the entity</pre></td>
+    <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>108</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>         */</pre></td>
+    <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>109</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>5996854</pre></td>
-    <td align="left" class="src coveredLine"><pre>        EntVersion entVersion() const { return cellData.version; }</pre></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>        /// Returns the version of the entity</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>110</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
+    <td align="left" class="src "><pre>        /**</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>111</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
+    <td align="left" class="src "><pre>         * Used both in free and occupied cell</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>112</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>        /// Represent the current data as an Occupied cell</pre></td>
+    <td align="left" class="src "><pre>         * @returns Version of the entity</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>113</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>        /**</pre></td>
+    <td align="left" class="src "><pre>         */</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>114</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>         * Universal cellData.idx becomes Occupied::poolIdx</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>5996854</pre></td>
+    <td align="left" class="src coveredLine"><pre>        EntVersion entVersion() const { return cellData.version; }</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>115</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>         * @returns Occupied representation of this cell</pre></td>
+    <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>116</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>         */</pre></td>
+    <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>117</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>3088967</pre></td>
-    <td align="left" class="src coveredLine"><pre>        Occupied asOccupied() const { return { cellData.idx, cellData.version, cellData.spawnerId }; }</pre></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>        /// Represent the current data as an Occupied cell</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>118</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
+    <td align="left" class="src "><pre>        /**</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>119</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
+    <td align="left" class="src "><pre>         * Universal cellData.idx becomes Occupied::poolIdx</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>120</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>        /// Represent the current data as a free cell</pre></td>
+    <td align="left" class="src "><pre>         * @returns Occupied representation of this cell</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>121</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>        /**</pre></td>
+    <td align="left" class="src "><pre>         */</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>122</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>         * Universal cellData.idx becomes Free::listIdx, cellData.spawnerId is discarded</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>3088967</pre></td>
+    <td align="left" class="src coveredLine"><pre>        Occupied asOccupied() const { return { cellData.idx, cellData.version, cellData.spawnerId }; }</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>123</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>         * @returns Free representation of this cell</pre></td>
+    <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>124</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>         */</pre></td>
+    <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>125</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>        Free asFree() const { return { cellData.idx, cellData.version }; }</pre></td>
+    <td align="left" class="src "><pre>        /// Represent the current data as a free cell</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>126</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
+    <td align="left" class="src "><pre>        /**</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>127</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    private:</pre></td>
+    <td align="left" class="src "><pre>         * Universal cellData.idx becomes Free::listIdx, cellData.spawnerId is discarded</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>128</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>        Data cellData;</pre></td>
+    <td align="left" class="src "><pre>         * @returns Free representation of this cell</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>129</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    };</pre></td>
+    <td align="left" class="src "><pre>         */</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>130</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
+    <td align="left" class="src "><pre>        Free asFree() const { return { cellData.idx, cellData.version }; }</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>131</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>public:</pre></td>
+    <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>132</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    /// Default constructor</pre></td>
+    <td align="left" class="src "><pre>    private:</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>133</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    /** By default EntityList reserves memory for 32 elements */</pre></td>
+    <td align="left" class="src "><pre>        Data cellData;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>134</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>35</pre></td>
-    <td align="left" class="src coveredLine"><pre>    EntityList() { reserve(32); }; // init size</pre></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    };</pre></td>
     </tr>
 
     <tr>
@@ -1248,28 +1248,28 @@
     <td align="right" class="lineno"><pre>136</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    EntityList(EntityList&amp;&amp; rhs) = delete;</pre></td>
+    <td align="left" class="src "><pre>public:</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>137</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    EntityList&amp; operator=(EntityList&amp;&amp; rhs) = delete;</pre></td>
+    <td align="left" class="src "><pre>    /// Default constructor</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>138</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    EntityList(const EntityList&amp;) = delete;</pre></td>
+    <td align="left" class="src "><pre>    /** By default EntityList reserves memory for 32 elements */</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>139</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    EntityList&amp; operator=(const EntityList&amp;) = delete;</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>35</pre></td>
+    <td align="left" class="src coveredLine"><pre>    EntityList() { reserve(32); }; // init size</pre></td>
     </tr>
 
     <tr>
@@ -1283,28 +1283,28 @@
     <td align="right" class="lineno"><pre>141</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
+    <td align="left" class="src "><pre>    EntityList(EntityList&amp;&amp; rhs) = delete;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>142</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    /// Destructor</pre></td>
+    <td align="left" class="src "><pre>    EntityList&amp; operator=(EntityList&amp;&amp; rhs) = delete;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>143</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    /** Releases resources */</pre></td>
+    <td align="left" class="src "><pre>    EntityList(const EntityList&amp;) = delete;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>144</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    ~EntityList();</pre></td>
+    <td align="left" class="src "><pre>    EntityList&amp; operator=(const EntityList&amp;) = delete;</pre></td>
     </tr>
 
     <tr>
@@ -1325,518 +1325,518 @@
     <td align="right" class="lineno"><pre>147</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    /// Allocates a unique entity</pre></td>
+    <td align="left" class="src "><pre>    /// Destructor</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>148</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    /**</pre></td>
+    <td align="left" class="src "><pre>    /** Releases resources */</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>149</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>     * Entitylist may use a new entity, or a used one with changed version.</pre></td>
+    <td align="left" class="src "><pre>    ~EntityList();</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>150</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>     * @param poolIdx Index of the entity in a spawner with "spawnerId" Id</pre></td>
+    <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>151</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>     * @param spawnerId Spawner's id</pre></td>
+    <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>152</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>     * @returns A unique entity</pre></td>
+    <td align="left" class="src "><pre>    /// Allocates a unique entity</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>153</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>     */</pre></td>
+    <td align="left" class="src "><pre>    /**</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>154</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    Entity allocEntity(PoolIdx poolIdx, SpawnerId spawnerId);</pre></td>
+    <td align="left" class="src "><pre>     * Entitylist may use a new entity, or a used one with changed version.</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>155</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
+    <td align="left" class="src "><pre>     * @param poolIdx Index of the entity in a spawner with "spawnerId" Id</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>156</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
+    <td align="left" class="src "><pre>     * @param spawnerId Spawner's id</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>157</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    /// Changes the values that describe the location of a given entity</pre></td>
+    <td align="left" class="src "><pre>     * @returns A unique entity</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>158</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    /**</pre></td>
+    <td align="left" class="src "><pre>     */</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>159</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>     * Ent stays valid</pre></td>
+    <td align="left" class="src "><pre>    Entity allocEntity(PoolIdx poolIdx, SpawnerId spawnerId);</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>160</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>     * @param ent A valid entity which data will be changed</pre></td>
+    <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>161</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>     * @param poolIdx Index of the entity in a spawner with "spawnerId" Id</pre></td>
+    <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>162</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>     * @param spawnerId A new Spawner's id</pre></td>
+    <td align="left" class="src "><pre>    /// Changes the values that describe the location of a given entity</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>163</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>     * @returns A unique entity</pre></td>
+    <td align="left" class="src "><pre>    /**</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>164</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>     * @throws (Debug only) Throws the AssertionFailed exception if ent is invalid</pre></td>
+    <td align="left" class="src "><pre>     * Ent stays valid</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>165</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>     */</pre></td>
+    <td align="left" class="src "><pre>     * @param ent A valid entity which data will be changed</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>166</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    void changeEntity(Entity ent, PoolIdx poolIdx, SpawnerId spawnerId);</pre></td>
+    <td align="left" class="src "><pre>     * @param poolIdx Index of the entity in a spawner with "spawnerId" Id</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>167</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
+    <td align="left" class="src "><pre>     * @param spawnerId A new Spawner's id</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>168</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
+    <td align="left" class="src "><pre>     * @returns A unique entity</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>169</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    /// Frees a given entity</pre></td>
+    <td align="left" class="src "><pre>     * @throws (Debug only) Throws the AssertionFailed exception if ent is invalid</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>170</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    /**</pre></td>
+    <td align="left" class="src "><pre>     */</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>171</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>     * Increases the version of the entity and sets its cell's universal idx to the freeIndex</pre></td>
+    <td align="left" class="src "><pre>    void changeEntity(Entity ent, PoolIdx poolIdx, SpawnerId spawnerId);</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>172</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>     * and freeIndex is set to the value of ent.listIdx</pre></td>
+    <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>173</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>     * @param ent A valid entity whose data will be changed</pre></td>
+    <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>174</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>     * @throws (Debug only) Throws the AssertionFailed exception if ent is invalid</pre></td>
+    <td align="left" class="src "><pre>    /// Frees a given entity</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>175</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>     */</pre></td>
+    <td align="left" class="src "><pre>    /**</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>176</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    void freeEntity(Entity ent);</pre></td>
+    <td align="left" class="src "><pre>     * Increases the version of the entity and sets its cell's universal idx to the freeIndex</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>177</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
+    <td align="left" class="src "><pre>     * and freeIndex is set to the value of ent.listIdx</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>178</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    /// Frees every entity</pre></td>
+    <td align="left" class="src "><pre>     * @param ent A valid entity whose data will be changed</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>179</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    /**</pre></td>
+    <td align="left" class="src "><pre>     * @throws (Debug only) Throws the AssertionFailed exception if ent is invalid</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>180</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>     * Increments version of every reserved cell (even the unused ones)</pre></td>
+    <td align="left" class="src "><pre>     */</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>181</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>     */</pre></td>
+    <td align="left" class="src "><pre>    void freeEntity(Entity ent);</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>182</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    void freeAll();</pre></td>
+    <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>183</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
+    <td align="left" class="src "><pre>    /// Frees every entity</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>184</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    /// The next n allocEntity(...) calls will not require reallocation</pre></td>
+    <td align="left" class="src "><pre>    /**</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>185</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    /**</pre></td>
+    <td align="left" class="src "><pre>     * Increments version of every reserved cell (even the unused ones)</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>186</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>     * @param n Number of entities to reserve the additional memory for</pre></td>
+    <td align="left" class="src "><pre>     */</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>187</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>     */</pre></td>
+    <td align="left" class="src "><pre>    void freeAll();</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>188</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    void fitNextN(std::size_t n);</pre></td>
+    <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>189</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
+    <td align="left" class="src "><pre>    /// The next n allocEntity(...) calls will not require reallocation</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>190</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
+    <td align="left" class="src "><pre>    /**</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>191</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    /// Check whether a given entity is valid</pre></td>
+    <td align="left" class="src "><pre>     * @param n Number of entities to reserve the additional memory for</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>192</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    /**</pre></td>
+    <td align="left" class="src "><pre>     */</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>193</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>     * @param ent Any entity</pre></td>
+    <td align="left" class="src "><pre>    void fitNextN(std::size_t n);</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>194</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>     * @returns True if the entity is valid, false otherwise</pre></td>
+    <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>195</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>     */</pre></td>
+    <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>196</pre></td>
-    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 5731625 times">&check;</span><span class="takenBranch" title="Branch 1 taken 5897 times">&check;</span><span class="takenBranch" title="Branch 3 taken 5730596 times">&check;</span><span class="takenBranch" title="Branch 4 taken 1029 times">&check;</span><br/></td>
-    <td align="right" class="linecount coveredLine"><pre>5737522</pre></td>
-    <td align="left" class="src coveredLine"><pre>    bool isValid(Entity ent) const { return ent.listIdx.value &lt; reserved &amp;&amp; ent.version.value == data[ent.listIdx.value].entVersion().value; }</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    /// Check whether a given entity is valid</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>197</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
+    <td align="left" class="src "><pre>    /**</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>198</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
+    <td align="left" class="src "><pre>     * @param ent Any entity</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>199</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    /// Returns the values that describe the location of a given entity</pre></td>
+    <td align="left" class="src "><pre>     * @returns True if the entity is valid, false otherwise</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>200</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    /**</pre></td>
+    <td align="left" class="src "><pre>     */</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>201</pre></td>
-    <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>     * @param ent A valid entity</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 5731625 times">&check;</span><span class="takenBranch" title="Branch 1 taken 5897 times">&check;</span><span class="takenBranch" title="Branch 3 taken 5730596 times">&check;</span><span class="takenBranch" title="Branch 4 taken 1029 times">&check;</span><br/></td>
+    <td align="right" class="linecount coveredLine"><pre>5737522</pre></td>
+    <td align="left" class="src coveredLine"><pre>    bool isValid(Entity ent) const { return ent.listIdx.value &lt; reserved &amp;&amp; ent.version.value == data[ent.listIdx.value].entVersion().value; }</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>202</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>     * @returns Occupied version of the entity's cell</pre></td>
+    <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>203</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>     * @throws (Debug only) Throws the AssertionFailed exception if ent is invalid</pre></td>
+    <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>204</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>     */</pre></td>
+    <td align="left" class="src "><pre>    /// Returns the values that describe the location of a given entity</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>205</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    Cell::Occupied get(Entity ent) const;</pre></td>
+    <td align="left" class="src "><pre>    /**</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>206</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
+    <td align="left" class="src "><pre>     * @param ent A valid entity</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>207</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
+    <td align="left" class="src "><pre>     * @returns Occupied version of the entity's cell</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>208</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    /// Returns the number of valid entities</pre></td>
+    <td align="left" class="src "><pre>     * @throws (Debug only) Throws the AssertionFailed exception if ent is invalid</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>209</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    /**</pre></td>
+    <td align="left" class="src "><pre>     */</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>210</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>     * @returns Number of valid entities</pre></td>
+    <td align="left" class="src "><pre>    Cell::Occupied get(Entity ent) const;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>211</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>     */</pre></td>
+    <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>212</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>90</pre></td>
-    <td align="left" class="src coveredLine"><pre>    std::size_t size() const { return reserved - freeLeft; }</pre></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>213</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
+    <td align="left" class="src "><pre>    /// Returns the number of valid entities</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>214</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>private:</pre></td>
+    <td align="left" class="src "><pre>    /**</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>215</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    void reserve(std::size_t newReserved);</pre></td>
+    <td align="left" class="src "><pre>     * @returns Number of valid entities</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>216</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
+    <td align="left" class="src "><pre>     */</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>217</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>private:</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>90</pre></td>
+    <td align="left" class="src coveredLine"><pre>    std::size_t size() const { return reserved - freeLeft; }</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>218</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    Cell* data = nullptr;</pre></td>
+    <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>219</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    std::size_t freeLeft = 0;</pre></td>
+    <td align="left" class="src "><pre>private:</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>220</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    std::size_t reserved = 0;</pre></td>
+    <td align="left" class="src "><pre>    void reserve(std::size_t newReserved);</pre></td>
     </tr>
 
     <tr>
@@ -1850,231 +1850,231 @@
     <td align="right" class="lineno"><pre>222</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    ListIdx freeIndex;</pre></td>
+    <td align="left" class="src "><pre>private:</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>223</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>};</pre></td>
+    <td align="left" class="src "><pre>    Cell* data = nullptr;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>224</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
+    <td align="left" class="src "><pre>    std::size_t freeLeft = 0;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>225</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
+    <td align="left" class="src "><pre>    std::size_t reserved = 0;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>226</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////</pre></td>
+    <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>227</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
+    <td align="left" class="src "><pre>    ListIdx freeIndex;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>228</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
+    <td align="left" class="src "><pre>};</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>229</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>70</pre></td>
-    <td align="left" class="src coveredLine"><pre>inline EntityList::~EntityList()</pre></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>230</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>{</pre></td>
+    <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>231</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    // no need to destroy</pre></td>
+    <td align="left" class="src "><pre>/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>232</pre></td>
-    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 35 times">&check;</span><span class="notTakenBranch" title="Branch 1 not taken">&cross;</span></td>
-    <td align="right" class="linecount coveredLine"><pre>35</pre></td>
-    <td align="left" class="src coveredLine"><pre>    if (data)</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>233</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>35</pre></td>
-    <td align="left" class="src coveredLine"><pre>        operator delete[](data);</pre></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>234</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>35</pre></td>
-    <td align="left" class="src coveredLine"><pre>}</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>70</pre></td>
+    <td align="left" class="src coveredLine"><pre>inline EntityList::~EntityList()</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>235</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
+    <td align="left" class="src "><pre>{</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>236</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    // no need to destroy</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>237</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 35 times">&check;</span><span class="notTakenBranch" title="Branch 1 not taken">&cross;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>35</pre></td>
+    <td align="left" class="src coveredLine"><pre>    if (data)</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>238</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>35</pre></td>
+    <td align="left" class="src coveredLine"><pre>        operator delete[](data);</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>239</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>35</pre></td>
+    <td align="left" class="src coveredLine"><pre>}</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>240</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>241</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount coveredLine"><pre>263021</pre></td>
     <td align="left" class="src coveredLine"><pre>inline Entity EntityList::allocEntity(PoolIdx poolIdx, SpawnerId spawnerId)</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>237</pre></td>
+    <td align="right" class="lineno"><pre>242</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre>{</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>238</pre></td>
+    <td align="right" class="lineno"><pre>243</pre></td>
     <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 263021 times">&check;</span><span class="notTakenBranch" title="Branch 1 not taken">&cross;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span><span class="takenBranch" title="Branch 3 taken 263021 times">&check;</span><br/><span class="notTakenBranch" title="Branch 6 not taken">&cross;</span><span class="notTakenBranch" title="Branch 7 not taken">&cross;</span><span class="notTakenBranch" title="Branch 10 not taken">&cross;</span><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 13 not taken">&cross;</span><span class="notTakenBranch" title="Branch 14 not taken">&cross;</span><span class="notTakenBranch" title="Branch 16 not taken">&cross;</span><span class="notTakenBranch" title="Branch 17 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 19 not taken">&cross;</span><span class="notTakenBranch" title="Branch 20 not taken">&cross;</span><span class="notTakenBranch" title="Branch 22 not taken">&cross;</span><span class="notTakenBranch" title="Branch 23 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 25 not taken">&cross;</span><span class="notTakenBranch" title="Branch 26 not taken">&cross;</span><span class="notTakenBranch" title="Branch 28 not taken">&cross;</span><span class="notTakenBranch" title="Branch 29 not taken">&cross;</span><br/></td>
     <td align="right" class="linecount coveredLine"><pre>263021</pre></td>
     <td align="left" class="src coveredLine"><pre>    EPP_ASSERT(poolIdx.value != PoolIdx::BadValue &amp;&amp; spawnerId.value != SpawnerId::BadValue);</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>239</pre></td>
+    <td align="right" class="lineno"><pre>244</pre></td>
     <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 130 times">&check;</span><span class="takenBranch" title="Branch 1 taken 262891 times">&check;</span></td>
     <td align="right" class="linecount coveredLine"><pre>263021</pre></td>
     <td align="left" class="src coveredLine"><pre>    if (freeLeft == 0)</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>240</pre></td>
+    <td align="right" class="lineno"><pre>245</pre></td>
     <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 130 times">&check;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span></td>
     <td align="right" class="linecount coveredLine"><pre>130</pre></td>
     <td align="left" class="src coveredLine"><pre>        reserve(2 * reserved);</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>241</pre></td>
+    <td align="right" class="lineno"><pre>246</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>242</pre></td>
+    <td align="right" class="lineno"><pre>247</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount coveredLine"><pre>263021</pre></td>
     <td align="left" class="src coveredLine"><pre>    ListIdx idx = freeIndex;</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>243</pre></td>
+    <td align="right" class="lineno"><pre>248</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount coveredLine"><pre>263021</pre></td>
     <td align="left" class="src coveredLine"><pre>    EntVersion version = data[idx.value].entVersion();</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>244</pre></td>
+    <td align="right" class="lineno"><pre>249</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount coveredLine"><pre>263021</pre></td>
     <td align="left" class="src coveredLine"><pre>    freeIndex = data[idx.value].nextFreeListIdx();</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>245</pre></td>
+    <td align="right" class="lineno"><pre>250</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount coveredLine"><pre>263021</pre></td>
     <td align="left" class="src coveredLine"><pre>    data[idx.value] = Cell(Cell::Occupied{ poolIdx, version, spawnerId });</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>246</pre></td>
+    <td align="right" class="lineno"><pre>251</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount coveredLine"><pre>263021</pre></td>
     <td align="left" class="src coveredLine"><pre>    --freeLeft;</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>247</pre></td>
+    <td align="right" class="lineno"><pre>252</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>248</pre></td>
+    <td align="right" class="lineno"><pre>253</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount coveredLine"><pre>263021</pre></td>
     <td align="left" class="src coveredLine"><pre>    return Entity{ idx, version };</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>249</pre></td>
+    <td align="right" class="lineno"><pre>254</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre>}</pre></td>
-    </tr>
-
-    <tr>
-    <td align="right" class="lineno"><pre>250</pre></td>
-    <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
-    </tr>
-
-    <tr>
-    <td align="right" class="lineno"><pre>251</pre></td>
-    <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>117249</pre></td>
-    <td align="left" class="src coveredLine"><pre>inline void EntityList::changeEntity(Entity ent, PoolIdx poolIdx, SpawnerId spawnerId)</pre></td>
-    </tr>
-
-    <tr>
-    <td align="right" class="lineno"><pre>252</pre></td>
-    <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>{</pre></td>
-    </tr>
-
-    <tr>
-    <td align="right" class="lineno"><pre>253</pre></td>
-    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 117249 times">&check;</span><span class="notTakenBranch" title="Branch 1 not taken">&cross;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span><span class="takenBranch" title="Branch 3 taken 117249 times">&check;</span><br/><span class="notTakenBranch" title="Branch 6 not taken">&cross;</span><span class="notTakenBranch" title="Branch 7 not taken">&cross;</span><span class="notTakenBranch" title="Branch 10 not taken">&cross;</span><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 13 not taken">&cross;</span><span class="notTakenBranch" title="Branch 14 not taken">&cross;</span><span class="notTakenBranch" title="Branch 16 not taken">&cross;</span><span class="notTakenBranch" title="Branch 17 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 19 not taken">&cross;</span><span class="notTakenBranch" title="Branch 20 not taken">&cross;</span><span class="notTakenBranch" title="Branch 22 not taken">&cross;</span><span class="notTakenBranch" title="Branch 23 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 25 not taken">&cross;</span><span class="notTakenBranch" title="Branch 26 not taken">&cross;</span><span class="notTakenBranch" title="Branch 28 not taken">&cross;</span><span class="notTakenBranch" title="Branch 29 not taken">&cross;</span><br/></td>
-    <td align="right" class="linecount coveredLine"><pre>117249</pre></td>
-    <td align="left" class="src coveredLine"><pre>    EPP_ASSERT(poolIdx.value != PoolIdx::BadValue &amp;&amp; spawnerId.value != SpawnerId::BadValue);</pre></td>
-    </tr>
-
-    <tr>
-    <td align="right" class="lineno"><pre>254</pre></td>
-    <td align="right" class="linebranch"><span class="notTakenBranch" title="Branch 1 not taken">&cross;</span><span class="takenBranch" title="Branch 2 taken 117249 times">&check;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><span class="notTakenBranch" title="Branch 6 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 9 not taken">&cross;</span><span class="notTakenBranch" title="Branch 10 not taken">&cross;</span><span class="notTakenBranch" title="Branch 12 not taken">&cross;</span><span class="notTakenBranch" title="Branch 13 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 15 not taken">&cross;</span><span class="notTakenBranch" title="Branch 16 not taken">&cross;</span><span class="notTakenBranch" title="Branch 18 not taken">&cross;</span><span class="notTakenBranch" title="Branch 19 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 21 not taken">&cross;</span><span class="notTakenBranch" title="Branch 22 not taken">&cross;</span><span class="notTakenBranch" title="Branch 24 not taken">&cross;</span><span class="notTakenBranch" title="Branch 25 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 27 not taken">&cross;</span><span class="notTakenBranch" title="Branch 28 not taken">&cross;</span></td>
-    <td align="right" class="linecount coveredLine"><pre>117249</pre></td>
-    <td align="left" class="src coveredLine"><pre>    EPP_ASSERT(isValid(ent));</pre></td>
     </tr>
 
     <tr>
@@ -2088,315 +2088,315 @@
     <td align="right" class="lineno"><pre>256</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount coveredLine"><pre>117249</pre></td>
-    <td align="left" class="src coveredLine"><pre>    data[ent.listIdx.value] = Cell(Cell::Occupied{ poolIdx, ent.version, spawnerId });</pre></td>
+    <td align="left" class="src coveredLine"><pre>inline void EntityList::changeEntity(Entity ent, PoolIdx poolIdx, SpawnerId spawnerId)</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>257</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>117249</pre></td>
-    <td align="left" class="src coveredLine"><pre>}</pre></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>{</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>258</pre></td>
-    <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 117249 times">&check;</span><span class="notTakenBranch" title="Branch 1 not taken">&cross;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span><span class="takenBranch" title="Branch 3 taken 117249 times">&check;</span><br/><span class="notTakenBranch" title="Branch 6 not taken">&cross;</span><span class="notTakenBranch" title="Branch 7 not taken">&cross;</span><span class="notTakenBranch" title="Branch 10 not taken">&cross;</span><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 13 not taken">&cross;</span><span class="notTakenBranch" title="Branch 14 not taken">&cross;</span><span class="notTakenBranch" title="Branch 16 not taken">&cross;</span><span class="notTakenBranch" title="Branch 17 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 19 not taken">&cross;</span><span class="notTakenBranch" title="Branch 20 not taken">&cross;</span><span class="notTakenBranch" title="Branch 22 not taken">&cross;</span><span class="notTakenBranch" title="Branch 23 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 25 not taken">&cross;</span><span class="notTakenBranch" title="Branch 26 not taken">&cross;</span><span class="notTakenBranch" title="Branch 28 not taken">&cross;</span><span class="notTakenBranch" title="Branch 29 not taken">&cross;</span><br/></td>
+    <td align="right" class="linecount coveredLine"><pre>117249</pre></td>
+    <td align="left" class="src coveredLine"><pre>    EPP_ASSERT(poolIdx.value != PoolIdx::BadValue &amp;&amp; spawnerId.value != SpawnerId::BadValue);</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>259</pre></td>
-    <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>46153</pre></td>
-    <td align="left" class="src coveredLine"><pre>inline void EntityList::freeEntity(Entity ent)</pre></td>
+    <td align="right" class="linebranch"><span class="notTakenBranch" title="Branch 1 not taken">&cross;</span><span class="takenBranch" title="Branch 2 taken 117249 times">&check;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><span class="notTakenBranch" title="Branch 6 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 9 not taken">&cross;</span><span class="notTakenBranch" title="Branch 10 not taken">&cross;</span><span class="notTakenBranch" title="Branch 12 not taken">&cross;</span><span class="notTakenBranch" title="Branch 13 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 15 not taken">&cross;</span><span class="notTakenBranch" title="Branch 16 not taken">&cross;</span><span class="notTakenBranch" title="Branch 18 not taken">&cross;</span><span class="notTakenBranch" title="Branch 19 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 21 not taken">&cross;</span><span class="notTakenBranch" title="Branch 22 not taken">&cross;</span><span class="notTakenBranch" title="Branch 24 not taken">&cross;</span><span class="notTakenBranch" title="Branch 25 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 27 not taken">&cross;</span><span class="notTakenBranch" title="Branch 28 not taken">&cross;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>117249</pre></td>
+    <td align="left" class="src coveredLine"><pre>    EPP_ASSERT(isValid(ent));</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>260</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>{</pre></td>
+    <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>261</pre></td>
-    <td align="right" class="linebranch"><span class="notTakenBranch" title="Branch 1 not taken">&cross;</span><span class="takenBranch" title="Branch 2 taken 46153 times">&check;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><span class="notTakenBranch" title="Branch 6 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 9 not taken">&cross;</span><span class="notTakenBranch" title="Branch 10 not taken">&cross;</span><span class="notTakenBranch" title="Branch 12 not taken">&cross;</span><span class="notTakenBranch" title="Branch 13 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 15 not taken">&cross;</span><span class="notTakenBranch" title="Branch 16 not taken">&cross;</span><span class="notTakenBranch" title="Branch 18 not taken">&cross;</span><span class="notTakenBranch" title="Branch 19 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 21 not taken">&cross;</span><span class="notTakenBranch" title="Branch 22 not taken">&cross;</span><span class="notTakenBranch" title="Branch 24 not taken">&cross;</span><span class="notTakenBranch" title="Branch 25 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 27 not taken">&cross;</span><span class="notTakenBranch" title="Branch 28 not taken">&cross;</span></td>
-    <td align="right" class="linecount coveredLine"><pre>46153</pre></td>
-    <td align="left" class="src coveredLine"><pre>    EPP_ASSERT(isValid(ent));</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>117249</pre></td>
+    <td align="left" class="src coveredLine"><pre>    data[ent.listIdx.value] = Cell(Cell::Occupied{ poolIdx, ent.version, spawnerId });</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>262</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    // increment version now, so old references wont be valid for freed cells</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>117249</pre></td>
+    <td align="left" class="src coveredLine"><pre>}</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>263</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>46153</pre></td>
-    <td align="left" class="src coveredLine"><pre>    data[ent.listIdx.value] = Cell(Cell::Free{ freeIndex, ent.version.nextVersion() });</pre></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>264</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount coveredLine"><pre>46153</pre></td>
-    <td align="left" class="src coveredLine"><pre>    freeIndex = ent.listIdx;</pre></td>
+    <td align="left" class="src coveredLine"><pre>inline void EntityList::freeEntity(Entity ent)</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>265</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>46153</pre></td>
-    <td align="left" class="src coveredLine"><pre>    ++freeLeft;</pre></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>{</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>266</pre></td>
-    <td align="right" class="linebranch"></td>
+    <td align="right" class="linebranch"><span class="notTakenBranch" title="Branch 1 not taken">&cross;</span><span class="takenBranch" title="Branch 2 taken 46153 times">&check;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><span class="notTakenBranch" title="Branch 6 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 9 not taken">&cross;</span><span class="notTakenBranch" title="Branch 10 not taken">&cross;</span><span class="notTakenBranch" title="Branch 12 not taken">&cross;</span><span class="notTakenBranch" title="Branch 13 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 15 not taken">&cross;</span><span class="notTakenBranch" title="Branch 16 not taken">&cross;</span><span class="notTakenBranch" title="Branch 18 not taken">&cross;</span><span class="notTakenBranch" title="Branch 19 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 21 not taken">&cross;</span><span class="notTakenBranch" title="Branch 22 not taken">&cross;</span><span class="notTakenBranch" title="Branch 24 not taken">&cross;</span><span class="notTakenBranch" title="Branch 25 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 27 not taken">&cross;</span><span class="notTakenBranch" title="Branch 28 not taken">&cross;</span></td>
     <td align="right" class="linecount coveredLine"><pre>46153</pre></td>
-    <td align="left" class="src coveredLine"><pre>}</pre></td>
+    <td align="left" class="src coveredLine"><pre>    EPP_ASSERT(isValid(ent));</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>267</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
+    <td align="left" class="src "><pre>    // increment version now, so old references wont be valid for freed cells</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>268</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>46153</pre></td>
+    <td align="left" class="src coveredLine"><pre>    data[ent.listIdx.value] = Cell(Cell::Free{ freeIndex, ent.version.nextVersion() });</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>269</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>46153</pre></td>
+    <td align="left" class="src coveredLine"><pre>    freeIndex = ent.listIdx;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>270</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>46153</pre></td>
+    <td align="left" class="src coveredLine"><pre>    ++freeLeft;</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>271</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>46153</pre></td>
+    <td align="left" class="src coveredLine"><pre>}</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>272</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>273</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount coveredLine"><pre>7</pre></td>
     <td align="left" class="src coveredLine"><pre>inline void EntityList::freeAll()</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>269</pre></td>
+    <td align="right" class="lineno"><pre>274</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre>{</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>270</pre></td>
+    <td align="right" class="lineno"><pre>275</pre></td>
     <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 2 times">&check;</span><span class="takenBranch" title="Branch 1 taken 5 times">&check;</span></td>
     <td align="right" class="linecount coveredLine"><pre>7</pre></td>
     <td align="left" class="src coveredLine"><pre>    if (freeLeft == reserved)</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>271</pre></td>
+    <td align="right" class="lineno"><pre>276</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount coveredLine"><pre>2</pre></td>
     <td align="left" class="src coveredLine"><pre>        return;</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>272</pre></td>
+    <td align="right" class="lineno"><pre>277</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount coveredLine"><pre>5</pre></td>
     <td align="left" class="src coveredLine"><pre>    freeLeft = reserved;</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>273</pre></td>
+    <td align="right" class="lineno"><pre>278</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount coveredLine"><pre>5</pre></td>
     <td align="left" class="src coveredLine"><pre>    freeIndex = ListIdx(0);</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>274</pre></td>
+    <td align="right" class="lineno"><pre>279</pre></td>
     <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 2203 times">&check;</span><span class="takenBranch" title="Branch 1 taken 5 times">&check;</span></td>
     <td align="right" class="linecount coveredLine"><pre>2208</pre></td>
     <td align="left" class="src coveredLine"><pre>    for (auto i = freeIndex; i.value &lt; reserved - 1; ++i.value)</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>275</pre></td>
+    <td align="right" class="lineno"><pre>280</pre></td>
     <td align="right" class="linebranch"><span class="takenBranch" title="Branch 3 taken 2203 times">&check;</span><span class="notTakenBranch" title="Branch 4 not taken">&cross;</span></td>
     <td align="right" class="linecount coveredLine"><pre>2203</pre></td>
     <td align="left" class="src coveredLine"><pre>        data[i.value] = Cell(Cell::Free{ ListIdx(i.value + 1), data[i.value].entVersion().nextVersion() });</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>276</pre></td>
+    <td align="right" class="lineno"><pre>281</pre></td>
     <td align="right" class="linebranch"><span class="takenBranch" title="Branch 3 taken 5 times">&check;</span><span class="notTakenBranch" title="Branch 4 not taken">&cross;</span></td>
     <td align="right" class="linecount coveredLine"><pre>5</pre></td>
     <td align="left" class="src coveredLine"><pre>    data[reserved - 1] = Cell(Cell::Free{ ListIdx(ListIdx::BadValue), data[reserved - 1].entVersion().nextVersion() });</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>277</pre></td>
+    <td align="right" class="lineno"><pre>282</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre>}</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>278</pre></td>
+    <td align="right" class="lineno"><pre>283</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre></pre></td>
-    </tr>
-
-    <tr>
-    <td align="right" class="lineno"><pre>279</pre></td>
-    <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>15</pre></td>
-    <td align="left" class="src coveredLine"><pre>inline void EntityList::fitNextN(std::size_t n)</pre></td>
-    </tr>
-
-    <tr>
-    <td align="right" class="lineno"><pre>280</pre></td>
-    <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>{</pre></td>
-    </tr>
-
-    <tr>
-    <td align="right" class="lineno"><pre>281</pre></td>
-    <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>15</pre></td>
-    <td align="left" class="src coveredLine"><pre>    n = SizeToFitNextN(n, reserved, freeLeft);</pre></td>
-    </tr>
-
-    <tr>
-    <td align="right" class="lineno"><pre>282</pre></td>
-    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 9 times">&check;</span><span class="takenBranch" title="Branch 1 taken 6 times">&check;</span></td>
-    <td align="right" class="linecount coveredLine"><pre>15</pre></td>
-    <td align="left" class="src coveredLine"><pre>    if (n &gt; reserved)</pre></td>
-    </tr>
-
-    <tr>
-    <td align="right" class="lineno"><pre>283</pre></td>
-    <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>9</pre></td>
-    <td align="left" class="src coveredLine"><pre>        reserve(n);</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>284</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount coveredLine"><pre>15</pre></td>
-    <td align="left" class="src coveredLine"><pre>}</pre></td>
+    <td align="left" class="src coveredLine"><pre>inline void EntityList::fitNextN(std::size_t n)</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>285</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
+    <td align="left" class="src "><pre>{</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>286</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>15</pre></td>
+    <td align="left" class="src coveredLine"><pre>    n = SizeToFitNextN(n, reserved, freeLeft);</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>287</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 9 times">&check;</span><span class="takenBranch" title="Branch 1 taken 6 times">&check;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>15</pre></td>
+    <td align="left" class="src coveredLine"><pre>    if (n &gt; reserved)</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>288</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>9</pre></td>
+    <td align="left" class="src coveredLine"><pre>        reserve(n);</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>289</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>15</pre></td>
+    <td align="left" class="src coveredLine"><pre>}</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>290</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>291</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount coveredLine"><pre>174</pre></td>
     <td align="left" class="src coveredLine"><pre>inline void EntityList::reserve(std::size_t newReserved)</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>287</pre></td>
+    <td align="right" class="lineno"><pre>292</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre>{</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>288</pre></td>
+    <td align="right" class="lineno"><pre>293</pre></td>
     <td align="right" class="linebranch"><span class="notTakenBranch" title="Branch 0 not taken">&cross;</span><span class="takenBranch" title="Branch 1 taken 174 times">&check;</span><span class="notTakenBranch" title="Branch 4 not taken">&cross;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 8 not taken">&cross;</span><span class="notTakenBranch" title="Branch 9 not taken">&cross;</span><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><span class="notTakenBranch" title="Branch 12 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 14 not taken">&cross;</span><span class="notTakenBranch" title="Branch 15 not taken">&cross;</span><span class="notTakenBranch" title="Branch 17 not taken">&cross;</span><span class="notTakenBranch" title="Branch 18 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 20 not taken">&cross;</span><span class="notTakenBranch" title="Branch 21 not taken">&cross;</span><span class="notTakenBranch" title="Branch 23 not taken">&cross;</span><span class="notTakenBranch" title="Branch 24 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 26 not taken">&cross;</span><span class="notTakenBranch" title="Branch 27 not taken">&cross;</span></td>
     <td align="right" class="linecount coveredLine"><pre>174</pre></td>
     <td align="left" class="src coveredLine"><pre>    EPP_ASSERT(newReserved &gt; reserved);</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>289</pre></td>
+    <td align="right" class="lineno"><pre>294</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount coveredLine"><pre>174</pre></td>
     <td align="left" class="src coveredLine"><pre>    Cell* newMemory = reinterpret_cast&lt;Cell*&gt;(operator new[](sizeof(Cell) * std::uintptr_t(newReserved)));</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>290</pre></td>
+    <td align="right" class="lineno"><pre>295</pre></td>
     <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 139 times">&check;</span><span class="takenBranch" title="Branch 1 taken 35 times">&check;</span></td>
     <td align="right" class="linecount coveredLine"><pre>174</pre></td>
     <td align="left" class="src coveredLine"><pre>    if (data) {</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>291</pre></td>
+    <td align="right" class="lineno"><pre>296</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount coveredLine"><pre>139</pre></td>
     <td align="left" class="src coveredLine"><pre>        std::memcpy(newMemory, data, reserved * sizeof(Cell));</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>292</pre></td>
+    <td align="right" class="lineno"><pre>297</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount coveredLine"><pre>139</pre></td>
     <td align="left" class="src coveredLine"><pre>        operator delete[](data);</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>293</pre></td>
+    <td align="right" class="lineno"><pre>298</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre>    }</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>294</pre></td>
+    <td align="right" class="lineno"><pre>299</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount coveredLine"><pre>174</pre></td>
     <td align="left" class="src coveredLine"><pre>    freeLeft += newReserved - reserved;</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>295</pre></td>
-    <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>174</pre></td>
-    <td align="left" class="src coveredLine"><pre>    data = newMemory;</pre></td>
-    </tr>
-
-    <tr>
-    <td align="right" class="lineno"><pre>296</pre></td>
-    <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre></pre></td>
-    </tr>
-
-    <tr>
-    <td align="right" class="lineno"><pre>297</pre></td>
-    <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    // init new elements</pre></td>
-    </tr>
-
-    <tr>
-    <td align="right" class="lineno"><pre>298</pre></td>
-    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 174 times">&check;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span><span class="takenBranch" title="Branch 3 taken 322706 times">&check;</span><span class="takenBranch" title="Branch 4 taken 174 times">&check;</span><br/></td>
-    <td align="right" class="linecount coveredLine"><pre>322880</pre></td>
-    <td align="left" class="src coveredLine"><pre>    for (ListIdx i(reserved); i.value &lt; newReserved - 1; ++i.value)</pre></td>
-    </tr>
-
-    <tr>
-    <td align="right" class="lineno"><pre>299</pre></td>
-    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 2 taken 322706 times">&check;</span><span class="notTakenBranch" title="Branch 3 not taken">&cross;</span></td>
-    <td align="right" class="linecount coveredLine"><pre>322706</pre></td>
-    <td align="left" class="src coveredLine"><pre>        new (data + i.value) Cell(Cell::Free{ ListIdx(i.value + 1), EntVersion(0) });</pre></td>
-    </tr>
-
-    <tr>
     <td align="right" class="lineno"><pre>300</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount coveredLine"><pre>174</pre></td>
-    <td align="left" class="src coveredLine"><pre>    new (data + (newReserved - 1)) Cell(Cell::Free{ ListIdx(freeIndex), EntVersion(0) });</pre></td>
+    <td align="left" class="src coveredLine"><pre>    data = newMemory;</pre></td>
     </tr>
 
     <tr>
@@ -2409,89 +2409,124 @@
     <tr>
     <td align="right" class="lineno"><pre>302</pre></td>
     <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    // init new elements</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>303</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 174 times">&check;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span><span class="takenBranch" title="Branch 3 taken 322706 times">&check;</span><span class="takenBranch" title="Branch 4 taken 174 times">&check;</span><br/></td>
+    <td align="right" class="linecount coveredLine"><pre>322880</pre></td>
+    <td align="left" class="src coveredLine"><pre>    for (ListIdx i(reserved); i.value &lt; newReserved - 1; ++i.value)</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>304</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 2 taken 322706 times">&check;</span><span class="notTakenBranch" title="Branch 3 not taken">&cross;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>322706</pre></td>
+    <td align="left" class="src coveredLine"><pre>        new (data + i.value) Cell(Cell::Free{ ListIdx(i.value + 1), EntVersion(0) });</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>305</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>174</pre></td>
+    <td align="left" class="src coveredLine"><pre>    new (data + (newReserved - 1)) Cell(Cell::Free{ ListIdx(freeIndex), EntVersion(0) });</pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>306</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre></pre></td>
+    </tr>
+
+    <tr>
+    <td align="right" class="lineno"><pre>307</pre></td>
+    <td align="right" class="linebranch"></td>
     <td align="right" class="linecount coveredLine"><pre>174</pre></td>
     <td align="left" class="src coveredLine"><pre>    freeIndex = ListIdx(reserved);</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>303</pre></td>
+    <td align="right" class="lineno"><pre>308</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount coveredLine"><pre>174</pre></td>
     <td align="left" class="src coveredLine"><pre>    reserved = newReserved;</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>304</pre></td>
+    <td align="right" class="lineno"><pre>309</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount coveredLine"><pre>174</pre></td>
     <td align="left" class="src coveredLine"><pre>}</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>305</pre></td>
+    <td align="right" class="lineno"><pre>310</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>306</pre></td>
+    <td align="right" class="lineno"><pre>311</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount coveredLine"><pre>3088967</pre></td>
     <td align="left" class="src coveredLine"><pre>inline EntityList::Cell::Occupied EntityList::get(Entity ent) const</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>307</pre></td>
+    <td align="right" class="lineno"><pre>312</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre>{</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>308</pre></td>
+    <td align="right" class="lineno"><pre>313</pre></td>
     <td align="right" class="linebranch"><span class="notTakenBranch" title="Branch 1 not taken">&cross;</span><span class="takenBranch" title="Branch 2 taken 3088967 times">&check;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><span class="notTakenBranch" title="Branch 6 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 9 not taken">&cross;</span><span class="notTakenBranch" title="Branch 10 not taken">&cross;</span><span class="notTakenBranch" title="Branch 12 not taken">&cross;</span><span class="notTakenBranch" title="Branch 13 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 15 not taken">&cross;</span><span class="notTakenBranch" title="Branch 16 not taken">&cross;</span><span class="notTakenBranch" title="Branch 18 not taken">&cross;</span><span class="notTakenBranch" title="Branch 19 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 21 not taken">&cross;</span><span class="notTakenBranch" title="Branch 22 not taken">&cross;</span><span class="notTakenBranch" title="Branch 24 not taken">&cross;</span><span class="notTakenBranch" title="Branch 25 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 27 not taken">&cross;</span><span class="notTakenBranch" title="Branch 28 not taken">&cross;</span></td>
     <td align="right" class="linecount coveredLine"><pre>3088967</pre></td>
     <td align="left" class="src coveredLine"><pre>    EPP_ASSERT(isValid(ent));</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>309</pre></td>
+    <td align="right" class="lineno"><pre>314</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount coveredLine"><pre>3088967</pre></td>
     <td align="left" class="src coveredLine"><pre>    return data[ent.listIdx.value].asOccupied();</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>310</pre></td>
+    <td align="right" class="lineno"><pre>315</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre>}</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>311</pre></td>
+    <td align="right" class="lineno"><pre>316</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>312</pre></td>
+    <td align="right" class="lineno"><pre>317</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre>} // namespace epp</pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>313</pre></td>
+    <td align="right" class="lineno"><pre>318</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre></pre></td>
     </tr>
 
     <tr>
-    <td align="right" class="lineno"><pre>314</pre></td>
+    <td align="right" class="lineno"><pre>319</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
     <td align="left" class="src "><pre>#endif // EPP_ENTITYLIST_H</pre></td>

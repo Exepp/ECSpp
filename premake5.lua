@@ -17,7 +17,7 @@ workspace "ECSpp"
 		if os.getenv("EPP_COVERAGE") == "1" then
 			toolset "gcc" -- do not change
 		else
-			toolset "clang"
+			toolset "gcc"
 		end
 		buildoptions{"-Wno-dangling-else",
 					-- "-Weverything",

@@ -105,7 +105,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a1c967e0dfdd36039e965f3d8c4a71642"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a634557d04c86acd8b42184ff21e1c5c7"><td class="memTemplParams" colspan="2">template&lt;typename Iter &gt; </td></tr>
 <tr class="memitem:a634557d04c86acd8b42184ff21e1c5c7"><td class="memTemplItemLeft" align="right" valign="top">Iter&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classepp_1_1EntityManager.html#a634557d04c86acd8b42184ff21e1c5c7">destroy</a> (Iter const &amp;it)</td></tr>
-<tr class="memdesc:a634557d04c86acd8b42184ff21e1c5c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys the entity associated with the iterator and returns the next valid one.  <a href="classepp_1_1EntityManager.html#a634557d04c86acd8b42184ff21e1c5c7">More...</a><br /></td></tr>
+<tr class="memdesc:a634557d04c86acd8b42184ff21e1c5c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys the entity associated with a given iterator and returns the next valid one.  <a href="classepp_1_1EntityManager.html#a634557d04c86acd8b42184ff21e1c5c7">More...</a><br /></td></tr>
 <tr class="separator:a634557d04c86acd8b42184ff21e1c5c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad28ffa045d1c2adc4c730e6bc1c6c43c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1EntityManager.html#ad28ffa045d1c2adc4c730e6bc1c6c43c">clear</a> ()</td></tr>
 <tr class="memdesc:ad28ffa045d1c2adc4c730e6bc1c6c43c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys every entity, keeps resereved memory.  <a href="classepp_1_1EntityManager.html#ad28ffa045d1c2adc4c730e6bc1c6c43c">More...</a><br /></td></tr>
@@ -465,7 +465,7 @@ template&lt;typename Iter , typename FnType &gt; </div>
 </div><div class="memdoc">
 
 <p>Changes the archetype of the entity associated with the iterator and returns the next valid one. </p>
-<p>There are no overloaded versions of this function (for iterators) on purpose - it is more optimal to create a separate archetype for those situations </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+<p>There are no overloaded versions of this function (for iterators) on purpose - it is more optimal to create a separate archetype for those situations. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">Iter</td><td>EntitySpawner::EntityPool_t::Container_t::iterator or Selection&lt;...&gt;::Iterator_t </td></tr>
     <tr><td class="paramname">FnType</td><td>Callable type that takes r-value reference to the EntityCreator </td></tr>
@@ -662,8 +662,8 @@ template&lt;typename Iter &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Destroys the entity associated with the iterator and returns the next valid one. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
+<p>Destroys the entity associated with a given iterator and returns the next valid one. </p>
+<p>The entity that the iterator points to becomes invalid </p><dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">Iter</td><td>EntitySpawner::EntityPool_t::Container_t::iterator or Selection&lt;...&gt;::Iterator_t </td></tr>
   </table>

@@ -96,7 +96,7 @@ On linux:
 * `$ ./runBenchmarks.sh` 
 
 ## Results
-See the results in BenchmarksResults folder.
+See the results in [BenchmarksResults](https://github.com/Exepp/ECSpp/blob/master/BenchmarksResults/makeCharts.ipynb) folder.
 More to come soon.
 
 # Tests

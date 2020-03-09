@@ -4,7 +4,7 @@
 #include <ECSpp/EntityManager.h>
 #include <ECSpp/internal/utility/TuplePP.h>
 #include <condition_variable>
-#include <thread>
+#include <future>
 
 namespace epp {
 
@@ -21,17 +21,21 @@ protected:
     };
 
 public:
-    TaskBase(EntityManager& mgrRef, TaskBase* upt = nullptr) : fence(Fence()), uptask(upt), mgr(mgrRef) {}
+    TaskBase(EntityManager& mgrRef, std::launch lPolicy, TaskBase* upt)
+        : mgr(mgrRef), launchPolicy(lPolicy), uptask(upt) {}
     virtual ~TaskBase() = default;
     virtual void run() = 0;
     virtual bool updateAndCheckIfHasEntities() = 0;
 
+    EntityManager& mgr;
+
     Fence fence;
     std::mutex mutex;
     std::condition_variable condVar;
+
+    std::launch launchPolicy;
     TaskBase* uptask = nullptr;
     std::unique_ptr<TaskBase> subtask;
-    EntityManager& mgr;
 };
 
 
@@ -49,14 +53,6 @@ public:
  */
 template <typename FnType, typename BatchSizeFnType, typename... CTypes>
 class Task : public TaskBase {
-
-    /// A small join guard for a thread
-    struct JoinGuard {
-        JoinGuard(std::thread& thread) : thr(thread){};
-        ~JoinGuard() { thr.joinable() ? thr.join() : void(); }
-        std::thread& thr;
-    };
-
 public:
     using Select_t = Selection<CTypes...>;
     using Iterator_t = typename Select_t::Iterator_t;
@@ -64,16 +60,20 @@ public:
 
 public:
     /**
-     * @param mgr EntityManager that will be used to select the entities from
-     * @param fn A callable object that takes Selection<CTypes...>::Iterator_t const& as the argument and that will be invoked 
+     * @param mgr EntityManager that will be used to select entities from
+     * @param fn A callable object that takes Selection<CTypes...>::Iterator_t const& as the argument and will be invoked 
      *           for each entity that owns at least all of the components of CTypes... types
      * @param bFn A Callable object that takes the number of entities as the argument and returns the size of a batch.
      *            This object will be used for this task and its subtasks
+     * @param lPolicy How will this task launch (applies only to subtasks)
      * @param upt A parent task, that will notify this task when new b
      * atch of entities will be ready to  
      */
-    Task(EntityManager& mgr, FnType fn, BatchSizeFnType bFn, TaskBase* upt = nullptr)
-        : TaskBase(mgr, upt), runFn(std::move(fn)), batchSizeFn(std::move(bFn)) {}
+    Task(EntityManager& mgr, FnType fn, BatchSizeFnType bFn,
+         std::launch lPolicy = std::launch::async | std::launch::deferred, TaskBase* upt = nullptr)
+        : TaskBase(mgr, lPolicy, upt),
+          runFn(std::move(fn)),
+          batchSizeFn(std::move(bFn)) {}
 
 
     /// Sets the subtask that will (always) run on a new thread next to this task
@@ -88,16 +88,16 @@ public:
      */
     template <typename... OtherCTypes, typename OtherFnType>
     decltype(auto)
-    setSubtask(OtherFnType fn)
+    setSubtask(OtherFnType fn, std::launch lPolicy = std::launch::async | std::launch::deferred)
     {
         if constexpr (sizeof...(OtherCTypes)) {
             static_assert(TuplePP<OtherCTypes...>::template containsType<CTypes...>());
             return static_cast<Task<OtherFnType, BatchSizeFnType, OtherCTypes...>&>(*(
-                subtask = std::make_unique<Task<OtherFnType, BatchSizeFnType, OtherCTypes...>>(mgr, std::move(fn), batchSizeFn, this)));
+                subtask = std::make_unique<Task<OtherFnType, BatchSizeFnType, OtherCTypes...>>(mgr, std::move(fn), batchSizeFn, lPolicy, this)));
         }
         else
             return static_cast<Task<OtherFnType, BatchSizeFnType, CTypes...>&>(*(
-                subtask = std::make_unique<Task<OtherFnType, BatchSizeFnType, CTypes...>>(mgr, std::move(fn), batchSizeFn, this)));
+                subtask = std::make_unique<Task<OtherFnType, BatchSizeFnType, CTypes...>>(mgr, std::move(fn), batchSizeFn, lPolicy, this)));
     }
 
     /// Runs the main task and the subtask (if set)
@@ -106,20 +106,19 @@ public:
      */
     virtual void run() override
     {
-        std::thread subThread;
-        JoinGuard jGuard(subThread);
+        std::future<void> subFt; // waits in the destructor for task to finish
         fence = Fence();
         mgr.updateSelection(select);
         if (subtask && subtask->updateAndCheckIfHasEntities())
-            subThread = std::thread(&TaskBase::run, subtask.get());
+            subFt = std::async(subtask->launchPolicy, &TaskBase::run, subtask.get());
 
         if (uptask) // is subtask
-            if (subThread.joinable())
+            if (subFt.valid())
                 _run<true, true>();
             else
                 _run<true, false>();
         else // is main task
-            if (subThread.joinable())
+            if (subFt.valid())
             _run<false, true>();
         else
             _run<false, false>();
@@ -205,7 +204,8 @@ public:
      * @returns Reference to the created task, which can be used to create subtasks
      */
     template <typename... CTypes, typename FnType, typename BatchSizeFnType = DefaultBatchSizeFn_t>
-    Task<FnType, BatchSizeFnType, CTypes...>& setTask(EntityManager& mgr, FnType fn, BatchSizeFnType batchSizeFn = DefBatchSizeFn)
+    Task<FnType, BatchSizeFnType, CTypes...>& setTask(EntityManager& mgr, FnType fn,
+                                                      BatchSizeFnType batchSizeFn = DefBatchSizeFn)
     {
         return static_cast<Task<FnType, BatchSizeFnType, CTypes...>&>(*(
             mainTask = std::make_unique<Task<FnType, BatchSizeFnType, CTypes...>>(mgr, std::move(fn), std::move(batchSizeFn))));

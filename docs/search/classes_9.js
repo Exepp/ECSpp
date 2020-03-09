@@ -1,25 +1,7 @@
 var searchData=
 [
-  ['selection_181',['Selection',['../classepp_1_1Selection.html',1,'epp']]],
-  ['selection_3c_20ctypes_2e_2e_2e_20_3e_182',['Selection&lt; CTypes... &gt;',['../classepp_1_1Selection.html',1,'epp']]],
-  ['selectionbase_183',['SelectionBase',['../structepp_1_1SelectionBase.html',1,'epp']]],
-  ['selectionbase_3c_20true_2c_20ctypes_2e_2e_2e_20_3e_184',['SelectionBase&lt; true, CTypes... &gt;',['../structepp_1_1SelectionBase_3_01true_00_01CTypes_8_8_8_01_4.html',1,'epp']]],
-  ['sizerimpl_185',['SizerImpl',['../unionepp_1_1llvm_1_1detail_1_1SizerImpl.html',1,'epp::llvm::detail']]],
-  ['sizerimpl_3c_20t_20_3e_186',['SizerImpl&lt; T &gt;',['../unionepp_1_1llvm_1_1detail_1_1SizerImpl_3_01T_01_4.html',1,'epp::llvm::detail']]],
-  ['smallvector_187',['SmallVector',['../classepp_1_1llvm_1_1SmallVector.html',1,'epp::llvm']]],
-  ['smallvector_3c_20cid_5ft_2c_208_20_3e_188',['SmallVector&lt; CId_t, 8 &gt;',['../classepp_1_1llvm_1_1SmallVector.html',1,'epp::llvm']]],
-  ['smallvectoralignmentandsize_189',['SmallVectorAlignmentAndSize',['../structepp_1_1llvm_1_1SmallVectorAlignmentAndSize.html',1,'epp::llvm']]],
-  ['smallvectorbase_190',['SmallVectorBase',['../classepp_1_1llvm_1_1SmallVectorBase.html',1,'epp::llvm']]],
-  ['smallvectorimpl_191',['SmallVectorImpl',['../classepp_1_1llvm_1_1SmallVectorImpl.html',1,'epp::llvm']]],
-  ['smallvectorimpl_3c_20cid_5ft_20_3e_192',['SmallVectorImpl&lt; CId_t &gt;',['../classepp_1_1llvm_1_1SmallVectorImpl.html',1,'epp::llvm']]],
-  ['smallvectorstorage_193',['SmallVectorStorage',['../structepp_1_1llvm_1_1SmallVectorStorage.html',1,'epp::llvm']]],
-  ['smallvectorstorage_3c_20cid_5ft_2c_20n_20_3e_194',['SmallVectorStorage&lt; CId_t, N &gt;',['../structepp_1_1llvm_1_1SmallVectorStorage.html',1,'epp::llvm']]],
-  ['smallvectorstorage_3c_20t_2c_200_20_3e_195',['SmallVectorStorage&lt; T, 0 &gt;',['../structepp_1_1llvm_1_1SmallVectorStorage_3_01T_00_010_01_4.html',1,'epp::llvm']]],
-  ['smallvectortemplatebase_196',['SmallVectorTemplateBase',['../classepp_1_1llvm_1_1SmallVectorTemplateBase.html',1,'epp::llvm']]],
-  ['smallvectortemplatebase_3c_20cid_5ft_20_3e_197',['SmallVectorTemplateBase&lt; CId_t &gt;',['../classepp_1_1llvm_1_1SmallVectorTemplateBase.html',1,'epp::llvm']]],
-  ['smallvectortemplatebase_3c_20t_20_3e_198',['SmallVectorTemplateBase&lt; T &gt;',['../classepp_1_1llvm_1_1SmallVectorTemplateBase.html',1,'epp::llvm']]],
-  ['smallvectortemplatebase_3c_20t_2c_20true_20_3e_199',['SmallVectorTemplateBase&lt; T, true &gt;',['../classepp_1_1llvm_1_1SmallVectorTemplateBase_3_01T_00_01true_01_4.html',1,'epp::llvm']]],
-  ['smallvectortemplatecommon_200',['SmallVectorTemplateCommon',['../classepp_1_1llvm_1_1SmallVectorTemplateCommon.html',1,'epp::llvm']]],
-  ['smallvectortemplatecommon_3c_20cid_5ft_20_3e_201',['SmallVectorTemplateCommon&lt; CId_t &gt;',['../classepp_1_1llvm_1_1SmallVectorTemplateCommon.html',1,'epp::llvm']]],
-  ['smallvectortemplatecommon_3c_20t_20_3e_202',['SmallVectorTemplateCommon&lt; T &gt;',['../classepp_1_1llvm_1_1SmallVectorTemplateCommon.html',1,'epp::llvm']]]
+  ['task_201',['Task',['../classepp_1_1Task.html',1,'epp']]],
+  ['taskbase_202',['TaskBase',['../classepp_1_1TaskBase.html',1,'epp']]],
+  ['tuplepp_203',['TuplePP',['../structepp_1_1TuplePP.html',1,'epp']]],
+  ['tuplepp_3c_20poolsptrs_5ft_3c_20ctypes_20_3e_2e_2e_2e_20_3e_204',['TuplePP&lt; PoolsPtrs_t&lt; CTypes &gt;... &gt;',['../structepp_1_1TuplePP.html',1,'epp']]]
 ];

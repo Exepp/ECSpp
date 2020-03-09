@@ -117,13 +117,10 @@ static void BM_EntitiesIteration(benchmark::State& state)
     epp::EntityManager mgr;
     epp::Archetype arch = makeArchetype<cNum>();
     auto sel = makeSelection<cNum>();
-    // epp::Selection<> sel;
     mgr.spawn(arch, state.range(0));
     mgr.updateSelection(sel);
     for (auto _ : state) {
-        // sel.forEach([](auto const& it) { assignComponents<cNum>(it); });
         for (auto it = sel.begin(), end = sel.end(); it != end; ++it)
-            // assignComponents<cNum>(mgr, *it);
             assignComponents<cNum>(it);
     }
 }
@@ -205,14 +202,14 @@ static void BM_EntitiesIterationReal(benchmark::State& state)
 }
 
 template <int cNum>
-static void BM_AddComponents(benchmark::State& state)
+static void BM_Add2Components(benchmark::State& state)
 {
     static NewLine nl;
 
     epp::EntityManager mgr;
-    epp::Archetype archMissing = makeArchetype<2>();
+    epp::Archetype archMissing = makeArchetype<cNum>();
     epp::Archetype archFull = makeArchetype<2 + cNum>();
-    auto sel = makeSelection<2>();
+    auto sel = makeSelection<cNum>();
 
     mgr.spawn(archMissing, state.range(0));
     mgr.updateSelection(sel);
@@ -223,13 +220,13 @@ static void BM_AddComponents(benchmark::State& state)
 }
 
 template <int cNum>
-static void BM_RemoveComponents(benchmark::State& state)
+static void BM_Remove2Components(benchmark::State& state)
 {
     static NewLine nl;
 
     epp::EntityManager mgr;
     epp::Archetype archFull = makeArchetype<2 + cNum>();
-    epp::Archetype archMissing = makeArchetype<2>();
+    epp::Archetype archMissing = makeArchetype<cNum>();
     auto sel = makeSelection<2 + cNum>();
 
     mgr.spawn(archFull, state.range(0));
@@ -240,13 +237,19 @@ static void BM_RemoveComponents(benchmark::State& state)
 }
 
 
-#define MYBENCHMARK_TEMPLATE(name, iters, reps, shortReport, ...) BENCHMARK_TEMPLATE(name, __VA_ARGS__) \
-                                                                      ->Range(1e6, 1e6)                 \
-                                                                      ->Iterations(iters)               \
-                                                                      ->Repetitions(reps)               \
-                                                                      ->ReportAggregatesOnly(shortReport);
+#define MYBENCHMARK_TEMPLATE(name, iters, reps, shortReport, ...) \
+    BENCHMARK_TEMPLATE(name, __VA_ARGS__)                         \
+        ->Range(4096, 1024 * 512)                                 \
+        ->DenseRange(1024 * 512 + 65536, 1024 * 1024, 65536)      \
+        ->Iterations(iters)                                       \
+        ->Repetitions(reps)                                       \
+        ->ReportAggregatesOnly(shortReport);
 
-#define MYBENCHMARK_TEMPLATE_N(name, iters, reps) MYBENCHMARK_TEMPLATE(name, iters, reps, true, 1)
+#define MYBENCHMARK_TEMPLATE_N(name, iters, reps)    \
+    MYBENCHMARK_TEMPLATE(name, iters, reps, true, 1) \
+    MYBENCHMARK_TEMPLATE(name, iters, reps, true, 2) \
+    MYBENCHMARK_TEMPLATE(name, iters, reps, true, 3) \
+    MYBENCHMARK_TEMPLATE(name, iters, reps, true, 6)
 
 constexpr static std::size_t const ITERS = 100;
 constexpr static std::size_t const REPS = 10;
@@ -256,8 +259,8 @@ MYBENCHMARK_TEMPLATE_N(BM_EntitiesSequentialCreationReserved, 1, ITERS)
 MYBENCHMARK_TEMPLATE_N(BM_EntitiesAtOnceCreation, 1, ITERS)
 MYBENCHMARK_TEMPLATE_N(BM_EntitiesSequentialDestroy, 1, ITERS)
 MYBENCHMARK_TEMPLATE_N(BM_EntitiesAtOnceDestroy, 1, ITERS)
-MYBENCHMARK_TEMPLATE_N(BM_AddComponents, 1, ITERS)
-MYBENCHMARK_TEMPLATE_N(BM_RemoveComponents, 1, ITERS)
+MYBENCHMARK_TEMPLATE_N(BM_Add2Components, 1, ITERS)
+// MYBENCHMARK_TEMPLATE_N(BM_Remove2Components, 1, ITERS)
 MYBENCHMARK_TEMPLATE_N(BM_EntitiesIteration, ITERS, REPS)
 MYBENCHMARK_TEMPLATE_N(BM_EntitiesIterationHalf, ITERS, REPS)
 MYBENCHMARK_TEMPLATE_N(BM_EntitiesIterationOneOfMany, ITERS, REPS)

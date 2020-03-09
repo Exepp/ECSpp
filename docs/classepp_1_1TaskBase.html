@@ -92,9 +92,9 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a50971c005f544f785e1e4795e57e29c3"><td class="memItemLeft" align="right" valign="top"><a id="a50971c005f544f785e1e4795e57e29c3"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>TaskBase</b> (<a class="el" href="classepp_1_1EntityManager.html">EntityManager</a> &amp;mgrRef, <a class="el" href="classepp_1_1TaskBase.html">TaskBase</a> *upt=nullptr)</td></tr>
-<tr class="separator:a50971c005f544f785e1e4795e57e29c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb03d300d79fca243e661333eda0ad51"><td class="memItemLeft" align="right" valign="top"><a id="abb03d300d79fca243e661333eda0ad51"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>TaskBase</b> (<a class="el" href="classepp_1_1EntityManager.html">EntityManager</a> &amp;mgrRef, std::launch lPolicy, <a class="el" href="classepp_1_1TaskBase.html">TaskBase</a> *upt)</td></tr>
+<tr class="separator:abb03d300d79fca243e661333eda0ad51"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2a94aad15d9bdd5e2724cf81bf2072c3"><td class="memItemLeft" align="right" valign="top"><a id="a2a94aad15d9bdd5e2724cf81bf2072c3"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>run</b> ()=0</td></tr>
 <tr class="separator:a2a94aad15d9bdd5e2724cf81bf2072c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -104,6 +104,9 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>updateAndChec
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
+<tr class="memitem:a6fb1a51937ab00c318f293d2ddb75036"><td class="memItemLeft" align="right" valign="top"><a id="a6fb1a51937ab00c318f293d2ddb75036"></a>
+<a class="el" href="classepp_1_1EntityManager.html">EntityManager</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>mgr</b></td></tr>
+<tr class="separator:a6fb1a51937ab00c318f293d2ddb75036"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aba2250ac2745b356ccdd94f90057b9b7"><td class="memItemLeft" align="right" valign="top"><a id="aba2250ac2745b356ccdd94f90057b9b7"></a>
 <a class="el" href="structepp_1_1TaskBase_1_1Fence.html">Fence</a>&#160;</td><td class="memItemRight" valign="bottom"><b>fence</b></td></tr>
 <tr class="separator:aba2250ac2745b356ccdd94f90057b9b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -113,15 +116,15 @@ std::mutex&#160;</td><td class="memItemRight" valign="bottom"><b>mutex</b></td><
 <tr class="memitem:a33690fdcd164c6f1d84a6f2642e09524"><td class="memItemLeft" align="right" valign="top"><a id="a33690fdcd164c6f1d84a6f2642e09524"></a>
 std::condition_variable&#160;</td><td class="memItemRight" valign="bottom"><b>condVar</b></td></tr>
 <tr class="separator:a33690fdcd164c6f1d84a6f2642e09524"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11a9a234dcf826c499682a107a4855d2"><td class="memItemLeft" align="right" valign="top"><a id="a11a9a234dcf826c499682a107a4855d2"></a>
+std::launch&#160;</td><td class="memItemRight" valign="bottom"><b>launchPolicy</b></td></tr>
+<tr class="separator:a11a9a234dcf826c499682a107a4855d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acbd42641d122eeee3c8d816df0f6e31f"><td class="memItemLeft" align="right" valign="top"><a id="acbd42641d122eeee3c8d816df0f6e31f"></a>
 <a class="el" href="classepp_1_1TaskBase.html">TaskBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>uptask</b> = nullptr</td></tr>
 <tr class="separator:acbd42641d122eeee3c8d816df0f6e31f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad69203742ebc9572f11368f2a8c96ae8"><td class="memItemLeft" align="right" valign="top"><a id="ad69203742ebc9572f11368f2a8c96ae8"></a>
 std::unique_ptr&lt; <a class="el" href="classepp_1_1TaskBase.html">TaskBase</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>subtask</b></td></tr>
 <tr class="separator:ad69203742ebc9572f11368f2a8c96ae8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6fb1a51937ab00c318f293d2ddb75036"><td class="memItemLeft" align="right" valign="top"><a id="a6fb1a51937ab00c318f293d2ddb75036"></a>
-<a class="el" href="classepp_1_1EntityManager.html">EntityManager</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>mgr</b></td></tr>
-<tr class="separator:a6fb1a51937ab00c318f293d2ddb75036"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>include/ECSpp/internal/<a class="el" href="Pipeline_8h_source.html">Pipeline.h</a></li>
