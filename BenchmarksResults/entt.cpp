@@ -251,12 +251,11 @@ static void BM_Add2Components(benchmark::State& state)
     }
 }
 
-#define MYBENCHMARK_TEMPLATE(name, iters, reps, shortReport, ...) \
-    BENCHMARK_TEMPLATE(name, __VA_ARGS__)                         \
-        ->Range(4096, 1024 * 512)                                 \
-        ->DenseRange(1024 * 512 + 65536, 1024 * 1024, 65536)      \
-        ->Iterations(iters)                                       \
-        ->Repetitions(reps)                                       \
+#define MYBENCHMARK_TEMPLATE(name, iters, reps, shortReport, ...)     \
+    BENCHMARK_TEMPLATE(name, __VA_ARGS__)                             \
+        ->DenseRange(1024 * 1024 / 16, 1024 * 1024, 1024 * 1024 / 16) \
+        ->Iterations(iters)                                           \
+        ->Repetitions(reps)                                           \
         ->ReportAggregatesOnly(shortReport);
 
 #define MYBENCHMARK_TEMPLATE_N(name, iters, reps)    \

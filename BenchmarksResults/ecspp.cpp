@@ -237,12 +237,11 @@ static void BM_Remove2Components(benchmark::State& state)
 }
 
 
-#define MYBENCHMARK_TEMPLATE(name, iters, reps, shortReport, ...) \
-    BENCHMARK_TEMPLATE(name, __VA_ARGS__)                         \
-        ->Range(4096, 1024 * 512)                                 \
-        ->DenseRange(1024 * 512 + 65536, 1024 * 1024, 65536)      \
-        ->Iterations(iters)                                       \
-        ->Repetitions(reps)                                       \
+#define MYBENCHMARK_TEMPLATE(name, iters, reps, shortReport, ...)     \
+    BENCHMARK_TEMPLATE(name, __VA_ARGS__)                             \
+        ->DenseRange(1024 * 1024 / 16, 1024 * 1024, 1024 * 1024 / 16) \
+        ->Iterations(iters)                                           \
+        ->Repetitions(reps)                                           \
         ->ReportAggregatesOnly(shortReport);
 
 #define MYBENCHMARK_TEMPLATE_N(name, iters, reps)    \
@@ -251,8 +250,8 @@ static void BM_Remove2Components(benchmark::State& state)
     MYBENCHMARK_TEMPLATE(name, iters, reps, true, 3) \
     MYBENCHMARK_TEMPLATE(name, iters, reps, true, 6)
 
-constexpr static std::size_t const ITERS = 1;
-constexpr static std::size_t const REPS = 1;
+constexpr static std::size_t const ITERS = 100;
+constexpr static std::size_t const REPS = 10;
 
 MYBENCHMARK_TEMPLATE_N(BM_EntitiesSequentialCreation, 1, ITERS)
 MYBENCHMARK_TEMPLATE_N(BM_EntitiesSequentialCreationReserved, 1, ITERS)
