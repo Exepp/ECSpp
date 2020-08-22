@@ -117,7 +117,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="separator:abab1ecfe886db174d399739f6b9f5341"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3bae854150aece1c1f3677372febe0fc"><td class="memTemplParams" colspan="2">template&lt;typename... CTypes&gt; </td></tr>
 <tr class="memitem:a3bae854150aece1c1f3677372febe0fc"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classepp_1_1EntityManager.html#a3bae854150aece1c1f3677372febe0fc">updateSelection</a> (<a class="el" href="classepp_1_1Selection.html">Selection</a>&lt; CTypes... &gt; &amp;selection)</td></tr>
-<tr class="memdesc:a3bae854150aece1c1f3677372febe0fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates selection so that its iterators can reach entities of the archetypes that were not present in its last update.  <a href="classepp_1_1EntityManager.html#a3bae854150aece1c1f3677372febe0fc">More...</a><br /></td></tr>
+<tr class="memdesc:a3bae854150aece1c1f3677372febe0fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates selection so that forEach member function can reach entities of the archetypes that were not present in its last update.  <a href="classepp_1_1EntityManager.html#a3bae854150aece1c1f3677372febe0fc">More...</a><br /></td></tr>
 <tr class="separator:a3bae854150aece1c1f3677372febe0fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa69eb832ee3fc2f2149db5d98d8bf4d9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structepp_1_1EntityList_1_1Cell_1_1Occupied.html">EntityList::Cell::Occupied</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1EntityManager.html#aa69eb832ee3fc2f2149db5d98d8bf4d9">cellOf</a> (<a class="el" href="structepp_1_1Entity.html">Entity</a> ent) const</td></tr>
 <tr class="memdesc:aa69eb832ee3fc2f2149db5d98d8bf4d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns an internal data that describes the location of a given entity.  <a href="classepp_1_1EntityManager.html#aa69eb832ee3fc2f2149db5d98d8bf4d9">More...</a><br /></td></tr>
@@ -269,7 +269,7 @@ static auto&#160;</td><td class="memItemRight" valign="bottom"><b>DefCreationFn<
 </div><div class="memdoc">
 
 <p>Returns an internal data that describes the location of a given entity. </p>
-<p>This data can be used with selections' iterators </p><dl class="params"><dt>Parameters</dt><dd>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ent</td><td>Valid entity </td></tr>
   </table>
@@ -964,7 +964,7 @@ template&lt;typename... CTypes&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Updates selection so that its iterators can reach entities of the archetypes that were not present in its last update. </p>
+<p>Updates selection so that forEach member function can reach entities of the archetypes that were not present in its last update. </p>
 <p>Complexity: O(n), where n is a number of new (for that selection) archetypes used </p><dl class="section warning"><dt>Warning</dt><dd>Once selection has been updated in one <a class="el" href="classepp_1_1EntityManager.html">EntityManager</a> it musn't be updated in any other <a class="el" href="classepp_1_1EntityManager.html">EntityManager</a> </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">

@@ -115,7 +115,7 @@ public:
     void shrinkToFit();
 
 
-    /// Updates selection so that its iterators can reach entities of the archetypes that were not present in its last update
+    /// Updates selection so that forEach member function can reach entities of the archetypes that were not present in its last update
     /** 
      * Complexity: O(n), where n is a number of new (for that selection) archetypes used
      * @warning Once selection has been updated in one EntityManager it musn't be updated in any other EntityManager
@@ -128,7 +128,6 @@ public:
 
     /// Returns an internal data that describes the location of a given entity
     /** 
-     * This data can be used with selections' iterators
      * @param ent Valid entity
      * @returns Default-constructed cell for invalid
      * @throws (Debug only) Throws the AssertionFailed exception if ent is invalid

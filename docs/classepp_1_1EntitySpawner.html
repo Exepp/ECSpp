@@ -83,7 +83,7 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classepp_1_1EntitySpawner_1_1Creator.html">Creator</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classepp_1_1EntitySpawner_1_1Creator.html" title="Creator is responsible for easy components initialization owned by some entity.">Creator</a> is responsible for easy components initialization owned by some entity.  <a href="classepp_1_1EntitySpawner_1_1Creator.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classepp_1_1EntitySpawner_1_1Creator.html" title="Creator is responsible for easy initialization of components owned by some entity.">Creator</a> is responsible for easy initialization of components owned by some entity.  <a href="classepp_1_1EntitySpawner_1_1Creator.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
@@ -553,7 +553,7 @@ template&lt;typename FnType &gt; </div>
 
 <p>Changes the archetype of a given entity. </p>
 <p>Components that are not present in this spawner's archetype are destroyed</p>
-<p>Components that are not present in originSpawner's archetype but are present in this spawner's archetype are allocated and can be constructed for the first time with <a class="el" href="classepp_1_1EntitySpawner_1_1Creator.html" title="Creator is responsible for easy components initialization owned by some entity.">Creator</a> <br  />
+<p>Components that are not present in originSpawner's archetype but are present in this spawner's archetype are allocated and can be constructed for the first time with <a class="el" href="classepp_1_1EntitySpawner_1_1Creator.html" title="Creator is responsible for easy initialization of components owned by some entity.">Creator</a> <br  />
  </p><dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">FnType</td><td>Callable type that takes r-value reference to the EntityCreator </td></tr>
@@ -565,7 +565,7 @@ template&lt;typename FnType &gt; </div>
     <tr><td class="paramname">ent</td><td>A valid entity </td></tr>
     <tr><td class="paramname">entList</td><td>List of entities to change the location data of ent </td></tr>
     <tr><td class="paramname">originSpawner</td><td>any OTHER spawner that owns entity </td></tr>
-    <tr><td class="paramname">fn</td><td>A Callable type that can use the <a class="el" href="classepp_1_1EntitySpawner_1_1Creator.html" title="Creator is responsible for easy components initialization owned by some entity.">Creator</a> instance to construct new components </td></tr>
+    <tr><td class="paramname">fn</td><td>A Callable type that can use the <a class="el" href="classepp_1_1EntitySpawner_1_1Creator.html" title="Creator is responsible for easy initialization of components owned by some entity.">Creator</a> instance to construct new components </td></tr>
   </table>
   </dd>
 </dl>
@@ -625,7 +625,7 @@ template&lt;typename FnType &gt; </div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">entList</td><td>List of entities to get a unique <a class="el" href="structepp_1_1Entity.html" title="A unique key used to distinguish created entities.">Entity</a> instance from </td></tr>
-    <tr><td class="paramname">fn</td><td>A Callable type that can use the <a class="el" href="classepp_1_1EntitySpawner_1_1Creator.html" title="Creator is responsible for easy components initialization owned by some entity.">Creator</a> instance to construct the components of the spawned entity </td></tr>
+    <tr><td class="paramname">fn</td><td>A Callable type that can use the <a class="el" href="classepp_1_1EntitySpawner_1_1Creator.html" title="Creator is responsible for easy initialization of components owned by some entity.">Creator</a> instance to construct the components of the spawned entity </td></tr>
   </table>
   </dd>
 </dl>
