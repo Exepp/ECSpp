@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <title>Head</title>
   <style media="screen" type="text/css">
-  
+
     body
     {
       color: #000000;
@@ -275,7 +275,7 @@
           </tr>
           <tr>
             <td class="headerName">Date:</td>
-            <td class="headerValue">2020-03-09 02:12:46</td>
+            <td class="headerValue">2020-08-22 22:38:55</td>
             <td></td>
             <td class="headerName">Branches:</td>
             <td class="headerTableEntry">25</td>
@@ -298,7 +298,7 @@
       <td width="75%" align="left" class="srcHeader src">Source</td>
     </tr>
 
-    
+
     <tr>
     <td align="right" class="lineno"><pre>1</pre></td>
     <td align="right" class="linebranch"></td>
@@ -324,14 +324,14 @@
     <td align="right" class="lineno"><pre>4</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>#include &lt;ECSpp/Component.h&gt;</pre></td>
+    <td align="left" class="src "><pre>#include &lt;ECSpp/Component.h></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>5</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>#include &lt;ECSpp/internal/utility/Pool.h&gt;</pre></td>
+    <td align="left" class="src "><pre>#include &lt;ECSpp/internal/utility/Pool.h></pre></td>
     </tr>
 
     <tr>
@@ -687,7 +687,7 @@
     <tr>
     <td align="right" class="lineno"><pre>56</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>260</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>187</pre></td>
     <td align="left" class="src coveredLine"><pre>    ~CPool() { reserve(0); }</pre></td>
     </tr>
 
@@ -1359,7 +1359,7 @@
     <tr>
     <td align="right" class="lineno"><pre>152</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>3045444</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>2948572</pre></td>
     <td align="left" class="src coveredLine"><pre>    ComponentId getCId() const { return metadata.cId; }</pre></td>
     </tr>
 
@@ -1387,7 +1387,7 @@
     <tr>
     <td align="right" class="lineno"><pre>156</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>122961</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>4656</pre></td>
     <td align="left" class="src coveredLine"><pre>    std::size_t size() const { return dataUsed; }</pre></td>
     </tr>
 
@@ -1436,7 +1436,7 @@
     <tr>
     <td align="right" class="lineno"><pre>163</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>3695447</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>3276833</pre></td>
     <td align="left" class="src coveredLine"><pre>    void* addressAtIdx(Idx_t idx) const { return addressAtIdx(data, idx); }</pre></td>
     </tr>
 
@@ -1450,8 +1450,8 @@
     <tr>
     <td align="right" class="lineno"><pre>165</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>4070814</pre></td>
-    <td align="left" class="src coveredLine"><pre>    void* addressAtIdx(void* base, Idx_t idx) const { return reinterpret_cast&lt;void*&gt;(static_cast&lt;std::uint8_t*&gt;(base) + metadata.size * std::uintptr_t(idx)); }</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>3582384</pre></td>
+    <td align="left" class="src coveredLine"><pre>    void* addressAtIdx(void* base, Idx_t idx) const { return reinterpret_cast&lt;void*>(static_cast&lt;std::uint8_t*>(base) + metadata.size * std::uintptr_t(idx)); }</pre></td>
     </tr>
 
     <tr>
@@ -1520,7 +1520,7 @@
     <tr>
     <td align="right" class="lineno"><pre>175</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>126</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>94</pre></td>
     <td align="left" class="src coveredLine"><pre>inline CPool::CPool(ComponentId cid) : metadata(CMetadata::GetData(cid)) {}</pre></td>
     </tr>
 
@@ -1534,35 +1534,35 @@
     <tr>
     <td align="right" class="lineno"><pre>177</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>134</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>93</pre></td>
     <td align="left" class="src coveredLine"><pre>inline CPool::CPool(CPool&amp;&amp; rval)</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>178</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>134</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>93</pre></td>
     <td align="left" class="src coveredLine"><pre>    : data(rval.data),</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>179</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>134</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>93</pre></td>
     <td align="left" class="src coveredLine"><pre>      reserved(rval.reserved),</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>180</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>134</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>93</pre></td>
     <td align="left" class="src coveredLine"><pre>      dataUsed(rval.dataUsed),</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>181</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>402</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>93</pre></td>
     <td align="left" class="src coveredLine"><pre>      metadata(rval.metadata)</pre></td>
     </tr>
 
@@ -1576,28 +1576,28 @@
     <tr>
     <td align="right" class="lineno"><pre>183</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>134</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>93</pre></td>
     <td align="left" class="src coveredLine"><pre>    rval.data = nullptr;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>184</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>134</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>93</pre></td>
     <td align="left" class="src coveredLine"><pre>    rval.reserved = 0;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>185</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>134</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>93</pre></td>
     <td align="left" class="src coveredLine"><pre>    rval.dataUsed = 0;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>186</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>134</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>93</pre></td>
     <td align="left" class="src coveredLine"><pre>}</pre></td>
     </tr>
 
@@ -1611,7 +1611,7 @@
     <tr>
     <td align="right" class="lineno"><pre>188</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>72</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>50</pre></td>
     <td align="left" class="src coveredLine"><pre>inline CPool&amp; CPool::operator=(CPool&amp;&amp; rval)</pre></td>
     </tr>
 
@@ -1625,14 +1625,14 @@
     <tr>
     <td align="right" class="lineno"><pre>190</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>72</pre></td>
-    <td align="left" class="src coveredLine"><pre>    this-&gt;~CPool();</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>50</pre></td>
+    <td align="left" class="src coveredLine"><pre>    this->~CPool();</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>191</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>72</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>50</pre></td>
     <td align="left" class="src coveredLine"><pre>    return *(new (this) CPool(std::move(rval)));</pre></td>
     </tr>
 
@@ -1653,7 +1653,7 @@
     <tr>
     <td align="right" class="lineno"><pre>194</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>585776</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>539353</pre></td>
     <td align="left" class="src coveredLine"><pre>inline void* CPool::alloc()</pre></td>
     </tr>
 
@@ -1666,22 +1666,22 @@
 
     <tr>
     <td align="right" class="lineno"><pre>196</pre></td>
-    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 703 times">&check;</span><span class="takenBranch" title="Branch 1 taken 585073 times">&check;</span></td>
-    <td align="right" class="linecount coveredLine"><pre>585776</pre></td>
-    <td align="left" class="src coveredLine"><pre>    if (dataUsed &gt;= reserved)</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 504 times">&check;</span><span class="takenBranch" title="Branch 1 taken 538849 times">&check;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>539353</pre></td>
+    <td align="left" class="src coveredLine"><pre>    if (dataUsed >= reserved)</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>197</pre></td>
-    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 603 times">&check;</span><span class="takenBranch" title="Branch 1 taken 100 times">&check;</span></td>
-    <td align="right" class="linecount coveredLine"><pre>703</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 436 times">&check;</span><span class="takenBranch" title="Branch 1 taken 68 times">&check;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>504</pre></td>
     <td align="left" class="src coveredLine"><pre>        fitNextN(reserved ? reserved : 4); // 4 as first size</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>198</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>585776</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>539353</pre></td>
     <td align="left" class="src coveredLine"><pre>    return addressAtIdx(dataUsed++);       // post-inc here</pre></td>
     </tr>
 
@@ -1772,7 +1772,7 @@
     <tr>
     <td align="right" class="lineno"><pre>211</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>401566</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>365260</pre></td>
     <td align="left" class="src coveredLine"><pre>inline void CPool::construct(Idx_t idx)</pre></td>
     </tr>
 
@@ -1785,22 +1785,22 @@
 
     <tr>
     <td align="right" class="lineno"><pre>213</pre></td>
-    <td align="right" class="linebranch"><span class="notTakenBranch" title="Branch 0 not taken">&cross;</span><span class="takenBranch" title="Branch 1 taken 401566 times">&check;</span><span class="notTakenBranch" title="Branch 4 not taken">&cross;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 8 not taken">&cross;</span><span class="notTakenBranch" title="Branch 9 not taken">&cross;</span><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><span class="notTakenBranch" title="Branch 12 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 14 not taken">&cross;</span><span class="notTakenBranch" title="Branch 15 not taken">&cross;</span><span class="notTakenBranch" title="Branch 17 not taken">&cross;</span><span class="notTakenBranch" title="Branch 18 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 20 not taken">&cross;</span><span class="notTakenBranch" title="Branch 21 not taken">&cross;</span><span class="notTakenBranch" title="Branch 23 not taken">&cross;</span><span class="notTakenBranch" title="Branch 24 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 26 not taken">&cross;</span><span class="notTakenBranch" title="Branch 27 not taken">&cross;</span></td>
-    <td align="right" class="linecount coveredLine"><pre>401566</pre></td>
+    <td align="right" class="linebranch"><span class="notTakenBranch" title="Branch 0 not taken">&cross;</span><span class="takenBranch" title="Branch 1 taken 365260 times">&check;</span><span class="notTakenBranch" title="Branch 4 not taken">&cross;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 8 not taken">&cross;</span><span class="notTakenBranch" title="Branch 9 not taken">&cross;</span><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><span class="notTakenBranch" title="Branch 12 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 14 not taken">&cross;</span><span class="notTakenBranch" title="Branch 15 not taken">&cross;</span><span class="notTakenBranch" title="Branch 17 not taken">&cross;</span><span class="notTakenBranch" title="Branch 18 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 20 not taken">&cross;</span><span class="notTakenBranch" title="Branch 21 not taken">&cross;</span><span class="notTakenBranch" title="Branch 23 not taken">&cross;</span><span class="notTakenBranch" title="Branch 24 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 26 not taken">&cross;</span><span class="notTakenBranch" title="Branch 27 not taken">&cross;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>365260</pre></td>
     <td align="left" class="src coveredLine"><pre>    EPP_ASSERT(idx &lt; dataUsed);</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>214</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>401566</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>365260</pre></td>
     <td align="left" class="src coveredLine"><pre>    metadata.defaultConstructor(addressAtIdx(idx));</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>215</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>401566</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>365260</pre></td>
     <td align="left" class="src coveredLine"><pre>}</pre></td>
     </tr>
 
@@ -1814,7 +1814,7 @@
     <tr>
     <td align="right" class="lineno"><pre>217</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>214593</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>176412</pre></td>
     <td align="left" class="src coveredLine"><pre>inline void CPool::construct(Idx_t idx, void* rValComp)</pre></td>
     </tr>
 
@@ -1827,22 +1827,22 @@
 
     <tr>
     <td align="right" class="lineno"><pre>219</pre></td>
-    <td align="right" class="linebranch"><span class="notTakenBranch" title="Branch 0 not taken">&cross;</span><span class="takenBranch" title="Branch 1 taken 214593 times">&check;</span><span class="notTakenBranch" title="Branch 4 not taken">&cross;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 8 not taken">&cross;</span><span class="notTakenBranch" title="Branch 9 not taken">&cross;</span><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><span class="notTakenBranch" title="Branch 12 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 14 not taken">&cross;</span><span class="notTakenBranch" title="Branch 15 not taken">&cross;</span><span class="notTakenBranch" title="Branch 17 not taken">&cross;</span><span class="notTakenBranch" title="Branch 18 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 20 not taken">&cross;</span><span class="notTakenBranch" title="Branch 21 not taken">&cross;</span><span class="notTakenBranch" title="Branch 23 not taken">&cross;</span><span class="notTakenBranch" title="Branch 24 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 26 not taken">&cross;</span><span class="notTakenBranch" title="Branch 27 not taken">&cross;</span></td>
-    <td align="right" class="linecount coveredLine"><pre>214593</pre></td>
+    <td align="right" class="linebranch"><span class="notTakenBranch" title="Branch 0 not taken">&cross;</span><span class="takenBranch" title="Branch 1 taken 176412 times">&check;</span><span class="notTakenBranch" title="Branch 4 not taken">&cross;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 8 not taken">&cross;</span><span class="notTakenBranch" title="Branch 9 not taken">&cross;</span><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><span class="notTakenBranch" title="Branch 12 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 14 not taken">&cross;</span><span class="notTakenBranch" title="Branch 15 not taken">&cross;</span><span class="notTakenBranch" title="Branch 17 not taken">&cross;</span><span class="notTakenBranch" title="Branch 18 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 20 not taken">&cross;</span><span class="notTakenBranch" title="Branch 21 not taken">&cross;</span><span class="notTakenBranch" title="Branch 23 not taken">&cross;</span><span class="notTakenBranch" title="Branch 24 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 26 not taken">&cross;</span><span class="notTakenBranch" title="Branch 27 not taken">&cross;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>176412</pre></td>
     <td align="left" class="src coveredLine"><pre>    EPP_ASSERT(idx &lt; dataUsed);</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>220</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>214593</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>176412</pre></td>
     <td align="left" class="src coveredLine"><pre>    metadata.moveConstructor(addressAtIdx(idx), rValComp);</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>221</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>214593</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>176412</pre></td>
     <td align="left" class="src coveredLine"><pre>}</pre></td>
     </tr>
 
@@ -1856,7 +1856,7 @@
     <tr>
     <td align="right" class="lineno"><pre>223</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>235646</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>197455</pre></td>
     <td align="left" class="src coveredLine"><pre>inline bool CPool::destroy(Idx_t idx)</pre></td>
     </tr>
 
@@ -1869,8 +1869,8 @@
 
     <tr>
     <td align="right" class="lineno"><pre>225</pre></td>
-    <td align="right" class="linebranch"><span class="notTakenBranch" title="Branch 0 not taken">&cross;</span><span class="takenBranch" title="Branch 1 taken 235646 times">&check;</span><span class="notTakenBranch" title="Branch 4 not taken">&cross;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 8 not taken">&cross;</span><span class="notTakenBranch" title="Branch 9 not taken">&cross;</span><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><span class="notTakenBranch" title="Branch 12 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 14 not taken">&cross;</span><span class="notTakenBranch" title="Branch 15 not taken">&cross;</span><span class="notTakenBranch" title="Branch 17 not taken">&cross;</span><span class="notTakenBranch" title="Branch 18 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 20 not taken">&cross;</span><span class="notTakenBranch" title="Branch 21 not taken">&cross;</span><span class="notTakenBranch" title="Branch 23 not taken">&cross;</span><span class="notTakenBranch" title="Branch 24 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 26 not taken">&cross;</span><span class="notTakenBranch" title="Branch 27 not taken">&cross;</span></td>
-    <td align="right" class="linecount coveredLine"><pre>235646</pre></td>
+    <td align="right" class="linebranch"><span class="notTakenBranch" title="Branch 0 not taken">&cross;</span><span class="takenBranch" title="Branch 1 taken 197455 times">&check;</span><span class="notTakenBranch" title="Branch 4 not taken">&cross;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 8 not taken">&cross;</span><span class="notTakenBranch" title="Branch 9 not taken">&cross;</span><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><span class="notTakenBranch" title="Branch 12 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 14 not taken">&cross;</span><span class="notTakenBranch" title="Branch 15 not taken">&cross;</span><span class="notTakenBranch" title="Branch 17 not taken">&cross;</span><span class="notTakenBranch" title="Branch 18 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 20 not taken">&cross;</span><span class="notTakenBranch" title="Branch 21 not taken">&cross;</span><span class="notTakenBranch" title="Branch 23 not taken">&cross;</span><span class="notTakenBranch" title="Branch 24 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 26 not taken">&cross;</span><span class="notTakenBranch" title="Branch 27 not taken">&cross;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>197455</pre></td>
     <td align="left" class="src coveredLine"><pre>    EPP_ASSERT(idx &lt; dataUsed);</pre></td>
     </tr>
 
@@ -1884,28 +1884,28 @@
     <tr>
     <td align="right" class="lineno"><pre>227</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>235646</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>197455</pre></td>
     <td align="left" class="src coveredLine"><pre>    bool notLast = (idx + 1) &lt; dataUsed;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>228</pre></td>
-    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 157293 times">&check;</span><span class="takenBranch" title="Branch 1 taken 78353 times">&check;</span></td>
-    <td align="right" class="linecount coveredLine"><pre>235646</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 119112 times">&check;</span><span class="takenBranch" title="Branch 1 taken 78343 times">&check;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>197455</pre></td>
     <td align="left" class="src coveredLine"><pre>    if (notLast) {</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>229</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>157293</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>119112</pre></td>
     <td align="left" class="src coveredLine"><pre>        metadata.destructor(addressAtIdx(idx));</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>230</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>157293</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>119112</pre></td>
     <td align="left" class="src coveredLine"><pre>        construct(idx, addressAtIdx(dataUsed - 1));</pre></td>
     </tr>
 
@@ -1919,14 +1919,14 @@
     <tr>
     <td align="right" class="lineno"><pre>232</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>235646</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>197455</pre></td>
     <td align="left" class="src coveredLine"><pre>    metadata.destructor(addressAtIdx(--dataUsed)); // pre-dec here</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>233</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>235646</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>197455</pre></td>
     <td align="left" class="src coveredLine"><pre>    return notLast;</pre></td>
     </tr>
 
@@ -1947,7 +1947,7 @@
     <tr>
     <td align="right" class="lineno"><pre>236</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>751</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>552</pre></td>
     <td align="left" class="src coveredLine"><pre>inline void CPool::fitNextN(std::size_t n)</pre></td>
     </tr>
 
@@ -1961,14 +1961,14 @@
     <tr>
     <td align="right" class="lineno"><pre>238</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>751</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>552</pre></td>
     <td align="left" class="src coveredLine"><pre>    reserve(SizeToFitNextN(n, reserved, reserved - dataUsed));</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>239</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>751</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>552</pre></td>
     <td align="left" class="src coveredLine"><pre>}</pre></td>
     </tr>
 
@@ -1982,7 +1982,7 @@
     <tr>
     <td align="right" class="lineno"><pre>241</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>1022</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>750</pre></td>
     <td align="left" class="src coveredLine"><pre>inline void CPool::reserve(std::size_t newReserved)</pre></td>
     </tr>
 
@@ -1995,85 +1995,85 @@
 
     <tr>
     <td align="right" class="lineno"><pre>243</pre></td>
-    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 154 times">&check;</span><span class="takenBranch" title="Branch 1 taken 868 times">&check;</span></td>
-    <td align="right" class="linecount coveredLine"><pre>1022</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 113 times">&check;</span><span class="takenBranch" title="Branch 1 taken 637 times">&check;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>750</pre></td>
     <td align="left" class="src coveredLine"><pre>    if (newReserved == reserved)</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>244</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>154</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>113</pre></td>
     <td align="left" class="src coveredLine"><pre>        return;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>245</pre></td>
-    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 748 times">&check;</span><span class="takenBranch" title="Branch 1 taken 120 times">&check;</span></td>
-    <td align="right" class="linecount coveredLine"><pre>868</pre></td>
+    <td align="right" class="linebranch"></td>
+    <td align="right" class="linecount coveredLine"><pre>637</pre></td>
     <td align="left" class="src coveredLine"><pre>    void* newData = newReserved ? operator new[](metadata.size* newReserved, std::align_val_t(metadata.alignment))</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>246</pre></td>
-    <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>1736</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 549 times">&check;</span><span class="takenBranch" title="Branch 1 taken 88 times">&check;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>637</pre></td>
     <td align="left" class="src coveredLine"><pre>                                : nullptr;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>247</pre></td>
-    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 748 times">&check;</span><span class="takenBranch" title="Branch 1 taken 120 times">&check;</span></td>
-    <td align="right" class="linecount coveredLine"><pre>868</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 549 times">&check;</span><span class="takenBranch" title="Branch 1 taken 88 times">&check;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>637</pre></td>
     <td align="left" class="src coveredLine"><pre>    if (data) {</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>248</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>748</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>549</pre></td>
     <td align="left" class="src coveredLine"><pre>        auto toMove = std::min(newReserved, dataUsed);</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>249</pre></td>
-    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 374083 times">&check;</span><span class="takenBranch" title="Branch 1 taken 748 times">&check;</span></td>
-    <td align="right" class="linecount coveredLine"><pre>374831</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 305551 times">&check;</span><span class="takenBranch" title="Branch 1 taken 549 times">&check;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>306100</pre></td>
     <td align="left" class="src coveredLine"><pre>        for (Idx_t i = 0; i &lt; toMove; ++i)</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>250</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>374083</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>305551</pre></td>
     <td align="left" class="src coveredLine"><pre>            metadata.moveConstructor(addressAtIdx(newData, i), addressAtIdx(i));</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>251</pre></td>
-    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 725149 times">&check;</span><span class="takenBranch" title="Branch 1 taken 748 times">&check;</span></td>
-    <td align="right" class="linecount coveredLine"><pre>725897</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 648408 times">&check;</span><span class="takenBranch" title="Branch 1 taken 549 times">&check;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>648957</pre></td>
     <td align="left" class="src coveredLine"><pre>        for (Idx_t i = 0; i &lt; dataUsed; ++i)</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>252</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>725149</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>648408</pre></td>
     <td align="left" class="src coveredLine"><pre>            metadata.destructor(addressAtIdx(i));</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>253</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>748</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>549</pre></td>
     <td align="left" class="src coveredLine"><pre>        dataUsed = toMove;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>254</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>748</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>549</pre></td>
     <td align="left" class="src coveredLine"><pre>        operator delete[](data, std::align_val_t(metadata.alignment));</pre></td>
     </tr>
 
@@ -2087,14 +2087,14 @@
     <tr>
     <td align="right" class="lineno"><pre>256</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>868</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>637</pre></td>
     <td align="left" class="src coveredLine"><pre>    data = newData;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>257</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>868</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>637</pre></td>
     <td align="left" class="src coveredLine"><pre>    reserved = newReserved;</pre></td>
     </tr>
 
@@ -2115,7 +2115,7 @@
     <tr>
     <td align="right" class="lineno"><pre>260</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>34</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>22</pre></td>
     <td align="left" class="src coveredLine"><pre>inline void CPool::clear()</pre></td>
     </tr>
 
@@ -2128,29 +2128,29 @@
 
     <tr>
     <td align="right" class="lineno"><pre>262</pre></td>
-    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 64 times">&check;</span><span class="takenBranch" title="Branch 1 taken 34 times">&check;</span></td>
-    <td align="right" class="linecount coveredLine"><pre>98</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 41 times">&check;</span><span class="takenBranch" title="Branch 1 taken 22 times">&check;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>63</pre></td>
     <td align="left" class="src coveredLine"><pre>    for (Idx_t i = 0; i &lt; dataUsed; ++i)</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>263</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>64</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>41</pre></td>
     <td align="left" class="src coveredLine"><pre>        metadata.destructor(addressAtIdx(i));</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>264</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>34</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>22</pre></td>
     <td align="left" class="src coveredLine"><pre>    dataUsed = 0;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>265</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>34</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>22</pre></td>
     <td align="left" class="src coveredLine"><pre>}</pre></td>
     </tr>
 
@@ -2164,7 +2164,7 @@
     <tr>
     <td align="right" class="lineno"><pre>267</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>819818</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>782537</pre></td>
     <td align="left" class="src coveredLine"><pre>inline void* CPool::operator[](Idx_t idx)</pre></td>
     </tr>
 
@@ -2177,15 +2177,15 @@
 
     <tr>
     <td align="right" class="lineno"><pre>269</pre></td>
-    <td align="right" class="linebranch"><span class="notTakenBranch" title="Branch 0 not taken">&cross;</span><span class="takenBranch" title="Branch 1 taken 819818 times">&check;</span><span class="notTakenBranch" title="Branch 4 not taken">&cross;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 8 not taken">&cross;</span><span class="notTakenBranch" title="Branch 9 not taken">&cross;</span><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><span class="notTakenBranch" title="Branch 12 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 14 not taken">&cross;</span><span class="notTakenBranch" title="Branch 15 not taken">&cross;</span><span class="notTakenBranch" title="Branch 17 not taken">&cross;</span><span class="notTakenBranch" title="Branch 18 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 20 not taken">&cross;</span><span class="notTakenBranch" title="Branch 21 not taken">&cross;</span><span class="notTakenBranch" title="Branch 23 not taken">&cross;</span><span class="notTakenBranch" title="Branch 24 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 26 not taken">&cross;</span><span class="notTakenBranch" title="Branch 27 not taken">&cross;</span></td>
-    <td align="right" class="linecount coveredLine"><pre>819818</pre></td>
+    <td align="right" class="linebranch"><span class="notTakenBranch" title="Branch 0 not taken">&cross;</span><span class="takenBranch" title="Branch 1 taken 782537 times">&check;</span><span class="notTakenBranch" title="Branch 4 not taken">&cross;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 8 not taken">&cross;</span><span class="notTakenBranch" title="Branch 9 not taken">&cross;</span><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><span class="notTakenBranch" title="Branch 12 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 14 not taken">&cross;</span><span class="notTakenBranch" title="Branch 15 not taken">&cross;</span><span class="notTakenBranch" title="Branch 17 not taken">&cross;</span><span class="notTakenBranch" title="Branch 18 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 20 not taken">&cross;</span><span class="notTakenBranch" title="Branch 21 not taken">&cross;</span><span class="notTakenBranch" title="Branch 23 not taken">&cross;</span><span class="notTakenBranch" title="Branch 24 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 26 not taken">&cross;</span><span class="notTakenBranch" title="Branch 27 not taken">&cross;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>782537</pre></td>
     <td align="left" class="src coveredLine"><pre>    EPP_ASSERT(idx &lt; dataUsed)</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>270</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>819818</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>782537</pre></td>
     <td align="left" class="src coveredLine"><pre>    return addressAtIdx(idx);</pre></td>
     </tr>
 
@@ -2271,7 +2271,7 @@
 
   <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr><td class="hr"><td></tr>
-    <tr><td class="footer">Generated by: <a href="http://gcovr.com">GCOVR (Version 3.4)</a></td></tr>
+    <tr><td class="footer">Generated by: <a href="http://gcovr.com">GCOVR (Version 4.2)</a></td></tr>
   </table>
   <br>
 

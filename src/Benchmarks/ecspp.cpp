@@ -1,5 +1,4 @@
 #include <ECSpp/EntityManager.h>
-#include <ECSpp/internal/Pipeline.h>
 #include <benchmark/benchmark.h>
 
 
@@ -31,15 +30,6 @@ decltype(auto) makeSelection()
         return makeSelection<id - 1, id, ids...>();
     else
         return epp::Selection<comp<ids>...>();
-}
-
-template <int id, int... ids, typename It>
-inline void assignComponents(It& it)
-{
-    if constexpr (id != 0)
-        assignComponents<id - 1, id, ids...>(it);
-    else
-        ((it.template getComponent<comp<ids>>().x = {}), ...);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -93,7 +83,7 @@ static void BM_EntitiesSequentialDestroy(benchmark::State& state)
     auto& entities = mgr.entitiesOf(arch);
     for (auto _ : state)
         for (auto it = entities.data.begin(); it != entities.data.end();)
-            it = mgr.destroy(it);
+            mgr.destroy(*it);
 }
 
 template <int cNum>
@@ -120,8 +110,7 @@ static void BM_EntitiesIteration(benchmark::State& state)
     mgr.spawn(arch, state.range(0));
     mgr.updateSelection(sel);
     for (auto _ : state) {
-        for (auto it = sel.begin(), end = sel.end(); it != end; ++it)
-            assignComponents<cNum>(it);
+        sel.forEach([](epp::Entity ent, auto&... comps) { ((comps.x = {}), ...); });
     }
 }
 
@@ -142,8 +131,7 @@ static void BM_EntitiesIterationHalf(benchmark::State& state)
             mgr.spawn(archMissing);
     mgr.updateSelection(sel);
     for (auto _ : state)
-        for (auto it = sel.begin(), end = sel.end(); it != end; ++it)
-            assignComponents<cNum>(it);
+        sel.forEach([](epp::Entity ent, auto&... comps) { ((comps.x = {}), ...); });
 }
 
 template <int cNum>
@@ -161,8 +149,7 @@ static void BM_EntitiesIterationOneOfMany(benchmark::State& state)
     mgr.spawn(archMissing, state.range(0) / 2 - 1);
     mgr.updateSelection(sel);
     for (auto _ : state)
-        for (auto it = sel.begin(), end = sel.end(); it != end; ++it)
-            assignComponents<cNum>(it);
+        sel.forEach([](epp::Entity ent, auto&... comps) { ((comps.x = {}), ...); });
 }
 
 template <int cNum>
@@ -197,8 +184,7 @@ static void BM_EntitiesIterationReal(benchmark::State& state)
     auto sel = makeSelection<cNum>();
     mgr.updateSelection(sel);
     for (auto _ : state)
-        for (auto it = sel.begin(), end = sel.end(); it != end; ++it)
-            assignComponents<cNum>(it);
+        sel.forEach([](epp::Entity ent, auto&... comps) { ((comps.x = {}), ...); });
 }
 
 template <int cNum>
@@ -214,8 +200,7 @@ static void BM_Add2Components(benchmark::State& state)
     mgr.spawn(archMissing, state.range(0));
     mgr.updateSelection(sel);
     for (auto _ : state)
-        for (auto it = sel.begin(), end = sel.end(); it != end;)
-            it = mgr.changeArchetype(it, archFull);
+        sel.forEach([&](epp::Entity ent, auto&...) { return mgr.changeArchetype(ent, archFull); });
     // mgr.changeArchetype(archMissing, archFull, [](epp::EntityCreator&& creator) { creator.constructed<comp<4>>().y = 2 * creator.idx.value; });
 }
 
@@ -232,10 +217,8 @@ static void BM_Remove2Components(benchmark::State& state)
     mgr.spawn(archFull, state.range(0));
     mgr.updateSelection(sel);
     for (auto _ : state)
-        for (auto it = sel.begin(), end = sel.end(); it != end;)
-            it = mgr.changeArchetype(it, archMissing);
+        sel.forEach([&](epp::Entity ent, auto&... comps) { return mgr.changeArchetype(ent, archMissing); });
 }
-
 
 #define MYBENCHMARK_TEMPLATE(name, iters, reps, shortReport, ...)     \
     BENCHMARK_TEMPLATE(name, __VA_ARGS__)                             \
@@ -259,10 +242,8 @@ MYBENCHMARK_TEMPLATE_N(BM_EntitiesAtOnceCreation, 1, ITERS)
 MYBENCHMARK_TEMPLATE_N(BM_EntitiesSequentialDestroy, 1, ITERS)
 MYBENCHMARK_TEMPLATE_N(BM_EntitiesAtOnceDestroy, 1, ITERS)
 MYBENCHMARK_TEMPLATE_N(BM_Add2Components, 1, ITERS)
-// MYBENCHMARK_TEMPLATE_N(BM_Remove2Components, 1, ITERS)
+MYBENCHMARK_TEMPLATE_N(BM_Remove2Components, 1, ITERS)
 MYBENCHMARK_TEMPLATE_N(BM_EntitiesIteration, ITERS, REPS)
 MYBENCHMARK_TEMPLATE_N(BM_EntitiesIterationHalf, ITERS, REPS)
 MYBENCHMARK_TEMPLATE_N(BM_EntitiesIterationOneOfMany, ITERS, REPS)
 MYBENCHMARK_TEMPLATE_N(BM_EntitiesIterationReal, ITERS, REPS)
-
-BENCHMARK_MAIN();

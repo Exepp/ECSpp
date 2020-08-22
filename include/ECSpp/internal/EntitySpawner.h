@@ -9,10 +9,10 @@ namespace epp {
 
 class EntitySpawner {
 public:
-    /// Creator is responsible for easy components initialization owned by some entity
+    /// Creator is responsible for easy initialization of components owned by some entity
     /**
      * Instances of this class can only be created and destroyed in EntitySpawner functions, 
-     * because they construct unconstructed components in their destructor. So to ensure
+     * because they construct the unconstructed components in their destructor. So to ensure
      * that every component will be constructed after leaving the scope of EntitySpanwer::spawn function,
      * Creator has no public constructors or assignment operators (to prevent moving the instance out of the function's scope)
      */
@@ -20,9 +20,10 @@ public:
     public:
         /// Ensures that the returned component is constructed
         /** 
-         * Consecutive calls to "constructed" on already constructed components will only return the reference
+         * If not constructed, constructs a new component of type CType with arguments args. 
+         * Consecutive calls on already constructed components will only return the reference
          * @tparam CType Component type owned by the entity that is being constructed
-         * @tparam Args Types of arguments that will be forwarded
+         * @tparam Args Types of arguments that will be forwarded to the constructor
          * @param args Arguments forwarded to construct an unconstructed component
          * @returns A reference to the constructed component of type CType
          * @throws (Debug only) Throws the AssertionFailed exception if the entity that 
@@ -31,13 +32,26 @@ public:
         template <typename CType, typename... Args>
         CType& constructed(Args&&... args);
 
+
+        /** 
+         * @returns An entity which the creator is working on
+        */
+        Entity getEntity() const;
+
+
+        /** 
+         * @returns CMask which can be used to determine, which components can be constructed with 
+         * this creator (determined by the Archetype of an entity)
+        */
+        CMask const& getCMask() const;
+
     private:
         Creator(EntitySpawner& sp, PoolIdx index, CMask const& cstred = CMask());
         Creator(Creator&& rVal) = delete;
         Creator(Creator const&) = delete;
         Creator& operator=(Creator const&) = delete;
         Creator& operator=(Creator&&) = delete;
-        ~Creator(); /** constructs components that the user didnt construct himself */
+        ~Creator(); /** constructs components that the user didn't construct himself */
 
 
     private:
@@ -184,13 +198,24 @@ inline EntityCreator::Creator(EntitySpawner& sp, PoolIdx index, CMask const& cst
 template <typename CType, typename... Args>
 inline CType& EntityCreator::constructed(Args&&... args)
 {
-    EPP_ASSERT(spawner.mask.get(IdOf<CType>()));
+    EPP_ASSERT_M(spawner.mask.get(IdOf<CType>()), "The entity owns no component of this type");
     auto cId = IdOf<CType>();
     CType* component = static_cast<CType*>(spawner.getPool(cId)[idx.value]);
     if (constrMask.get(cId))
         return *component;
     constrMask.set(cId);
     return *(new (component) CType(std::forward<Args>(args)...));
+}
+
+
+inline Entity EntityCreator::getEntity() const
+{
+    return spawner.entityPool.data[idx.value];
+}
+
+inline CMask const& EntityCreator::getCMask() const
+{
+    return spawner.mask;
 }
 
 inline EntityCreator::~Creator()

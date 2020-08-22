@@ -195,7 +195,7 @@ TEST(EntityManager, ChangeArchetypeEntityDifference)
     TestEntityManager<TComp3, TComp1>(mgr, 1 + 1e4, archTo, {});
 }
 
-TEST(EntityManager, ChangeArchetypeSelectionIterator)
+TEST(EntityManager, ChangeArchetypeSelectionForEach)
 {
     EntityManager mgr;
     Archetype archFrom(IdOf<TComp3, TComp4>());
@@ -208,12 +208,10 @@ TEST(EntityManager, ChangeArchetypeSelectionIterator)
     mgr.updateSelection(sel1);
     ents = { beg1, end1 };
 
-    for (auto it = sel1.begin(), end = sel1.end(); it != end;)
-        it = mgr.changeArchetype(it, archFrom); // does nothing
+    sel1.forEach([&](Entity ent, auto&...) { return mgr.changeArchetype(ent, archFrom); });
     TestEntityManager<TComp3, TComp1>(mgr, 123, archFrom, ents, ents.front(), { 444, 44, 4 });
 
-    for (auto it = sel1.begin(), end = sel1.end(); it != end;)
-        it = mgr.changeArchetype(it, archTo);
+    sel1.forEach([&](Entity ent, auto&...) { return mgr.changeArchetype(ent, archTo); });
     std::reverse(ents.begin(), ents.end());
     ents.insert(ents.begin(), ents.back());
     ents.pop_back();
@@ -229,8 +227,9 @@ TEST(EntityManager, ChangeArchetypeSelectionIterator)
     TestEntityManager<TComp3, TComp1>(mgr, 123 + 1e4, archTo, ents, *(beg2 + 1e3 + 1), {});
 
     mgr.updateSelection(sel2);
-    for (auto it = sel2.begin(), end = sel2.end(); it != end;)
-        it = mgr.changeArchetype(it, archFrom);
+    sel2.forEach([&](Entity ent, auto&...) {
+        mgr.changeArchetype(ent, archFrom); 
+        return IterTimeChange::ArchetypeCurrent; });
     std::reverse(ents.begin(), ents.end());
     ents.insert(ents.begin(), ents.back());
     ents.pop_back();
@@ -245,18 +244,20 @@ TEST(EntityManager, ChangeArchetypeEntityPoolIterator)
     EntityManager mgr;
     Archetype archFrom(IdOf<TComp3, TComp4>());
     Archetype archTo(IdOf<TComp3, TComp2>());
-    std::vector<Entity> ents;
 
     auto [beg1, end1] = mgr.spawn(archFrom, 123, [](EntityCreator&& cr) { cr.constructed<TComp3>(TComp3::Arr_t{ 444, 44, 4 }); });
-    ents = { beg1, end1 };
+    std::vector<Entity> ents = { beg1, end1 }; // copy
 
     for (auto it = ents.begin(), end = ents.end(); it != end; ++it)
-        mgr.changeArchetype(it, archFrom); // does nothing
+        mgr.changeArchetype(*it, archFrom); // does nothing
     TestEntityManager<TComp3, TComp1>(mgr, 123, archFrom, ents, ents.front(), { 444, 44, 4 });
 
     for (auto it = ents.begin(), end = ents.end(); it != end; ++it)
-        mgr.changeArchetype(it, archTo);
+        mgr.changeArchetype(*it, archTo, [](EntityCreator&& creator) {
+            creator.constructed<TComp2>(TComp2::Arr_t{ 123, 99, 22 });
+        });
     TestEntityManager<TComp3, TComp1>(mgr, 123, archFrom, {});
+    TestEntityManager<TComp2, TComp1>(mgr, 123, archTo, ents, ents.front(), { 123, 99, 22 });
     TestEntityManager<TComp3, TComp1>(mgr, 123, archTo, ents, ents.front(), { 444, 44, 4 });
 
     int cnt = 0;
@@ -268,14 +269,14 @@ TEST(EntityManager, ChangeArchetypeEntityPoolIterator)
     TestEntityManager<TComp3, TComp1>(mgr, 123 + 1e4, archTo, ents, *(beg2 + 1e3 + 1), {});
 
     for (auto it = ents.begin(), end = ents.end(); it != end; ++it)
-        mgr.changeArchetype(it, archFrom);
+        mgr.changeArchetype(*it, archFrom);
     TestEntityManager<TComp3, TComp1>(mgr, 123 + 1e4, archFrom, ents, ents.front(), { 444, 44, 4 });
     TestEntityManager<TComp3, TComp1>(mgr, 123 + 1e4, archFrom, ents, *(ents.begin() + 123 + 1e3), { 222, 22, 2 });
     TestEntityManager<TComp3, TComp1>(mgr, 123 + 1e4, archFrom, ents, *(ents.begin() + 123 + 1e3 + 1), {});
     TestEntityManager<TComp3, TComp1>(mgr, 123 + 1e4, archTo, {});
 
-    for (auto it = mgr.entitiesOf(archFrom).data.begin(), end = mgr.entitiesOf(archFrom).data.end(); it != end;)
-        it = mgr.changeArchetype(it, archTo);
+    for (auto it = mgr.entitiesOf(archFrom).data.begin(); it != mgr.entitiesOf(archFrom).data.end();)
+        mgr.changeArchetype(*it, archTo);
     std::reverse(ents.begin(), ents.end());
     ents.insert(ents.begin(), ents.back());
     ents.pop_back();
@@ -314,42 +315,14 @@ TEST(EntityManager, DestroyEntity)
     TestEntityManager<TComp4, TComp3>(mgr, 0, arch, {});
 }
 
-TEST(EntityManager, DestroySelectionIterator)
-{
-    EntityManager mgr;
-    Archetype arch(IdOf<TComp1, TComp2>());
-    Selection<TComp1, TComp2> sel(IdOfL<TComp4>());
-    ASSERT_THROW(mgr.destroy(sel.begin()), AssertFailed); // without update & invalid
-
-    Entity ent = mgr.spawn(arch);
-    mgr.updateSelection(sel);
-
-    mgr.destroy(sel.begin());
-    TestEntityManager<TComp2, TComp3>(mgr, 0, arch, {});
-    ASSERT_THROW(mgr.destroy(sel.begin()), AssertFailed); // invalid iterator
-
-    // bigger scale & new archetype
-    arch.addComponent<TComp4>();
-    std::vector<Entity> ents;
-    for (int i = 0; i < 1e4; ++i)
-        ents.push_back(mgr.spawn(arch));
-    TestEntityManager<TComp4, TComp3>(mgr, 1e4, arch, ents);
-
-    Selection<TComp1, TComp2, TComp4> sel2;
-    mgr.updateSelection(sel2);
-    for (auto it = sel2.begin(), end = sel2.end(); it != end;)
-        it = mgr.destroy(it);
-    TestEntityManager<TComp4, TComp3>(mgr, 0, arch, {});
-}
-
 TEST(EntityManager, DestroyEntityPoolIterator)
 {
     EntityManager mgr;
     Archetype arch(IdOf<TComp1, TComp2>());
-    ASSERT_THROW(mgr.destroy(mgr.entitiesOf(arch).data.begin()), AssertFailed); // no entities of that archetype yet
+    ASSERT_THROW(mgr.destroy(*mgr.entitiesOf(arch).data.begin()), AssertFailed); // no entities of that archetype yet
 
     Entity ent = mgr.spawn(arch);
-    mgr.destroy(mgr.entitiesOf(arch).data.begin());
+    mgr.destroy(*mgr.entitiesOf(arch).data.begin());
     TestEntityManager<TComp2, TComp3>(mgr, 0, arch, {});
 
     // bigger scale & new archetype
@@ -360,7 +333,7 @@ TEST(EntityManager, DestroyEntityPoolIterator)
     TestEntityManager<TComp4, TComp3>(mgr, 1e4, arch, ents);
 
     for (auto it = mgr.entitiesOf(arch).data.begin(); it != mgr.entitiesOf(arch).data.end();)
-        it = mgr.destroy(it);
+        mgr.destroy(*it);
     TestEntityManager<TComp4, TComp3>(mgr, 0, arch, {});
 }
 

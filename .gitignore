@@ -7,3 +7,4 @@
 *.sln
 **/Makefile
 **.make
+venv

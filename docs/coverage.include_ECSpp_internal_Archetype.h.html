@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <title>Head</title>
   <style media="screen" type="text/css">
-  
+
     body
     {
       color: #000000;
@@ -269,13 +269,13 @@
             <td class="headerValue">include/ECSpp/internal/Archetype.h</td>
             <td></td>
             <td class="headerName">Lines:</td>
-            <td class="headerTableEntry">28</td>
-            <td class="headerTableEntry">28</td>
+            <td class="headerTableEntry">27</td>
+            <td class="headerTableEntry">27</td>
             <td class="headerTableEntry" style="background-color:LightGreen">100.0 %</td>
           </tr>
           <tr>
             <td class="headerName">Date:</td>
-            <td class="headerValue">2020-03-09 02:12:46</td>
+            <td class="headerValue">2020-08-22 22:38:55</td>
             <td></td>
             <td class="headerName">Branches:</td>
             <td class="headerTableEntry">11</td>
@@ -298,7 +298,7 @@
       <td width="75%" align="left" class="srcHeader src">Source</td>
     </tr>
 
-    
+
     <tr>
     <td align="right" class="lineno"><pre>1</pre></td>
     <td align="right" class="linebranch"></td>
@@ -324,14 +324,14 @@
     <td align="right" class="lineno"><pre>4</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>#include &lt;ECSpp/external/llvm/SmallVector.h&gt;</pre></td>
+    <td align="left" class="src "><pre>#include &lt;ECSpp/external/llvm/SmallVector.h></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>5</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>#include &lt;ECSpp/internal/CMask.h&gt;</pre></td>
+    <td align="left" class="src "><pre>#include &lt;ECSpp/internal/CMask.h></pre></td>
     </tr>
 
     <tr>
@@ -365,15 +365,15 @@
     <tr>
     <td align="right" class="lineno"><pre>10</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>612566</pre></td>
-    <td align="left" class="src coveredLine"><pre>class Archetype {</pre></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>class Archetype {</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>11</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    using IdList_t = decltype(IdOfL&lt;&gt;());</pre></td>
+    <td align="left" class="src "><pre>    using IdList_t = decltype(IdOfL&lt;>());</pre></td>
     </tr>
 
     <tr>
@@ -387,7 +387,7 @@
     <td align="right" class="lineno"><pre>13</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    using IdVec_t = llvm::SmallVector&lt;CId_t, 8&gt;;</pre></td>
+    <td align="left" class="src "><pre>    using IdVec_t = llvm::SmallVector&lt;CId_t, 8>;</pre></td>
     </tr>
 
     <tr>
@@ -414,7 +414,7 @@
     <tr>
     <td align="right" class="lineno"><pre>17</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>592433</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>584604</pre></td>
     <td align="left" class="src coveredLine"><pre>    Archetype() = default;</pre></td>
     </tr>
 
@@ -520,7 +520,7 @@
     <td align="right" class="lineno"><pre>32</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    template &lt;typename... CTypes&gt;</pre></td>
+    <td align="left" class="src "><pre>    template &lt;typename... CTypes></pre></td>
     </tr>
 
     <tr>
@@ -695,7 +695,7 @@
     <td align="right" class="lineno"><pre>57</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    template &lt;typename... CTypes&gt;</pre></td>
+    <td align="left" class="src "><pre>    template &lt;typename... CTypes></pre></td>
     </tr>
 
     <tr>
@@ -1155,8 +1155,8 @@
 
     <tr>
     <td align="right" class="lineno"><pre>123</pre></td>
-    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 3 taken 123 times">&check;</span><span class="notTakenBranch" title="Branch 4 not taken">&cross;</span></td>
-    <td align="right" class="linecount coveredLine"><pre>123</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 3 taken 105 times">&check;</span><span class="notTakenBranch" title="Branch 4 not taken">&cross;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>105</pre></td>
     <td align="left" class="src coveredLine"><pre>inline Archetype::Archetype(IdList_t initList) { addComponent(initList); }</pre></td>
     </tr>
 
@@ -1171,14 +1171,14 @@
     <td align="right" class="lineno"><pre>125</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>template &lt;typename... CTypes&gt;</pre></td>
+    <td align="left" class="src "><pre>template &lt;typename... CTypes></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>126</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>29</pre></td>
-    <td align="left" class="src coveredLine"><pre>inline Archetype&amp; Archetype::addComponent() { return addComponent(IdOfL&lt;CTypes...&gt;()); }</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>56</pre></td>
+    <td align="left" class="src coveredLine"><pre>inline Archetype&amp; Archetype::addComponent() { return addComponent(IdOfL&lt;CTypes...>()); }</pre></td>
     </tr>
 
     <tr>
@@ -1191,7 +1191,7 @@
     <tr>
     <td align="right" class="lineno"><pre>128</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>10172</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>10153</pre></td>
     <td align="left" class="src coveredLine"><pre>inline Archetype&amp; Archetype::addComponent(IdList_t ids)</pre></td>
     </tr>
 
@@ -1204,22 +1204,22 @@
 
     <tr>
     <td align="right" class="lineno"><pre>130</pre></td>
-    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 2 taken 10267 times">&check;</span><span class="takenBranch" title="Branch 3 taken 10172 times">&check;</span></td>
-    <td align="right" class="linecount coveredLine"><pre>20439</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 2 taken 10229 times">&check;</span><span class="takenBranch" title="Branch 3 taken 10153 times">&check;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>20382</pre></td>
     <td align="left" class="src coveredLine"><pre>    for (auto id : ids)</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>131</pre></td>
-    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 10267 times">&check;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span></td>
-    <td align="right" class="linecount coveredLine"><pre>10267</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 10229 times">&check;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>10229</pre></td>
     <td align="left" class="src coveredLine"><pre>        addComponent(id);</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>132</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>10172</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>10153</pre></td>
     <td align="left" class="src coveredLine"><pre>    return *this;</pre></td>
     </tr>
 
@@ -1240,7 +1240,7 @@
     <tr>
     <td align="right" class="lineno"><pre>135</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>1115095</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>1091447</pre></td>
     <td align="left" class="src coveredLine"><pre>inline Archetype&amp; Archetype::addComponent(CId_t id)</pre></td>
     </tr>
 
@@ -1253,22 +1253,22 @@
 
     <tr>
     <td align="right" class="lineno"><pre>137</pre></td>
-    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 1115046 times">&check;</span><span class="takenBranch" title="Branch 2 taken 49 times">&check;</span></td>
-    <td align="right" class="linecount coveredLine"><pre>1115095</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 1091398 times">&check;</span><span class="takenBranch" title="Branch 2 taken 49 times">&check;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>1091447</pre></td>
     <td align="left" class="src coveredLine"><pre>    if (!cMask.get(id)) {</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>138</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>1115046</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>1091398</pre></td>
     <td align="left" class="src coveredLine"><pre>        cMask.set(id);</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>139</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>1115046</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>1091398</pre></td>
     <td align="left" class="src coveredLine"><pre>        cIds.push_back(id);</pre></td>
     </tr>
 
@@ -1282,7 +1282,7 @@
     <tr>
     <td align="right" class="lineno"><pre>141</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>1115095</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>1091447</pre></td>
     <td align="left" class="src coveredLine"><pre>    return *this;</pre></td>
     </tr>
 
@@ -1304,14 +1304,14 @@
     <td align="right" class="lineno"><pre>144</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>template &lt;typename... CTypes&gt;</pre></td>
+    <td align="left" class="src "><pre>template &lt;typename... CTypes></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>145</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>7</pre></td>
-    <td align="left" class="src coveredLine"><pre>inline Archetype&amp; Archetype::removeComponent() { return removeComponent(IdOfL&lt;CTypes...&gt;()); }</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>14</pre></td>
+    <td align="left" class="src coveredLine"><pre>inline Archetype&amp; Archetype::removeComponent() { return removeComponent(IdOfL&lt;CTypes...>()); }</pre></td>
     </tr>
 
     <tr>
@@ -1478,7 +1478,7 @@
     <tr>
     <td align="right" class="lineno"><pre>169</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>414</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>388</pre></td>
     <td align="left" class="src coveredLine"><pre>inline Archetype::IdVec_t const&amp; Archetype::getCIds() const { return cIds; }</pre></td>
     </tr>
 
@@ -1492,7 +1492,7 @@
     <tr>
     <td align="right" class="lineno"><pre>171</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>1934599</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>1910170</pre></td>
     <td align="left" class="src coveredLine"><pre>inline CMask const&amp; Archetype::getMask() const { return cMask; }</pre></td>
     </tr>
 
@@ -1529,7 +1529,7 @@
 
   <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr><td class="hr"><td></tr>
-    <tr><td class="footer">Generated by: <a href="http://gcovr.com">GCOVR (Version 3.4)</a></td></tr>
+    <tr><td class="footer">Generated by: <a href="http://gcovr.com">GCOVR (Version 4.2)</a></td></tr>
   </table>
   <br>
 

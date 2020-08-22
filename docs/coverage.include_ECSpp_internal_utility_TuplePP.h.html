@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <title>Head</title>
   <style media="screen" type="text/css">
-  
+
     body
     {
       color: #000000;
@@ -269,13 +269,13 @@
             <td class="headerValue">include/ECSpp/internal/utility/TuplePP.h</td>
             <td></td>
             <td class="headerName">Lines:</td>
-            <td class="headerTableEntry">6</td>
-            <td class="headerTableEntry">6</td>
+            <td class="headerTableEntry">3</td>
+            <td class="headerTableEntry">3</td>
             <td class="headerTableEntry" style="background-color:LightGreen">100.0 %</td>
           </tr>
           <tr>
             <td class="headerName">Date:</td>
-            <td class="headerValue">2020-03-09 02:12:46</td>
+            <td class="headerValue">2020-08-22 22:38:55</td>
             <td></td>
             <td class="headerName">Branches:</td>
             <td class="headerTableEntry">0</td>
@@ -298,7 +298,7 @@
       <td width="75%" align="left" class="srcHeader src">Source</td>
     </tr>
 
-    
+
     <tr>
     <td align="right" class="lineno"><pre>1</pre></td>
     <td align="right" class="linebranch"></td>
@@ -324,7 +324,7 @@
     <td align="right" class="lineno"><pre>4</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>#include &lt;tuple&gt;</pre></td>
+    <td align="left" class="src "><pre>#include &lt;tuple></pre></td>
     </tr>
 
     <tr>
@@ -352,7 +352,7 @@
     <td align="right" class="lineno"><pre>8</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>template &lt;typename T, typename... Pack&gt;</pre></td>
+    <td align="left" class="src "><pre>template &lt;typename T, typename... Pack></pre></td>
     </tr>
 
     <tr>
@@ -373,7 +373,7 @@
     <td align="right" class="lineno"><pre>11</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    return false || (std::is_same_v&lt;T, Pack&gt; || ...);</pre></td>
+    <td align="left" class="src "><pre>    return false || (std::is_same_v&lt;T, Pack> || ...);</pre></td>
     </tr>
 
     <tr>
@@ -401,14 +401,14 @@
     <td align="right" class="lineno"><pre>15</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>template &lt;typename... TplTypes&gt;</pre></td>
+    <td align="left" class="src "><pre>template &lt;typename... TplTypes></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>16</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>15</pre></td>
-    <td align="left" class="src coveredLine"><pre>struct TuplePP : public std::tuple&lt;TplTypes...&gt; {</pre></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>struct TuplePP : public std::tuple&lt;TplTypes...> {</pre></td>
     </tr>
 
     <tr>
@@ -422,7 +422,7 @@
     <td align="right" class="lineno"><pre>18</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    using Base_t = std::tuple&lt;TplTypes...&gt;;</pre></td>
+    <td align="left" class="src "><pre>    using Base_t = std::tuple&lt;TplTypes...>;</pre></td>
     </tr>
 
     <tr>
@@ -442,7 +442,7 @@
     <tr>
     <td align="right" class="lineno"><pre>21</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>15</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>12</pre></td>
     <td align="left" class="src coveredLine"><pre>    TuplePP() = default;</pre></td>
     </tr>
 
@@ -492,13 +492,13 @@
     <td align="right" class="lineno"><pre>28</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    template &lt;typename U&gt;</pre></td>
+    <td align="left" class="src "><pre>    template &lt;typename U></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>29</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>52695</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>24842</pre></td>
     <td align="left" class="src coveredLine"><pre>    U&amp; get()</pre></td>
     </tr>
 
@@ -513,14 +513,14 @@
     <td align="right" class="lineno"><pre>31</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>        static_assert(isTypeInPack&lt;U, TplTypes...&gt;(), "Tried to get a wrong type from a tuple!");</pre></td>
+    <td align="left" class="src "><pre>        static_assert(isTypeInPack&lt;U, TplTypes...>(), "Tried to get a wrong type from a tuple!");</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>32</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>52695</pre></td>
-    <td align="left" class="src coveredLine"><pre>        return std::get&lt;U&gt;(*this);</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>24842</pre></td>
+    <td align="left" class="src coveredLine"><pre>        return std::get&lt;U>(*this);</pre></td>
     </tr>
 
     <tr>
@@ -541,7 +541,7 @@
     <td align="right" class="lineno"><pre>35</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    template &lt;typename U&gt;</pre></td>
+    <td align="left" class="src "><pre>    template &lt;typename U></pre></td>
     </tr>
 
     <tr>
@@ -562,14 +562,14 @@
     <td align="right" class="lineno"><pre>38</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>        static_assert(isTypeInPack&lt;U, TplTypes...&gt;(), "Tried to get a wrong type from a tuple!");</pre></td>
+    <td align="left" class="src "><pre>        static_assert(isTypeInPack&lt;U, TplTypes...>(), "Tried to get a wrong type from a tuple!");</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>39</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>        return std::get&lt;U&gt;(*this);</pre></td>
+    <td align="left" class="src "><pre>        return std::get&lt;U>(*this);</pre></td>
     </tr>
 
     <tr>
@@ -590,14 +590,14 @@
     <td align="right" class="lineno"><pre>42</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    template &lt;std::size_t i&gt;</pre></td>
+    <td align="left" class="src "><pre>    template &lt;std::size_t i></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>43</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>235620</pre></td>
-    <td align="left" class="src coveredLine"><pre>    decltype(auto) get()</pre></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>    decltype(auto) get()</pre></td>
     </tr>
 
     <tr>
@@ -617,8 +617,8 @@
     <tr>
     <td align="right" class="lineno"><pre>46</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>235620</pre></td>
-    <td align="left" class="src coveredLine"><pre>        return std::get&lt;i&gt;(*this);</pre></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>        return std::get&lt;i>(*this);</pre></td>
     </tr>
 
     <tr>
@@ -639,7 +639,7 @@
     <td align="right" class="lineno"><pre>49</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    template &lt;std::size_t i&gt;</pre></td>
+    <td align="left" class="src "><pre>    template &lt;std::size_t i></pre></td>
     </tr>
 
     <tr>
@@ -667,7 +667,7 @@
     <td align="right" class="lineno"><pre>53</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>        return std::get&lt;i&gt;(*this);</pre></td>
+    <td align="left" class="src "><pre>        return std::get&lt;i>(*this);</pre></td>
     </tr>
 
     <tr>
@@ -695,14 +695,14 @@
     <td align="right" class="lineno"><pre>57</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    template &lt;typename... OtherTypes&gt;</pre></td>
+    <td align="left" class="src "><pre>    template &lt;typename... OtherTypes></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>58</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    TuplePP&lt;OtherTypes...&gt; asTuple()</pre></td>
+    <td align="left" class="src "><pre>    TuplePP&lt;OtherTypes...> asTuple()</pre></td>
     </tr>
 
     <tr>
@@ -716,14 +716,14 @@
     <td align="right" class="lineno"><pre>60</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>        static_assert(containsType&lt;OtherTypes...&gt;() || !sizeof...(OtherTypes), "Tuple does not contain given sequence of types");</pre></td>
+    <td align="left" class="src "><pre>        static_assert(containsType&lt;OtherTypes...>() || !sizeof...(OtherTypes), "Tuple does not contain given sequence of types");</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>61</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>        return std::tuple&lt;OtherTypes...&gt;(get&lt;OtherTypes&gt;()...);</pre></td>
+    <td align="left" class="src "><pre>        return std::tuple&lt;OtherTypes...>(get&lt;OtherTypes>()...);</pre></td>
     </tr>
 
     <tr>
@@ -744,14 +744,14 @@
     <td align="right" class="lineno"><pre>64</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    template &lt;typename... OtherTypes&gt;</pre></td>
+    <td align="left" class="src "><pre>    template &lt;typename... OtherTypes></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>65</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    TuplePP&lt;OtherTypes...&gt; asTuple() const</pre></td>
+    <td align="left" class="src "><pre>    TuplePP&lt;OtherTypes...> asTuple() const</pre></td>
     </tr>
 
     <tr>
@@ -765,14 +765,14 @@
     <td align="right" class="lineno"><pre>67</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>        static_assert(containsType&lt;OtherTypes...&gt;() || !sizeof...(OtherTypes), "Tuple does not contain given sequence of types");</pre></td>
+    <td align="left" class="src "><pre>        static_assert(containsType&lt;OtherTypes...>() || !sizeof...(OtherTypes), "Tuple does not contain given sequence of types");</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>68</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>        return std::tuple&lt;OtherTypes...&gt;(get&lt;OtherTypes&gt;()...);</pre></td>
+    <td align="left" class="src "><pre>        return std::tuple&lt;OtherTypes...>(get&lt;OtherTypes>()...);</pre></td>
     </tr>
 
     <tr>
@@ -793,7 +793,7 @@
     <td align="right" class="lineno"><pre>71</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    TuplePP&lt;TplTypes&amp;...&gt; asRefTuple()</pre></td>
+    <td align="left" class="src "><pre>    TuplePP&lt;TplTypes&amp;...> asRefTuple()</pre></td>
     </tr>
 
     <tr>
@@ -807,7 +807,7 @@
     <td align="right" class="lineno"><pre>73</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>        return std::tuple&lt;TplTypes&amp;...&gt;(get&lt;TplTypes&gt;()...);</pre></td>
+    <td align="left" class="src "><pre>        return std::tuple&lt;TplTypes&amp;...>(get&lt;TplTypes>()...);</pre></td>
     </tr>
 
     <tr>
@@ -828,7 +828,7 @@
     <td align="right" class="lineno"><pre>76</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    TuplePP&lt;TplTypes const&amp;...&gt; asRefTuple() const</pre></td>
+    <td align="left" class="src "><pre>    TuplePP&lt;TplTypes const&amp;...> asRefTuple() const</pre></td>
     </tr>
 
     <tr>
@@ -842,7 +842,7 @@
     <td align="right" class="lineno"><pre>78</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>        return std::tuple&lt;const TplTypes&amp;...&gt;(get&lt;TplTypes&gt;()...);</pre></td>
+    <td align="left" class="src "><pre>        return std::tuple&lt;const TplTypes&amp;...>(get&lt;TplTypes>()...);</pre></td>
     </tr>
 
     <tr>
@@ -863,14 +863,14 @@
     <td align="right" class="lineno"><pre>81</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    template &lt;typename... OtherTypes&gt;</pre></td>
+    <td align="left" class="src "><pre>    template &lt;typename... OtherTypes></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>82</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    TuplePP&lt;OtherTypes&amp;...&gt; asRefTuple()</pre></td>
+    <td align="left" class="src "><pre>    TuplePP&lt;OtherTypes&amp;...> asRefTuple()</pre></td>
     </tr>
 
     <tr>
@@ -884,14 +884,14 @@
     <td align="right" class="lineno"><pre>84</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>        static_assert(containsType&lt;OtherTypes...&gt;() || !sizeof...(OtherTypes), "Tuple does not contain given sequence of types");</pre></td>
+    <td align="left" class="src "><pre>        static_assert(containsType&lt;OtherTypes...>() || !sizeof...(OtherTypes), "Tuple does not contain given sequence of types");</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>85</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>        return std::tuple&lt;OtherTypes&amp;...&gt;(get&lt;OtherTypes&gt;()...);</pre></td>
+    <td align="left" class="src "><pre>        return std::tuple&lt;OtherTypes&amp;...>(get&lt;OtherTypes>()...);</pre></td>
     </tr>
 
     <tr>
@@ -912,14 +912,14 @@
     <td align="right" class="lineno"><pre>88</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    template &lt;typename... OtherTypes&gt;</pre></td>
+    <td align="left" class="src "><pre>    template &lt;typename... OtherTypes></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>89</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    TuplePP&lt;OtherTypes const&amp;...&gt; asRefTuple() const</pre></td>
+    <td align="left" class="src "><pre>    TuplePP&lt;OtherTypes const&amp;...> asRefTuple() const</pre></td>
     </tr>
 
     <tr>
@@ -933,14 +933,14 @@
     <td align="right" class="lineno"><pre>91</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>        static_assert(containsType&lt;OtherTypes...&gt;() || !sizeof...(OtherTypes), "Tuple does not contain given sequence of types");</pre></td>
+    <td align="left" class="src "><pre>        static_assert(containsType&lt;OtherTypes...>() || !sizeof...(OtherTypes), "Tuple does not contain given sequence of types");</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>92</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>        return std::tuple&lt;const OtherTypes&amp;...&gt;(get&lt;OtherTypes&gt;()...);</pre></td>
+    <td align="left" class="src "><pre>        return std::tuple&lt;const OtherTypes&amp;...>(get&lt;OtherTypes>()...);</pre></td>
     </tr>
 
     <tr>
@@ -968,14 +968,14 @@
     <td align="right" class="lineno"><pre>96</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    template &lt;typename... OtherTplTypes&gt;</pre></td>
+    <td align="left" class="src "><pre>    template &lt;typename... OtherTplTypes></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>97</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    static TuplePP makeFromTuple(TuplePP&lt;OtherTplTypes...&gt; const&amp; tplToCpyFrom)</pre></td>
+    <td align="left" class="src "><pre>    static TuplePP makeFromTuple(TuplePP&lt;OtherTplTypes...> const&amp; tplToCpyFrom)</pre></td>
     </tr>
 
     <tr>
@@ -989,7 +989,7 @@
     <td align="right" class="lineno"><pre>99</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>        return TuplePP(Base_t(tplToCpyFrom.template get&lt;TplTypes&gt;()...));</pre></td>
+    <td align="left" class="src "><pre>        return TuplePP(Base_t(tplToCpyFrom.template get&lt;TplTypes>()...));</pre></td>
     </tr>
 
     <tr>
@@ -1010,7 +1010,7 @@
     <td align="right" class="lineno"><pre>102</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    template &lt;typename... SearchedTypes&gt;</pre></td>
+    <td align="left" class="src "><pre>    template &lt;typename... SearchedTypes></pre></td>
     </tr>
 
     <tr>
@@ -1031,14 +1031,14 @@
     <td align="right" class="lineno"><pre>105</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>        if constexpr (sizeof...(SearchedTypes) &gt; 0)</pre></td>
+    <td align="left" class="src "><pre>        if constexpr (sizeof...(SearchedTypes) > 0)</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>106</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>            return (isTypeInPack&lt;SearchedTypes, TplTypes...&gt;() &amp;&amp; ...);</pre></td>
+    <td align="left" class="src "><pre>            return (isTypeInPack&lt;SearchedTypes, TplTypes...>() &amp;&amp; ...);</pre></td>
     </tr>
 
     <tr>
@@ -1102,7 +1102,7 @@
 
   <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr><td class="hr"><td></tr>
-    <tr><td class="footer">Generated by: <a href="http://gcovr.com">GCOVR (Version 3.4)</a></td></tr>
+    <tr><td class="footer">Generated by: <a href="http://gcovr.com">GCOVR (Version 4.2)</a></td></tr>
   </table>
   <br>
 

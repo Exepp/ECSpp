@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['task_137',['Task',['../classepp_1_1Task.html',1,'epp::Task&lt; FnType, BatchSizeFnType, CTypes &gt;'],['../classepp_1_1Task.html#a7b207423c1e38a87a77ff6d0ebbf2943',1,'epp::Task::Task()']]],
-  ['taskbase_138',['TaskBase',['../classepp_1_1TaskBase.html',1,'epp']]],
-  ['tuplepp_139',['TuplePP',['../structepp_1_1TuplePP.html',1,'epp']]],
-  ['tuplepp_3c_20poolsptrs_5ft_3c_20ctypes_20_3e_2e_2e_2e_20_3e_140',['TuplePP&lt; PoolsPtrs_t&lt; CTypes &gt;... &gt;',['../structepp_1_1TuplePP.html',1,'epp']]]
+  ['_7ecpool_127',['~CPool',['../classepp_1_1CPool.html#a086db7e609e3dec0983337527b493666',1,'epp::CPool']]],
+  ['_7eentitylist_128',['~EntityList',['../classepp_1_1EntityList.html#ae084a66b63fd6de98de7efc8b0651d1b',1,'epp::EntityList']]]
 ];

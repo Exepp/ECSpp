@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <title>Head</title>
   <style media="screen" type="text/css">
-  
+
     body
     {
       color: #000000;
@@ -269,13 +269,13 @@
             <td class="headerValue">include/ECSpp/internal/EntityList.h</td>
             <td></td>
             <td class="headerName">Lines:</td>
-            <td class="headerTableEntry">71</td>
-            <td class="headerTableEntry">71</td>
+            <td class="headerTableEntry">70</td>
+            <td class="headerTableEntry">70</td>
             <td class="headerTableEntry" style="background-color:LightGreen">100.0 %</td>
           </tr>
           <tr>
             <td class="headerName">Date:</td>
-            <td class="headerValue">2020-03-09 02:12:46</td>
+            <td class="headerValue">2020-08-22 22:38:55</td>
             <td></td>
             <td class="headerName">Branches:</td>
             <td class="headerTableEntry">33</td>
@@ -298,7 +298,7 @@
       <td width="75%" align="left" class="srcHeader src">Source</td>
     </tr>
 
-    
+
     <tr>
     <td align="right" class="lineno"><pre>1</pre></td>
     <td align="right" class="linebranch"></td>
@@ -324,28 +324,28 @@
     <td align="right" class="lineno"><pre>4</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>#include &lt;ECSpp/internal/utility/Assert.h&gt;</pre></td>
+    <td align="left" class="src "><pre>#include &lt;ECSpp/internal/utility/Assert.h></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>5</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>#include &lt;ECSpp/internal/utility/IndexType.h&gt;</pre></td>
+    <td align="left" class="src "><pre>#include &lt;ECSpp/internal/utility/IndexType.h></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>6</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>#include &lt;ECSpp/internal/utility/Pool.h&gt;</pre></td>
+    <td align="left" class="src "><pre>#include &lt;ECSpp/internal/utility/Pool.h></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>7</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>#include &lt;cstring&gt;</pre></td>
+    <td align="left" class="src "><pre>#include &lt;cstring></pre></td>
     </tr>
 
     <tr>
@@ -380,7 +380,7 @@
     <td align="right" class="lineno"><pre>12</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>using UniIdx = IndexType&lt;1&gt;;</pre></td>
+    <td align="left" class="src "><pre>using UniIdx = IndexType&lt;1>;</pre></td>
     </tr>
 
     <tr>
@@ -401,7 +401,7 @@
     <td align="right" class="lineno"><pre>15</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>using SpawnerId = IndexType&lt;2&gt;;</pre></td>
+    <td align="left" class="src "><pre>using SpawnerId = IndexType&lt;2>;</pre></td>
     </tr>
 
     <tr>
@@ -415,20 +415,20 @@
     <td align="right" class="lineno"><pre>17</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>struct EntVersion : public IndexType&lt;3&gt; {</pre></td>
+    <td align="left" class="src "><pre>struct EntVersion : public IndexType&lt;3> {</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>18</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>5974</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>5965</pre></td>
     <td align="left" class="src coveredLine"><pre>    EntVersion() = default;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>19</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>381568</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>343823</pre></td>
     <td align="left" class="src coveredLine"><pre>    explicit EntVersion(Val_t val) : IndexType(val) {}</pre></td>
     </tr>
 
@@ -477,7 +477,7 @@
     <tr>
     <td align="right" class="lineno"><pre>26</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>48361</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>35256</pre></td>
     <td align="left" class="src coveredLine"><pre>    EntVersion nextVersion() const { return EntVersion(Val_t(value + 1)); }</pre></td>
     </tr>
 
@@ -547,8 +547,8 @@
     <tr>
     <td align="right" class="lineno"><pre>36</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>5974</pre></td>
-    <td align="left" class="src coveredLine"><pre>struct Entity {</pre></td>
+    <td align="right" class="linecount "><pre></pre></td>
+    <td align="left" class="src "><pre>struct Entity {</pre></td>
     </tr>
 
     <tr>
@@ -574,8 +574,8 @@
 
     <tr>
     <td align="right" class="lineno"><pre>40</pre></td>
-    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 583776 times">&check;</span><span class="takenBranch" title="Branch 2 taken 45 times">&check;</span><span class="takenBranch" title="Branch 4 taken 583776 times">&check;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><br/></td>
-    <td align="right" class="linecount coveredLine"><pre>583821</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 579017 times">&check;</span><span class="takenBranch" title="Branch 2 taken 46 times">&check;</span><span class="takenBranch" title="Branch 4 taken 579017 times">&check;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><br/></td>
+    <td align="right" class="linecount coveredLine"><pre>579063</pre></td>
     <td align="left" class="src coveredLine"><pre>    bool operator==(Entity const&amp; rhs) const { return listIdx == rhs.listIdx &amp;&amp; version == rhs.version; }</pre></td>
     </tr>
 
@@ -729,14 +729,14 @@
     <tr>
     <td align="right" class="lineno"><pre>62</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>371241</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>333496</pre></td>
     <td align="left" class="src coveredLine"><pre>            explicit Data(Free fCell) : idx(fCell.listIdx), version(fCell.version) {}</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>63</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>380270</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>351040</pre></td>
     <td align="left" class="src coveredLine"><pre>            explicit Data(Occupied oCell) : idx(oCell.poolIdx), version(oCell.version), spawnerId(oCell.spawnerId) {}</pre></td>
     </tr>
 
@@ -813,7 +813,7 @@
     <tr>
     <td align="right" class="lineno"><pre>74</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>380270</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>351040</pre></td>
     <td align="left" class="src coveredLine"><pre>        explicit Cell(Occupied cell) : cellData(cell) {}</pre></td>
     </tr>
 
@@ -862,7 +862,7 @@
     <tr>
     <td align="right" class="lineno"><pre>81</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>371241</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>333496</pre></td>
     <td align="left" class="src coveredLine"><pre>        explicit Cell(Free cell) : cellData(cell) {}</pre></td>
     </tr>
 
@@ -946,7 +946,7 @@
     <tr>
     <td align="right" class="lineno"><pre>93</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>263021</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>246859</pre></td>
     <td align="left" class="src coveredLine"><pre>        ListIdx nextFreeListIdx() const { return cellData.idx; }</pre></td>
     </tr>
 
@@ -1093,7 +1093,7 @@
     <tr>
     <td align="right" class="lineno"><pre>114</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>5996854</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>5850439</pre></td>
     <td align="left" class="src coveredLine"><pre>        EntVersion entVersion() const { return cellData.version; }</pre></td>
     </tr>
 
@@ -1149,7 +1149,7 @@
     <tr>
     <td align="right" class="lineno"><pre>122</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>3088967</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>3042229</pre></td>
     <td align="left" class="src coveredLine"><pre>        Occupied asOccupied() const { return { cellData.idx, cellData.version, cellData.spawnerId }; }</pre></td>
     </tr>
 
@@ -1268,7 +1268,7 @@
     <tr>
     <td align="right" class="lineno"><pre>139</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>35</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>30</pre></td>
     <td align="left" class="src coveredLine"><pre>    EntityList() { reserve(32); }; // init size</pre></td>
     </tr>
 
@@ -1701,8 +1701,8 @@
 
     <tr>
     <td align="right" class="lineno"><pre>201</pre></td>
-    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 5731625 times">&check;</span><span class="takenBranch" title="Branch 1 taken 5897 times">&check;</span><span class="takenBranch" title="Branch 3 taken 5730596 times">&check;</span><span class="takenBranch" title="Branch 4 taken 1029 times">&check;</span><br/></td>
-    <td align="right" class="linecount coveredLine"><pre>5737522</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 5601404 times">&check;</span><span class="takenBranch" title="Branch 1 taken 5891 times">&check;</span><span class="takenBranch" title="Branch 3 taken 5600375 times">&check;</span><span class="takenBranch" title="Branch 4 taken 1029 times">&check;</span><br/></td>
+    <td align="right" class="linecount coveredLine"><pre>5607295</pre></td>
     <td align="left" class="src coveredLine"><pre>    bool isValid(Entity ent) const { return ent.listIdx.value &lt; reserved &amp;&amp; ent.version.value == data[ent.listIdx.value].entVersion().value; }</pre></td>
     </tr>
 
@@ -1814,7 +1814,7 @@
     <tr>
     <td align="right" class="lineno"><pre>217</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>90</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>88</pre></td>
     <td align="left" class="src coveredLine"><pre>    std::size_t size() const { return reserved - freeLeft; }</pre></td>
     </tr>
 
@@ -1933,7 +1933,7 @@
     <tr>
     <td align="right" class="lineno"><pre>234</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>70</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>60</pre></td>
     <td align="left" class="src coveredLine"><pre>inline EntityList::~EntityList()</pre></td>
     </tr>
 
@@ -1953,22 +1953,22 @@
 
     <tr>
     <td align="right" class="lineno"><pre>237</pre></td>
-    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 35 times">&check;</span><span class="notTakenBranch" title="Branch 1 not taken">&cross;</span></td>
-    <td align="right" class="linecount coveredLine"><pre>35</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 30 times">&check;</span><span class="notTakenBranch" title="Branch 1 not taken">&cross;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>30</pre></td>
     <td align="left" class="src coveredLine"><pre>    if (data)</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>238</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>35</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>30</pre></td>
     <td align="left" class="src coveredLine"><pre>        operator delete[](data);</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>239</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>35</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>30</pre></td>
     <td align="left" class="src coveredLine"><pre>}</pre></td>
     </tr>
 
@@ -1982,7 +1982,7 @@
     <tr>
     <td align="right" class="lineno"><pre>241</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>263021</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>246859</pre></td>
     <td align="left" class="src coveredLine"><pre>inline Entity EntityList::allocEntity(PoolIdx poolIdx, SpawnerId spawnerId)</pre></td>
     </tr>
 
@@ -1995,22 +1995,22 @@
 
     <tr>
     <td align="right" class="lineno"><pre>243</pre></td>
-    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 263021 times">&check;</span><span class="notTakenBranch" title="Branch 1 not taken">&cross;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span><span class="takenBranch" title="Branch 3 taken 263021 times">&check;</span><br/><span class="notTakenBranch" title="Branch 6 not taken">&cross;</span><span class="notTakenBranch" title="Branch 7 not taken">&cross;</span><span class="notTakenBranch" title="Branch 10 not taken">&cross;</span><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 13 not taken">&cross;</span><span class="notTakenBranch" title="Branch 14 not taken">&cross;</span><span class="notTakenBranch" title="Branch 16 not taken">&cross;</span><span class="notTakenBranch" title="Branch 17 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 19 not taken">&cross;</span><span class="notTakenBranch" title="Branch 20 not taken">&cross;</span><span class="notTakenBranch" title="Branch 22 not taken">&cross;</span><span class="notTakenBranch" title="Branch 23 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 25 not taken">&cross;</span><span class="notTakenBranch" title="Branch 26 not taken">&cross;</span><span class="notTakenBranch" title="Branch 28 not taken">&cross;</span><span class="notTakenBranch" title="Branch 29 not taken">&cross;</span><br/></td>
-    <td align="right" class="linecount coveredLine"><pre>263021</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 246859 times">&check;</span><span class="notTakenBranch" title="Branch 1 not taken">&cross;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span><span class="takenBranch" title="Branch 3 taken 246859 times">&check;</span><br/><span class="notTakenBranch" title="Branch 6 not taken">&cross;</span><span class="notTakenBranch" title="Branch 7 not taken">&cross;</span><span class="notTakenBranch" title="Branch 10 not taken">&cross;</span><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 13 not taken">&cross;</span><span class="notTakenBranch" title="Branch 14 not taken">&cross;</span><span class="notTakenBranch" title="Branch 16 not taken">&cross;</span><span class="notTakenBranch" title="Branch 17 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 19 not taken">&cross;</span><span class="notTakenBranch" title="Branch 20 not taken">&cross;</span><span class="notTakenBranch" title="Branch 22 not taken">&cross;</span><span class="notTakenBranch" title="Branch 23 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 25 not taken">&cross;</span><span class="notTakenBranch" title="Branch 26 not taken">&cross;</span><span class="notTakenBranch" title="Branch 28 not taken">&cross;</span><span class="notTakenBranch" title="Branch 29 not taken">&cross;</span><br/></td>
+    <td align="right" class="linecount coveredLine"><pre>246859</pre></td>
     <td align="left" class="src coveredLine"><pre>    EPP_ASSERT(poolIdx.value != PoolIdx::BadValue &amp;&amp; spawnerId.value != SpawnerId::BadValue);</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>244</pre></td>
-    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 130 times">&check;</span><span class="takenBranch" title="Branch 1 taken 262891 times">&check;</span></td>
-    <td align="right" class="linecount coveredLine"><pre>263021</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 107 times">&check;</span><span class="takenBranch" title="Branch 1 taken 246752 times">&check;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>246859</pre></td>
     <td align="left" class="src coveredLine"><pre>    if (freeLeft == 0)</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>245</pre></td>
-    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 130 times">&check;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span></td>
-    <td align="right" class="linecount coveredLine"><pre>130</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 107 times">&check;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>107</pre></td>
     <td align="left" class="src coveredLine"><pre>        reserve(2 * reserved);</pre></td>
     </tr>
 
@@ -2024,35 +2024,35 @@
     <tr>
     <td align="right" class="lineno"><pre>247</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>263021</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>246859</pre></td>
     <td align="left" class="src coveredLine"><pre>    ListIdx idx = freeIndex;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>248</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>263021</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>246859</pre></td>
     <td align="left" class="src coveredLine"><pre>    EntVersion version = data[idx.value].entVersion();</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>249</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>263021</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>246859</pre></td>
     <td align="left" class="src coveredLine"><pre>    freeIndex = data[idx.value].nextFreeListIdx();</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>250</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>263021</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>246859</pre></td>
     <td align="left" class="src coveredLine"><pre>    data[idx.value] = Cell(Cell::Occupied{ poolIdx, version, spawnerId });</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>251</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>263021</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>246859</pre></td>
     <td align="left" class="src coveredLine"><pre>    --freeLeft;</pre></td>
     </tr>
 
@@ -2066,7 +2066,7 @@
     <tr>
     <td align="right" class="lineno"><pre>253</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>263021</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>246859</pre></td>
     <td align="left" class="src coveredLine"><pre>    return Entity{ idx, version };</pre></td>
     </tr>
 
@@ -2087,7 +2087,7 @@
     <tr>
     <td align="right" class="lineno"><pre>256</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>117249</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>104181</pre></td>
     <td align="left" class="src coveredLine"><pre>inline void EntityList::changeEntity(Entity ent, PoolIdx poolIdx, SpawnerId spawnerId)</pre></td>
     </tr>
 
@@ -2100,15 +2100,15 @@
 
     <tr>
     <td align="right" class="lineno"><pre>258</pre></td>
-    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 117249 times">&check;</span><span class="notTakenBranch" title="Branch 1 not taken">&cross;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span><span class="takenBranch" title="Branch 3 taken 117249 times">&check;</span><br/><span class="notTakenBranch" title="Branch 6 not taken">&cross;</span><span class="notTakenBranch" title="Branch 7 not taken">&cross;</span><span class="notTakenBranch" title="Branch 10 not taken">&cross;</span><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 13 not taken">&cross;</span><span class="notTakenBranch" title="Branch 14 not taken">&cross;</span><span class="notTakenBranch" title="Branch 16 not taken">&cross;</span><span class="notTakenBranch" title="Branch 17 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 19 not taken">&cross;</span><span class="notTakenBranch" title="Branch 20 not taken">&cross;</span><span class="notTakenBranch" title="Branch 22 not taken">&cross;</span><span class="notTakenBranch" title="Branch 23 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 25 not taken">&cross;</span><span class="notTakenBranch" title="Branch 26 not taken">&cross;</span><span class="notTakenBranch" title="Branch 28 not taken">&cross;</span><span class="notTakenBranch" title="Branch 29 not taken">&cross;</span><br/></td>
-    <td align="right" class="linecount coveredLine"><pre>117249</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 104181 times">&check;</span><span class="notTakenBranch" title="Branch 1 not taken">&cross;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span><span class="takenBranch" title="Branch 3 taken 104181 times">&check;</span><br/><span class="notTakenBranch" title="Branch 6 not taken">&cross;</span><span class="notTakenBranch" title="Branch 7 not taken">&cross;</span><span class="notTakenBranch" title="Branch 10 not taken">&cross;</span><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 13 not taken">&cross;</span><span class="notTakenBranch" title="Branch 14 not taken">&cross;</span><span class="notTakenBranch" title="Branch 16 not taken">&cross;</span><span class="notTakenBranch" title="Branch 17 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 19 not taken">&cross;</span><span class="notTakenBranch" title="Branch 20 not taken">&cross;</span><span class="notTakenBranch" title="Branch 22 not taken">&cross;</span><span class="notTakenBranch" title="Branch 23 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 25 not taken">&cross;</span><span class="notTakenBranch" title="Branch 26 not taken">&cross;</span><span class="notTakenBranch" title="Branch 28 not taken">&cross;</span><span class="notTakenBranch" title="Branch 29 not taken">&cross;</span><br/></td>
+    <td align="right" class="linecount coveredLine"><pre>104181</pre></td>
     <td align="left" class="src coveredLine"><pre>    EPP_ASSERT(poolIdx.value != PoolIdx::BadValue &amp;&amp; spawnerId.value != SpawnerId::BadValue);</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>259</pre></td>
-    <td align="right" class="linebranch"><span class="notTakenBranch" title="Branch 1 not taken">&cross;</span><span class="takenBranch" title="Branch 2 taken 117249 times">&check;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><span class="notTakenBranch" title="Branch 6 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 9 not taken">&cross;</span><span class="notTakenBranch" title="Branch 10 not taken">&cross;</span><span class="notTakenBranch" title="Branch 12 not taken">&cross;</span><span class="notTakenBranch" title="Branch 13 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 15 not taken">&cross;</span><span class="notTakenBranch" title="Branch 16 not taken">&cross;</span><span class="notTakenBranch" title="Branch 18 not taken">&cross;</span><span class="notTakenBranch" title="Branch 19 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 21 not taken">&cross;</span><span class="notTakenBranch" title="Branch 22 not taken">&cross;</span><span class="notTakenBranch" title="Branch 24 not taken">&cross;</span><span class="notTakenBranch" title="Branch 25 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 27 not taken">&cross;</span><span class="notTakenBranch" title="Branch 28 not taken">&cross;</span></td>
-    <td align="right" class="linecount coveredLine"><pre>117249</pre></td>
+    <td align="right" class="linebranch"><span class="notTakenBranch" title="Branch 1 not taken">&cross;</span><span class="takenBranch" title="Branch 2 taken 104181 times">&check;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><span class="notTakenBranch" title="Branch 6 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 9 not taken">&cross;</span><span class="notTakenBranch" title="Branch 10 not taken">&cross;</span><span class="notTakenBranch" title="Branch 12 not taken">&cross;</span><span class="notTakenBranch" title="Branch 13 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 15 not taken">&cross;</span><span class="notTakenBranch" title="Branch 16 not taken">&cross;</span><span class="notTakenBranch" title="Branch 18 not taken">&cross;</span><span class="notTakenBranch" title="Branch 19 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 21 not taken">&cross;</span><span class="notTakenBranch" title="Branch 22 not taken">&cross;</span><span class="notTakenBranch" title="Branch 24 not taken">&cross;</span><span class="notTakenBranch" title="Branch 25 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 27 not taken">&cross;</span><span class="notTakenBranch" title="Branch 28 not taken">&cross;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>104181</pre></td>
     <td align="left" class="src coveredLine"><pre>    EPP_ASSERT(isValid(ent));</pre></td>
     </tr>
 
@@ -2122,14 +2122,14 @@
     <tr>
     <td align="right" class="lineno"><pre>261</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>117249</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>104181</pre></td>
     <td align="left" class="src coveredLine"><pre>    data[ent.listIdx.value] = Cell(Cell::Occupied{ poolIdx, ent.version, spawnerId });</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>262</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>117249</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>104181</pre></td>
     <td align="left" class="src coveredLine"><pre>}</pre></td>
     </tr>
 
@@ -2143,7 +2143,7 @@
     <tr>
     <td align="right" class="lineno"><pre>264</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>46153</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>33080</pre></td>
     <td align="left" class="src coveredLine"><pre>inline void EntityList::freeEntity(Entity ent)</pre></td>
     </tr>
 
@@ -2156,8 +2156,8 @@
 
     <tr>
     <td align="right" class="lineno"><pre>266</pre></td>
-    <td align="right" class="linebranch"><span class="notTakenBranch" title="Branch 1 not taken">&cross;</span><span class="takenBranch" title="Branch 2 taken 46153 times">&check;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><span class="notTakenBranch" title="Branch 6 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 9 not taken">&cross;</span><span class="notTakenBranch" title="Branch 10 not taken">&cross;</span><span class="notTakenBranch" title="Branch 12 not taken">&cross;</span><span class="notTakenBranch" title="Branch 13 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 15 not taken">&cross;</span><span class="notTakenBranch" title="Branch 16 not taken">&cross;</span><span class="notTakenBranch" title="Branch 18 not taken">&cross;</span><span class="notTakenBranch" title="Branch 19 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 21 not taken">&cross;</span><span class="notTakenBranch" title="Branch 22 not taken">&cross;</span><span class="notTakenBranch" title="Branch 24 not taken">&cross;</span><span class="notTakenBranch" title="Branch 25 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 27 not taken">&cross;</span><span class="notTakenBranch" title="Branch 28 not taken">&cross;</span></td>
-    <td align="right" class="linecount coveredLine"><pre>46153</pre></td>
+    <td align="right" class="linebranch"><span class="notTakenBranch" title="Branch 1 not taken">&cross;</span><span class="takenBranch" title="Branch 2 taken 33080 times">&check;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><span class="notTakenBranch" title="Branch 6 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 9 not taken">&cross;</span><span class="notTakenBranch" title="Branch 10 not taken">&cross;</span><span class="notTakenBranch" title="Branch 12 not taken">&cross;</span><span class="notTakenBranch" title="Branch 13 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 15 not taken">&cross;</span><span class="notTakenBranch" title="Branch 16 not taken">&cross;</span><span class="notTakenBranch" title="Branch 18 not taken">&cross;</span><span class="notTakenBranch" title="Branch 19 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 21 not taken">&cross;</span><span class="notTakenBranch" title="Branch 22 not taken">&cross;</span><span class="notTakenBranch" title="Branch 24 not taken">&cross;</span><span class="notTakenBranch" title="Branch 25 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 27 not taken">&cross;</span><span class="notTakenBranch" title="Branch 28 not taken">&cross;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>33080</pre></td>
     <td align="left" class="src coveredLine"><pre>    EPP_ASSERT(isValid(ent));</pre></td>
     </tr>
 
@@ -2171,28 +2171,28 @@
     <tr>
     <td align="right" class="lineno"><pre>268</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>46153</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>33080</pre></td>
     <td align="left" class="src coveredLine"><pre>    data[ent.listIdx.value] = Cell(Cell::Free{ freeIndex, ent.version.nextVersion() });</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>269</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>46153</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>33080</pre></td>
     <td align="left" class="src coveredLine"><pre>    freeIndex = ent.listIdx;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>270</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>46153</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>33080</pre></td>
     <td align="left" class="src coveredLine"><pre>    ++freeLeft;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>271</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>46153</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>33080</pre></td>
     <td align="left" class="src coveredLine"><pre>}</pre></td>
     </tr>
 
@@ -2206,7 +2206,7 @@
     <tr>
     <td align="right" class="lineno"><pre>273</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>7</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>6</pre></td>
     <td align="left" class="src coveredLine"><pre>inline void EntityList::freeAll()</pre></td>
     </tr>
 
@@ -2219,8 +2219,8 @@
 
     <tr>
     <td align="right" class="lineno"><pre>275</pre></td>
-    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 2 times">&check;</span><span class="takenBranch" title="Branch 1 taken 5 times">&check;</span></td>
-    <td align="right" class="linecount coveredLine"><pre>7</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 2 times">&check;</span><span class="takenBranch" title="Branch 1 taken 4 times">&check;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>6</pre></td>
     <td align="left" class="src coveredLine"><pre>    if (freeLeft == reserved)</pre></td>
     </tr>
 
@@ -2234,35 +2234,35 @@
     <tr>
     <td align="right" class="lineno"><pre>277</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>5</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>4</pre></td>
     <td align="left" class="src coveredLine"><pre>    freeLeft = reserved;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>278</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>5</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>4</pre></td>
     <td align="left" class="src coveredLine"><pre>    freeIndex = ListIdx(0);</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>279</pre></td>
-    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 2203 times">&check;</span><span class="takenBranch" title="Branch 1 taken 5 times">&check;</span></td>
-    <td align="right" class="linecount coveredLine"><pre>2208</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 2172 times">&check;</span><span class="takenBranch" title="Branch 1 taken 4 times">&check;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>2176</pre></td>
     <td align="left" class="src coveredLine"><pre>    for (auto i = freeIndex; i.value &lt; reserved - 1; ++i.value)</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>280</pre></td>
-    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 3 taken 2203 times">&check;</span><span class="notTakenBranch" title="Branch 4 not taken">&cross;</span></td>
-    <td align="right" class="linecount coveredLine"><pre>2203</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 3 taken 2172 times">&check;</span><span class="notTakenBranch" title="Branch 4 not taken">&cross;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>2172</pre></td>
     <td align="left" class="src coveredLine"><pre>        data[i.value] = Cell(Cell::Free{ ListIdx(i.value + 1), data[i.value].entVersion().nextVersion() });</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>281</pre></td>
-    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 3 taken 5 times">&check;</span><span class="notTakenBranch" title="Branch 4 not taken">&cross;</span></td>
-    <td align="right" class="linecount coveredLine"><pre>5</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 3 taken 4 times">&check;</span><span class="notTakenBranch" title="Branch 4 not taken">&cross;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>4</pre></td>
     <td align="left" class="src coveredLine"><pre>    data[reserved - 1] = Cell(Cell::Free{ ListIdx(ListIdx::BadValue), data[reserved - 1].entVersion().nextVersion() });</pre></td>
     </tr>
 
@@ -2305,7 +2305,7 @@
     <td align="right" class="lineno"><pre>287</pre></td>
     <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 9 times">&check;</span><span class="takenBranch" title="Branch 1 taken 6 times">&check;</span></td>
     <td align="right" class="linecount coveredLine"><pre>15</pre></td>
-    <td align="left" class="src coveredLine"><pre>    if (n &gt; reserved)</pre></td>
+    <td align="left" class="src coveredLine"><pre>    if (n > reserved)</pre></td>
     </tr>
 
     <tr>
@@ -2332,7 +2332,7 @@
     <tr>
     <td align="right" class="lineno"><pre>291</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>174</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>146</pre></td>
     <td align="left" class="src coveredLine"><pre>inline void EntityList::reserve(std::size_t newReserved)</pre></td>
     </tr>
 
@@ -2345,36 +2345,36 @@
 
     <tr>
     <td align="right" class="lineno"><pre>293</pre></td>
-    <td align="right" class="linebranch"><span class="notTakenBranch" title="Branch 0 not taken">&cross;</span><span class="takenBranch" title="Branch 1 taken 174 times">&check;</span><span class="notTakenBranch" title="Branch 4 not taken">&cross;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 8 not taken">&cross;</span><span class="notTakenBranch" title="Branch 9 not taken">&cross;</span><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><span class="notTakenBranch" title="Branch 12 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 14 not taken">&cross;</span><span class="notTakenBranch" title="Branch 15 not taken">&cross;</span><span class="notTakenBranch" title="Branch 17 not taken">&cross;</span><span class="notTakenBranch" title="Branch 18 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 20 not taken">&cross;</span><span class="notTakenBranch" title="Branch 21 not taken">&cross;</span><span class="notTakenBranch" title="Branch 23 not taken">&cross;</span><span class="notTakenBranch" title="Branch 24 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 26 not taken">&cross;</span><span class="notTakenBranch" title="Branch 27 not taken">&cross;</span></td>
-    <td align="right" class="linecount coveredLine"><pre>174</pre></td>
-    <td align="left" class="src coveredLine"><pre>    EPP_ASSERT(newReserved &gt; reserved);</pre></td>
+    <td align="right" class="linebranch"><span class="notTakenBranch" title="Branch 0 not taken">&cross;</span><span class="takenBranch" title="Branch 1 taken 146 times">&check;</span><span class="notTakenBranch" title="Branch 4 not taken">&cross;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 8 not taken">&cross;</span><span class="notTakenBranch" title="Branch 9 not taken">&cross;</span><span class="notTakenBranch" title="Branch 11 not taken">&cross;</span><span class="notTakenBranch" title="Branch 12 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 14 not taken">&cross;</span><span class="notTakenBranch" title="Branch 15 not taken">&cross;</span><span class="notTakenBranch" title="Branch 17 not taken">&cross;</span><span class="notTakenBranch" title="Branch 18 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 20 not taken">&cross;</span><span class="notTakenBranch" title="Branch 21 not taken">&cross;</span><span class="notTakenBranch" title="Branch 23 not taken">&cross;</span><span class="notTakenBranch" title="Branch 24 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 26 not taken">&cross;</span><span class="notTakenBranch" title="Branch 27 not taken">&cross;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>146</pre></td>
+    <td align="left" class="src coveredLine"><pre>    EPP_ASSERT(newReserved > reserved);</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>294</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>174</pre></td>
-    <td align="left" class="src coveredLine"><pre>    Cell* newMemory = reinterpret_cast&lt;Cell*&gt;(operator new[](sizeof(Cell) * std::uintptr_t(newReserved)));</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>146</pre></td>
+    <td align="left" class="src coveredLine"><pre>    Cell* newMemory = reinterpret_cast&lt;Cell*>(operator new[](sizeof(Cell) * std::uintptr_t(newReserved)));</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>295</pre></td>
-    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 139 times">&check;</span><span class="takenBranch" title="Branch 1 taken 35 times">&check;</span></td>
-    <td align="right" class="linecount coveredLine"><pre>174</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 116 times">&check;</span><span class="takenBranch" title="Branch 1 taken 30 times">&check;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>146</pre></td>
     <td align="left" class="src coveredLine"><pre>    if (data) {</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>296</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>139</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>116</pre></td>
     <td align="left" class="src coveredLine"><pre>        std::memcpy(newMemory, data, reserved * sizeof(Cell));</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>297</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>139</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>116</pre></td>
     <td align="left" class="src coveredLine"><pre>        operator delete[](data);</pre></td>
     </tr>
 
@@ -2388,14 +2388,14 @@
     <tr>
     <td align="right" class="lineno"><pre>299</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>174</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>146</pre></td>
     <td align="left" class="src coveredLine"><pre>    freeLeft += newReserved - reserved;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>300</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>174</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>146</pre></td>
     <td align="left" class="src coveredLine"><pre>    data = newMemory;</pre></td>
     </tr>
 
@@ -2415,22 +2415,22 @@
 
     <tr>
     <td align="right" class="lineno"><pre>303</pre></td>
-    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 174 times">&check;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span><span class="takenBranch" title="Branch 3 taken 322706 times">&check;</span><span class="takenBranch" title="Branch 4 taken 174 times">&check;</span><br/></td>
-    <td align="right" class="linecount coveredLine"><pre>322880</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 146 times">&check;</span><span class="notTakenBranch" title="Branch 2 not taken">&cross;</span><span class="takenBranch" title="Branch 3 taken 298094 times">&check;</span><span class="takenBranch" title="Branch 4 taken 146 times">&check;</span><br/></td>
+    <td align="right" class="linecount coveredLine"><pre>298240</pre></td>
     <td align="left" class="src coveredLine"><pre>    for (ListIdx i(reserved); i.value &lt; newReserved - 1; ++i.value)</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>304</pre></td>
-    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 2 taken 322706 times">&check;</span><span class="notTakenBranch" title="Branch 3 not taken">&cross;</span></td>
-    <td align="right" class="linecount coveredLine"><pre>322706</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 2 taken 298094 times">&check;</span><span class="notTakenBranch" title="Branch 3 not taken">&cross;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>298094</pre></td>
     <td align="left" class="src coveredLine"><pre>        new (data + i.value) Cell(Cell::Free{ ListIdx(i.value + 1), EntVersion(0) });</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>305</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>174</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>146</pre></td>
     <td align="left" class="src coveredLine"><pre>    new (data + (newReserved - 1)) Cell(Cell::Free{ ListIdx(freeIndex), EntVersion(0) });</pre></td>
     </tr>
 
@@ -2444,21 +2444,21 @@
     <tr>
     <td align="right" class="lineno"><pre>307</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>174</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>146</pre></td>
     <td align="left" class="src coveredLine"><pre>    freeIndex = ListIdx(reserved);</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>308</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>174</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>146</pre></td>
     <td align="left" class="src coveredLine"><pre>    reserved = newReserved;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>309</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>174</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>146</pre></td>
     <td align="left" class="src coveredLine"><pre>}</pre></td>
     </tr>
 
@@ -2472,7 +2472,7 @@
     <tr>
     <td align="right" class="lineno"><pre>311</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>3088967</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>3042229</pre></td>
     <td align="left" class="src coveredLine"><pre>inline EntityList::Cell::Occupied EntityList::get(Entity ent) const</pre></td>
     </tr>
 
@@ -2485,15 +2485,15 @@
 
     <tr>
     <td align="right" class="lineno"><pre>313</pre></td>
-    <td align="right" class="linebranch"><span class="notTakenBranch" title="Branch 1 not taken">&cross;</span><span class="takenBranch" title="Branch 2 taken 3088967 times">&check;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><span class="notTakenBranch" title="Branch 6 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 9 not taken">&cross;</span><span class="notTakenBranch" title="Branch 10 not taken">&cross;</span><span class="notTakenBranch" title="Branch 12 not taken">&cross;</span><span class="notTakenBranch" title="Branch 13 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 15 not taken">&cross;</span><span class="notTakenBranch" title="Branch 16 not taken">&cross;</span><span class="notTakenBranch" title="Branch 18 not taken">&cross;</span><span class="notTakenBranch" title="Branch 19 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 21 not taken">&cross;</span><span class="notTakenBranch" title="Branch 22 not taken">&cross;</span><span class="notTakenBranch" title="Branch 24 not taken">&cross;</span><span class="notTakenBranch" title="Branch 25 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 27 not taken">&cross;</span><span class="notTakenBranch" title="Branch 28 not taken">&cross;</span></td>
-    <td align="right" class="linecount coveredLine"><pre>3088967</pre></td>
+    <td align="right" class="linebranch"><span class="notTakenBranch" title="Branch 1 not taken">&cross;</span><span class="takenBranch" title="Branch 2 taken 3042229 times">&check;</span><span class="notTakenBranch" title="Branch 5 not taken">&cross;</span><span class="notTakenBranch" title="Branch 6 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 9 not taken">&cross;</span><span class="notTakenBranch" title="Branch 10 not taken">&cross;</span><span class="notTakenBranch" title="Branch 12 not taken">&cross;</span><span class="notTakenBranch" title="Branch 13 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 15 not taken">&cross;</span><span class="notTakenBranch" title="Branch 16 not taken">&cross;</span><span class="notTakenBranch" title="Branch 18 not taken">&cross;</span><span class="notTakenBranch" title="Branch 19 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 21 not taken">&cross;</span><span class="notTakenBranch" title="Branch 22 not taken">&cross;</span><span class="notTakenBranch" title="Branch 24 not taken">&cross;</span><span class="notTakenBranch" title="Branch 25 not taken">&cross;</span><br/><span class="notTakenBranch" title="Branch 27 not taken">&cross;</span><span class="notTakenBranch" title="Branch 28 not taken">&cross;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>3042229</pre></td>
     <td align="left" class="src coveredLine"><pre>    EPP_ASSERT(isValid(ent));</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>314</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>3088967</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>3042229</pre></td>
     <td align="left" class="src coveredLine"><pre>    return data[ent.listIdx.value].asOccupied();</pre></td>
     </tr>
 
@@ -2537,7 +2537,7 @@
 
   <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr><td class="hr"><td></tr>
-    <tr><td class="footer">Generated by: <a href="http://gcovr.com">GCOVR (Version 3.4)</a></td></tr>
+    <tr><td class="footer">Generated by: <a href="http://gcovr.com">GCOVR (Version 4.2)</a></td></tr>
   </table>
   <br>
 

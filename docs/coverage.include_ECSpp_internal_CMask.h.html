@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <title>Head</title>
   <style media="screen" type="text/css">
-  
+
     body
     {
       color: #000000;
@@ -275,7 +275,7 @@
           </tr>
           <tr>
             <td class="headerName">Date:</td>
-            <td class="headerValue">2020-03-09 02:12:46</td>
+            <td class="headerValue">2020-08-22 22:38:55</td>
             <td></td>
             <td class="headerName">Branches:</td>
             <td class="headerTableEntry">8</td>
@@ -298,7 +298,7 @@
       <td width="75%" align="left" class="srcHeader src">Source</td>
     </tr>
 
-    
+
     <tr>
     <td align="right" class="lineno"><pre>1</pre></td>
     <td align="right" class="linebranch"></td>
@@ -324,14 +324,14 @@
     <td align="right" class="lineno"><pre>4</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>#include &lt;ECSpp/Component.h&gt;</pre></td>
+    <td align="left" class="src "><pre>#include &lt;ECSpp/Component.h></pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>5</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>#include &lt;bitset&gt;</pre></td>
+    <td align="left" class="src "><pre>#include &lt;bitset></pre></td>
     </tr>
 
     <tr>
@@ -415,7 +415,7 @@
     <td align="right" class="lineno"><pre>17</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    using IdxList_t = decltype(IdOfL&lt;&gt;());</pre></td>
+    <td align="left" class="src "><pre>    using IdxList_t = decltype(IdOfL&lt;>());</pre></td>
     </tr>
 
     <tr>
@@ -429,7 +429,7 @@
     <td align="right" class="lineno"><pre>19</pre></td>
     <td align="right" class="linebranch"></td>
     <td align="right" class="linecount "><pre></pre></td>
-    <td align="left" class="src "><pre>    using Bitset_t = std::bitset&lt;CMetadata::MaxRegisteredComponents&gt;;</pre></td>
+    <td align="left" class="src "><pre>    using Bitset_t = std::bitset&lt;CMetadata::MaxRegisteredComponents>;</pre></td>
     </tr>
 
     <tr>
@@ -1485,7 +1485,7 @@
     <tr>
     <td align="right" class="lineno"><pre>170</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>847527</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>825548</pre></td>
     <td align="left" class="src coveredLine"><pre>inline CMask::CMask(IdxList_t list) { set(list); }</pre></td>
     </tr>
 
@@ -1499,7 +1499,7 @@
     <tr>
     <td align="right" class="lineno"><pre>172</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>312711</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>335195</pre></td>
     <td align="left" class="src coveredLine"><pre>inline CMask::CMask(CMask&amp;&amp; rval) { *this = std::move(rval); }</pre></td>
     </tr>
 
@@ -1513,7 +1513,7 @@
     <tr>
     <td align="right" class="lineno"><pre>174</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>312719</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>335203</pre></td>
     <td align="left" class="src coveredLine"><pre>inline CMask&amp; CMask::operator=(CMask&amp;&amp; rval)</pre></td>
     </tr>
 
@@ -1527,21 +1527,21 @@
     <tr>
     <td align="right" class="lineno"><pre>176</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>312719</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>335203</pre></td>
     <td align="left" class="src coveredLine"><pre>    bitset = std::move(rval.bitset);</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>177</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>312719</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>335203</pre></td>
     <td align="left" class="src coveredLine"><pre>    rval.bitset.reset();</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>178</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>312719</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>335203</pre></td>
     <td align="left" class="src coveredLine"><pre>    return *this;</pre></td>
     </tr>
 
@@ -1562,7 +1562,7 @@
     <tr>
     <td align="right" class="lineno"><pre>181</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>1250369</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>1220681</pre></td>
     <td align="left" class="src coveredLine"><pre>inline void CMask::set(Idx_t bitIndex) { bitset.set(bitIndex.value); }</pre></td>
     </tr>
 
@@ -1576,7 +1576,7 @@
     <tr>
     <td align="right" class="lineno"><pre>183</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>847532</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>825553</pre></td>
     <td align="left" class="src coveredLine"><pre>inline void CMask::set(IdxList_t list)</pre></td>
     </tr>
 
@@ -1589,22 +1589,22 @@
 
     <tr>
     <td align="right" class="lineno"><pre>185</pre></td>
-    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 2 taken 7409 times">&check;</span><span class="takenBranch" title="Branch 3 taken 847530 times">&check;</span></td>
-    <td align="right" class="linecount coveredLine"><pre>854939</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 2 taken 11486 times">&check;</span><span class="takenBranch" title="Branch 3 taken 825551 times">&check;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>837037</pre></td>
     <td align="left" class="src coveredLine"><pre>    for (auto idx : list)</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>186</pre></td>
-    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 7407 times">&check;</span><span class="takenBranch" title="Branch 2 taken 2 times">&check;</span></td>
-    <td align="right" class="linecount coveredLine"><pre>7409</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 1 taken 11484 times">&check;</span><span class="takenBranch" title="Branch 2 taken 2 times">&check;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>11486</pre></td>
     <td align="left" class="src coveredLine"><pre>        set(idx);</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>187</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>847530</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>825551</pre></td>
     <td align="left" class="src coveredLine"><pre>}</pre></td>
     </tr>
 
@@ -1674,7 +1674,7 @@
     <tr>
     <td align="right" class="lineno"><pre>197</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>19</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>10</pre></td>
     <td align="left" class="src coveredLine"><pre>inline CMask&amp; CMask::removeCommon(CMask const&amp; other)</pre></td>
     </tr>
 
@@ -1688,14 +1688,14 @@
     <tr>
     <td align="right" class="lineno"><pre>199</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>19</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>10</pre></td>
     <td align="left" class="src coveredLine"><pre>    bitset &amp;= ~other.bitset;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>200</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>19</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>10</pre></td>
     <td align="left" class="src coveredLine"><pre>    return *this;</pre></td>
     </tr>
 
@@ -1730,7 +1730,7 @@
     <tr>
     <td align="right" class="lineno"><pre>205</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>3219689</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>3136331</pre></td>
     <td align="left" class="src coveredLine"><pre>inline bool CMask::get(Idx_t bitIndex) const { return bitset.test(bitIndex.value); }</pre></td>
     </tr>
 
@@ -1772,7 +1772,7 @@
     <tr>
     <td align="right" class="lineno"><pre>211</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>235</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>209</pre></td>
     <td align="left" class="src coveredLine"><pre>inline bool CMask::hasCommon(CMask const&amp; other) const { return (bitset &amp; other.bitset).any(); }</pre></td>
     </tr>
 
@@ -1786,7 +1786,7 @@
     <tr>
     <td align="right" class="lineno"><pre>213</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>3224</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>5246</pre></td>
     <td align="left" class="src coveredLine"><pre>inline bool CMask::contains(CMask const&amp; other) const { return other.bitset == (other.bitset &amp; bitset); }</pre></td>
     </tr>
 
@@ -1828,7 +1828,7 @@
     <tr>
     <td align="right" class="lineno"><pre>219</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>1498176</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>1474640</pre></td>
     <td align="left" class="src coveredLine"><pre>inline bool CMask::operator==(CMask const&amp; rhs) const { return bitset == rhs.bitset; }</pre></td>
     </tr>
 
@@ -1842,7 +1842,7 @@
     <tr>
     <td align="right" class="lineno"><pre>221</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>61024</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>52949</pre></td>
     <td align="left" class="src coveredLine"><pre>inline bool CMask::operator!=(CMask const&amp; rhs) const { return !(*this == rhs); }</pre></td>
     </tr>
 
@@ -1879,7 +1879,7 @@
 
   <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr><td class="hr"><td></tr>
-    <tr><td class="footer">Generated by: <a href="http://gcovr.com">GCOVR (Version 3.4)</a></td></tr>
+    <tr><td class="footer">Generated by: <a href="http://gcovr.com">GCOVR (Version 4.2)</a></td></tr>
   </table>
   <br>
 

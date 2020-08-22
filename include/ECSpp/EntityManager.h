@@ -52,10 +52,10 @@ public:
      * @param ent A valid entity
      * @param newArchetype Any archetype. A new archetype of ent
      * @param fn A Callable type that can use the Creator instance to construct new components
-     * @returns True when changed the archetype, false otherwise (newArchetype was the same as ent's current archetype) 
+     * @returns Instance of IterTimeChange enum - ArchetypeCurrent when changed the archetype, ChangeFailed otherwise (newArchetype was the same as ent's current archetype)
      */
     template <typename FnType = DefCreationFn_t>
-    bool changeArchetype(Entity ent, Archetype const& newArchetype, FnType fn = DefCreationFn);
+    IterTimeChange changeArchetype(Entity ent, Archetype const& newArchetype, FnType fn = DefCreationFn);
 
 
     /// Changes the archetype of ent, removing components from toRemove list and adding the ones from toAdd list
@@ -66,24 +66,10 @@ public:
      * @param toAdd Components that will be added to ent (or kept it these are already there). toAdd has a priority over toRemove
      * @param toRemove Components that will be removed from ent (except for the ones specified in toAdd)
      * @param fn A Callable type that can use the Creator instance to construct the added components
-     * @returns True when changed the archetype, false otherwise (resulting archetype was the same as ent's current archetype) 
+     * @returns Instance of IterTimeChange enum - ArchetypeCurrent when changed the archetype, ChangeFailed otherwise (newArchetype was the same as ent's current archetype)
      */
     template <typename FnType = DefCreationFn_t>
-    bool changeArchetype(Entity ent, IdList_t toRemove, IdList_t toAdd, FnType fn = DefCreationFn);
-
-
-    /// Changes the archetype of the entity associated with the iterator and returns the next valid one
-    /**
-     * There are no overloaded versions of this function (for iterators) on purpose - it is more optimal to create a separate archetype for those situations.
-     * @tparam Iter EntitySpawner::EntityPool_t::Container_t::iterator or Selection<...>::Iterator_t
-     * @tparam FnType Callable type that takes r-value reference to the EntityCreator
-     * @param it A valid and non-end iterator
-     * @param newArchetype Any archetype - a new archetype of the entity associated with the iterator  
-     * @param fn A Callable type that can use the Creator instance to construct the added components
-     * @returns A valid iterator to the next entity or end
-     */
-    template <typename Iter, typename FnType = DefCreationFn_t>
-    Iter changeArchetype(Iter const& it, Archetype const& newArchetype, FnType fn = DefCreationFn);
+    IterTimeChange changeArchetype(Entity ent, IdList_t toRemove, IdList_t toAdd, FnType fn = DefCreationFn);
 
 
     /// Destroys a valid entity and makes it invalid
@@ -92,18 +78,6 @@ public:
      * @throws (Debug only) Throws the AssertionFailed exception if ent is invalid
      */
     void destroy(Entity ent);
-
-
-    /// Destroys the entity associated with a given iterator and returns the next valid one
-    /**
-     * The entity that the iterator points to becomes invalid
-     * @tparam Iter EntitySpawner::EntityPool_t::Container_t::iterator or Selection<...>::Iterator_t
-     * @param it A valid and non-end iterator
-     * @returns A valid iterator to the next entity or end
-     * @throws (Debug only) Throws the AssertionFailed exception if "it" is invalid
-     */
-    template <typename Iter>
-    Iter destroy(Iter const& it);
 
 
     /// Destroys every entity, keeps resereved memory
@@ -258,57 +232,34 @@ EntityManager::spawn(Archetype const& arch, std::size_t n, FnType fn)
 }
 
 template <typename FnType>
-inline bool EntityManager::changeArchetype(Entity ent, Archetype const& newArchetype, FnType fn)
+inline IterTimeChange EntityManager::changeArchetype(Entity ent, Archetype const& newArchetype, FnType fn)
 {
     EPP_ASSERT(entList.isValid(ent));
     EntitySpawner& spawner = getSpawner(ent);
     if (spawner.mask != newArchetype.getMask()) {
         getSpawner(newArchetype).moveEntityHere(ent, entList, spawner, std::move(fn));
-        return true;
+        return IterTimeChange::ArchetypeCurrent;
     }
-    return false;
+    return IterTimeChange::ChangeFailed;
 }
 
 template <typename FnType>
-inline bool EntityManager::changeArchetype(Entity ent, IdList_t toRemove, IdList_t toAdd, FnType fn)
+inline IterTimeChange EntityManager::changeArchetype(Entity ent, IdList_t toRemove, IdList_t toAdd, FnType fn)
 {
     EPP_ASSERT(entList.isValid(ent));
     EntitySpawner& spawner = getSpawner(ent);
     Archetype newArchetype = spawner.makeArchetype().removeComponent(toRemove).addComponent(toAdd);
     if (spawner.mask != newArchetype.getMask()) {
         getSpawner(newArchetype).moveEntityHere(ent, entList, spawner, std::move(fn));
-        return true;
+        return IterTimeChange::ArchetypeCurrent;
     }
-    return false;
-}
-
-template <typename Iter, typename FnType>
-inline Iter
-EntityManager::changeArchetype(Iter const& it, Archetype const& newArchetype, FnType fn)
-{
-    if (changeArchetype(*it, newArchetype, std::move(fn)))
-        if constexpr (std::is_same_v<Iter, EPoolIter_t> || std::is_same_v<Iter, EPoolCIter_t>)
-            return it;
-        else if (it.isValid())
-            return it;
-    return ++Iter(it); // if didn't change - entity stays in its place -> need to increment
-                       // or changed and iterator is now invalid (iterator can be valid after a change)
+    return IterTimeChange::ChangeFailed;
 }
 
 inline void EntityManager::destroy(Entity ent)
 {
     EPP_ASSERT(entList.isValid(ent));
     getSpawner(ent).destroy(ent, entList);
-}
-
-template <typename Iter>
-inline Iter EntityManager::destroy(Iter const& it)
-{
-    destroy(*it); // throws for invalid or end
-    if constexpr (!std::is_same_v<Iter, EPoolIter_t> && !std::is_same_v<Iter, EPoolCIter_t>)
-        if (!it.isValid())
-            return ++Iter(it);
-    return it;
 }
 
 inline void EntityManager::clear()
@@ -344,8 +295,8 @@ inline void EntityManager::shrinkToFit()
 template <typename... CTypes>
 inline void EntityManager::updateSelection(Selection<CTypes...>& selection)
 {
-    for (; selection.checkedSpawnersNum < spawners.size(); ++selection.checkedSpawnersNum)
-        selection.addSpawnerIfMeetsRequirements(spawners[selection.checkedSpawnersNum]);
+    while (selection.checkedSpawnersNum < spawners.size())
+        selection.addSpawnerIfMeetsRequirements(spawners[selection.checkedSpawnersNum++]);
 }
 
 inline EntityList::Cell::Occupied EntityManager::cellOf(Entity ent) const

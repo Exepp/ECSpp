@@ -1,10 +1,7 @@
 var searchData=
 [
-  ['end_34',['end',['../classepp_1_1Selection.html#a93c065dec3b4340b6965ff81d15e8a49',1,'epp::Selection::end()'],['../classepp_1_1Selection.html#af983e423a44bff7ca7c531e3f60d9bdd',1,'epp::Selection::end() const']]],
-  ['entitiesof_35',['entitiesOf',['../classepp_1_1EntityManager.html#a9d2909ef76779afa99e6be3ca41e7f31',1,'epp::EntityManager']]],
-  ['entity_36',['Entity',['../structepp_1_1Entity.html',1,'epp']]],
-  ['entitylist_37',['EntityList',['../classepp_1_1EntityList.html',1,'epp::EntityList'],['../classepp_1_1EntityList.html#a67c07d88b68fc3b01e29551b87126bbd',1,'epp::EntityList::EntityList()']]],
-  ['entitymanager_38',['EntityManager',['../classepp_1_1EntityManager.html',1,'epp']]],
-  ['entityspawner_39',['EntitySpawner',['../classepp_1_1EntitySpawner.html',1,'epp::EntitySpawner'],['../classepp_1_1EntitySpawner.html#aa97a2cff03446282f0d49413675c7e75',1,'epp::EntitySpawner::EntitySpawner()']]],
-  ['entversion_40',['EntVersion',['../structepp_1_1EntVersion.html',1,'epp::EntVersion'],['../classepp_1_1EntityList_1_1Cell.html#a342b6cf51e84cfee4b68c0312dd3cad7',1,'epp::EntityList::Cell::entVersion()']]]
+  ['fitnextn_39',['fitNextN',['../classepp_1_1CPool.html#a531d5f11291ba779176d8122da6382fb',1,'epp::CPool::fitNextN()'],['../classepp_1_1EntityList.html#a2e286f7c541ff6ed0e72782789b7a74b',1,'epp::EntityList::fitNextN()'],['../classepp_1_1EntitySpawner.html#a024fc44ee47d17dd9f5bf77f1de54f04',1,'epp::EntitySpawner::fitNextN()'],['../structepp_1_1Pool.html#a4d46ca3b79090e2f6452835b381fce40',1,'epp::Pool::fitNextN()']]],
+  ['foreach_40',['forEach',['../classepp_1_1Selection.html#acc47dfa84773bdf0fdb26eead7c32b52',1,'epp::Selection']]],
+  ['freeall_41',['freeAll',['../classepp_1_1EntityList.html#a0ce28c03714f81c78bd11d6c247ad5d2',1,'epp::EntityList']]],
+  ['freeentity_42',['freeEntity',['../classepp_1_1EntityList.html#a11541909aa2b245b93af45060c57156a',1,'epp::EntityList']]]
 ];
