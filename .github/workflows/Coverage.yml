@@ -6,6 +6,7 @@ env:
   BUILD_TYPE: Debug
   CXXFLAGS: "-O0 --coverage -fno-inline -fno-inline-small-functions -fno-default-inline"
   CXX: g++
+  CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
 jobs:
   build:
@@ -34,9 +35,8 @@ jobs:
         run: ctest -C $BUILD_TYPE
         
       - name: Upload coverage to Codecov
-        working-directory: build
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        shell: bash
+        working-directory: ${{runner.workspace}}/build
         run: |
           wget https://codecov.io/bash -O codecov
           chmod +x ./codecov
