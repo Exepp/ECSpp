@@ -2,20 +2,15 @@
 
 # Table of contents
 * [Introduction](#introduction)
-    * [Motivation](#motivation)
 * [Code example](#code-example)
-* [Benchmarks](#benchmarks)
-    * [Building](#building-benchmarks)
-    * [Results](#results)
-* [Tests](#tests)
-    * [Building](#building-tests)
+* [Building tests and benchmarks](#building-tests-and-benchmarks)
     * [Coverage](#coverage)
+* [Performance](#performance)
 
 Current TODO
 ------------
 Documentation's home page
 Github's actions
-Better out of the box building
 
 # Introduction
 ECSpp is a header only library that manages objects in games or simulations. It was developed with "[data-oriented design](https://www.youtube.com/watch?v=rX0ItVEVjHc)" approach to create a fast [ECS](https://en.wikipedia.org/wiki/Entity_component_system) model. Library optimizes the iteration over components by arranging them contiguously in memory, maximizing the spatial locality of the data.
@@ -79,44 +74,29 @@ int main()
 }
 
 ```
+# Building tests and benchmarks
+To test this library, I am using google's test library: [googletest](https://github.com/google/googletest).
+To test the performance of this library, I am using google's benchmark library: [benchmark](https://github.com/google/benchmark).
 
-# Benchmarks
-To test the performance of this library, I am using google's benchmark library: [benchmark](https://github.com/google/benchmark). The "external" folder contains header files, lib files and executables needed to create the solution and build benchmarks for x64 version on Linux and Windows. If included files do not work on your platform, unfortunately for now you will have to provide the correct ones yourself.
+* Clone the library
+    * `$ git clone https://github.com/Exepp/ECSpp.git --recurse-submodules`
+    * or 
+    * `$ git clone https://github.com/Exepp/ECSpp.git`
+    * `$ cd ECSpp`
+    * `$ git submodule update --init`
+* Generate build files using cmake
+(in ECSpp's root directory)
+    * `$ mkdir build`
+    * `$ cd build`
+    * `$ cmake ..`
+    * `$ cmake --build . --target tests`
+    * Using single-config generators:
+        * `$ cmake .. -DCMAKE_BUILD_TYPE=Release && cmake --build . --target benchmarks`
+    * Using multi-config generators:
+        * `$ cmake --build . --config Release --target benchmarks`
 
-Most of these benchmarks are based on the benchmarks from the [entt](https://github.com/skypjack/entt) library to see how my library compares to arguably the best ECS library. See below for the results.
+# Coverage
+Coverage available at [docs/coverage.html](https://exepp.github.io/ECSpp/coverage.html)
 
-## Building benchmarks
-On windows:
-* Run makeSolution_Win.bat 
-* Open the generated solution
-* Build Benchmarks project
-
-On linux:
-* `$ ./makeSolution_Linux.sh` 
-* `$ ./runBenchmarks.sh` 
-
-## Results
-See the results in [BenchmarksResults](https://github.com/Exepp/ECSpp/blob/master/BenchmarksResults/makeCharts.ipynb) folder.
-More to come soon.
-
-# Tests
-To test this library, I am using google's test library: [googletest](https://github.com/google/googletest). 
-As in the case of the benchmarks, files to build tests for x64 version on Linux and Windows also resides in the "external" folder.
-
-## Building tests
-On windows:
-* Run makeSolution_Win.bat 
-* Open the generated solution
-* Build Tests project
-
-On linux:
-* `$ ./makeSolution_Linux.sh` 
-* `$ ./runTests.sh` 
-
-## Coverage
-For now I am using gcc's gcov to generate the code coverage data of the tests and gcovr to generate the html representation. To generate the coverage:
-* Make sure that you have gcovr package
-    * `$ apt install gcovr`
-* `$ ./makeCoverage.sh`
-
-Coverage will be available at [docs/coverage.html](https://exepp.github.io/ECSpp/coverage.html)
+# Performance
+Most of my benchmarks are based on the benchmarks from the [entt](https://github.com/skypjack/entt) library, to see how my library compares to arguably the best ECS library. See my results in [BenchmarksResults](https://github.com/Exepp/ECSpp/blob/master/BenchmarksResults/makeCharts.ipynb) folder.
