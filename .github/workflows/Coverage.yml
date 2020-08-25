@@ -1,0 +1,43 @@
+name: Coverage
+
+on: [push]
+
+env:
+  BUILD_TYPE: Debug
+  CXXFLAGS: "-O0 --coverage -fno-inline -fno-inline-small-functions -fno-default-inline"
+  CXX: g++
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:      
+      - uses: actions/checkout@v2
+      - name: Create Build Environment
+        run: |
+          git submodule update --init
+          cmake -E make_directory ${{runner.workspace}}/build
+
+      - name: Configure CMake
+        shell: bash
+        working-directory: ${{runner.workspace}}/build
+        run: cmake $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DECSPP_BENCHMARKS=OFF
+
+      - name: Build
+        working-directory: ${{runner.workspace}}/build
+        shell: bash
+        run: cmake --build . --config $BUILD_TYPE
+
+      - name: Test
+        working-directory: ${{runner.workspace}}/build
+        shell: bash
+        run: ctest -C $BUILD_TYPE
+        
+      - name: Upload coverage to Codecov
+        working-directory: build
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        run: |
+          wget https://codecov.io/bash -O codecov
+          chmod +x codecov
+          ./codecov -t $CODECOV_TOKEN -B $GITHUB_REF -s .
