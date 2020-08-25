@@ -39,5 +39,5 @@ jobs:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         run: |
           wget https://codecov.io/bash -O codecov
-          chmod +x codecov
+          chmod +x ./codecov
           ./codecov -t $CODECOV_TOKEN -B $GITHUB_REF -s .
