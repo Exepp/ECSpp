@@ -1,4 +1,6 @@
 # ECSpp - C++ 17 Header-only ECS library
+![Build](https://github.com/Exepp/ECSpp/workflows/Build/badge.svg)
+[![codecov](https://codecov.io/gh/Exepp/ECSpp/branch/master/graph/badge.svg)](https://codecov.io/gh/Exepp/ECSpp)
 
 # Table of contents
 * [Introduction](#introduction)
