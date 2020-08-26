@@ -14,11 +14,13 @@ jobs:
     steps:      
       - uses: actions/checkout@v2
       - name: Create Build Environment
-        run: git submodule update --init
-
+        run: |
+          git submodule update --init
+          cmake -E make_directory build
+          
       - name: Configure CMake
         working-directory: build
-        run: cmake .. -DECSPP_BENCHMARKS=OFF
+        run: cmake -DECSPP_BENCHMARKS=OFF ..
 
       - name: Build
         working-directory: build
