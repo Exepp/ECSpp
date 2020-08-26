@@ -3,13 +3,12 @@ name: Coverage
 on: [push]
 
 env:
-  BUILD_TYPE: Debug
   CXXFLAGS: "-O0 --coverage -fno-inline -fno-inline-small-functions -fno-default-inline"
   CXX: g++
   CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
 jobs:
-  build:
+  codecov:
     runs-on: ubuntu-latest
 
     steps:      
@@ -17,26 +16,22 @@ jobs:
       - name: Create Build Environment
         run: |
           git submodule update --init
-          cmake -E make_directory ${{runner.workspace}}/build
-
+          cmake -E make_directory build
+          
       - name: Configure CMake
-        shell: bash
-        working-directory: ${{runner.workspace}}/build
-        run: cmake $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DECSPP_BENCHMARKS=OFF
+        working-directory: build
+        run: cmake -DECSPP_BENCHMARKS=OFF ..
 
       - name: Build
-        working-directory: ${{runner.workspace}}/build
-        shell: bash
-        run: cmake --build . --config $BUILD_TYPE
+        working-directory: build
+        run: cmake --build .
 
       - name: Test
-        working-directory: ${{runner.workspace}}/build
-        shell: bash
-        run: ctest -C $BUILD_TYPE
+        working-directory: build
+        run: ctest
         
       - name: Upload coverage to Codecov
-        shell: bash
-        working-directory: ${{runner.workspace}}/build
+        working-directory: build
         run: |
           wget https://codecov.io/bash -O codecov
           chmod +x ./codecov
