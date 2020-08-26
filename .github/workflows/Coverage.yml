@@ -22,7 +22,7 @@ jobs:
       - name: Configure CMake
         shell: bash
         working-directory: build
-        run: cmake $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DECSPP_BENCHMARKS=OFF
+        run: cmake .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DECSPP_BENCHMARKS=OFF
 
       - name: Build
         working-directory: build
