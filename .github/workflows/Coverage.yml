@@ -21,22 +21,22 @@ jobs:
 
       - name: Configure CMake
         shell: bash
-        working-directory: ${{runner.workspace}}/build
+        working-directory: build
         run: cmake $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DECSPP_BENCHMARKS=OFF
 
       - name: Build
-        working-directory: ${{runner.workspace}}/build
+        working-directory: build
         shell: bash
         run: cmake --build . --config $BUILD_TYPE
 
       - name: Test
-        working-directory: ${{runner.workspace}}/build
+        working-directory: build
         shell: bash
         run: ctest -C $BUILD_TYPE
         
       - name: Upload coverage to Codecov
         shell: bash
-        working-directory: ${{runner.workspace}}/build
+        working-directory: build
         run: |
           wget https://codecov.io/bash -O codecov
           chmod +x ./codecov
