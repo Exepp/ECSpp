@@ -27,7 +27,7 @@ macro(package_add_test TESTNAME)
     
 endmacro()
 
-package_add_test(ECSppTests 
+package_add_test(tests 
     Utility/PoolT.cpp
     EntityManager/ComponentT.cpp
     EntityManager/CMaskT.cpp
