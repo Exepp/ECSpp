@@ -239,53 +239,6 @@ TEST(EntityManager, ChangeArchetypeSelectionForEach)
     TestEntityManager<TComp3, TComp1>(mgr, 123 + 1e4, archTo, {});
 }
 
-TEST(EntityManager, ChangeArchetypeEntityPoolIterator)
-{
-    EntityManager mgr;
-    Archetype archFrom(IdOf<TComp3, TComp4>());
-    Archetype archTo(IdOf<TComp3, TComp2>());
-
-    auto [beg1, end1] = mgr.spawn(archFrom, 123, [](EntityCreator&& cr) { cr.constructed<TComp3>(TComp3::Arr_t{ 444, 44, 4 }); });
-    std::vector<Entity> ents = { beg1, end1 }; // copy
-
-    for (auto it = ents.begin(), end = ents.end(); it != end; ++it)
-        mgr.changeArchetype(*it, archFrom); // does nothing
-    TestEntityManager<TComp3, TComp1>(mgr, 123, archFrom, ents, ents.front(), { 444, 44, 4 });
-
-    for (auto it = ents.begin(), end = ents.end(); it != end; ++it)
-        mgr.changeArchetype(*it, archTo, [](EntityCreator&& creator) {
-            creator.constructed<TComp2>(TComp2::Arr_t{ 123, 99, 22 });
-        });
-    TestEntityManager<TComp3, TComp1>(mgr, 123, archFrom, {});
-    TestEntityManager<TComp2, TComp1>(mgr, 123, archTo, ents, ents.front(), { 123, 99, 22 });
-    TestEntityManager<TComp3, TComp1>(mgr, 123, archTo, ents, ents.front(), { 444, 44, 4 });
-
-    int cnt = 0;
-    auto [beg2, end2] = mgr.spawn(archTo, 1e4, [&cnt](EntityCreator&& cr) { if(cnt++ == 1e3) cr.constructed<TComp3>(TComp3::Arr_t{ 222, 22, 2 }); });
-    ents = { beg2 - 123, end2 };
-    TestEntityManager<TComp3, TComp1>(mgr, 123 + 1e4, archFrom, {});
-    TestEntityManager<TComp3, TComp1>(mgr, 123 + 1e4, archTo, ents, ents.front(), { 444, 44, 4 });
-    TestEntityManager<TComp3, TComp1>(mgr, 123 + 1e4, archTo, ents, *(beg2 + 1e3), { 222, 22, 2 });
-    TestEntityManager<TComp3, TComp1>(mgr, 123 + 1e4, archTo, ents, *(beg2 + 1e3 + 1), {});
-
-    for (auto it = ents.begin(), end = ents.end(); it != end; ++it)
-        mgr.changeArchetype(*it, archFrom);
-    TestEntityManager<TComp3, TComp1>(mgr, 123 + 1e4, archFrom, ents, ents.front(), { 444, 44, 4 });
-    TestEntityManager<TComp3, TComp1>(mgr, 123 + 1e4, archFrom, ents, *(ents.begin() + 123 + 1e3), { 222, 22, 2 });
-    TestEntityManager<TComp3, TComp1>(mgr, 123 + 1e4, archFrom, ents, *(ents.begin() + 123 + 1e3 + 1), {});
-    TestEntityManager<TComp3, TComp1>(mgr, 123 + 1e4, archTo, {});
-
-    for (auto it = mgr.entitiesOf(archFrom).data.begin(); it != mgr.entitiesOf(archFrom).data.end();)
-        mgr.changeArchetype(*it, archTo);
-    std::reverse(ents.begin(), ents.end());
-    ents.insert(ents.begin(), ents.back());
-    ents.pop_back();
-    TestEntityManager<TComp3, TComp1>(mgr, 123 + 1e4, archFrom, {});
-    TestEntityManager<TComp3, TComp1>(mgr, 123 + 1e4, archTo, ents, ents.front(), { 444, 44, 4 });
-    TestEntityManager<TComp3, TComp1>(mgr, 123 + 1e4, archTo, ents, ents[1e4 - 1e3], { 222, 22, 2 });
-    TestEntityManager<TComp3, TComp1>(mgr, 123 + 1e4, archTo, ents, ents[1e4], {});
-}
-
 TEST(EntityManager, DestroyEntity)
 {
     EntityManager mgr;

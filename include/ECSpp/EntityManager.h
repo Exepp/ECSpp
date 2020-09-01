@@ -12,7 +12,6 @@ namespace epp {
 class EntityManager {
     using Spawners_t = std::deque<EntitySpawner>; // deque, to keep selections' references valid
     using EntityPool_t = EntitySpawner::EntityPool_t;
-    using EPoolIter_t = EntitySpawner::EntityPool_t::Container_t::iterator;
     using EPoolCIter_t = EntitySpawner::EntityPool_t::Container_t::const_iterator;
     static_assert(std::is_same_v<EntityPool_t::Container_t, std::vector<Entity>>, "changeEntity works only with vectors");
 
@@ -26,7 +25,7 @@ public:
     /**
      * @tparam FnType Callable type that takes r-value reference to the EntityCreator
      * @param arch Any archetype. The archetype of the spawned entity
-     * @param fn A Callable type that can use the Creator instance to construct components of the spawned entity
+     * @param fn A Callable type that can use a Creator instance to construct components of the spawned entity
      * @returns An entity
      */
     template <typename FnType = DefCreationFn_t>
@@ -38,7 +37,7 @@ public:
     /**
      * @tparam FnType Callable type that takes r-value reference to the EntityCreator
      * @param arch Any archetype. The archetype of spawned entities
-     * @param fn A Callable type that can use the Creator instance to construct components of the spawned entities
+     * @param fn A Callable type that can use a Creator instance to construct components of the spawned entities
      * @returns A (begin, end) iterators pair to the spawned entities
      */
     template <typename FnType = DefCreationFn_t>
@@ -51,21 +50,21 @@ public:
      * @tparam FnType Callable type that takes r-value reference to the EntityCreator
      * @param ent A valid entity
      * @param newArchetype Any archetype. A new archetype of ent
-     * @param fn A Callable type that can use the Creator instance to construct new components
+     * @param fn A Callable type that can use a Creator instance to construct new components
      * @returns Instance of IterTimeChange enum - ArchetypeCurrent when changed the archetype, ChangeFailed otherwise (newArchetype was the same as ent's current archetype)
      */
     template <typename FnType = DefCreationFn_t>
     IterTimeChange changeArchetype(Entity ent, Archetype const& newArchetype, FnType fn = DefCreationFn);
 
 
-    /// Changes the archetype of ent, removing components from toRemove list and adding the ones from toAdd list
+    /// Changes the archetype of ent, removing components of toRemove list and adding the ones from toAdd list
     /**
      * There are intentionally no overloaded versions of this function (for iterators) - it is more optimal to create a separate archetype for those situations
      * @tparam FnType Callable type that takes r-value reference to the EntityCreator
      * @param ent A valid entity
      * @param toAdd Components that will be added to ent (or kept it these are already there). toAdd has a priority over toRemove
      * @param toRemove Components that will be removed from ent (except for the ones specified in toAdd)
-     * @param fn A Callable type that can use the Creator instance to construct the added components
+     * @param fn A Callable type that can use a Creator instance to construct the added components
      * @returns Instance of IterTimeChange enum - ArchetypeCurrent when changed the archetype, ChangeFailed otherwise (newArchetype was the same as ent's current archetype)
      */
     template <typename FnType = DefCreationFn_t>
@@ -246,13 +245,7 @@ template <typename FnType>
 inline IterTimeChange EntityManager::changeArchetype(Entity ent, IdList_t toRemove, IdList_t toAdd, FnType fn)
 {
     EPP_ASSERT(entList.isValid(ent));
-    EntitySpawner& spawner = getSpawner(ent);
-    Archetype newArchetype = spawner.makeArchetype().removeComponent(toRemove).addComponent(toAdd);
-    if (spawner.mask != newArchetype.getMask()) {
-        getSpawner(newArchetype).moveEntityHere(ent, entList, spawner, std::move(fn));
-        return IterTimeChange::ArchetypeCurrent;
-    }
-    return IterTimeChange::ChangeFailed;
+    return changeArchetype(ent, getSpawner(ent).makeArchetype().removeComponent(toRemove).addComponent(toAdd), std::move(fn));
 }
 
 inline void EntityManager::destroy(Entity ent)
