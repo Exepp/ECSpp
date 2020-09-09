@@ -6,7 +6,6 @@
 * [Introduction](#introduction)
 * [Code example](#code-example)
 * [Building tests and benchmarks](#building-tests-and-benchmarks)
-    * [Coverage](#coverage)
 * [Performance](#performance)
 
 Current TODO
@@ -77,8 +76,7 @@ int main()
 
 ```
 # Building tests and benchmarks
-To test this library, I am using google's test library: [googletest](https://github.com/google/googletest).
-To test the performance of this library, I am using google's benchmark library: [benchmark](https://github.com/google/benchmark).
+I am using google's test library: [googletest](https://github.com/google/googletest) for unit tests, and google's benchmark library: [benchmark](https://github.com/google/benchmark) to test its performance.
 
 * Clone the library
     * `$ git clone https://github.com/Exepp/ECSpp.git --recurse-submodules`
@@ -96,9 +94,6 @@ To test the performance of this library, I am using google's benchmark library: 
         * `$ cmake .. -DCMAKE_BUILD_TYPE=Release && cmake --build . --target benchmarks`
     * Using multi-config generators:
         * `$ cmake --build . --config Release --target benchmarks`
-
-# Coverage
-Coverage available at [docs/coverage.html](https://exepp.github.io/ECSpp/coverage.html)
 
 # Performance
 Most of my benchmarks are based on the benchmarks from the [entt](https://github.com/skypjack/entt) library, to see how my library compares to arguably the best ECS library. See my results in [BenchmarksResults](https://github.com/Exepp/ECSpp/blob/master/BenchmarksResults/makeCharts.ipynb) folder.
